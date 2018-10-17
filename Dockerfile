@@ -2,7 +2,7 @@ FROM ubuntu
 
 RUN apt-get update
 
-#  There are some warnings (in red) that show up during the build. You can hide
+#  There docker run -P --name postgres itucsdbare some warnings (in red) that show up during the build. You can hide
 #  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y postgresql-10
 
