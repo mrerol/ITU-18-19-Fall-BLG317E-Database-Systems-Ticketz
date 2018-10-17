@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home_page():
-    return "Hello, world!"
+    return render_template("admin_home_page.html")
 
 @app.route("/admin_home_page")
 def admin_home_page():
