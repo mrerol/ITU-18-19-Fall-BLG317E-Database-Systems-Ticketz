@@ -3,6 +3,7 @@ import sys
 
 import psycopg2 as dbapi2
 
+DATABASE_URL = 'postgres://itucs:itucspw@localhost:32768/itucsdb'
 
 INIT_STATEMENTS = [
     "CREATE TABLE IF NOT EXISTS DUMMY (NUM INTEGER)",
