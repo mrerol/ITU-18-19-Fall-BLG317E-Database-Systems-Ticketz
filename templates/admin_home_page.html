@@ -2,10 +2,9 @@
 {% extends "layout.html" %}
 {% block title %}Admin Home Page{% endblock %}
 {% block body %}
-    <br><br><hr>
+    {% include "components/admin/navbar.html" %}
     <div class="container">
         <div class="row">
-        {% include "components/admin/navbar.html" %}
         {% include "components/admin/hotel_card.html" %}
         {% include "components/admin/hotel_card.html" %}
         {% include "components/admin/hotel_card.html" %}
