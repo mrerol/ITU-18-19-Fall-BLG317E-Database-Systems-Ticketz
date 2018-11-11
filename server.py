@@ -1,16 +1,29 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request
 import views
+
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
 
-    app.add_url_rule("/", view_func=views.home_page)
-    app.add_url_rule("/admin_home_page", view_func=views.admin_home_page)
-    app.add_url_rule("/hotels/<int:id>", view_func=views.hotel_page)
     return app
 
 app = create_app()
+
+@app.route('/admin_home_page', methods=['GET', 'POST'])
+def admin_home_page():
+    return views.admin_home_page()
+
+
+@app.route('/hotels/<int:id>', methods=['GET', 'POST'])
+def home(id):
+    return views.hotel_page(id)
+
+@app.route('/', methods=['GET', 'POST'])
+def home_page():
+    return views.home_page()
+
 
 if __name__ == "__main__":
     port = app.config.get("PORT", 5000)
