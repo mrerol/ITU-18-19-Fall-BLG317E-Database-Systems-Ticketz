@@ -15,6 +15,9 @@ app = create_app()
 def admin_home_page():
     return views.admin_home_page()
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return views.login_page(request)
 
 @app.route('/hotels/<int:id>', methods=['GET', 'POST'])
 def home(id):
