@@ -9,9 +9,9 @@ class Database:
 
     class Hotel:
         def __init__(self):
-            if os.getenv("DATABASE_URL") is None:
-                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
-            else:
+            #if os.getenv("DATABASE_URL") is None:
+            #    self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
+            #else:
                 self.url = os.getenv("DATABASE_URL")
 
         def add_hotel(self, hotel):
