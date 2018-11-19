@@ -5,15 +5,20 @@
     {% include "components/admin/navbar.html" %}
     <div class="container">
         <div class="row">
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
-        {% include "components/admin/hotel_card.html" %}
+            {% for (id, hotel) in hotels %}
+
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__180.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ hotel.name }}</h5>
+                            <p class="card-text">{{ hotel.description }}</p>
+                            <a href="/hotels/{{ id }}" class="btn btn-primary">{{ hotel.email }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
         </div>
     </div>
     {% include "components/admin/footer.html" %}
