@@ -11,7 +11,7 @@ INIT_STATEMENTS = [
 
     """CREATE TABLE IF NOT EXISTS hotels 
     (
-    
+
         hotel_id SERIAL NOT NULL PRIMARY KEY,
         name VARCHAR (50) NOT NULL,
         email VARCHAR (50) NOT NULL,
@@ -20,13 +20,13 @@ INIT_STATEMENTS = [
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
         website VARCHAR (50)
-                
+
     )""",
 
     """CREATE TABLE IF NOT EXISTS users 
     (
-    
-        use_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+        user_id SERIAL NOT NULL PRIMARY KEY,
         email VARCHAR (50) NOT NULL,
         password VARCHAR (16) NOT NULL,
         name VARCHAR (50) NOT NULL,
@@ -35,11 +35,9 @@ INIT_STATEMENTS = [
         gender VARCHAR (1) NOT NULL,
         address VARCHAR (250) NOT NULL,
         last_login TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        register_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        register_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 
     )""",
-
-
 
     """INSERT INTO hotels VALUES (
                         1,
@@ -50,7 +48,7 @@ INIT_STATEMENTS = [
                         'deneme sokak deneme cadde deneme',
                         '0321221222',
                         'dememe.com'
-    
+
     )""",
 
     """INSERT INTO hotels VALUES (
@@ -62,7 +60,7 @@ INIT_STATEMENTS = [
                             'deneme sokak deneme cadde deneme',
                             '0321221222',
                             'dememe.com'
-    
+
         )""",
 
     """INSERT INTO hotels VALUES (
@@ -74,7 +72,7 @@ INIT_STATEMENTS = [
                             'deneme sokak deneme cadde deneme',
                             '0321221222',
                             'dememe.com'
-    
+
         )""",
 
     """INSERT INTO hotels VALUES (
@@ -86,7 +84,7 @@ INIT_STATEMENTS = [
                             'deneme sokak deneme cadde deneme',
                             '0321221222',
                             'dememe.com'
-    
+
         )""",
 
     """INSERT INTO hotels VALUES (
@@ -98,7 +96,7 @@ INIT_STATEMENTS = [
                             'deneme sokak deneme cadde deneme',
                             '0321221222',
                             'dememe.com'
-    
+
         )""",
 
     """INSERT INTO hotels VALUES (
@@ -110,7 +108,7 @@ INIT_STATEMENTS = [
                             'deneme sokak deneme cadde deneme',
                             '0321221222',
                             'dememe.com'
-    
+
         )"""
 ]
 
