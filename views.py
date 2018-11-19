@@ -1,13 +1,21 @@
 from flask import render_template, current_app, redirect, url_for, request
 
 
+from tables import Hotel
+from dboperations import Database
+
+db = Database()
+
+hotel_db = db.hotel
 
 
 def home_page():
     return render_template("admin_home_page.html")
 
 def admin_home_page():
-    return render_template("admin_home_page.html")
+    hotels = hotel_db.get_hotels()
+    #print(hotels)
+    return render_template("admin_home_page.html", hotels = sorted(hotels))
 
 def login_page(request):
     if request.method == 'POST':

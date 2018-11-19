@@ -9,7 +9,10 @@ class Database:
 
     class Hotel:
         def __init__(self):
-            self.url = os.getenv("DATABASE_URL")
+            if os.getenv("DATABASE_URL") is None:
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
+            else:
+                self.url = os.getenv("DATABASE_URL")
 
         def add_hotel(self, hotel):
             with dbapi2.connect(self.url) as connection:
@@ -34,6 +37,7 @@ class Database:
 
         def get_hotel(self, hotel_id):
             _hotel = None
+            print("hotel id =")
             print(hotel_id)
             print("deneme")
             try:
@@ -59,7 +63,7 @@ class Database:
                 cursor = connection.cursor()
                 cursor.execute("SELECT * FROM hotels;")
                 for hotel in cursor:
-                    _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7])
+                    _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7], hotel[7])
                     hotels.append((hotel[0], _hotel))
                 connection.commit()
                 cursor.close()
@@ -68,5 +72,4 @@ class Database:
             finally:
                 if connection is not None:
                     connection.close()
-
             return hotels
