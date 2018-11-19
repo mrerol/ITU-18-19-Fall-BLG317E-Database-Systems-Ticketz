@@ -7,6 +7,7 @@ DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd36
 
 INIT_STATEMENTS = [
     """DROP TABLE IF EXISTS hotels""",
+    """DROP TABLE IF EXISTS users""",
 
     """CREATE TABLE IF NOT EXISTS hotels 
     (
@@ -21,6 +22,24 @@ INIT_STATEMENTS = [
         website VARCHAR (50)
                 
     )""",
+
+    """CREATE TABLE IF NOT EXISTS users 
+    (
+    
+        use_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR (50) NOT NULL,
+        password VARCHAR (16) NOT NULL,
+        name VARCHAR (50) NOT NULL,
+        surname VARCHAR (50) NOT NULL,
+        phone VARCHAR (15) NOT NULL,
+        gender VARCHAR (1) NOT NULL,
+        address VARCHAR (250) NOT NULL,
+        last_login TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        register_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    )""",
+
+
 
     """INSERT INTO hotels VALUES (
                         1,
