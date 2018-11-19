@@ -27,6 +27,13 @@ def home(id):
 def home_page():
     return views.home_page()
 
+@app.route('/firms/<int:id>', methods=['GET', 'POST'])
+def firms_page():
+    return views.firms_page()
+
+@app.route('/drivers/<int:id>', methods=['GET', 'POST'])
+def drivers_page():
+    return views.drivers_page()
 
 if __name__ == "__main__":
     port = app.config.get("PORT", 5000)

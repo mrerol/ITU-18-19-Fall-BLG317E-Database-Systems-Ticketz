@@ -16,3 +16,9 @@ def login_page(request):
 
 def hotel_page(id):
     return render_template("hotels.html")
+
+def drivers_page(id):
+    return render_template("drivers.html")
+
+def firms_page(id):
+    return render_template("firms.html")
