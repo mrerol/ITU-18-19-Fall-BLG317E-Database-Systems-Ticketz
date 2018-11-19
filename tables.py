@@ -4,7 +4,6 @@ class Hotel:
         self.name = name
         self.email = email
         self.description = description
-        self.description = description
         self.city = city
         self.address = address
         self.phone = phone

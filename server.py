@@ -12,18 +12,15 @@ app = create_app()
 
 @app.route('/admin_home_page', methods=['GET', 'POST'])
 def admin_home_page():
-    #hotels = hotel_db.get_hotels()
     return views.admin_home_page()
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     return views.login_page(request)
 
-@app.route('/hotels/<int:hotel_id>', methods=['GET', 'POST'])
-def home(hotel_id):
-    #hotel_ = hotel_db.get_hotel(hotel_id)
-    #print(hotel_)
-    return render_template("hotels.html",)
+@app.route('/hotels/<int:id>', methods=['GET', 'POST'])
+def home(id):
+    return views.hotel_page(id)
 
 @app.route('/', methods=['GET', 'POST'])
 def home_page():

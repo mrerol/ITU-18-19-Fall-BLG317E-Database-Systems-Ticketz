@@ -10,7 +10,7 @@
     <div class="container">
         <section class="content-header" style="text-align: center;">
 
-            <h1>Hotel Name</h1>
+            <h1>{{ hotel.name }}</h1>
             <hr>
             <img src=" https://www.logo.com.tr/img/250x250.png" class="img-thumbnail" width="150" alt="logo">
             <hr>
@@ -112,10 +112,7 @@
                                 <div class="card-body firm-info">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            hotel description<br>
-                                            hotel description<br>
-                                            hotel description<br>
-                                            ...
+                                            {{ hotel.description }}
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +128,7 @@
                                     </h3>
                                 </div>
                                 <div class="card-body firm-info">
-                                    0212 212 21 21
+                                    {{ hotel.phone }}
                                 </div>
                             </div>
                             <div class="card card-default color-palette-box">
@@ -144,7 +141,7 @@
                                 <div class="card-body firm-info">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a target="_blank" href="#">www.hotel.hotel</a>
+                                            <a target="_blank" href="www.{{ hotel.website }}">{{ hotel.website }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +157,7 @@
                                     </h3>
                                 </div>
                                 <div class="card-body firm-info">
-                                    Hotel Address
+                                    {{ hotel.address }}
                                 </div>
                             </div>
                             <div class="card card-default color-palette-box">
@@ -171,7 +168,7 @@
                                     </h3>
                                 </div>
                                 <div class="card-body firm-info">
-                                    Hotel City
+                                    {{ hotel.city }}
                                 </div>
                             </div>
                         </div>
@@ -239,6 +236,8 @@
         </section>
 
     </div>
+    <br>
+    <br>
     {% include "components/admin/footer.html" %}
 
 {% endblock %}

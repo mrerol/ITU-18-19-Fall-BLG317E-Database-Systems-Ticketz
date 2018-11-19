@@ -10,7 +10,8 @@ hotel_db = db.hotel
 
 
 def home_page():
-    return render_template("admin_home_page.html")
+    hotels = hotel_db.get_hotels()
+    return render_template("admin_home_page.html", hotels = sorted(hotels))
 
 def admin_home_page():
     hotels = hotel_db.get_hotels()
@@ -26,7 +27,8 @@ def login_page(request):
     return render_template('login.html')
 
 def hotel_page(id):
-    return render_template("hotels.html")
+    temp_hotel = hotel_db.get_hotel(id)
+    return render_template("hotels.html", hotel = temp_hotel)
 
 def drivers_page(id):
     return render_template("drivers.html")
