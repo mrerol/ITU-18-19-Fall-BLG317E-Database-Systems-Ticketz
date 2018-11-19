@@ -11,6 +11,7 @@ INIT_STATEMENTS = [
     """DROP TABLE IF EXISTS firms""",
     """DROP TABLE IF EXISTS drivers""",
     """DROP TABLE IF EXISTS vehicles""",
+
     """CREATE TABLE IF NOT EXISTS hotels 
     (
         hotel_id SERIAL NOT NULL PRIMARY KEY,
@@ -38,6 +39,7 @@ INIT_STATEMENTS = [
         register_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 
     )""",
+
     """CREATE TABLE IF NOT EXISTS drivers 
     (
         driver_id SERIAL NOT NULL PRIMARY KEY,
@@ -48,8 +50,9 @@ INIT_STATEMENTS = [
         vote VARCHAR (20),
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL
-    
+
     )""",
+
     """CREATE TABLE IF NOT EXISTS firms 
     (
         firm_id SERIAL NOT NULL PRIMARY KEY,
@@ -60,8 +63,9 @@ INIT_STATEMENTS = [
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
         website VARCHAR (50)
-    
+
     )""",
+
     """CREATE TABLE IF NOT EXISTS vehicles 
     (
         vehicle_id SERIAL NOT NULL PRIMARY KEY,
@@ -69,8 +73,9 @@ INIT_STATEMENTS = [
         production_year VARCHAR (20) NOT NULL,
         recovery_year VARCHAR (20) NOT NULL,
         model VARCHAR (15) NOT NULL
-    
+
     )""",
+
     """INSERT INTO hotels VALUES (
                         1,
                         'deneme',
@@ -141,8 +146,8 @@ INIT_STATEMENTS = [
                             '0321221222',
                             'dememe.com'
 
-        )""",
-    """ """
+        )"""
+
 ]
 
 
