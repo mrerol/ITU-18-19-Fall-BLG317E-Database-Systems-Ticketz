@@ -1,5 +1,8 @@
 from flask import render_template, current_app, redirect, url_for, request
 
+
+
+
 def home_page():
     return render_template("admin_home_page.html")
 
@@ -16,3 +19,9 @@ def login_page(request):
 
 def hotel_page(id):
     return render_template("hotels.html")
+
+def drivers_page(id):
+    return render_template("drivers.html")
+
+def firms_page(id):
+    return render_template("firms.html")
