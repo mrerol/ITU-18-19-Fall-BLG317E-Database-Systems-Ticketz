@@ -1,7 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, request
 import views
 
+from tables import Hotel
+from dboperations import Database
 
+db = Database()
+
+hotel_db = db.hotel
 
 def create_app():
     app = Flask(__name__)
@@ -19,9 +24,11 @@ def admin_home_page():
 def login():
     return views.login_page(request)
 
-@app.route('/hotels/<int:id>', methods=['GET', 'POST'])
-def home(id):
-    return views.hotel_page(id)
+@app.route('/hotels/<int:hotel_id>', methods=['GET', 'POST'])
+def home(hotel_id):
+    #hotel_ = hotel_db.get_hotel(hotel_id)
+    #print(hotel_)
+    return render_template("hotels.html",)
 
 @app.route('/', methods=['GET', 'POST'])
 def home_page():

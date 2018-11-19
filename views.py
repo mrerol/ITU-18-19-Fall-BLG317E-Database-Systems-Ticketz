@@ -1,5 +1,8 @@
 from flask import render_template, current_app, redirect, url_for, request
 
+
+
+
 def home_page():
     return render_template("admin_home_page.html")
 
