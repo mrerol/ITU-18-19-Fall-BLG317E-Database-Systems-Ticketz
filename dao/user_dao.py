@@ -7,12 +7,12 @@ class UserDao(BaseDao):
     def __init__(self):
         super(UserDao,self).__init__()
 
-    def add_user(self,username,password):
+    def add_user(self,user_name, name, surname, gender, email, password, phone, address):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
             cursor.execute(
-                "INSERT INTO users (username, password) VALUES (%s, %s) RETURNING user_id",
-                (username, password)
+                "INSERT INTO users (user_name, name, surname, gender, email, password, phone, address) VALUES (%s, %s,%s, %s,%s, %s,%s, %s) RETURNING user_id",
+                (user_name, name, surname, gender, email, password, phone, address)
             )
             userid = cursor.fetchone()
             cursor.close()
