@@ -15,7 +15,7 @@ INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS hotels 
     (
         hotel_id SERIAL NOT NULL PRIMARY KEY,
-        name VARCHAR (50) NOT NULL,
+        name VARCHAR (25) NOT NULL,
         email VARCHAR (50) NOT NULL,
         description VARCHAR (250) NOT NULL,
         city VARCHAR (20),
