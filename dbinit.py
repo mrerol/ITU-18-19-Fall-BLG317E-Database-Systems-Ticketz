@@ -28,6 +28,7 @@ INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS users 
     (
         user_id SERIAL NOT NULL PRIMARY KEY,
+        user_name VARCHAR(15) UNIQUE NOT NULL,
         email VARCHAR (50) NOT NULL,
         password VARCHAR (16) NOT NULL,
         name VARCHAR (50) NOT NULL,
