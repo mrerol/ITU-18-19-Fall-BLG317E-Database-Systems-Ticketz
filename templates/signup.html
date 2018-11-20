@@ -20,43 +20,43 @@
                         
                         <div class="input-group form-group">
                             <input type="text" name="username" class="form-control" placeholder="username" 
-                            pattern=".{3,25}" required title="3 to 25 characters">	
+                            pattern=".{3,25}" required title="3 to 25 characters" value="{{request.form.username }}">	
                         </div>
 
                         <div class="input-group form-group">
                             <input type="text" name="name" class="form-control" placeholder="name"
-                            pattern=".{3,50}" required title="3 to 50 characters">						
+                            pattern=".{3,50}" required title="3 to 50 characters" value="{{request.form.name }}">						
                         </div>
 
                         <div class="input-group form-group">
                             <input type="text" name="surname" class="form-control" placeholder="surname"
-                            pattern=".{3,50}" required title="3 to 50 characters">
+                            pattern=".{3,50}" required title="3 to 50 characters" value="{{request.form.surname }}">
                         </div>
 
                         <div class="input-group form-group">
                                 <label for="gndr">Gender</label>
-                                <input type="radio" id="gndr" name="gender" value="male" checked> Male<br>
-                                <input type="radio" id="gndr" name="gender" value="male" checked> Female<br>						
+                                <input type="radio" id="gndr" name="gender" value="m" checked> Male<br>
+                                <input type="radio" id="gndr" name="gender" value="f" checked> Female<br>						
                         </div>
 
                         <div class="input-group form-group">
                                 <input type="text" name="mail" class="form-control" placeholder="e-mail"
-                                pattern=".{5,50}" required title="3 to 25 characters">
+                                pattern=".{5,50}" required title="3 to 25 characters" value="{{request.form.mail }}">
                         </div>
 
                         <div class="input-group form-group">
                                 <input type="password" name="password" class="form-control" placeholder="password"
-                                pattern=".{8,16}" required title="8 to 16 characters">
+                                pattern=".{8,16}" required title="8 to 16 characters" value="{{request.form.password }}">
                         </div>
 
                         <div class="input-group form-group">
                             <input type="text" name="phone" class="form-control" placeholder="phone"
-                            pattern=".{8,15}" required title="8 to 15 characters">						
+                            pattern=".{8,15}" required title="8 to 15 characters" value="{{request.form.phone }}">						
                         </div>
 
                         <div class="input-group form-group">
                                 <input type="text" name="address" class="form-control" placeholder="address"
-                                pattern=".{5,250}" required title="5 to 250 characters">
+                                pattern=".{5,250}" required title="5 to 250 characters" value="{{request.form.address }}">
                         </div>
 
                         <div class="form-group">
