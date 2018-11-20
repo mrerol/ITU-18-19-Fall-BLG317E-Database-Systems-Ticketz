@@ -13,12 +13,15 @@ hotel_db = db.hotel
 
 def home_page():
     hotels = hotel_db.get_hotels()
-    return render_template("admin_home_page.html", hotels = sorted(hotels))
+    return render_template("admin_home_page.html", hotels = reversed(hotels))
 
 def admin_home_page():
     hotels = hotel_db.get_hotels()
     #print(hotels)
-    return render_template("admin_home_page.html", hotels = sorted(hotels))
+    return render_template("admin_home_page.html", hotels = reversed(hotels))
+
+def add_hotel_page():
+    return render_template("add_hotel.html")
 
 def login_page(request):
     if request.method == 'POST':
@@ -30,7 +33,10 @@ def login_page(request):
 
 def hotel_page(id):
     temp_hotel = hotel_db.get_hotel(id)
-    return render_template("hotels.html", hotel = temp_hotel)
+    if temp_hotel is None:
+        return render_template("404_not_found.html")
+    else:
+        return render_template("hotels.html", hotel = temp_hotel)
 
 def driver_list_page(id):
     return render_template("driver/driver_list.html")

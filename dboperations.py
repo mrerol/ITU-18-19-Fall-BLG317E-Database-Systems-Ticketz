@@ -10,7 +10,7 @@ class Database:
     class Hotel:
         def __init__(self):
             if os.getenv("DATABASE_URL") is None:
-                self.url = "postgres://itucs:itucspw@localhost:32769/itucsdb"
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
             else:
                 self.url = os.getenv("DATABASE_URL")
 
@@ -18,7 +18,7 @@ class Database:
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO hotels (name, email, description, city, address, phone, website) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    "INSERT INTO hotels ( name, email, description, city, address, phone, website) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                     (hotel.name, hotel.email, hotel.description, hotel.city, hotel.address, hotel.phone, hotel.website))
                 cursor.close()
 
@@ -43,7 +43,7 @@ class Database:
                 cursor.execute("SELECT * FROM hotels WHERE hotel_id = %s", (hotel_id,))
                 hotel = cursor.fetchone()
                 if hotel is not None:
-                    _hotel = Hotel(hotel[0], hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7])
+                    _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7])
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
@@ -60,7 +60,7 @@ class Database:
                 cursor = connection.cursor()
                 cursor.execute("SELECT * FROM hotels;")
                 for hotel in cursor:
-                    _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7], hotel[7])
+                    _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7])
                     hotels.append((hotel[0], _hotel))
                 connection.commit()
                 cursor.close()
