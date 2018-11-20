@@ -1,5 +1,7 @@
 from flask import render_template, current_app, redirect, url_for, request
-
+from dao.user_dao import UserDao
+from psycopg2 import IntegrityError
+import sys
 
 from tables import Hotel
 from dboperations import Database
@@ -41,3 +43,20 @@ def driver_edit_page(id):
 
 def firms_page(id):
     return render_template("firms.html")
+
+def signup_page():
+    userop = UserDao()
+    try: 
+        userid = userop.add_user(request.form['username'],request.form['name'],request.form['surname'],
+                                request.form['gender'],request.form['mail'],request.form['password'],
+                                request.form['phone'],request.form['address'])
+        print("userid: ",userid)
+        # TODO redirect login page
+    except IntegrityError:
+        print("duplicate entry")
+        pass # TODO show error pop up for already existing user
+    except:
+        print("generic errorrrrrrr",sys.exc_info())
+        pass # TODO show generic pop up error
+    return render_template("signup.html")
+
