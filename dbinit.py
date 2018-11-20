@@ -76,6 +76,38 @@ INIT_STATEMENTS = [
 
     )""",
 
+    """INSERT INTO drivers VALUES (
+                        1,
+                        'deneme',
+                        'deneme@deneme.com',
+                        'true',
+                        'istanbul',
+                        '100',
+                        'deneme sokak deneme cadde deneme',
+                        '0321221222'
+                        
+    )""",
+
+    """INSERT INTO vehicles VALUES (
+                        1,
+                        'yuruyen ucak',
+                        '1923',
+                        '2023',
+                        'model'
+    
+    )""",
+
+    """INSERT INTO firms VALUES (
+                        1,
+                        'itu',
+                        'parola',
+                        'deneme@deneme.com',
+                        'istanbul',
+                        'deneme sokak deneme cadde deneme',
+                        '0321221222',
+                        'dememe.com'
+    
+    )""",
     """INSERT INTO hotels VALUES (
                         1,
                         'deneme',

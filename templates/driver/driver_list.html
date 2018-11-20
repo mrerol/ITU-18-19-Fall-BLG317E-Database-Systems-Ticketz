@@ -1,0 +1,15 @@
+<link href="../../static/admin/admin_home_page.css" rel="stylesheet">
+{% extends "layout.html" %}
+{% block title %}Admin Home Page{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+        <div class="row">
+        {% include "components/driver/driver_card.html" %}
+        {% include "components/driver/driver_card.html" %}
+        {% include "components/driver/driver_card.html" %}
+        {% include "components/driver/driver_card.html" %}
+        </div>
+    </div>
+    {% include "components/admin/footer.html" %}
+{% endblock %}

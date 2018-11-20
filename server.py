@@ -27,12 +27,20 @@ def home_page():
     return views.home_page()
 
 @app.route('/firms/<int:id>', methods=['GET', 'POST'])
-def firms_page():
-    return views.firms_page()
+def firms_page(id):
+    return views.firms_page(id)
 
-@app.route('/drivers/<int:id>', methods=['GET', 'POST'])
-def drivers_page():
-    return views.drivers_page()
+@app.route('/driver_list/<int:id>', methods=['GET', 'POST'])
+def driver_list_page(id):
+    return views.driver_list_page(id)
+
+@app.route('/driver_profile/<int:id>', methods=['GET', 'POST'])
+def driver_profile_page(id):
+    return views.driver_profile_page(id)
+
+@app.route('/driver_edit/<int:id>', methods=['GET', 'POST'])
+def driver_edit_page(id):
+    return views.driver_edit_page(id)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
