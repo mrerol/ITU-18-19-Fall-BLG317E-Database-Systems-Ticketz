@@ -16,6 +16,8 @@ def create_app():
 
 app = create_app()
 
+app.secret_key = b'_5#y2L"F4Q8z_^?4c]/'
+
 @app.route('/admin_home_page', methods=['GET', 'POST'])
 def admin_home_page():
     return views.admin_home_page()

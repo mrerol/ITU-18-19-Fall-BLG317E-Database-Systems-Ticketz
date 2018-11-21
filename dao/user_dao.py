@@ -17,3 +17,13 @@ class UserDao(BaseDao):
             userid = cursor.fetchone()
             cursor.close()
         return userid
+    
+    def get_user_id(self,user_name,password):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT user_id FROM users WHERE (users.user_name = %s AND users.password = %s)",
+                             (user_name,password)
+            )
+            userid = cursor.fetchone()
+            cursor.close()
+        return userid
