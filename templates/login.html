@@ -20,6 +20,9 @@
                     <div class="d-flex justify-content-end social_icon">
                     </div>
                 </div>
+                {% if error %}
+                    <p class=error><strong>Error:</strong> {{ error }}
+                {% endif %}
                 <div class="card-body">
                     <form action="" method='POST'>
                         <div class="input-group form-group">
