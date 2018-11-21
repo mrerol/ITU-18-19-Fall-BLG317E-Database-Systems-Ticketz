@@ -4,7 +4,12 @@
 {% block body %}
     {% include "components/admin/navbar.html" %}
     <div class="container">
+
+
         <div class="row">
+
+
+
             {% for (id, hotel) in hotels %}
 
                 <div class="col-md-4">
@@ -16,6 +21,10 @@
                             <a href="/hotels/{{ id }}" class="btn btn-primary">{{ hotel.email }}</a>
                         </div>
                     </div>
+                </div>
+            {% else %}
+                <div class="alert alert-danger">
+                  <strong>Not Found!</strong> There is no Hotel record
                 </div>
             {% endfor %}
 

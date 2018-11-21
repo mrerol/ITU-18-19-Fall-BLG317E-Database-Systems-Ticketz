@@ -8,6 +8,8 @@ db = Database()
 
 hotel_db = db.hotel
 
+deneme = hotel_db.search("deneme")
+print(deneme)
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
@@ -21,6 +23,10 @@ app.secret_key = b'_5#y2L"F4Q8z_^?4c]/'
 @app.route('/admin_home_page', methods=['GET', 'POST'])
 def admin_home_page():
     return views.admin_home_page()
+
+@app.route('/search_hotel/<string:text>', methods=['GET', 'POST'])
+def search_hotel(text):
+    return views.search_hotel_page(text)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -67,7 +73,7 @@ def delete_hotel(id):
     return redirect(url_for('edit_hotels_page'))
 
 @app.route('/hotels/<int:id>', methods=['GET', 'POST'])
-def home(id):
+def hotel_page(id):
     return views.hotel_page(id)
 
 @app.route('/', methods=['GET', 'POST'])

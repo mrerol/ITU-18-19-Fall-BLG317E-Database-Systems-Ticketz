@@ -85,3 +85,22 @@ class Database:
             finally:
                 if connection is not None:
                     connection.close()
+
+        def search(self, text):
+            hotels = []
+            to_search = "%" + text + "%"
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM hotels WHERE (name like %s) or (email like %s) or (description like %s) or (address like %s) or (website like %s) or (city like %s)    ;", (to_search, to_search, to_search, to_search, to_search, to_search))
+                for hotel in cursor:
+                    _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7])
+                    hotels.append((hotel[0], _hotel))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return hotels

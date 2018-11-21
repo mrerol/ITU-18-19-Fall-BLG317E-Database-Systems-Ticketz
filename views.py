@@ -23,6 +23,14 @@ def admin_home_page():
     #else:
     #    return redirect(url_for('404_not_found'))
 
+def search_hotel_page(text):
+    #if 'user_id' in session:
+    hotels = hotel_db.search(text)
+    return render_template("admin_home_page.html", hotels = reversed(hotels))
+    #else:
+    #    return redirect(url_for('404_not_found'))
+
+
 def add_hotel_page():
     return render_template("add_hotel.html")
 

@@ -26,16 +26,16 @@
             </li>
 
         </ul>
-        <form class="mx-2 my-auto d-inline w-100">
+
             <div class="input-group">
-                <input type="text" class="form-control border border-right-0" placeholder="Search...">
+                <input name="search" id="search" type="text" class="form-control border border-right-0" placeholder="Search...">
                 <span class="input-group-append">
-                <button class="btn btn-outline-secondary border border-left-0" type="button">
+                <button class="btn btn-outline-secondary border border-left-0" onclick="ara()" type="button">
                     <i class="fa fa-search"></i>
                 </button>
               </span>
             </div>
-        </form>
+
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,6 +53,21 @@
 </br>
 <br>
 <script>
+
+    $('#search').on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        if($('#search').val() != "")
+        text = $('#search').val()
+        window.location = "/search_hotel/" + text
+    }
+    });
+
+    function ara(){
+        if($('#search').val() != "")
+        text = $('#search').val()
+        window.location = "/search_hotel/" + text
+    }
+
     let i=0;
     function deneme() {
         i++;
