@@ -1,4 +1,4 @@
-from flask import render_template, current_app, redirect, url_for, request
+from flask import render_template, current_app, redirect, url_for, request, session
 from dao.user_dao import UserDao
 from psycopg2 import IntegrityError
 import sys
@@ -9,26 +9,37 @@ from dboperations import Database
 db = Database()
 
 hotel_db = db.hotel
-
+userop = UserDao()
 
 def home_page():
     hotels = hotel_db.get_hotels()
     return render_template("admin_home_page.html", hotels = reversed(hotels))
 
 def admin_home_page():
-    hotels = hotel_db.get_hotels()
-    #print(hotels)
-    return render_template("admin_home_page.html", hotels = reversed(hotels))
+    if 'user_id' in session:
+        hotels = hotel_db.get_hotels()
+        #print(hotels)
+        return render_template("admin_home_page.html", hotels = reversed(hotels))
+    else:
+        return redirect(url_for('404_not_found'))
 
 def add_hotel_page():
     return render_template("add_hotel.html")
 
 def login_page(request):
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('admin_home_page'))
+        try:
+            user_id = userop.get_user_id(request.form['username'],request.form['password'])
+            print("userid ",user_id)
+            if user_id is not None:
+                session['user_id'] = user_id
+                return redirect(url_for('admin_home_page'))
+            else:
+                # TODO user not found
+                return render_template("404_not_found.html")# TODO add 403
+        except:
+            print("login generic errorrrrrrr",sys.exc_info())
+            # TODO pop up error message
     return render_template('login.html')
 
 def hotel_page(id):
@@ -51,12 +62,13 @@ def firms_page(id):
     return render_template("firms.html")
 
 def signup_page():
-    userop = UserDao()
+   # userop = UserDao()
     try: 
         userid = userop.add_user(request.form['username'],request.form['name'],request.form['surname'],
                                 request.form['gender'],request.form['mail'],request.form['password'],
                                 request.form['phone'],request.form['address'])
         print("userid: ",userid)
+        session['user_id'] = userid
         # TODO redirect login page
     except IntegrityError:
         print("duplicate entry")
