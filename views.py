@@ -27,6 +27,7 @@ def add_hotel_page():
     return render_template("add_hotel.html")
 
 def login_page(request):
+    error = None
     if request.method == 'POST':
         try:
             user_id = userop.get_user_id(request.form['username'],request.form['password'])
@@ -36,11 +37,13 @@ def login_page(request):
                 return redirect(url_for('admin_home_page'))
             else:
                 # TODO user not found
-                return render_template("404_not_found.html")# TODO add 403
+                error = "invalid credentials"
+                #return render_template("404_not_found.html")# TODO add 403
         except:
             print("login generic errorrrrrrr",sys.exc_info())
+            error = "error"
             # TODO pop up error message
-    return render_template('login.html')
+    return render_template('login.html',error = error)
 
 def hotel_page(id):
     temp_hotel = hotel_db.get_hotel(id)
@@ -62,19 +65,20 @@ def firms_page(id):
     return render_template("firms.html")
 
 def signup_page():
-   # userop = UserDao()
+    error = None
     try: 
         userid = userop.add_user(request.form['username'],request.form['name'],request.form['surname'],
                                 request.form['gender'],request.form['mail'],request.form['password'],
                                 request.form['phone'],request.form['address'])
         print("userid: ",userid)
         session['user_id'] = userid
-        # TODO redirect login page
+        return redirect(url_for('login'))
     except IntegrityError:
         print("duplicate entry")
+        error = "duplicate entry"
         pass # TODO show error pop up for already existing user
     except:
         print("generic errorrrrrrr",sys.exc_info())
         pass # TODO show generic pop up error
-    return render_template("signup.html")
+    return render_template("signup.html",error = error)
 
