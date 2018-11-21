@@ -189,7 +189,7 @@ INIT_STATEMENTS = [
 
         )""",
 
-    """INSERT INTO city VALUES (
+    """INSERT INTO city VALUES 
                             ('01', 'Adana'),
                             ('02', 'Adıyaman'),
                             ('03', 'Afyon'),
@@ -272,7 +272,7 @@ INIT_STATEMENTS = [
                             ('80', 'Osmaniye'),
                             ('81', 'Düzce')
 
-        )"""
+        """
 
 ]
 
