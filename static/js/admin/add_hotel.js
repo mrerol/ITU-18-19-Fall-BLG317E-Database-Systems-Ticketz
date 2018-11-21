@@ -16,11 +16,11 @@ function add()
         document.getElementById("description").style.borderColor = "red";
         deneme = false
     }
-    if ($('#city').val()==""){
+    /*if ($('#city').val()==""){
         document.getElementById("city").style.borderColor = "red";
         deneme = false
 
-    }
+    }*/
     if ($('#address').val()==""){
         document.getElementById("address").style.borderColor = "red";
         deneme = false
@@ -29,10 +29,10 @@ function add()
         document.getElementById("phone").style.borderColor = "red";
         deneme = false
     }
-    if ($('#website').val()==""){
+    /*if ($('#website').val()==""){
         document.getElementById("website").style.borderColor = "red";
         deneme = false
-    }
+    }*/
 
     if(deneme)
         document.getElementById("add_hotel").submit();

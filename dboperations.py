@@ -70,3 +70,18 @@ class Database:
                 if connection is not None:
                     connection.close()
             return hotels
+
+        def update_hotel(self, hotel_id, hotel):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                statement = """UPDATE hotels SET name = '""" + hotel.name + """' , email = '""" + hotel.email +"""' , description = '""" + hotel.description + """', city = ' """ + hotel.city +"""' ,  address = '""" + hotel.address + """', phone = '""" + hotel.phone +"""', website = '""" + hotel.website + """'   WHERE hotel_id = """ + str(hotel_id)
+                print(statement)
+                cursor.execute(statement)
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()

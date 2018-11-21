@@ -16,15 +16,31 @@ def home_page():
     return render_template("admin_home_page.html", hotels = reversed(hotels))
 
 def admin_home_page():
-    if 'user_id' in session:
-        hotels = hotel_db.get_hotels()
+    #if 'user_id' in session:
+    hotels = hotel_db.get_hotels()
         #print(hotels)
-        return render_template("admin_home_page.html", hotels = reversed(hotels))
-    else:
-        return redirect(url_for('404_not_found'))
+    return render_template("admin_home_page.html", hotels = reversed(hotels))
+    #else:
+    #    return redirect(url_for('404_not_found'))
 
 def add_hotel_page():
     return render_template("add_hotel.html")
+
+def edit_hotel_page(id):
+    temp_hotel = hotel_db.get_hotel(id)
+    if temp_hotel is None:
+        return render_template("404_not_found.html")
+    else:
+        return render_template("edit_hotel.html", hotel = temp_hotel)
+
+def edit_hotels_page():
+    #if 'user_id' in session:
+    hotels = hotel_db.get_hotels()
+        #print(hotels)
+    return render_template("edit_hotels.html", hotels = reversed(hotels))
+    #else:
+    #    return redirect(url_for('404_not_found'))
+
 
 def login_page(request):
     error = None
@@ -51,6 +67,7 @@ def hotel_page(id):
         return render_template("404_not_found.html")
     else:
         return render_template("hotels.html", hotel = temp_hotel)
+
 
 def driver_list_page(id):
     return render_template("driver/driver_list.html")

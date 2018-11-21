@@ -38,10 +38,33 @@ def add_hotel_page():
         address = request.form["address"]
         phone = request.form["phone"]
         website = request.form["website"]
-
         hotel_db.add_hotel(Hotel(hotel_name,email,description,city,address,phone,website))
+        return redirect(url_for('admin_home_page'))
 
-        return views.admin_home_page()
+@app.route('/admin/edit_hotel/<int:id>', methods=['GET', 'POST'])
+def edit_hotel_page(id):
+    if request.method == "GET":
+        return views.edit_hotel_page(id)
+    else:
+        hotel_name = request.form["hotel_name"]
+        email = request.form["e_mail"]
+        description = request.form["description"]
+        city = request.form["city"]
+        address = request.form["address"]
+        phone = request.form["phone"]
+        website = request.form["website"]
+        hotel_db.update_hotel(id, Hotel(hotel_name,email,description,city,address,phone,website))
+        return redirect(url_for('admin_home_page'))
+
+@app.route('/admin/edit_hotels', methods=['GET', 'POST'])
+def edit_hotels_page():
+    return views.edit_hotels_page()
+
+@app.route('/admin/delete_hotel/<int:id>')
+def delete_hotel(id):
+    if(id>6):
+        hotel_db.delete_hotel(id)
+    return redirect(url_for('edit_hotels_page'))
 
 @app.route('/hotels/<int:id>', methods=['GET', 'POST'])
 def home(id):

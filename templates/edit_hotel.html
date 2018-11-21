@@ -4,7 +4,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 {% extends "layout.html" %}
-{% block title %}Ticketz -  Hotel Add{% endblock %}
+{% block title %}Ticketz -  Hotel Edit{% endblock %}
 {% block body %}
     {% include "components/admin/navbar.html" %}
     <div class="container">
@@ -116,13 +116,13 @@
                             <div class="container-fluid">
                                 <div class="row mb-2">
                                     <div class="col-sm-6">
-                                        <h1>Add Hotel</h1>
+                                        <h1>Edit Hotel</h1>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <div class="card-body">
-                            <form method="post" action=""  role="form" name="add_hotel" id="add_hotel">
+                            <form method="post" action=""  role="form" name="edit_hotel" id="edit_hotel">
                                 <label for="hotel_name" >Hotel Name*</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -130,7 +130,7 @@
                                             <i class="fas fa-hotel"></i>
                                         </span>
                                     </div>
-                                    <input name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
+                                    <input value="{{ hotel.name }}" name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
                                 </div>
 
                                 <br>
@@ -141,7 +141,7 @@
                                             <i class="fas fa-at"></i>
                                         </span>
                                     </div>
-                                    <input name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Hotel e-Mail" maxlength="50" required>
+                                    <input value="{{ hotel.email }}" name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Hotel e-Mail" maxlength="50" required>
                                 </div>
 
                                 <br>
@@ -152,7 +152,7 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                     </div>
-                                    <textarea name="description" id="description" class="form-control" placeholder="Enter The Hotel Description" maxlength="250" required></textarea>
+                                    <textarea value="{{ hotel.description }}" name="description" id="description" class="form-control" placeholder="Enter The Hotel Description" maxlength="250" required></textarea>
                                 </div>
                                 <br>
 
@@ -163,7 +163,7 @@
                                             <i class="fas fa-map"></i>
                                         </span>
                                     </div>
-                                    <input name="city" id="city" type="text" class="form-control" placeholder="Enter The City" maxlength="20" required>
+                                    <input value="{{ hotel.city }}" name="city" id="city" type="text" class="form-control" placeholder="Enter The City" maxlength="20" required>
                                 </div>
                                 <br>
 
@@ -174,7 +174,7 @@
                                             <i class="fas fa-map-marked-alt"></i>
                                         </span>
                                     </div>
-                                    <textarea name="address" id="address" class="form-control" placeholder="Enter The Hotel Address" maxlength="250" required></textarea>
+                                    <textarea value="{{ hotel.address }}" name="address" id="address" class="form-control" placeholder="Enter The Hotel Address" maxlength="250" required></textarea>
                                 </div>
                                 <br>
 
@@ -185,7 +185,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </span>
                                     </div>
-                                    <input name="phone" id="phone" type="text" class="form-control" placeholder="Enter The Phone" maxlength="15" required>
+                                    <input value="{{ hotel.phone }}" name="phone" id="phone" type="text" class="form-control" placeholder="Enter The Phone" maxlength="15" required>
                                 </div>
                                 <br>
 
@@ -196,13 +196,13 @@
                                             <i class="fas fa-phone-square"></i>
                                         </span>
                                     </div>
-                                    <input name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
+                                    <input value="{{ hotel.website }}" name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
                                 </div>
                                 <br>
                             </form>
                             <div class="card-footer">
-                                <button type="submit" onclick="add()" class="btn btn-info float-right">Submit</button>
-                                <button type="submit" class="btn btn-default" onclick="document.getElementById('add_hotel').reset();">Clear</button>
+                                <button type="submit" onclick="edit()" class="btn btn-info float-right">Update</button>
+                                <button type="submit" class="btn btn-default" onclick="document.getElementById('edit_hotel').reset();">Clear</button>
                             </div>
 
                             <div class="message-box-danger" style="display: none">
@@ -225,6 +225,131 @@
     <br>
     <br>
     {% include "components/admin/footer.html" %}
-<script src="../static/js/admin/add_hotel.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#js_hotel_name').val($('#hotel_name').val());
+            $('#js_e_mail').val($('#e_mail').val());
+            $('#js_address').val($('#address').val());
+            $('#js_city').val($('#city').val());
+            $('#js_phone').val($('#phone').val());
+            $('#js_description').val($('#description').val());
+            $('#js_website').val($('#website').val());
+
+
+
+
+        });
+
+
+
+        function edit()
+        {
+
+            deneme = true
+            if ($('#hotel_name').val()==""){
+                document.getElementById("hotel_name").style.borderColor = "red";
+                deneme = false
+
+            }
+            if ($('#e_mail').val()==""){
+                document.getElementById("e_mail").style.borderColor = "red";
+                deneme = false
+            }
+            if ($('#description').val()==""){
+                document.getElementById("description").style.borderColor = "red";
+                deneme = false
+            }
+            /*if ($('#city').val()==""){
+                document.getElementById("city").style.borderColor = "red";
+                deneme = false
+
+            }*/
+            if ($('#address').val()==""){
+                document.getElementById("address").style.borderColor = "red";
+                deneme = false
+            }
+            if ($('#phone').val()==""){
+                document.getElementById("phone").style.borderColor = "red";
+                deneme = false
+            }
+            /*if ($('#website').val()==""){
+                document.getElementById("website").style.borderColor = "red";
+                deneme = false
+            }*/
+
+            if(deneme)
+                document.getElementById("edit_hotel").submit();
+            else{
+                $(".message-box-danger").toggle(750, function () {
+                    setTimeout(function () {
+                        $(".message-box-danger").toggle(750);
+                    }, 2500);
+                });
+
+
+                return false
+            }
+
+        }
+
+        $('#hotel_name').on('change keyup paste delete', function () {
+
+            let value = this.value;
+            $('#js_hotel_name').val(value);
+            document.getElementById("hotel_name").style.borderColor = "";
+
+        });
+
+        $('#e_mail').on('change keyup paste delete', function () {
+
+            let value = this.value;
+            $('#js_e_mail').val(value);
+            document.getElementById("e_mail").style.borderColor = "";
+
+        });
+
+        $('#description').on('change keyup paste delete', function () {
+
+            let value = this.value;
+            $('#js_description').val(value);
+            document.getElementById("description").style.borderColor = "";
+
+        });
+
+        $('#city').on('change keyup paste delete', function () {
+
+            let value = this.value;
+            $('#js_city').val(value);
+            document.getElementById("city").style.borderColor = "";
+
+        });
+
+        $('#address').on('change keyup paste delete', function () {
+
+            let value = this.value;
+            $('#js_address').val(value);
+            document.getElementById("address").style.borderColor = "";
+
+        });
+
+        $('#phone').on('change keyup paste delete', function () {
+
+            let value = this.value;
+            $('#js_phone').val(value);
+            document.getElementById("phone").style.borderColor = "";
+
+        });
+
+        $('#website').on('change keyup paste delete', function () {
+
+            let value = this.value;
+            $('#js_website').val(value);
+            document.getElementById("website").style.borderColor = "";
+
+        });
+
+
+    </script>
 
 {% endblock %}
