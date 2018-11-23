@@ -1,8 +1,25 @@
 
+
 function add()
 {
 
-    deneme = true
+    var $captcha = $( '#recaptcha' ),
+        response = grecaptcha.getResponse();
+
+    if (response.length === 0) {
+        $( '.msg-error').text( "reCAPTCHA is mandatory" );
+        if( !$captcha.hasClass( "error" ) ){
+            $captcha.addClass( "error" );
+            return false;
+        }
+    }
+    else {
+        $( '.msg-error' ).text('');
+        $captcha.removeClass( "error" );
+    }
+
+
+    let deneme = true
     if ($('#hotel_name').val()==""){
         document.getElementById("hotel_name").style.borderColor = "red";
         deneme = false

@@ -2,7 +2,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
 
+    .g-recaptcha.error {
+      border: solid 2px #c64848;
+      padding: .2em;
+      width: 19em;
+    }
+</style>
 {% extends "layout.html" %}
 {% block title %}Ticketz -  Hotel Add{% endblock %}
 {% block body %}
@@ -199,6 +206,15 @@
                                     <input name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
                                 </div>
                                 <br>
+
+                                <div class="input-group">
+                                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>
+
+                                </div>
+
+
+                                <br>
+
                             </form>
                             <div class="card-footer">
                                 <button type="submit" onclick="add()" class="btn btn-info float-right">Submit</button>
