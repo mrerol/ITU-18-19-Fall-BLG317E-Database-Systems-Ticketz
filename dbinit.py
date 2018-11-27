@@ -7,6 +7,8 @@ DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd36
 
 INIT_STATEMENTS = [
 
+    """DROP TABLE IF EXISTS images""",
+    """DROP TABLE IF EXISTS hotels""",
     """DROP TABLE IF EXISTS users""",
     """DROP TABLE IF EXISTS firms""",
     """DROP TABLE IF EXISTS drivers""",
@@ -127,77 +129,6 @@ INIT_STATEMENTS = [
                         'dememe.com'
     
     )""",
-    """INSERT INTO hotels VALUES (
-                        1,
-                        'deneme',
-                        'deneme@deneme.com',
-                        'demo of description',
-                        'istanbul',
-                        'deneme sokak deneme cadde deneme',
-                        '0321221222',
-                        'dememe.com'
-
-    )""",
-
-    """INSERT INTO hotels VALUES (
-                            2,
-                            'deneme',
-                            'deneme@deneme.com',
-                            'demo of description',
-                            'istanbul',
-                            'deneme sokak deneme cadde deneme',
-                            '0321221222',
-                            'dememe.com'
-
-        )""",
-
-    """INSERT INTO hotels VALUES (
-                            3,
-                            'deneme',
-                            'deneme@deneme.com',
-                            'demo of description',
-                            'istanbul',
-                            'deneme sokak deneme cadde deneme',
-                            '0321221222',
-                            'dememe.com'
-
-        )""",
-
-    """INSERT INTO hotels VALUES (
-                            4,
-                            'deneme',
-                            'deneme@deneme.com',
-                            'demo of description',
-                            'istanbul',
-                            'deneme sokak deneme cadde deneme',
-                            '0321221222',
-                            'dememe.com'
-
-        )""",
-
-    """INSERT INTO hotels VALUES (
-                            5,
-                            'deneme',
-                            'deneme@deneme.com',
-                            'demo of description',
-                            'istanbul',
-                            'deneme sokak deneme cadde deneme',
-                            '0321221222',
-                            'dememe.com'
-
-        )""",
-
-    """INSERT INTO hotels VALUES (
-                            6,
-                            'deneme',
-                            'deneme@deneme.com',
-                            'demo of description',
-                            'istanbul',
-                            'deneme sokak deneme cadde deneme',
-                            '0321221222',
-                            'dememe.com'
-
-        )""",
 
     """INSERT INTO city VALUES 
                             ('01', 'Adana'),
