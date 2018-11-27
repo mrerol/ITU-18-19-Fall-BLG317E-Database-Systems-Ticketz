@@ -26,7 +26,7 @@ function imageAdd() {
 
 function add()
 {
-    /*
+
     var $captcha = $( '#recaptcha' ),
         response = grecaptcha.getResponse();
 
@@ -41,7 +41,7 @@ function add()
         $( '.msg-error' ).text('');
         $captcha.removeClass( "error" );
     }
-    */
+
 
     let deneme = true
     if ($('#hotel_name').val()==""){
