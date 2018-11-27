@@ -1,100 +1,244 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-</head>>
-<body>
-<div class="container">
-      <div class="row">
-      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-           <A href="edit.html" >Edit Profile</A>
+<link href="../../static/admin/admin_home_page.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-        <A href="edit.html" >Logout</A>
-       <br>
-<p class=" text-info">May 05,2014,03:00 pm </p>
-      </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+{% extends "layout.html" %}
+{% block title %}Driver Name{% endblock %}
+{% block body %}
+    {% include "components/firm/navbar.html" %}
+    <div class="container">
+        <section class="content-header" style="text-align: center;">
 
+            <h1>Firm Name</h1>
+            <hr>
+            <img src=" https://www.logo.com.tr/img/250x250.png" class="img-thumbnail" width="150" alt="logo">
+            <hr>
+        </section>
 
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Sheena Shrestha</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+        <section class="content">
+            <div class="card" style="box-shadow: 0 0 0px rgba(0,0,0,0);">
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                       <!-- <li class="nav-item text-center" style="width: 20%">
+                            <a class="nav-link active show" href="#images" data-toggle="tab"><i class="fa fa-images" aria-hidden="true"></i> Photos</a>
+                        </li>
+-->
+                        <li class="nav-item text-center" style="width: 20%">
+                            <a class="nav-link active show" class="nav-link" href="#information" data-toggle="tab"><i class="fas fa-info-circle" aria-hidden="true"></i></i> Information</a>
+                        </li>
 
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
-                <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Department:</td>
-                        <td>Programming</td>
-                      </tr>
-                      <tr>
-                        <td>Hire date:</td>
-                        <td>06/23/2013</td>
-                      </tr>
-                      <tr>
-                        <td>Date of Birth</td>
-                        <td>01/24/1988</td>
-                      </tr>
+                        <li class="nav-item text-center" style="width: 20%">
+                            <a class="nav-link" href="#contact" data-toggle="tab"><i class="fas fa-address-book" aria-hidden="true"></i> Contact</a>
+                        </li>
 
-                         <tr>
-                             <tr>
-                        <td>Gender</td>
-                        <td>Female</td>
-                      </tr>
-                        <tr>
-                        <td>Home Address</td>
-                        <td>Kathmandu,Nepal</td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
-                      </tr>
-                        <td>Phone Number</td>
-                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
-                        </td>
+                        <li class="nav-item text-center" style="width: 20%">
+                            <a class="nav-link" href="#location" data-toggle="tab"><i class="fas fa-map-marked-alt" aria-hidden="true"></i> InFO2</a>
+                        </li>
 
-                      </tr>
+                        <li class="nav-item text-center" style="width: 20%">
+                            <a class="nav-link" href="#comments" data-toggle="tab"><i class="fas fa-comments" aria-hidden="true"></i> Infor2r</a>
+                        </li>
 
-                    </tbody>
-                  </table>
-
-                  <a href="#" class="btn btn-primary">My Sales Performance</a>
-                  <a href="#" class="btn btn-primary">Team Sales Performance</a>
+                    </ul>
                 </div>
-              </div>
-            </div>
-                 <div class="panel-footer">
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
+
+                <div class="card-body" style="background-color: #f4f6fa;border-color: #f4f6fa; padding: 0px; padding-top: 10px;">
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="images">
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fa fa-images" aria-hidden="true"></i>
+                                        Photos
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div id="demo" class="carousel slide" data-ride="carousel">
+                                              <!-- Indicators -->
+                                                <ul class="carousel-indicators">
+                                                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                                    <li data-target="#demo" data-slide-to="1"></li>
+                                                    <li data-target="#demo" data-slide-to="2"></li>
+                                                </ul>
+                                              <!-- The slideshow -->
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <img class="img-rounded"     src="https://www.rwsentosa.com/-/media/project/non-gaming/rwsentosa/hotels/hard-rock-hotel-singapore/hardrockhotelsg-exterior.jpg" alt="Los Angeles" width="1100" height="500">
+                                                        <div class="carousel-caption d-none d-md-block">
+                                                            <h5>Image Header</h5>
+                                                            <p>Image Description</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img class="img-rounded" src="https://www.ahstatic.com/photos/7205_ho_00_p_2048x1536.jpg" alt="Chicago" width="1100" height="500">
+                                                            <div class="carousel-caption d-none d-md-block">
+                                                                <h5>Image Header</h5>
+                                                                <p>Image Description</p>
+                                                            </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img class="img-rounded" src="https://cdn.tatilbudur.net/otel/960x475/michell-hotel-spa-16_176263.jpg" alt="New York" width="1100" height="500">
+                                                        <div class="carousel-caption d-none d-md-block">
+                                                            <h5>Image Header</h5>
+                                                            <p>Image Description</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <!-- Left and right controls -->
+                                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon"></span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                    <span class="carousel-control-next-icon"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="information">
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                                        Information
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            firm description<br>
+                                            firm description<br>
+                                            firm description<br>
+                                            ...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="contact">
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-address-book" aria-hidden="true"></i>
+                                        Phone
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    0212 212 21 21
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-globe-americas" aria-hidden="true"></i>
+                                        Website
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <a target="_blank" href="#">www.hotel.hotel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="location">
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                                        Adress
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    Hotel Address
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-map-pin" aria-hidden="true"></i>
+                                        City
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    Hotel City
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="comments">
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-comments" aria-hidden="true"></i>
+                                        Add Comment
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!--<form action="#" method="post" class="form-horizontal" id="commentForm" role="form">-->
+                                                <div class="form-group">
+                                                    <label for="email" class="col-sm-2 control-label">Comment</label>
+                                                    <div class="col-sm-10">
+                                                      <textarea class="form-control" name="addComment" id="addComment" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="uploadMedia" class="col-sm-2 control-label">Upload media</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon">http://</div>
+                                                          <input type="text" class="form-control" name="uploadMedia" id="uploadMedia">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Summit comment</button>
+                                                    </div>
+                                                </div>
+                                            <!--</form>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="far fa-comments" aria-hidden="true"></i>
+                                        Old Comments
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h2>User Name</h2>
+                                            <p>comment</p>
+                                            <hr>
+                                            <h2>ap****</h2>
+                                            <p>comment......</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-          </div>
-        </div>
-      </div>
     </div>
-</body>
+    {% include "components/firm/footer.html" %}
 
-</html>
+{% endblock %}

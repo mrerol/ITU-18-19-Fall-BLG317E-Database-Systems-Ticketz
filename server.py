@@ -80,21 +80,27 @@ def hotel_page(id):
 def home_page():
     return views.home_page()
 
-@app.route('/firms/<int:id>', methods=['GET', 'POST'])
+@app.route('/firm/<int:id>', methods=['GET', 'POST'])
 def firms_page(id):
     return views.firms_page(id)
 
-@app.route('/driver_list/<int:id>', methods=['GET', 'POST'])
+@app.route('/firm/driver_list/<int:id>', methods=['GET', 'POST'])
 def driver_list_page(id):
     return views.driver_list_page(id)
 
-@app.route('/driver_profile/<int:id>', methods=['GET', 'POST'])
+@app.route('/firm/driver_profile/<int:id>', methods=['GET', 'POST'])
 def driver_profile_page(id):
     return views.driver_profile_page(id)
 
-@app.route('/driver_edit/<int:id>', methods=['GET', 'POST'])
+@app.route('/firm/driver_edit/<int:id>', methods=['GET', 'POST'])
 def driver_edit_page(id):
     return views.driver_edit_page(id)
+
+@app.route('/firm/add_expedition/<int:id>', methods=['GET', 'POST'])
+def add_expedition(id):
+    return views.add_expedition(id)
+
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

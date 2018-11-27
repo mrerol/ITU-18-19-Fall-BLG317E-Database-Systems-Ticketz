@@ -87,7 +87,10 @@ def driver_edit_page(id):
     return render_template("driver/driver_edit.html")
 
 def firms_page(id):
-    return render_template("firms.html")
+    return render_template("firm/firm.html")
+
+def add_expedition(id):
+    return render_template("firm/firm.html")
 
 def signup_page():
     error = None

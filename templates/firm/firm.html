@@ -6,7 +6,7 @@
 {% extends "layout.html" %}
 {% block title %}Firm Name{% endblock %}
 {% block body %}
-    {% include "components/admin/navbar.html" %}
+    {% include "components/firm/navbar.html" %}
     <div class="container">
         <section class="content-header" style="text-align: center;">
 
@@ -33,11 +33,11 @@
                         </li>
 
                         <li class="nav-item text-center" style="width: 20%">
-                            <a class="nav-link" href="#location" data-toggle="tab"><i class="fas fa-map-marked-alt" aria-hidden="true"></i> Add Expedition</a>
+                            <a class="nav-link" href="#location" data-toggle="tab"><i class="fas fa-map-marked-alt" aria-hidden="true"></i> InFO2</a>
                         </li>
 
                         <li class="nav-item text-center" style="width: 20%">
-                            <a class="nav-link" href="#comments" data-toggle="tab"><i class="fas fa-comments" aria-hidden="true"></i> Add Driver</a>
+                            <a class="nav-link" href="#comments" data-toggle="tab"><i class="fas fa-comments" aria-hidden="true"></i> Infor2r</a>
                         </li>
 
                     </ul>
@@ -112,9 +112,9 @@
                                 <div class="card-body firm-info">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            hotel description<br>
-                                            hotel description<br>
-                                            hotel description<br>
+                                            firm description<br>
+                                            firm description<br>
+                                            firm description<br>
                                             ...
                                         </div>
                                     </div>
@@ -239,6 +239,6 @@
         </section>
 
     </div>
-    {% include "components/admin/footer.html" %}
+    {% include "components/firm/footer.html" %}
 
 {% endblock %}

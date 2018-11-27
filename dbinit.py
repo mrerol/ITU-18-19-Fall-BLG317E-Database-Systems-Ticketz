@@ -3,6 +3,7 @@ import sys
 
 import psycopg2 as dbapi2
 
+
 DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd3645c95c712b9ba888f28cab791b@ec2-54-243-187-30.compute-1.amazonaws.com:5432/d96hqqveldfnft'
 
 INIT_STATEMENTS = [
@@ -49,7 +50,8 @@ INIT_STATEMENTS = [
         email VARCHAR (50) NOT NULL,
         gender VARCHAR (20) NOT NULL,
         city VARCHAR (20),
-        vote VARCHAR (20),
+        vote_number VARCHAR (20),
+        score VARCHAR (20),
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL
 
@@ -64,17 +66,23 @@ INIT_STATEMENTS = [
         city VARCHAR (20),
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
-        website VARCHAR (50)
+        website VARCHAR (50),
+        description VARCHAR (250) NOT NULL,
+        logo VARCHAR (250) NOT NULL
 
     )""",
 
     """CREATE TABLE IF NOT EXISTS vehicles 
     (
         vehicle_id SERIAL NOT NULL PRIMARY KEY,
-        vehicle_type VARCHAR (20) NOT NULL,
+        category VARCHAR (20) NOT NULL,
         production_year VARCHAR (20) NOT NULL,
-        recovery_year VARCHAR (20) NOT NULL,
-        model VARCHAR (15) NOT NULL
+        production_place VARCHAR (20) NOT NULL,
+        recovery_time VARCHAR (20) NOT NULL,
+        description VARCHAR (250) NOT NULL,
+        capacity VARCHAR (20) NOT NULL,
+        model VARCHAR (20) NOT NULL,
+        image VARCHAR (250) NOT NULL
 
     )""",
 
@@ -87,36 +95,126 @@ INIT_STATEMENTS = [
 
     """INSERT INTO drivers VALUES (
                         1,
-                        'deneme',
-                        'deneme@deneme.com',
+                        'rasit',
+                        'rasit@rasit.com',
                         'true',
                         'istanbul',
                         '100',
-                        'deneme sokak deneme cadde deneme',
-                        '0321221222'
+                        '5',
+                        'rasit sokak rasit cadde rasit',
+                        '05414144141'
                         
+    )""",
+
+    """INSERT INTO drivers VALUES (
+                        2,
+                        'erol',
+                        'erol@erol.com',
+                        'false',
+                        'istanbul',
+                        '200',
+                        '7',
+                        'erol sokak erol cadde erol',
+                        '05414144141'
+    
+    )""",
+
+    """INSERT INTO drivers VALUES (
+                        3,
+                        'poset',
+                        'poset@poset.com',
+                        'false',
+                        'istanbul',
+                        '600',
+                        '10',
+                        'poset sokak poset cadde poset',
+                        '05414144141'
+    
     )""",
 
     """INSERT INTO vehicles VALUES (
                         1,
                         'yuruyen ucak',
-                        '1923',
-                        '2023',
-                        'model'
+                        '2000',
+                        'istanbul',
+                        '2019',
+                        'ucak yuruyor',
+                        '200',
+                        'UC34X',
+                        'kedi.jpg'
+    
+    )""",
+
+    """INSERT INTO vehicles VALUES (
+                        2,
+                        'yuruyen araba',
+                        '2345',
+                        'istanbul',
+                        '2078',
+                        'araba yuruyor',
+                        '700',
+                        'ZXCV232',
+                        'kedi.jpg'
+    
+    )""",
+
+    """INSERT INTO vehicles VALUES (
+                        3,
+                        'yuruyen gemi',
+                        '2342',
+                        'istanbul',
+                        '2239',
+                        'gemi yuruyor',
+                        '124',
+                        'BFD56',
+                        'kedi.jpg'
     
     )""",
 
     """INSERT INTO firms VALUES (
                         1,
-                        'itu',
+                        'rasit',
                         'parola',
-                        'deneme@deneme.com',
+                        'rasit@rasit.com',
                         'istanbul',
-                        'deneme sokak deneme cadde deneme',
+                        'rasit sokak rasit cadde deneme',
                         '0321221222',
-                        'dememe.com'
+                        'rasit.com',
+                        'anlatmaya gerek mukemmel firma1',
+                        'firma1.jpg'
     
     )""",
+
+    """INSERT INTO firms VALUES (
+                        2,
+                        'erol',
+                        'parola',
+                        'erol@erol.com',
+                        'istanbul',
+                        'erol sokak erol cadde erol',
+                        '0321221222',
+                        'dememe.com',
+                        'anlatmaya gerek mukemmel firma2',
+                        'firma2.jpg'                        
+                        
+    
+    )""",
+
+    """INSERT INTO firms VALUES (
+                        3,
+                        'poset',
+                        'parola',
+                        'poset@poset.com',
+                        'istanbul',
+                        'poset sokak poset cadde erol',
+                        '0321221222',
+                        'poset.com',
+                        'anlatmaya gerek mukemmel firma3',
+                        'firma3.jpg'                        
+    
+    
+    )""",
+
     """INSERT INTO hotels VALUES (
                         1,
                         'deneme',
