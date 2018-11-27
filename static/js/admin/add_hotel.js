@@ -1,8 +1,32 @@
+let image_count = 0
 
+function deleteImage(i) {
+    console.log(i)
+    $('#i'+i).remove()
+}
+
+function imageAdd() {
+
+    image_count ++;
+    a = '<div class="input-group-prepend" id="i' +image_count +'">' +
+        '                                        <div class="input-group"><span class="input-group-text">' +
+        '                                            <i class="far fa-images"></i>' +
+        '                                        </span>\n' +
+        '                                    </div>\n' +
+        '                                    <label for="image' + image_count +'" hidden></label><input type="file" name="image' + image_count + '" accept="image/*" />\n' +
+        '                                    <span class="input-group-text">\n' +
+        '                                        <i onclick="imageAdd()" class="fas fa-plus"></i>\n' +
+        '                                    </span> ' +
+        '                                   <span class="input-group-text">' +
+        '                                       <i onclick="deleteImage(' + image_count + ')" class="fas fa-minus"></i>' +
+        '                                   </span></div>'
+
+    $('#images').append(a)
+}
 
 function add()
 {
-
+    /*
     var $captcha = $( '#recaptcha' ),
         response = grecaptcha.getResponse();
 
@@ -17,7 +41,7 @@ function add()
         $( '.msg-error' ).text('');
         $captcha.removeClass( "error" );
     }
-
+    */
 
     let deneme = true
     if ($('#hotel_name').val()==""){
@@ -51,8 +75,10 @@ function add()
         deneme = false
     }*/
 
-    if(deneme)
-        document.getElementById("add_hotel").submit();
+    if(deneme){
+        $('#s').val(image_count)
+        document.getElementById("add_hotel").submit()
+    }
     else{
         $(".message-box-danger").toggle(750, function () {
             setTimeout(function () {

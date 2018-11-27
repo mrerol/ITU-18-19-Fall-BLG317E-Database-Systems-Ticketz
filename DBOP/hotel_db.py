@@ -1,9 +1,9 @@
-from tables import Hotel
+from DBOP.tables.hotel_table import Hotel
 import psycopg2 as dbapi2
 import os
-import sys
 
-class Database:
+
+class hotel_database:
     def __init__(self):
         self.hotel = self.Hotel()
 
@@ -21,6 +21,16 @@ class Database:
                     "INSERT INTO hotels ( name, email, description, city, address, phone, website) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                     (hotel.name, hotel.email, hotel.description, hotel.city, hotel.address, hotel.phone, hotel.website))
                 cursor.close()
+
+        def get_hotel_id(self, hotel):
+            with dbapi2.connect(self.url) as connection:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "SELECT hotel_id FROM hotels WHERE name = %s AND email = %s AND description = %s AND city = %s AND address = %s AND phone= %s AND website = %s",
+                    (hotel.name, hotel.email, hotel.description, hotel.city, hotel.address, hotel.phone, hotel.website))
+                temp_id = cursor.fetchone()
+                cursor.close()
+                return temp_id
 
         def delete_hotel(self, hotel_id):
             try:
@@ -76,7 +86,6 @@ class Database:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
                 statement = """UPDATE hotels SET name = '""" + hotel.name + """' , email = '""" + hotel.email +"""' , description = '""" + hotel.description + """', city = ' """ + hotel.city +"""' ,  address = '""" + hotel.address + """', phone = '""" + hotel.phone +"""', website = '""" + hotel.website + """'   WHERE hotel_id = """ + str(hotel_id)
-                print(statement)
                 cursor.execute(statement)
                 connection.commit()
                 cursor.close()

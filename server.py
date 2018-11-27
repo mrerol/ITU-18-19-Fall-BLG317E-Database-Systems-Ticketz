@@ -1,15 +1,18 @@
 from flask import Flask, render_template, redirect, url_for, request
 import views
+from base64 import b64encode
 
-from tables import Hotel
-from dboperations import Database
+from DBOP.tables.image_table import Image
+from DBOP.tables.hotel_table import Hotel
+from DBOP.hotel_db import hotel_database
+from DBOP.image_db import image_database
 
-db = Database()
+db_hotel = hotel_database()
+db_image = image_database()
 
-hotel_db = db.hotel
+hotel_db = db_hotel.hotel
+image_db = db_image.image
 
-deneme = hotel_db.search("deneme")
-print(deneme)
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
@@ -19,6 +22,7 @@ def create_app():
 app = create_app()
 
 app.secret_key = b'_5#y2L"F4Q8z_^?4c]/'
+
 
 @app.route('/admin_home_page', methods=['GET', 'POST'])
 def admin_home_page():
@@ -44,7 +48,20 @@ def add_hotel_page():
         address = request.form["address"]
         phone = request.form["phone"]
         website = request.form["website"]
+        s = request.form["s"]
+
+
         hotel_db.add_hotel(Hotel(hotel_name,email,description,city,address,phone,website))
+
+        (temp_id, ) = hotel_db.get_hotel_id(Hotel(hotel_name, email, description, city, address, phone, website))
+
+        uploaded_files = request.form.getlist("file[]")
+        for i in range(int(s) + 1):
+            temp = "image" + str(i)
+            if temp in request.files:
+                file = request.files[temp]
+                image_db.add_image(Image(temp_id, file.read()))
+
         return redirect(url_for('admin_home_page'))
 
 @app.route('/admin/edit_hotel/<int:id>', methods=['GET', 'POST'])
@@ -60,6 +77,15 @@ def edit_hotel_page(id):
         phone = request.form["phone"]
         website = request.form["website"]
         hotel_db.update_hotel(id, Hotel(hotel_name,email,description,city,address,phone,website))
+        s = request.form["s"]
+        uploaded_files = request.form.getlist("file[]")
+        print(uploaded_files)
+        for i in range(int(s) + 1):
+            temp = "image" + str(i)
+            if temp in request.files:
+                file = request.files[temp]
+                image_db.add_image(Image(id, file.read()))
+
         return redirect(url_for('admin_home_page'))
 
 @app.route('/admin/edit_hotels', methods=['GET', 'POST'])
@@ -71,6 +97,12 @@ def delete_hotel(id):
     if(id>6):
         hotel_db.delete_hotel(id)
     return redirect(url_for('edit_hotels_page'))
+
+@app.route('/admin/delete_image/<int:hotel_id>/<int:image_id>')
+def delete_image(hotel_id, image_id):
+    image_db.delete_image(hotel_id ,image_id)
+    return redirect(url_for('edit_hotel_page', id = hotel_id))
+
 
 @app.route('/hotels/<int:id>', methods=['GET', 'POST'])
 def hotel_page(id):
