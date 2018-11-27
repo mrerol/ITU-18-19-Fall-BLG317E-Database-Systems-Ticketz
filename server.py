@@ -94,8 +94,7 @@ def edit_hotels_page():
 
 @app.route('/admin/delete_hotel/<int:id>')
 def delete_hotel(id):
-    if(id>6):
-        hotel_db.delete_hotel(id)
+    hotel_db.delete_hotel(id)
     return redirect(url_for('edit_hotels_page'))
 
 @app.route('/admin/delete_image/<int:hotel_id>/<int:image_id>')
