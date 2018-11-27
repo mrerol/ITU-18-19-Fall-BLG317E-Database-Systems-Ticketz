@@ -1,27 +1,78 @@
-from flask import render_template, current_app, redirect, url_for, request, session
+from flask import render_template, redirect, url_for, request, session
 from dao.user_dao import UserDao
 from psycopg2 import IntegrityError
 import sys
+from base64 import b64encode
 
-from tables import Hotel
-from dboperations import Database
+from DBOP.hotel_db import hotel_database
+from DBOP.image_db import image_database
 
-db = Database()
+db_hotel = hotel_database()
+db_image = image_database()
 
-hotel_db = db.hotel
+hotel_db = db_hotel.hotel
+image_db = db_image.image
+
 userop = UserDao()
 
 def home_page():
+    images = image_db.get_images()
     hotels = hotel_db.get_hotels()
-    return render_template("admin_home_page.html", hotels = reversed(hotels))
+    toSend = []
+    for (temp_id , trash , image) in images:
+        temp = (b64encode(image.file_data).decode("utf-8"))
+        checker = True
+        for (i, trash) in toSend:
+            if i == temp_id:
+                checker = False
+                break
+        if (temp is not None or temp is not '') and checker :
+            toSend.append((temp_id,temp))
+
+    combined = []
+    for (id, hotel) in hotels:
+        a = True
+        for(id2, image) in toSend:
+            if id == id2:
+                combined.append((id, hotel, image))
+                a = False
+        if a:
+            combined.append((id,hotel,None))
+
+    print(images)
+    print(toSend)
+    return render_template("admin_home_page.html", hotels = reversed(combined))
+
+
 
 def admin_home_page():
-    #if 'user_id' in session:
+    images = image_db.get_images()
     hotels = hotel_db.get_hotels()
-        #print(hotels)
-    return render_template("admin_home_page.html", hotels = reversed(hotels))
-    #else:
-    #    return redirect(url_for('404_not_found'))
+    toSend = []
+    for (temp_id, trash, image) in images:
+        temp = (b64encode(image.file_data).decode("utf-8"))
+        checker = True
+        for (i, trash) in toSend:
+            if i == temp_id:
+                checker = False
+                break
+        if (temp is not None or temp is not '') and checker:
+            toSend.append((temp_id, temp))
+
+    combined = []
+    for (id, hotel) in hotels:
+        a = True
+        for (id2, image) in toSend:
+            if id == id2:
+                combined.append((id, hotel, image))
+                a = False
+        if a:
+            combined.append((id, hotel, None))
+
+    print(images)
+    print(toSend)
+    return render_template("admin_home_page.html", hotels=reversed(combined))
+
 
 def search_hotel_page(text):
     #if 'user_id' in session:
@@ -39,7 +90,14 @@ def edit_hotel_page(id):
     if temp_hotel is None:
         return render_template("404_not_found.html")
     else:
-        return render_template("edit_hotel.html", hotel = temp_hotel)
+        tmp = image_db.get_images()
+        print(tmp)
+        images = []
+        for (h_id, image_id,  im) in tmp:
+            if id == h_id:
+                image = b64encode(im.file_data).decode("utf-8")
+                images.append((image_id, image) )
+        return render_template("edit_hotel.html", hotel = temp_hotel, images = images, hotel_id = id)
 
 def edit_hotels_page():
     #if 'user_id' in session:
@@ -74,7 +132,12 @@ def hotel_page(id):
     if temp_hotel is None:
         return render_template("404_not_found.html")
     else:
-        return render_template("hotels.html", hotel = temp_hotel)
+        toSend = []
+        images = image_db.get_images()
+        for ( temp_id, trash, image) in images:
+            if temp_id is id:
+                toSend.append(b64encode(image.file_data).decode("utf-8"))
+        return render_template("hotels.html", hotel = temp_hotel , images = toSend)
 
 
 def driver_list_page(id):

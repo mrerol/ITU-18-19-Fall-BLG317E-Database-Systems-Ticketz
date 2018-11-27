@@ -129,7 +129,7 @@
                             </div>
                         </section>
                         <div class="card-body">
-                            <form method="post" action=""  role="form" name="add_hotel" id="add_hotel">
+                            <form method="post" action="" enctype = "multipart/form-data"  role="form" name="add_hotel" id="add_hotel">
                                 <label for="hotel_name" >Hotel Name*</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -206,11 +206,33 @@
                                     <input name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
                                 </div>
                                 <br>
+                                <label for="s" hidden></label>
+                                <input type="number" id="s" name="s" hidden >
+                                <label for="photo">Photos</label>
+                                <div class="input-group" id="images">
+                                    <div class="input-group" id="i0">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-images"></i>
+                                            </span>
+                                        </div>
+                                        <label for="images0" hidden></label>
+                                        <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
+                                        <input type="file" name="image0" accept="image/*" />
+                                        <span class="input-group-text">
+                                            <i onclick="imageAdd()" class="fas fa-plus"></i>
+                                        </span>
+                                    </div>
+                                </div>
 
-                                <div class="input-group">
+                                <br>
+
+                                <br>
+
+                                <!--<div class="input-group">
                                     <div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>
 
-                                </div>
+                                </div>-->
 
 
                                 <br>

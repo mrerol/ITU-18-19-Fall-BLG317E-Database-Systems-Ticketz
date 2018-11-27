@@ -7,7 +7,7 @@ import psycopg2 as dbapi2
 DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd3645c95c712b9ba888f28cab791b@ec2-54-243-187-30.compute-1.amazonaws.com:5432/d96hqqveldfnft'
 
 INIT_STATEMENTS = [
-    """DROP TABLE IF EXISTS hotels""",
+
     """DROP TABLE IF EXISTS users""",
     """DROP TABLE IF EXISTS firms""",
     """DROP TABLE IF EXISTS drivers""",
@@ -24,8 +24,18 @@ INIT_STATEMENTS = [
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
         website VARCHAR (50)
-
+        
     )""",
+
+    """CREATE TABLE IF NOT EXISTS images(
+        hotel_id INT NOT NULL,
+        image_id SERIAL NOT NULL,
+        file_data BYTEA,
+        PRIMARY KEY (hotel_id, image_id),
+        FOREIGN KEY (hotel_id) REFERENCES hotels (hotel_id) ON DELETE CASCADE ON UPDATE CASCADE ,
+        UNIQUE (hotel_id, image_id)
+    )
+    """,
 
     """CREATE TABLE IF NOT EXISTS users 
     (

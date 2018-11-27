@@ -10,11 +10,17 @@
 
 
 
-            {% for (id, hotel) in hotels %}
+            {% for (id, hotel, image) in hotels %}
 
                 <div class="col-md-4">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__180.png" alt="Card image cap">
+                        {% if image %}
+                                <img class="card-img-top"  src='data:image/png;base64,{{ image }}' >
+
+                        {% else %}
+                            <img class="card-img-top" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
+                        {% endif %}
+
                         <div class="card-body">
                             <h5 class="card-title">{{ hotel.name }}</h5>
                             <p class="card-text">{{ hotel.description }}</p>

@@ -100,6 +100,24 @@
                             </div>
                             <br>
 
+                            <label> Photos</label>
+                            {%  for (id, image) in images %}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-image"></i>
+                                        </span>
+                                    </div>
+                                    <img class="card-img-top"  src='data:image/png;base64,{{image}}' style="height: 40%; width: 40%;">
+                                    <a href="/admin/delete_image/{{hotel_id }}/{{id}}">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            <br>
+                            {% endfor %}
 
                         </div>
 
@@ -122,7 +140,7 @@
                             </div>
                         </section>
                         <div class="card-body">
-                            <form method="post" action=""  role="form" name="edit_hotel" id="edit_hotel">
+                            <form method="post" action=""  enctype = "multipart/form-data" role="form" name="edit_hotel" id="edit_hotel">
                                 <label for="hotel_name" >Hotel Name*</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -130,7 +148,7 @@
                                             <i class="fas fa-hotel"></i>
                                         </span>
                                     </div>
-                                    <input value="{{ hotel.name }}" name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
+                                    <input value="{{hotel.name}}" name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
                                 </div>
 
                                 <br>
@@ -141,7 +159,7 @@
                                             <i class="fas fa-at"></i>
                                         </span>
                                     </div>
-                                    <input value="{{ hotel.email }}" name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Hotel e-Mail" maxlength="50" required>
+                                    <input value="{{hotel.email}}" name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Hotel e-Mail" maxlength="50" required>
                                 </div>
 
                                 <br>
@@ -152,7 +170,7 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                     </div>
-                                    <textarea value="{{ hotel.description }}" name="description" id="description" class="form-control" placeholder="Enter The Hotel Description" maxlength="250" required></textarea>
+                                    <textarea value="{{hotel.description}}" name="description" id="description" class="form-control" placeholder="Enter The Hotel Description" maxlength="250" required>{{hotel.description}}</textarea>
                                 </div>
                                 <br>
 
@@ -163,7 +181,7 @@
                                             <i class="fas fa-map"></i>
                                         </span>
                                     </div>
-                                    <input value="{{ hotel.city }}" name="city" id="city" type="text" class="form-control" placeholder="Enter The City" maxlength="20" required>
+                                    <input value="{{hotel.city}}" name="city" id="city" type="text" class="form-control" placeholder="Enter The City" maxlength="20" required>
                                 </div>
                                 <br>
 
@@ -174,7 +192,7 @@
                                             <i class="fas fa-map-marked-alt"></i>
                                         </span>
                                     </div>
-                                    <textarea value="{{ hotel.address }}" name="address" id="address" class="form-control" placeholder="Enter The Hotel Address" maxlength="250" required></textarea>
+                                    <textarea value="{{hotel.address}}" name="address" id="address" class="form-control" placeholder="Enter The Hotel Address" maxlength="250" required>{{hotel.address}}</textarea>
                                 </div>
                                 <br>
 
@@ -185,7 +203,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </span>
                                     </div>
-                                    <input value="{{ hotel.phone }}" name="phone" id="phone" type="text" class="form-control" placeholder="Enter The Phone" maxlength="15" required>
+                                    <input value="{{hotel.phone}}" name="phone" id="phone" type="text" class="form-control" placeholder="Enter The Phone" maxlength="15" required>
                                 </div>
                                 <br>
 
@@ -196,7 +214,28 @@
                                             <i class="fas fa-phone-square"></i>
                                         </span>
                                     </div>
-                                    <input value="{{ hotel.website }}" name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
+                                    <input value="{{hotel.website}}" name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
+                                </div>
+                                <br>
+
+                                <label for="s" hidden></label>
+                                <input type="number" id="s" name="s" hidden >
+
+                                <label for="photo">Photos</label>
+                                <div class="input-group" id="images">
+                                    <div class="input-group" id="i0">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-images"></i>
+                                            </span>
+                                        </div>
+                                        <label for="images0" hidden></label>
+                                        <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
+                                        <input type="file" name="image0" accept="image/*" />
+                                        <span class="input-group-text">
+                                            <i onclick="imageAdd()" class="fas fa-plus"></i>
+                                        </span>
+                                    </div>
                                 </div>
                                 <br>
                             </form>
@@ -225,131 +264,7 @@
     <br>
     <br>
     {% include "components/admin/footer.html" %}
-    <script>
-        $(document).ready(function () {
+    <script src="/../static/js/admin/edit_hotel.js"></script>
 
-            $('#js_hotel_name').val($('#hotel_name').val());
-            $('#js_e_mail').val($('#e_mail').val());
-            $('#js_address').val($('#address').val());
-            $('#js_city').val($('#city').val());
-            $('#js_phone').val($('#phone').val());
-            $('#js_description').val($('#description').val());
-            $('#js_website').val($('#website').val());
-
-
-
-
-        });
-
-
-
-        function edit()
-        {
-
-            deneme = true
-            if ($('#hotel_name').val()==""){
-                document.getElementById("hotel_name").style.borderColor = "red";
-                deneme = false
-
-            }
-            if ($('#e_mail').val()==""){
-                document.getElementById("e_mail").style.borderColor = "red";
-                deneme = false
-            }
-            if ($('#description').val()==""){
-                document.getElementById("description").style.borderColor = "red";
-                deneme = false
-            }
-            /*if ($('#city').val()==""){
-                document.getElementById("city").style.borderColor = "red";
-                deneme = false
-
-            }*/
-            if ($('#address').val()==""){
-                document.getElementById("address").style.borderColor = "red";
-                deneme = false
-            }
-            if ($('#phone').val()==""){
-                document.getElementById("phone").style.borderColor = "red";
-                deneme = false
-            }
-            /*if ($('#website').val()==""){
-                document.getElementById("website").style.borderColor = "red";
-                deneme = false
-            }*/
-
-            if(deneme)
-                document.getElementById("edit_hotel").submit();
-            else{
-                $(".message-box-danger").toggle(750, function () {
-                    setTimeout(function () {
-                        $(".message-box-danger").toggle(750);
-                    }, 2500);
-                });
-
-
-                return false
-            }
-
-        }
-
-        $('#hotel_name').on('change keyup paste delete', function () {
-
-            let value = this.value;
-            $('#js_hotel_name').val(value);
-            document.getElementById("hotel_name").style.borderColor = "";
-
-        });
-
-        $('#e_mail').on('change keyup paste delete', function () {
-
-            let value = this.value;
-            $('#js_e_mail').val(value);
-            document.getElementById("e_mail").style.borderColor = "";
-
-        });
-
-        $('#description').on('change keyup paste delete', function () {
-
-            let value = this.value;
-            $('#js_description').val(value);
-            document.getElementById("description").style.borderColor = "";
-
-        });
-
-        $('#city').on('change keyup paste delete', function () {
-
-            let value = this.value;
-            $('#js_city').val(value);
-            document.getElementById("city").style.borderColor = "";
-
-        });
-
-        $('#address').on('change keyup paste delete', function () {
-
-            let value = this.value;
-            $('#js_address').val(value);
-            document.getElementById("address").style.borderColor = "";
-
-        });
-
-        $('#phone').on('change keyup paste delete', function () {
-
-            let value = this.value;
-            $('#js_phone').val(value);
-            document.getElementById("phone").style.borderColor = "";
-
-        });
-
-        $('#website').on('change keyup paste delete', function () {
-
-            let value = this.value;
-            $('#js_website').val(value);
-            document.getElementById("website").style.borderColor = "";
-
-        });
-
-
-    </script>
 
 {% endblock %}
