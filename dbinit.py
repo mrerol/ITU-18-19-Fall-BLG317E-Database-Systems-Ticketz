@@ -7,8 +7,6 @@ DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd36
 
 INIT_STATEMENTS = [
 
-    """DROP TABLE IF EXISTS images""",
-    """DROP TABLE IF EXISTS hotels""",
     """DROP TABLE IF EXISTS users""",
     """DROP TABLE IF EXISTS firms""",
     """DROP TABLE IF EXISTS drivers""",
