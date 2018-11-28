@@ -140,6 +140,22 @@
                                     <input name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
                                 </div>
 
+                                <label for="photo">Logo</label>
+                                <div class="input-group" id="logos">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-images"></i>
+                                            </span>
+                                        </div>
+                                        <label for="logo" hidden></label>
+                                        <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
+
+                                        <img id="logo" >
+                                        <input onchange="loadFile(event)" type="file" name="logo" accept="image/*" />
+                                    </div>
+                                </div>
+
                                 <br>
                                 <label for="e_mail">Hotel e-Mail*</label>
                                 <div class="input-group">
@@ -218,9 +234,10 @@
                                         </div>
                                         <label for="images0" hidden></label>
                                         <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
-                                        <input type="file" name="image0" accept="image/*" />
-                                        <span class="input-group-text">
-                                            <i onclick="imageAdd()" class="fas fa-plus"></i>
+                                        <img id="images0" >
+                                        <input onchange="loadImage(event, 0)" type="file" name="image0" accept="image/*" />
+                                        <span onclick="imageAdd()" class="input-group-text">
+                                            <i  class="fas fa-plus"></i>
                                         </span>
                                     </div>
                                 </div>

@@ -13,6 +13,7 @@ db_image = image_database()
 hotel_db = db_hotel.hotel
 image_db = db_image.image
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object("settings")
@@ -48,12 +49,17 @@ def add_hotel_page():
         address = request.form["address"]
         phone = request.form["phone"]
         website = request.form["website"]
+        if "logo" in request.files:
+            logo = request.files["logo"]
+            hotel_db.add_hotel_with_logo(Hotel(hotel_name, email, description, city, address, phone, website, logo.read()))
+        else:
+            hotel_db.add_hotel(Hotel(hotel_name, email, description, city, address, phone, website, None))
+
         s = request.form["s"]
 
 
-        hotel_db.add_hotel(Hotel(hotel_name,email,description,city,address,phone,website))
 
-        (temp_id, ) = hotel_db.get_hotel_id(Hotel(hotel_name, email, description, city, address, phone, website))
+        (temp_id, ) = hotel_db.get_hotel_id(Hotel(hotel_name, email, description, city, address, phone, website, None))
 
         uploaded_files = request.form.getlist("file[]")
         for i in range(int(s) + 1):
@@ -76,7 +82,11 @@ def edit_hotel_page(id):
         address = request.form["address"]
         phone = request.form["phone"]
         website = request.form["website"]
-        hotel_db.update_hotel(id, Hotel(hotel_name,email,description,city,address,phone,website))
+        if "logo" in request.files:
+            logo = request.files["logo"]
+            hotel_db.update_hotel_with_logo(id, Hotel(hotel_name, email, description, city, address, phone, website, logo.read()))
+        else:
+            hotel_db.update_hotel(id, Hotel(hotel_name, email, description, city, address, phone, website, None))
         s = request.form["s"]
         uploaded_files = request.form.getlist("file[]")
         print(uploaded_files)
@@ -101,6 +111,11 @@ def delete_hotel(id):
 @app.route('/admin/delete_image/<int:hotel_id>/<int:image_id>')
 def delete_image(hotel_id, image_id):
     image_db.delete_image(hotel_id ,image_id)
+    return redirect(url_for('edit_hotel_page', id = hotel_id))
+
+@app.route('/admin/delete_logo/<int:hotel_id>')
+def delete_hotel_logo(hotel_id):
+    hotel_db.delete_hotel_logo(hotel_id )
     return redirect(url_for('edit_hotel_page', id = hotel_id))
 
 
