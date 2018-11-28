@@ -84,6 +84,7 @@ def edit_hotel_page(id):
         website = request.form["website"]
         if "logo" in request.files:
             logo = request.files["logo"]
+            print(logo)
             hotel_db.update_hotel_with_logo(id, Hotel(hotel_name, email, description, city, address, phone, website, logo.read()))
         else:
             hotel_db.update_hotel(id, Hotel(hotel_name, email, description, city, address, phone, website, None))

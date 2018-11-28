@@ -19,9 +19,6 @@ def home_page():
     hotels = hotel_db.get_hotels()
 
     for (id , hotel) in hotels:
-        print("logo")
-        print(hotel.logo)
-        print(id)
         if hotel.logo is not None:
             temp = b64encode(hotel.logo).decode("utf-8")
             hotel.logo = temp
@@ -34,9 +31,6 @@ def admin_home_page():
     hotels = hotel_db.get_hotels()
 
     for (id, hotel) in hotels:
-        print("logo")
-        print(hotel.logo)
-        print(id)
         if hotel.logo is not None:
             temp = b64encode(hotel.logo).decode("utf-8")
             hotel.logo = temp

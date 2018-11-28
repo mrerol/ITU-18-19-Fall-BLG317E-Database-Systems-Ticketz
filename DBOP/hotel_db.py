@@ -122,8 +122,7 @@ class hotel_database:
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                statement = """UPDATE hotels SET name = '""" + hotel.name + """' , logo = '""" + hotel.logo + """ ', email = '""" + hotel.email +"""' , description = '""" + hotel.description + """', city = ' """ + hotel.city +"""' ,  address = '""" + hotel.address + """', phone = '""" + hotel.phone +"""', website = '""" + hotel.website + """'    WHERE hotel_id = """ + str(hotel_id)
-                cursor.execute(statement)
+                cursor.execute("""UPDATE hotels SET name = %s, email = %s, description = %s, city = %s, address = %s, phone = %s, website = %s, logo = %s WHERE hotel_id = %s """, (hotel.name, hotel.email, hotel.description, hotel.city, hotel.address, hotel.phone, hotel.website, hotel.logo, hotel_id))
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:

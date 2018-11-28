@@ -163,11 +163,11 @@
                                             <img id="logo_image" class="img-thumbnail" style="height: 40%; width: 40%;" alt="logo"  src='data:image/png;base64,{{ hotel.logo }}' >
 
                                         {% else %}
-                                            <img class="img-thumbnail" style="height: 40%; width: 40%;" alt="logo" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
+                                            <img id="logo_image" class="img-thumbnail" style="height: 40%; width: 40%;" alt="logo" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
                                         {% endif %}
 
                                         <label for="logo" hidden></label>
-                                        <input type="file" id="logo" name="logo" onchange="loadFile(event)" accept="image/*" />
+                                        <input onchange="loadFile(event)" type="file" id="logo" name="logo" accept="image/*" />
                                         <a href="/admin/delete_logo/{{ hotel_id }}"><span onclick="clicked()" class="input-group-text">
                                             <i  class="fas fa-minus"></i>
                                         </span></a>
