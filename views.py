@@ -16,62 +16,26 @@ image_db = db_image.image
 userop = UserDao()
 
 def home_page():
-    images = image_db.get_images()
     hotels = hotel_db.get_hotels()
-    toSend = []
-    for (temp_id , trash , image) in images:
-        temp = (b64encode(image.file_data).decode("utf-8"))
-        checker = True
-        for (i, trash) in toSend:
-            if i == temp_id:
-                checker = False
-                break
-        if (temp is not None or temp is not '') and checker :
-            toSend.append((temp_id,temp))
 
-    combined = []
-    for (id, hotel) in hotels:
-        a = True
-        for(id2, image) in toSend:
-            if id == id2:
-                combined.append((id, hotel, image))
-                a = False
-        if a:
-            combined.append((id,hotel,None))
+    for (id , hotel) in hotels:
+        if hotel.logo is not None:
+            temp = b64encode(hotel.logo).decode("utf-8")
+            hotel.logo = temp
 
-    print(images)
-    print(toSend)
-    return render_template("admin_home_page.html", hotels = reversed(combined))
+    return render_template("admin_home_page.html", hotels = hotels)
 
 
 
 def admin_home_page():
-    images = image_db.get_images()
     hotels = hotel_db.get_hotels()
-    toSend = []
-    for (temp_id, trash, image) in images:
-        temp = (b64encode(image.file_data).decode("utf-8"))
-        checker = True
-        for (i, trash) in toSend:
-            if i == temp_id:
-                checker = False
-                break
-        if (temp is not None or temp is not '') and checker:
-            toSend.append((temp_id, temp))
 
-    combined = []
     for (id, hotel) in hotels:
-        a = True
-        for (id2, image) in toSend:
-            if id == id2:
-                combined.append((id, hotel, image))
-                a = False
-        if a:
-            combined.append((id, hotel, None))
+        if hotel.logo is not None:
+            temp = b64encode(hotel.logo).decode("utf-8")
+            hotel.logo = temp
 
-    print(images)
-    print(toSend)
-    return render_template("admin_home_page.html", hotels=reversed(combined))
+    return render_template("admin_home_page.html", hotels=hotels)
 
 
 def search_hotel_page(text):
@@ -91,7 +55,8 @@ def edit_hotel_page(id):
         return render_template("404_not_found.html")
     else:
         tmp = image_db.get_images()
-        print(tmp)
+        if temp_hotel.logo is not None:
+            temp_hotel.logo = b64encode(temp_hotel.logo).decode("utf-8")
         images = []
         for (h_id, image_id,  im) in tmp:
             if id == h_id:
@@ -134,6 +99,8 @@ def hotel_page(id):
     else:
         toSend = []
         images = image_db.get_images()
+        if temp_hotel.logo is not None:
+            temp_hotel.logo = b64encode(temp_hotel.logo).decode("utf-8")
         for ( temp_id, trash, image) in images:
             if temp_id is id:
                 toSend.append(b64encode(image.file_data).decode("utf-8"))

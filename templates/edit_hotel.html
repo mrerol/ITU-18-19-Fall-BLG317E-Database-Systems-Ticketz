@@ -151,6 +151,29 @@
                                     <input value="{{hotel.name}}" name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
                                 </div>
 
+                                <label for="photo">Logo</label>
+                                <div class="input-group" id="Logo">
+                                    <div class="input-group" id="logo">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-images"></i>
+                                            </span>
+                                        </div>
+                                        {% if hotel.logo %}
+                                            <img id="logo_image" class="img-thumbnail" style="height: 40%; width: 40%;" alt="logo"  src='data:image/png;base64,{{ hotel.logo }}' >
+
+                                        {% else %}
+                                            <img id="logo_image" class="img-thumbnail" style="height: 40%; width: 40%;" alt="logo" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
+                                        {% endif %}
+
+                                        <label for="logo" hidden></label>
+                                        <input onchange="loadFile(event)" type="file" id="logo" name="logo" accept="image/*" />
+                                        <a href="/admin/delete_logo/{{ hotel_id }}"><span onclick="clicked()" class="input-group-text">
+                                            <i  class="fas fa-minus"></i>
+                                        </span></a>
+                                    </div>
+                                </div>
+
                                 <br>
                                 <label for="e_mail">Hotel e-Mail*</label>
                                 <div class="input-group">
@@ -231,11 +254,18 @@
                                         </div>
                                         <label for="images0" hidden></label>
                                         <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
-                                        <input type="file" name="image0" accept="image/*" />
-                                        <span class="input-group-text">
-                                            <i onclick="imageAdd()" class="fas fa-plus"></i>
+                                        <img id="images0" >
+                                        <input onchange="loadImage(event, 0)" type="file" name="image0" accept="image/*" />
+                                        <span onclick="imageAdd()" class="input-group-text">
+                                            <i class="fas fa-plus"></i>
                                         </span>
                                     </div>
+                                </div>
+                                <br>
+
+                                <div class="input-group">
+                                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>
+
                                 </div>
                                 <br>
                             </form>
@@ -264,6 +294,7 @@
     <br>
     <br>
     {% include "components/admin/footer.html" %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/../static/js/admin/edit_hotel.js"></script>
 
 
