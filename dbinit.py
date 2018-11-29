@@ -73,10 +73,12 @@ INIT_STATEMENTS = [
         name VARCHAR (50) NOT NULL,
         password VARCHAR (16) NOT NULL,
         email VARCHAR (50) NOT NULL,
-        city VARCHAR (20),
+        city VARCHAR (20) NOT NULL,
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
-        website VARCHAR (50)
+        website VARCHAR (50) NOT NULL,
+        description VARCHAR (250) NOT NULL
+        
 
     )""",
 
@@ -126,7 +128,8 @@ INIT_STATEMENTS = [
                         'istanbul',
                         'deneme sokak deneme cadde deneme',
                         '0321221222',
-                        'dememe.com'
+                        'dememe.com',
+                        'aciklama'
 
     )""",
 
