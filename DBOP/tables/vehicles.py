@@ -1,4 +1,4 @@
-class Vehicles:
+class Vehicle:
     def __init__(self, category, capacity, production_year, production_place, image , recovery_time, model, description):
         self.category = category
         self.description = description

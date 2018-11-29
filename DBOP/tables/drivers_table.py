@@ -1,4 +1,4 @@
-class Drivers:
+class Driver:
     def __init__(self, name, gender, email, score , vote_number, city, address, phone):
         self.name = name
         self.gender = gender

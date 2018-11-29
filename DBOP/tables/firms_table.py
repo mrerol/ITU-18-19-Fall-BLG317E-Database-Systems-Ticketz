@@ -1,5 +1,5 @@
-class Firms:
-    def __init__(self, name, password, email, city, address, phone, website, description, logo):
+class Firm:
+    def __init__(self, name, password, email, city, address, phone, website, description, logo=None):
         self.name = name
         self.password = password
         self.email = email

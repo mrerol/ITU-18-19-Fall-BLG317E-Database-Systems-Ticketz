@@ -77,8 +77,8 @@ INIT_STATEMENTS = [
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
         website VARCHAR (50) NOT NULL,
-        description VARCHAR (250) NOT NULL
-        
+        description VARCHAR (250),
+        logo VARCHAR (50) 
 
     )""",
 
