@@ -55,6 +55,21 @@ INIT_STATEMENTS = [
 
     )""",
 
+    """CREATE TABLE IF NOT EXISTS terminal 
+    (
+        terinal_id SERIAL NOT NULL PRIMARY KEY,
+        terminal_name VARCHAR(50) UNIQUE NOT NULL,
+        terminal_code VARCHAR(6) UNIQUE NOT NULL,
+        email VARCHAR (50) NOT NULL,
+        phone VARCHAR (15) NOT NULL,
+        password VARCHAR (16) NOT NULL,
+        address VARCHAR (250) NOT NULL,
+        description VARCHAR (60) NOT NULL,
+        city VARCHAR(25) UNIQUE NOT NULL,
+        FOREIGN KEY (city) REFERENCES city (city_name) ON DELETE CASCADE ON UPDATE CASCADE
+
+    )""",
+
     """CREATE TABLE IF NOT EXISTS drivers 
     (
         driver_id SERIAL NOT NULL PRIMARY KEY,
