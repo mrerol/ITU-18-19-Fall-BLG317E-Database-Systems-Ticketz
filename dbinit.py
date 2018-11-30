@@ -76,10 +76,11 @@ INIT_STATEMENTS = [
         name VARCHAR (50) NOT NULL,
         email VARCHAR (50) NOT NULL,
         gender VARCHAR (20) NOT NULL,
-        city VARCHAR (20),
-        vote VARCHAR (20),
+        city VARCHAR (20) NOT NULL,
         address VARCHAR (250) NOT NULL,
-        phone VARCHAR (15) NOT NULL
+        phone VARCHAR (15) NOT NULL,
+        vote_number VARCHAR (20),
+        score VARCHAR (20)
 
     )""",
 
@@ -101,10 +102,14 @@ INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS vehicles 
     (
         vehicle_id SERIAL NOT NULL PRIMARY KEY,
-        vehicle_type VARCHAR (20) NOT NULL,
+        category VARCHAR (50) NOT NULL,
+        model VARCHAR (15) NOT NULL,
+        capacity VARCHAR (50) NOT NULL,
         production_year VARCHAR (20) NOT NULL,
-        recovery_year VARCHAR (20) NOT NULL,
-        model VARCHAR (15) NOT NULL
+        production_place VARCHAR (20) NOT NULL,
+        recovery_time VARCHAR (20) NOT NULL,
+        description VARCHAR (250),
+        image VARCHAR (50)
 
     )""",
 
@@ -117,22 +122,27 @@ INIT_STATEMENTS = [
 
     """INSERT INTO drivers VALUES (
                         1,
-                        'deneme',
-                        'deneme@deneme.com',
+                        'rasit',
+                        'rasit@rasit.com',
                         'true',
                         'istanbul',
-                        '100',
                         'deneme sokak deneme cadde deneme',
-                        '0321221222'
+                        '0321221222',
+                        '100',
+                        '6'
 
     )""",
 
     """INSERT INTO vehicles VALUES (
                         1,
                         'yuruyen ucak',
-                        '1923',
-                        '2023',
-                        'model'
+                        'X2342SD',
+                        '500',
+                        '1920',
+                        'istabul',
+                        '2020',
+                        'guzel',
+                        'image'
 
     )""",
 

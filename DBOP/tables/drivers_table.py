@@ -1,8 +1,8 @@
 class Driver:
-    def __init__(self, name, gender, email, score , vote_number, city, address, phone):
+    def __init__(self, name, email, gender, city, address, phone, vote_number, score ):
         self.name = name
-        self.gender = gender
         self.email = email
+        self.gender = gender
         self.city = city
         self.address = address
         self.phone = phone

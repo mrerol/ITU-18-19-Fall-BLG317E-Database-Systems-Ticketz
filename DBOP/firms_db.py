@@ -140,7 +140,7 @@ class firm_database:
                 cursor = connection.cursor()
                 cursor.execute("SELECT * FROM firms WHERE (name like %s)  or (email like %s) or (city like %s) or (address like %s)  or (phone like %s) or (website like %s) or (description like %s) or (logo like %s)      ;", (to_search, to_search, to_search, to_search, to_search, to_search,to_search,to_search))
                 for firm in cursor:
-                    _firm = Firm(firm[1], firm[3], firm[4], firm[5], firm[6], firm[7], firm[8], firm[9])
+                    _firm = Firm(firm[1], "foo", firm[3], firm[4], firm[5], firm[6], firm[7], firm[8], firm[9])
                     firms.append((firm[0], _firm))
                 connection.commit()
                 cursor.close()
