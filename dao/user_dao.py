@@ -27,3 +27,19 @@ class UserDao(BaseDao):
             userid = cursor.fetchone()
             cursor.close()
         return userid
+
+    def get_user(self,user_id):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM users WHERE (users.user_id = %s)",(user_id))
+            user = cursor.fetchone()
+            cursor.close()
+        return user
+
+    def get_all_user(self):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM users ")
+            user = cursor.fetchall()
+            cursor.close()
+        return user
