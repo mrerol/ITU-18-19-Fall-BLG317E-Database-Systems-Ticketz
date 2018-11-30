@@ -94,8 +94,8 @@ INIT_STATEMENTS = [
 
     """CREATE TABLE IF NOT EXISTS city 
     (
-        code VARCHAR(2) NOT NULL,
-        city_name VARCHAR(25) NOT NULL
+        code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
+        city_name VARCHAR(25) UNIQUE NOT NULL        
 
     )""",
 
