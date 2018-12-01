@@ -50,7 +50,29 @@ INIT_STATEMENTS = [
         gender VARCHAR (1) NOT NULL,
         address VARCHAR (250) NOT NULL,
         last_login TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        register_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        register_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        is_admin BOOLEAN NOT NULL DEFAULT FALSE
+
+    )""",
+
+    """CREATE TABLE IF NOT EXISTS city 
+    (
+        code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
+        city_name VARCHAR(25) UNIQUE NOT NULL        
+
+    )""",
+
+    """CREATE TABLE IF NOT EXISTS terminal 
+    (
+        terminal_id SERIAL NOT NULL PRIMARY KEY,
+        terminal_name VARCHAR(50) UNIQUE NOT NULL,
+        terminal_code VARCHAR(6) UNIQUE NOT NULL,
+        email VARCHAR (50) NOT NULL,
+        phone VARCHAR (15) NOT NULL,
+        address VARCHAR (250) NOT NULL,
+        description VARCHAR (60) NOT NULL,
+        city VARCHAR(25) NOT NULL,
+        FOREIGN KEY (city) REFERENCES city (city_name) ON DELETE CASCADE ON UPDATE CASCADE
 
     )""",
 
@@ -60,10 +82,11 @@ INIT_STATEMENTS = [
         name VARCHAR (50) NOT NULL,
         email VARCHAR (50) NOT NULL,
         gender VARCHAR (20) NOT NULL,
-        city VARCHAR (20),
-        vote VARCHAR (20),
+        city VARCHAR (20) NOT NULL,
         address VARCHAR (250) NOT NULL,
-        phone VARCHAR (15) NOT NULL
+        phone VARCHAR (15) NOT NULL,
+        vote_number VARCHAR (20),
+        score VARCHAR (20)
 
     )""",
 
@@ -73,48 +96,54 @@ INIT_STATEMENTS = [
         name VARCHAR (50) NOT NULL,
         password VARCHAR (16) NOT NULL,
         email VARCHAR (50) NOT NULL,
-        city VARCHAR (20),
+        city VARCHAR (20) NOT NULL,
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
-        website VARCHAR (50)
+        website VARCHAR (50) NOT NULL,
+        description VARCHAR (250),
+        logo VARCHAR (50) 
 
     )""",
 
     """CREATE TABLE IF NOT EXISTS vehicles 
     (
         vehicle_id SERIAL NOT NULL PRIMARY KEY,
-        vehicle_type VARCHAR (20) NOT NULL,
+        name VARCHAR (50) NOT NULL,
+        category VARCHAR (50) NOT NULL,
+        model VARCHAR (15) NOT NULL,
+        capacity VARCHAR (50) NOT NULL,
         production_year VARCHAR (20) NOT NULL,
-        recovery_year VARCHAR (20) NOT NULL,
-        model VARCHAR (15) NOT NULL
-
-    )""",
-
-    """CREATE TABLE IF NOT EXISTS city 
-    (
-        code VARCHAR(2) NOT NULL,
-        city_name VARCHAR(25) NOT NULL
+        production_place VARCHAR (20) NOT NULL,
+        recovery_time VARCHAR (20) NOT NULL,
+        description VARCHAR (250),
+        image VARCHAR (50)
 
     )""",
 
     """INSERT INTO drivers VALUES (
                         1,
-                        'deneme',
-                        'deneme@deneme.com',
+                        'rasit',
+                        'rasit@rasit.com',
                         'true',
                         'istanbul',
-                        '100',
                         'deneme sokak deneme cadde deneme',
-                        '0321221222'
+                        '0321221222',
+                        '100',
+                        '6'
 
     )""",
 
     """INSERT INTO vehicles VALUES (
                         1,
+                        'Safiye Soyman',
                         'yuruyen ucak',
-                        '1923',
-                        '2023',
-                        'model'
+                        'X2342SD',
+                        '500',
+                        '1920',
+                        'istabul',
+                        '2020',
+                        'guzel',
+                        'image'
 
     )""",
 
@@ -126,7 +155,8 @@ INIT_STATEMENTS = [
                         'istanbul',
                         'deneme sokak deneme cadde deneme',
                         '0321221222',
-                        'dememe.com'
+                        'dememe.com',
+                        'aciklama'
 
     )""",
 

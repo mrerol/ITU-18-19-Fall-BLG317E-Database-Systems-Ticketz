@@ -1,14 +1,11 @@
-class Hotel:
-    def __init__(self, name, email, description, city, address, phone, website, logo = None):
+class Firm:
+    def __init__(self, name, password, email, city, address, phone, website, description, logo=None):
         self.name = name
+        self.password = password
         self.email = email
-        self.description = description
         self.city = city
         self.address = address
         self.phone = phone
         self.website = website
+        self.description = description
         self.logo = logo
-
-
-
-
