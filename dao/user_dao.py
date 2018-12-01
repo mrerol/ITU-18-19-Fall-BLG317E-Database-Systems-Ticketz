@@ -31,7 +31,7 @@ class UserDao(BaseDao):
     def get_user(self,user_id):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM users WHERE (users.user_id = %s)",(user_id))
+            cursor.execute("SELECT * FROM users WHERE (users.user_id = %s)",(user_id,))
             user = cursor.fetchone()
             cursor.close()
         return user
