@@ -55,6 +55,13 @@ INIT_STATEMENTS = [
 
     )""",
 
+    """CREATE TABLE IF NOT EXISTS city 
+    (
+        code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
+        city_name VARCHAR(25) UNIQUE NOT NULL        
+
+    )""",
+
     """CREATE TABLE IF NOT EXISTS terminal 
     (
         terinal_id SERIAL NOT NULL PRIMARY KEY,
@@ -62,10 +69,9 @@ INIT_STATEMENTS = [
         terminal_code VARCHAR(6) UNIQUE NOT NULL,
         email VARCHAR (50) NOT NULL,
         phone VARCHAR (15) NOT NULL,
-        password VARCHAR (16) NOT NULL,
         address VARCHAR (250) NOT NULL,
         description VARCHAR (60) NOT NULL,
-        city VARCHAR(25) UNIQUE NOT NULL,
+        city VARCHAR(25) NOT NULL,
         FOREIGN KEY (city) REFERENCES city (city_name) ON DELETE CASCADE ON UPDATE CASCADE
 
     )""",
@@ -111,13 +117,6 @@ INIT_STATEMENTS = [
         recovery_time VARCHAR (20) NOT NULL,
         description VARCHAR (250),
         image VARCHAR (50)
-
-    )""",
-
-    """CREATE TABLE IF NOT EXISTS city 
-    (
-        code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
-        city_name VARCHAR(25) UNIQUE NOT NULL        
 
     )""",
 
