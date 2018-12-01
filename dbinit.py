@@ -64,7 +64,7 @@ INIT_STATEMENTS = [
 
     """CREATE TABLE IF NOT EXISTS terminal 
     (
-        terinal_id SERIAL NOT NULL PRIMARY KEY,
+        terminal_id SERIAL NOT NULL PRIMARY KEY,
         terminal_name VARCHAR(50) UNIQUE NOT NULL,
         terminal_code VARCHAR(6) UNIQUE NOT NULL,
         email VARCHAR (50) NOT NULL,
