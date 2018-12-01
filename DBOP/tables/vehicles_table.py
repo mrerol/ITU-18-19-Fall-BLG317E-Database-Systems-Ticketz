@@ -1,5 +1,6 @@
 class Vehicle:
-    def __init__(self, category, model, capacity, production_year, production_place, recovery_time, description, image=None):
+    def __init__(self, name, category, model, capacity, production_year, production_place, recovery_time, description, image=None):
+        self.name = name
         self.category = category
         self.model = model
         self.capacity = capacity

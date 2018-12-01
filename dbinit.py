@@ -102,6 +102,7 @@ INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS vehicles 
     (
         vehicle_id SERIAL NOT NULL PRIMARY KEY,
+        name VARCHAR (50) NOT NULL,
         category VARCHAR (50) NOT NULL,
         model VARCHAR (15) NOT NULL,
         capacity VARCHAR (50) NOT NULL,
@@ -135,6 +136,7 @@ INIT_STATEMENTS = [
 
     """INSERT INTO vehicles VALUES (
                         1,
+                        'Safiye Soyman',
                         'yuruyen ucak',
                         'X2342SD',
                         '500',
