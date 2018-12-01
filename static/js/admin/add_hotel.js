@@ -148,11 +148,13 @@ $('#description').on('change keyup paste delete', function () {
 
 $('#city').on('change keyup paste delete', function () {
 
-    let value = this.value;
+    let value = $('#city')[0].selectedOptions[0].innerHTML
     $('#js_city').val(value);
     document.getElementById("city").style.borderColor = "";
 
 });
+
+
 
 $('#address').on('change keyup paste delete', function () {
 

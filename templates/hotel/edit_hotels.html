@@ -32,7 +32,11 @@
                             <tr>
                                 <th scope="row">{{id}}</th>
                                 <td>{{ hotel.name}}</td>
-                                <td>{{ hotel.city}}</td>
+                                {% for (code, city_name) in cities %}
+                                    {% if (code == id) %}
+                                        <td>{{ city_name }}</td>
+                                    {% endif %}
+                                {%  endfor %}
                                 <td>{{ hotel.phone}}</td>
                                 <td><a href="/admin/edit_hotel/{{ id}}" class="btn btn-info">Edit</a></td>
                                 <td><a href="/admin/delete_hotel/{{ id}}" class="btn btn-danger">Delete</a></td>

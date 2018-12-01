@@ -9,6 +9,3 @@ class Hotel:
         self.website = website
         self.logo = logo
 
-
-
-

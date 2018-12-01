@@ -2,16 +2,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
 
+    .g-recaptcha.error {
+      border: solid 2px #c64848;
+      padding: .2em;
+      width: 19em;
+    }
+</style>
 {% extends "layout.html" %}
-{% block title %}Ticketz -  Hotel Edit{% endblock %}
+{% block title %}Ticketz -  Hotel Add{% endblock %}
 {% block body %}
     {% include "components/admin/navbar.html" %}
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
                 <section class="content">
-                    <div class="card">
+                    <div style="background-color:powderblue;" class="card">
 
                         <section class="content-header">
                             <div class="container-fluid">
@@ -100,24 +107,6 @@
                             </div>
                             <br>
 
-                            <label> Photos</label>
-                            {%  for (id, image) in images %}
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="far fa-image"></i>
-                                        </span>
-                                    </div>
-                                    <img class="card-img-top"  src='data:image/png;base64,{{image}}' style="height: 40%; width: 40%;">
-                                    <a href="/admin/delete_image/{{hotel_id }}/{{id}}">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </span>
-                                    </a>
-                                </div>
-
-                            <br>
-                            {% endfor %}
 
                         </div>
 
@@ -134,13 +123,13 @@
                             <div class="container-fluid">
                                 <div class="row mb-2">
                                     <div class="col-sm-6">
-                                        <h1>Edit Hotel</h1>
+                                        <h1>Add Hotel</h1>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <div class="card-body">
-                            <form method="post" action=""  enctype = "multipart/form-data" role="form" name="edit_hotel" id="edit_hotel">
+                            <form method="post" action="" enctype = "multipart/form-data"  role="form" name="add_hotel" id="add_hotel">
                                 <label for="hotel_name" >Hotel Name*</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -148,29 +137,22 @@
                                             <i class="fas fa-hotel"></i>
                                         </span>
                                     </div>
-                                    <input value="{{hotel.name}}" name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
+                                    <input name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
                                 </div>
 
                                 <label for="photo">Logo</label>
-                                <div class="input-group" id="Logo">
-                                    <div class="input-group" id="logo">
+                                <div class="input-group" id="logos">
+                                    <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
                                                 <i class="far fa-images"></i>
                                             </span>
                                         </div>
-                                        {% if hotel.logo %}
-                                            <img id="logo_image" class="img-thumbnail" style="height: 40%; width: 40%;" alt="logo"  src='data:image/png;base64,{{ hotel.logo }}' >
-
-                                        {% else %}
-                                            <img id="logo_image" class="img-thumbnail" style="height: 40%; width: 40%;" alt="logo" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
-                                        {% endif %}
-
                                         <label for="logo" hidden></label>
-                                        <input onchange="loadFile(event)" type="file" id="logo" name="logo" accept="image/*" />
-                                        <a href="/admin/delete_logo/{{ hotel_id }}"><span onclick="clicked()" class="input-group-text">
-                                            <i  class="fas fa-minus"></i>
-                                        </span></a>
+                                        <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
+
+                                        <img id="logo" >
+                                        <input onchange="loadFile(event)" type="file" name="logo" accept="image/*" />
                                     </div>
                                 </div>
 
@@ -182,7 +164,7 @@
                                             <i class="fas fa-at"></i>
                                         </span>
                                     </div>
-                                    <input value="{{hotel.email}}" name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Hotel e-Mail" maxlength="50" required>
+                                    <input name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Hotel e-Mail" maxlength="50" required>
                                 </div>
 
                                 <br>
@@ -193,7 +175,7 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                     </div>
-                                    <textarea value="{{hotel.description}}" name="description" id="description" class="form-control" placeholder="Enter The Hotel Description" maxlength="250" required>{{hotel.description}}</textarea>
+                                    <textarea name="description" id="description" class="form-control" placeholder="Enter The Hotel Description" maxlength="250" required></textarea>
                                 </div>
                                 <br>
 
@@ -204,7 +186,11 @@
                                             <i class="fas fa-map"></i>
                                         </span>
                                     </div>
-                                    <input value="{{hotel.city}}" name="city" id="city" type="text" class="form-control" placeholder="Enter The City" maxlength="20" required>
+                                    <select class="form-control" name="city" id="city">
+                                        {% for (id, city_name) in cities %}
+                                            <option value="{{ id }}">{{ city_name }}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                                 <br>
 
@@ -215,7 +201,7 @@
                                             <i class="fas fa-map-marked-alt"></i>
                                         </span>
                                     </div>
-                                    <textarea value="{{hotel.address}}" name="address" id="address" class="form-control" placeholder="Enter The Hotel Address" maxlength="250" required>{{hotel.address}}</textarea>
+                                    <textarea name="address" id="address" class="form-control" placeholder="Enter The Hotel Address" maxlength="250" required></textarea>
                                 </div>
                                 <br>
 
@@ -226,7 +212,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </span>
                                     </div>
-                                    <input value="{{hotel.phone}}" name="phone" id="phone" type="text" class="form-control" placeholder="Enter The Phone" maxlength="15" required>
+                                    <input name="phone" id="phone" type="text" class="form-control" placeholder="Enter The Phone" maxlength="15" required>
                                 </div>
                                 <br>
 
@@ -237,13 +223,11 @@
                                             <i class="fas fa-phone-square"></i>
                                         </span>
                                     </div>
-                                    <input value="{{hotel.website}}" name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
+                                    <input name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
                                 </div>
                                 <br>
-
                                 <label for="s" hidden></label>
                                 <input type="number" id="s" name="s" hidden >
-
                                 <label for="photo">Photos</label>
                                 <div class="input-group" id="images">
                                     <div class="input-group" id="i0">
@@ -257,21 +241,27 @@
                                         <img id="images0" >
                                         <input onchange="loadImage(event, 0)" type="file" name="image0" accept="image/*" />
                                         <span onclick="imageAdd()" class="input-group-text">
-                                            <i class="fas fa-plus"></i>
+                                            <i  class="fas fa-plus"></i>
                                         </span>
                                     </div>
                                 </div>
+
+                                <br>
+
                                 <br>
 
                                 <div class="input-group">
                                     <div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>
 
                                 </div>
+
+
                                 <br>
+
                             </form>
                             <div class="card-footer">
-                                <button type="submit" onclick="edit()" class="btn btn-info float-right">Update</button>
-                                <button type="submit" class="btn btn-default" onclick="document.getElementById('edit_hotel').reset();">Clear</button>
+                                <button type="submit" onclick="add()" class="btn btn-info float-right">Submit</button>
+                                <button type="submit" class="btn btn-default" onclick="document.getElementById('add_hotel').reset();">Clear</button>
                             </div>
 
                             <div class="message-box-danger" style="display: none">
@@ -294,8 +284,6 @@
     <br>
     <br>
     {% include "components/admin/footer.html" %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="/../static/js/admin/edit_hotel.js"></script>
-
+<script src="../../static/js/admin/add_hotel.js"></script>
 
 {% endblock %}

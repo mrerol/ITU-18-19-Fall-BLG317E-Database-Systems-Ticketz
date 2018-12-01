@@ -14,17 +14,25 @@ INIT_STATEMENTS = [
     """DROP TABLE IF EXISTS vehicles""",
     """DROP TABLE IF EXISTS city""",
 
+    """CREATE TABLE IF NOT EXISTS city 
+    (
+        code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
+        city_name VARCHAR(25) UNIQUE NOT NULL        
+
+    )""",
+
     """CREATE TABLE IF NOT EXISTS hotels 
     (
         hotel_id SERIAL NOT NULL PRIMARY KEY,
         name VARCHAR (25) NOT NULL,
         email VARCHAR (50) NOT NULL,
         description VARCHAR (250) NOT NULL,
-        city VARCHAR (20),
+        city VARCHAR(2),
         address VARCHAR (250) NOT NULL,
         phone VARCHAR (15) NOT NULL,
         website VARCHAR (50),
-        logo BYTEA
+        logo BYTEA,
+        FOREIGN KEY (city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE
 
     )""",
 
@@ -55,12 +63,6 @@ INIT_STATEMENTS = [
 
     )""",
 
-    """CREATE TABLE IF NOT EXISTS city 
-    (
-        code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
-        city_name VARCHAR(25) UNIQUE NOT NULL        
-
-    )""",
 
     """CREATE TABLE IF NOT EXISTS terminal 
     (

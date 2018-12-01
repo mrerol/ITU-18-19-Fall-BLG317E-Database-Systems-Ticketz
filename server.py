@@ -84,13 +84,11 @@ def edit_hotel_page(id):
         website = request.form["website"]
         if "logo" in request.files:
             logo = request.files["logo"]
-            print(logo)
             hotel_db.update_hotel_with_logo(id, Hotel(hotel_name, email, description, city, address, phone, website, logo.read()))
         else:
             hotel_db.update_hotel(id, Hotel(hotel_name, email, description, city, address, phone, website, None))
         s = request.form["s"]
         uploaded_files = request.form.getlist("file[]")
-        print(uploaded_files)
         for i in range(int(s) + 1):
             temp = "image" + str(i)
             if temp in request.files:
@@ -144,7 +142,7 @@ def driver_profile_page(id):
 def driver_edit_page(id):
     return views.driver_edit_page(id)
 
-@app.route('/firm/add_expedition/<int:id>', methods=['GET', 'POST'])
+@app.route('/firm/<int:id>/add_expedition', methods=['GET', 'POST'])
 def add_expedition(id):
     return views.add_expedition(id)
 

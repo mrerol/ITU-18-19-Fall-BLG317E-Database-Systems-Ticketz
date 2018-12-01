@@ -1,4 +1,5 @@
 from DBOP.tables.hotel_table import Hotel
+from dao.city_dao import CityDao
 
 import psycopg2 as dbapi2
 import os
@@ -108,8 +109,7 @@ class hotel_database:
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                statement = """UPDATE hotels SET name = '""" + hotel.name + """' , email = '""" + hotel.email +"""' , description = '""" + hotel.description + """', city = ' """ + hotel.city +"""' ,  address = '""" + hotel.address + """', phone = '""" + hotel.phone +"""', website = '""" + hotel.website + """'   WHERE hotel_id = """ + str(hotel_id)
-                cursor.execute(statement)
+                cursor.execute("""UPDATE hotels SET name = %s, email = %s, description = %s, city = %s, address = %s, phone = %s, website = %s WHERE hotel_id = %s """, (hotel.name, hotel.email, hotel.description, hotel.city, hotel.address, hotel.phone, hotel.website, hotel_id))
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
@@ -141,6 +141,22 @@ class hotel_database:
                 for hotel in cursor:
                     _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7])
                     hotels.append((hotel[0], _hotel))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return hotels
+
+        def get_hotels_with_cities(self):
+            hotels = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT hotel_id, city_name FROM hotels JOIN city ON hotels.city = city.code;")
+                hotels = cursor.fetchall()
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:

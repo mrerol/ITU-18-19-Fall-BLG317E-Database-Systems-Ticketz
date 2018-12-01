@@ -63,7 +63,7 @@ $(document).ready(function () {
     $('#js_hotel_name').val($('#hotel_name').val());
     $('#js_e_mail').val($('#e_mail').val());
     $('#js_address').val($('#address').val());
-    $('#js_city').val($('#city').val());
+    $('#js_city').val($('#city')[0].selectedOptions[0].innerHTML);
     $('#js_phone').val($('#phone').val());
     $('#js_description').val($('#description').val());
     $('#js_website').val($('#website').val());
@@ -168,7 +168,7 @@ $('#description').on('change keyup paste delete', function () {
 
 $('#city').on('change keyup paste delete', function () {
 
-    let value = this.value;
+    let value = $('#city')[0].selectedOptions[0].innerHTML
     $('#js_city').val(value);
     document.getElementById("city").style.borderColor = "";
 

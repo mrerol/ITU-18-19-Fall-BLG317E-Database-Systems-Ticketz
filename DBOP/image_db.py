@@ -15,7 +15,6 @@ class image_database:
                 self.url = os.getenv("DATABASE_URL")
 
         def add_image(self, image):
-            print("database")
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
