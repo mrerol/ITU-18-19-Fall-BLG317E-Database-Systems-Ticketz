@@ -12,14 +12,12 @@ class CityDao(BaseDao):
             cursor = connection.cursor()
             cursor.execute(
                 "INSERT INTO city (code, city_name) VALUES (%s, %s) ", (code, city_name))
-            city = cursor.fetchone()
             cursor.close()
-        return city
     
     def get_city_code(self,city_name):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT code FROM city WHERE (city.name = %s)", (city_name))
+            cursor.execute("SELECT code FROM city WHERE (city.city_name = %s)", (city_name,))
             city_code = cursor.fetchone()
             cursor.close()
         return city_code
@@ -28,6 +26,14 @@ class CityDao(BaseDao):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM city")
-            city = cursor.fetchall()
+            cities = cursor.fetchall()
+            cursor.close()
+        return cities
+
+    def get_city(self,code):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM city WHERE (city.code = %s)",(code,))
+            city = cursor.fetchone()
             cursor.close()
         return city
