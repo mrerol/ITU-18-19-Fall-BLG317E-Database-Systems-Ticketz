@@ -10,6 +10,7 @@ from DBOP.firms_db import firm_database
 from DBOP.vehicles_db import vehicle_database
 from DBOP.drivers_db import driver_database
 from dao.city_dao import CityDao
+from dao.terminal_dao import TerminalDao
 
 db_hotel = hotel_database()
 db_image = image_database()
@@ -25,6 +26,7 @@ driver_db = db_driver.driver
 
 userop = UserDao()
 city_db = CityDao()
+terminalop = TerminalDao()
 
 def home_page():
     hotels = hotel_db.get_hotels()
@@ -56,9 +58,17 @@ def search_hotel_page(text):
     #else:
     #    return redirect(url_for('404_not_found'))
 
-
 def add_hotel_page():
-    cities = city_db.get_all_city()
+    #cities = city_db.get_all_city()
+    cities = {}
+    terminals = terminalop.get_all_terminal()
+    print(terminals)
+
+    for t in terminals:
+        if t[7] not in cities:
+            cities[t[7]] = {'city_name':t[-1], 'terminals':[]}
+        cities[t[7]]['terminals'].append({'id':t[0],'name':t[1]})
+
     return render_template("hotel/add_hotel.html", cities = cities)
 
 def edit_hotel_page(id):
