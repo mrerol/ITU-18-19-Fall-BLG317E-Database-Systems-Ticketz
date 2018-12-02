@@ -134,6 +134,22 @@
                             </div>
                             <br>
 
+                            <label for="js_driver">Driver*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-id-card"></i>
+                                        </span>
+                                    </div>
+
+
+                                     <input disabled id="js_driver" type="text" class="form-control" >
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            <br>
+
 
                         </div>
 
@@ -321,6 +337,26 @@
                                 <br>
                                 </div>
 
+                                <label for="driver">Driver*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-id-card"></i>
+                                        </span>
+                                    </div>
+
+                                    <select class="form-control" name="driver" id="driver">
+                                            <option disabled selected></option>
+                                            {% for (id, driver) in drivers %}
+                                                <option value="{{ id }}">{{ driver.name }}</option>
+                                            {% endfor %}
+                                      </select>
+
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <br>
 
                                 <label for="document">Document (only pdf)</label>
                                 <div class="input-group">
