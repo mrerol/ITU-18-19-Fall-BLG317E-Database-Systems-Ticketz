@@ -73,8 +73,8 @@ INIT_STATEMENTS = [
         phone VARCHAR (15) NOT NULL,
         address VARCHAR (250) NOT NULL,
         description VARCHAR (60) NOT NULL,
-        city VARCHAR(25) NOT NULL,
-        FOREIGN KEY (city) REFERENCES city (city_name) ON DELETE CASCADE ON UPDATE CASCADE
+        city_id VARCHAR (2)
+        FOREIGN KEY (city_id) REFERENCES city (code) ON DELETE CASCADE ON UPDATE CASCADE
 
     )""",
 

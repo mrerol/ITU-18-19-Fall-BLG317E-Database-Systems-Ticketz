@@ -26,7 +26,7 @@ class TerminalDao(BaseDao):
     def get_all_terminal(self):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM terminal")
+            cursor.execute("SELECT * FROM terminal JOIN city ON (terminal.city_id = city.code)")
             terminal = cursor.fetchall()
             cursor.close()
         return terminal
