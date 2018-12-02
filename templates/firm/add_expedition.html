@@ -1,0 +1,435 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../static/jquery-clockpicker.min.css">
+<link rel="stylesheet" type="text/css" href="../../static/bootstrap-datepicker.css">
+<style>
+
+    .g-recaptcha.error {
+      border: solid 2px #c64848;
+      padding: .2em;
+      width: 19em;
+    }
+</style>
+{% extends "layout.html" %}
+{% block title %}Ticketz -  Hotel Add{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <section class="content">
+                    <div style="background-color:powderblue;" class="card">
+
+                        <br>
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1>Preview</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="card-body">
+
+                            <label for="js_from" >From*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-plane-departure"></i>
+                                        </span>
+                                    </div>
+                                    <input disabled id="js_from" type="text" class="form-control" >
+                                    <input disabled id="js_from_ter" type="text" class="form-control" >
+                                </div>
+                            <br>
+
+
+                            <label for="js_to">To*</label>
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-plane-arrival"></i>
+                                        </span>
+                                    </div>
+                                    <input disabled id="js_to" type="text" class="form-control" >
+                                    <input disabled id="js_to_ter" type="text" class="form-control" >
+                                </div>
+                            </div>
+                            <br>
+
+
+                            <label for="js_dep_time">Departure Time*</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </span>
+                                </div>
+                                <input disabled id="js_dep_time" type="text" class="form-control" >
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+
+                            <br>
+
+                            <label for="js_arr_time">Arrival Time*</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input disabled id="js_arr_time" type="text" class="form-control" >
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+
+                            <br>
+
+                            <label for="js_date">Date*</label>
+                            <div class="input-group" >
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-clock"></i>
+                                    </span>
+                                </div>
+                                <input disabled id="js_date" type="text" class="form-control" >
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <label for="js_price">Price*</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </span>
+                                </div>
+                                <input disabled id="js_price" type="text" class="form-control" >
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <label for="js_plane">Plane*</label>
+                            <div class="input-group" id="plane">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-fighter-jet"></i>
+                                        </span>
+                                    </div>
+                                    <input disabled id="js_plane" type="text" class="form-control" >
+                                </div>
+                            </div>
+                            <br>
+
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+            </div>
+            <div class="col-sm-7">
+                <section class="content">
+                    <div class="card">
+
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1>Add Expedition</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="card-body">
+                            <form method="post" action="" enctype = "multipart/form-data"  role="form" name="add_expedition" id="add_expedition">
+                                <label for="from" >From*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-plane-departure"></i>
+                                        </span>
+                                    </div>
+                                      <select class="form-control" name="from" id="from" onchange="onCitySelectedFrom()">
+                                        <option selected disabled></option>
+                                        {% for id in cities %}
+                                            <option value="{{ id }}">{{ cities[id]['city_name'] }}</option>
+                                        {% endfor %}
+                                      </select>
+                                      <select class="form-control" name="from_ter" id="from_ter">
+
+                                      </select>
+                                </div>
+                                <br>
+
+                                <label for="to">To*</label>
+                                <div class="input-group" >
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-plane-arrival"></i>
+                                            </span>
+                                        </div>
+                                        <select class="form-control" name="to" id="to" onchange="onCitySelectedTo()">
+                                            <option selected disabled></option>
+                                            {% for id in cities %}
+                                                <option value="{{ id }}">{{ cities[id]['city_name'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select class="form-control" name="to_ter" id="to_ter">
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <br>
+
+
+                                <label for="dep_time">Departure Time*</label>
+                                <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-clock"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="dep_time" name="dep_time" class="form-control" value="19:05">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+
+                                <br>
+
+                                <label for="arr_time">Arrival Time*</label>
+                                <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="arr_time" name="arr_time" class="form-control" value="19:05">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+
+                                <br>
+
+                                <label for="date">Date*</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-clock"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="date"  name="date" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <label for="price">Price*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                    </div>
+                                    <input type="number" id="price"  name="price" min="1" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control currency">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <label for="plane">Plane*</label>
+                                <div class="input-group" id="plane">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-fighter-jet"></i>
+                                            </span>
+                                        </div>
+                                        <select class="form-control" name="selected_plane" id="selected_plane">
+                                            <option disabled selected></option>
+                                            {% for (id, vehicle) in vehicles %}
+                                                <option value="{{ id }}">{{ vehicle.name }}</option>
+                                                <option hidden id="category{{ id }}" value="{{ vehicle.category }}"></option>
+                                                <option hidden id="model{{ id }}" value="{{ vehicle.model }}"></option>
+                                                <option hidden id="description{{ id }}" value="{{ vehicle.description }}"></option>
+                                                <option hidden id="capacity{{ id }}" value="{{ vehicle.capacity }}"></option>
+                                            {% endfor %}
+                                      </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div id="hidden_plane" class="border border-success" style="display: none;">
+                                    <label>Plane Information</label><br>
+                                    <label>Category</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-align-justify"></i>
+                                            </span>
+                                        </div>
+                                        <input id="hidden_category" disabled type="text" class="form-control" value="" >
+                                    </div>
+                                    <label>Model</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-splotch"></i>
+                                            </span>
+                                        </div>
+                                        <input id="hidden_model" disabled type="text" class="form-control" value="" >
+                                    </div>
+                                    <label>Description</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-audio-description"></i>
+                                            </span>
+                                        </div>
+                                        <input id="hidden_description" disabled type="text" class="form-control" value="" >
+                                    </div>
+                                    <label>Capacity</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-battery-full"></i>
+                                            </span>
+                                        </div>
+                                        <input id="hidden_capacity" name="hidden_capacity" disabled type="number" class="form-control" value="" >
+                                    </div>
+
+                                <br>
+                                </div>
+
+
+                                <label for="document">Document (only pdf)</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-file"></i>
+                                        </span>
+                                    </div>
+                                    <input type="file" id="document"  name="document" accept="application/pdf" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="input-group">
+                                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>
+
+                                </div>
+
+
+                                <br>
+
+                            </form>
+                            <div class="card-footer">
+                                <button type="submit" onclick="add()" class="btn btn-info float-right">Submit</button>
+                                <button type="submit" class="btn btn-default" onclick="document.getElementById('add_expedition').reset(); $('#hidden_plane').hide();">Clear</button>
+                            </div>
+
+                            <div class="message-box-danger" style="display: none">
+                                <div class="alert alert-danger alert-dismissible" style="display:block; margin: 10px;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    Please Fill All Necessary *</div>
+                            </div>
+                        </div>
+
+                            </div>
+                </section>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+    {% include "components/admin/footer.html" %}
+    <script>
+
+    var raw = '{{ cities|tojson }}';
+    var jo = JSON.parse(raw);
+    function populateTerminalsFrom(terminals){
+        var terminalSelect = document.getElementById("from_ter");
+        terminalSelect.options.length = 0;
+        for (var i = 0; i < terminals.length; i++) {
+            if(i == 0){
+                var opt = terminals[i];
+                var el = document.createElement("option");
+                el.textContent = '';
+                el.value = '';
+                el.setAttribute('selected', 'disabled')
+                terminalSelect.appendChild(el);
+            }
+            var opt = terminals[i];
+            var el = document.createElement("option");
+            el.textContent = opt['name'];
+            el.value = opt['id'];
+            terminalSelect.appendChild(el);
+        }
+    }
+    function onCitySelectedFrom(){
+        var cityId = document.getElementById("from").value;
+        var terminals = jo[cityId]['terminals']
+        populateTerminalsFrom(terminals);
+    }
+onCitySelectedFrom();
+
+    function populateTerminalsTo(terminals){
+        var terminalSelect = document.getElementById("to_ter");
+        terminalSelect.options.length = 0;
+        for (var i = 0; i < terminals.length; i++) {
+            if(i == 0){
+                var opt = terminals[i];
+                var el = document.createElement("option");
+                el.textContent = '';
+                el.value = '';
+                el.setAttribute('selected', 'disabled')
+                terminalSelect.appendChild(el);
+            }
+            var opt = terminals[i];
+            var el = document.createElement("option");
+            el.textContent = opt['name'];
+            el.value = opt['id'];
+            terminalSelect.appendChild(el);
+        }
+    }
+    function onCitySelectedTo(){
+        var cityId = document.getElementById("to").value;
+        var terminals = jo[cityId]['terminals']
+        populateTerminalsTo(terminals);
+    }
+onCitySelectedTo();
+
+    </script>
+<script src="../../static/js/firm/jquery-clockpicker.min.js"></script>
+<script src="../../static/js/firm/bootstrap-datepicker.js"></script>
+<script src="../../static/js/firm/add_expedition.js"></script>
+
+{% endblock %}

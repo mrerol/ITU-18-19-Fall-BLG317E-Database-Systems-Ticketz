@@ -16,7 +16,6 @@ var loadImage = function(event, i) {
 
 var loadFile = function(event) {
 var output = document.getElementById('logo_image');
-    console.log(event.target.files)
     if(event.target.files.length != 0){
         output.src = URL.createObjectURL(event.target.files[0]);
         output.class = "img-thumbnail";
@@ -34,7 +33,6 @@ function clicked() {
 }
 
 function deleteImage(i) {
-console.log(i)
 $('#i'+i).remove()
 
 $('#images'+i).hide()

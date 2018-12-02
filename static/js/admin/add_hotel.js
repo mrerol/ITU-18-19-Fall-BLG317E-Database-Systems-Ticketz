@@ -29,7 +29,6 @@ var loadFile = function(event) {
     };
 
 function deleteImage(i) {
-    console.log(i)
     $('#i'+i).remove()
 
     $('#images'+i).hide()

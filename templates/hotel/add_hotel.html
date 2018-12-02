@@ -186,23 +186,10 @@
                                             <i class="fas fa-map"></i>
                                         </span>
                                     </div>
-                                    <select class="form-control" name="city" id="city-dd" onchange="onCitySelected()">
-                                        {% for id in cities %}
-                                            <option value="{{ id }}">{{ cities[id]['city_name'] }}</option>
+                                    <select class="form-control" name="city" id="city">
+                                        {% for (id, city_name) in cities %}
+                                            <option value="{{ id }}">{{ city_name }}</option>
                                         {% endfor %}
-                                    </select>
-
-                                </div>
-                                <br>
-                                <label for="city">Terminal*</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-map"></i>
-                                        </span>
-                                    </div>
-                                    <select class="form-control" name="city-with-terminal" id="terminal-dd">
-                                            
                                     </select>
                                 </div>
                                 <br>
@@ -298,30 +285,5 @@
     <br>
     {% include "components/admin/footer.html" %}
 <script src="../../static/js/admin/add_hotel.js"></script>
-
-<script>
-var raw = '{{ cities|tojson }}';
-var jo = JSON.parse(raw);
-
-function populateTerminals(terminals){
-    var terminalSelect = document.getElementById("terminal-dd");    
-    terminalSelect.options.length = 0;
-    for (var i = 0; i < terminals.length; i++) {
-        var opt = terminals[i];
-        var el = document.createElement("option");
-        el.textContent = opt['name'];
-        el.value = opt['id'];
-        terminalSelect.appendChild(el);
-    }
-}
-
-function onCitySelected(){
-    var cityId = document.getElementById("city-dd").value;
-    var terminals = jo[cityId]['terminals'];
-    populateTerminals(terminals);
-}
-onCitySelected();
-console.log('flag1');
-</script>
 
 {% endblock %}

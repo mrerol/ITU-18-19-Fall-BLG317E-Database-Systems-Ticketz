@@ -73,7 +73,7 @@ INIT_STATEMENTS = [
         phone VARCHAR (15) NOT NULL,
         address VARCHAR (250) NOT NULL,
         description VARCHAR (60) NOT NULL,
-        city_id VARCHAR (2)
+        city_id VARCHAR (2),
         FOREIGN KEY (city_id) REFERENCES city (code) ON DELETE CASCADE ON UPDATE CASCADE
 
     )""",
@@ -113,12 +113,36 @@ INIT_STATEMENTS = [
         name VARCHAR (50) NOT NULL,
         category VARCHAR (50) NOT NULL,
         model VARCHAR (15) NOT NULL,
-        capacity VARCHAR (50) NOT NULL,
+        capacity INT NOT NULL,
         production_year VARCHAR (20) NOT NULL,
         production_place VARCHAR (20) NOT NULL,
         recovery_time VARCHAR (20) NOT NULL,
         description VARCHAR (250),
         image VARCHAR (50)
+
+    )""",
+
+    """CREATE TABLE IF NOT EXISTS expeditions 
+    (
+        expedition_id SERIAL NOT NULL PRIMARY KEY,
+        from_city VARCHAR (02) NOT NULL,
+        from_ter INT NOT NULL,
+        to_city VARCHAR (02) NOT NULL,
+        to_ter INT NOT NULL,
+        dep_time VARCHAR (5) NOT NULL ,
+        arr_time VARCHAR (5) NOT NULL ,
+        date VARCHAR (10) NOT NULL ,
+        price INT NOT NULL ,
+        plane_id INT NOT NULL ,
+        current_cap INT NOT NULL DEFAULT 0,
+        total_cap INT NOT NULL,
+        document BYTEA,
+        FOREIGN KEY (from_city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (to_city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (from_ter) REFERENCES terminal (terminal_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (to_ter) REFERENCES terminal (terminal_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (plane_id) REFERENCES vehicles (vehicle_id) ON DELETE RESTRICT ON UPDATE CASCADE
+        
 
     )""",
 

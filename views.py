@@ -59,15 +59,7 @@ def search_hotel_page(text):
     #    return redirect(url_for('404_not_found'))
 
 def add_hotel_page():
-    #cities = city_db.get_all_city()
-    cities = {}
-    terminals = terminalop.get_all_terminal()
-    print(terminals)
-
-    for t in terminals:
-        if t[7] not in cities:
-            cities[t[7]] = {'city_name':t[-1], 'terminals':[]}
-        cities[t[7]]['terminals'].append({'id':t[0],'name':t[1]})
+    cities = city_db.get_all_city()
 
     return render_template("hotel/add_hotel.html", cities = cities)
 
@@ -149,7 +141,34 @@ def firms_page(id):
 
 def add_expedition(id):
     vehicles = vehicle_db.get_vehicles()
-    return render_template("firm/add_expedition.html", vehicles = vehicles)
+    terminals = terminalop.get_all_terminal()
+    cities = {}
+    terminals = terminalop.get_all_terminal()
+    for t in terminals:
+        if t[7] not in cities:
+            cities[t[7]] = {'city_name': t[-1], 'terminals': []}
+        cities[t[7]]['terminals'].append({'id': t[0], 'name': t[1]})
+
+
+    return render_template("firm/add_expedition.html", vehicles = vehicles, cities = cities)
+
+def edit_hotel_page(id):
+    temp_hotel = hotel_db.get_hotel(id)
+    hotel_city = city_db.get_city(temp_hotel.city)
+    (city_code, hotel_city_name) = hotel_city
+    if temp_hotel is None:
+        return render_template("404_not_found.html")
+    else:
+        cities = city_db.get_all_city()
+        tmp = image_db.get_images()
+        if temp_hotel.logo is not None:
+            temp_hotel.logo = b64encode(temp_hotel.logo).decode("utf-8")
+        images = []
+        for (h_id, image_id,  im) in tmp:
+            if id == h_id:
+                image = b64encode(im.file_data).decode("utf-8")
+                images.append((image_id, image) )
+        return render_template("hotel/edit_hotel.html", hotel = temp_hotel, images = images, hotel_id = id, cities = cities, code = city_code, hotel_city = hotel_city_name)
 
 def signup_page():
     error = None

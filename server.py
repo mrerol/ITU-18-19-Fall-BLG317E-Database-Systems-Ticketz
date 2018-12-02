@@ -1,17 +1,24 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 import views
 from base64 import b64encode
 
 from DBOP.tables.image_table import Image
 from DBOP.tables.hotel_table import Hotel
+from DBOP.tables.expedition_table import Expedition
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
+from DBOP.expedition_db import expedition_database
+from DBOP.vehicles_db import vehicle_database
 
 db_hotel = hotel_database()
 db_image = image_database()
+db_expedition = expedition_database()
+db_vehicle = vehicle_database()
 
 hotel_db = db_hotel.hotel
 image_db = db_image.image
+expedition_db = db_expedition.expedition
+vehicle_db = db_vehicle.vehicle
 
 
 def create_app():
@@ -144,7 +151,29 @@ def driver_edit_page(id):
 
 @app.route('/firm/<int:id>/add_expedition', methods=['GET', 'POST'])
 def add_expedition(id):
-    return views.add_expedition(id)
+    if request.method == "GET":
+        return views.add_expedition(id)
+    else:
+        from_ = request.form["from"]
+        from_ter = request.form["from_ter"]
+        to = request.form["to"]
+        to_ter = request.form["to_ter"]
+        dep_time = request.form["dep_time"]
+        arr_time = request.form["arr_time"]
+        date = request.form["date"]
+        price = request.form["price"]
+        plane = request.form["selected_plane"]
+        vehicle = vehicle_db.get_vehicle(plane)
+        total_cap = vehicle.capacity
+        if "document" in request.files:
+            document = request.files["document"]
+            expedition_db.add_expedition_with_document(Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, total_cap, 0, document.read()))
+
+        else:
+            expedition_db.add_expedition(Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, total_cap, 0,  None ))
+
+        return redirect(url_for('admin_home_page'))
+
 
 
 
