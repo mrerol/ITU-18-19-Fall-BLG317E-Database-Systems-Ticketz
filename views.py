@@ -103,7 +103,7 @@ def login_page(request):
             print("userid ",user_id)
             if user_id is not None:
                 session['user_id'] = user_id
-                return redirect(url_for('admin_home_page'))
+                return redirect(url_for('home_page'))
             else:
                 # TODO user not found
                 error = "invalid credentials"
