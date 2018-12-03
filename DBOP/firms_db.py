@@ -10,7 +10,7 @@ class firm_database:
     class Firm:
         def __init__(self):
             if os.getenv("DATABASE_URL") is None:
-                self.url = "postgres://itucs:itucspw@localhost:32770/itucsdb"
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
             else:
                 self.url = os.getenv("DATABASE_URL")
 
@@ -42,6 +42,17 @@ class firm_database:
                 temp_id = cursor.fetchone()
                 cursor.close()
                 return temp_id
+
+        def get_firm_id_login(self, username, password):
+            with dbapi2.connect(self.url) as connection:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "SELECT firm_id FROM firms WHERE name = %s AND password = %s ",
+                    (username, password))
+                temp_id = cursor.fetchone()
+                cursor.close()
+                return temp_id
+
 
         def delete_firm(self, firm_id):
             try:

@@ -176,6 +176,10 @@ def home_page():
 def firms_page(id):
     return views.firms_page(id)
 
+@app.route('/firm/login', methods=['GET', 'POST'])
+def firms_login():
+    return views.firm_login(request)
+
 @app.route('/firm/driver_list/<int:id>', methods=['GET', 'POST'])
 def driver_list_page(id):
     return views.driver_list_page(id)

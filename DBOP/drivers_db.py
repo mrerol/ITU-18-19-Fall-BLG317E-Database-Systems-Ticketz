@@ -10,7 +10,7 @@ class driver_database:
     class Driver:
         def __init__(self):
             if os.getenv("DATABASE_URL") is None:
-                self.url = "postgres://itucs:itucspw@localhost:32770/itucsdb"
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
             else:
                 self.url = os.getenv("DATABASE_URL")
 

@@ -4,6 +4,7 @@ from psycopg2 import IntegrityError
 import sys
 from base64 import b64encode
 
+
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
 from DBOP.firms_db import firm_database
@@ -143,7 +144,34 @@ def driver_edit_page(id):
     return render_template("driver/driver_edit.html")
 
 def firms_page(id):
-    return render_template("firm/firm.html")
+    print()
+    if id != session.get("firm_id"):
+        return redirect(url_for("unAuth403"))
+    else:
+        return render_template("firm/firm.html")
+def firm_login(request):
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["pass"]
+        try:
+            temp = firm_db.get_firm_id_login(username,password)
+            (firm_id,)=temp
+            #print("firmid ", firm_id)
+            if firm_id is not None:
+                session['firm_id'] = firm_id
+
+                return redirect(url_for('firms_page', id=firm_id))
+            else:
+                error = "invalid credentials"
+                # return render_template("404_not_found.html")# TODO add 403
+        except:
+            print("login generic errorrrrrrr", sys.exc_info())
+            error = "error"
+
+        return "aloo"
+    else:
+        return render_template("firm/login.html")
+
 
 def add_expedition(id):
     drivers = driver_db.get_drivers()
