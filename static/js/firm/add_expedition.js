@@ -134,6 +134,14 @@ $('#selected_plane').on('change keyup paste delete', function () {
 
 });
 
+$('#driver').on('change keyup paste delete', function () {
+
+    let value = $('#driver')[0].selectedOptions[0].innerHTML
+    $('#js_driver').val(value);
+    document.getElementById("driver").style.borderColor = "";
+
+});
+
 function add()
 {
 
@@ -288,6 +296,11 @@ function add()
 
     }
 
+    if ($('#driver').val()=="" || $('#driver').val()== null){
+        document.getElementById("driver").style.borderColor = "red";
+        deneme = false
+
+    }
 
     if(deneme){
         document.getElementById("add_expedition").submit()

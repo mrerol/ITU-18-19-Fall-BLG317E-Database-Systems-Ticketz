@@ -136,12 +136,14 @@ INIT_STATEMENTS = [
         plane_id INT NOT NULL ,
         current_cap INT NOT NULL DEFAULT 0,
         total_cap INT NOT NULL,
+        driver_id INT NOT NULL,
         document BYTEA,
         FOREIGN KEY (from_city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE,
         FOREIGN KEY (to_city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE,
         FOREIGN KEY (from_ter) REFERENCES terminal (terminal_id) ON DELETE RESTRICT ON UPDATE CASCADE,
         FOREIGN KEY (to_ter) REFERENCES terminal (terminal_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-        FOREIGN KEY (plane_id) REFERENCES vehicles (vehicle_id) ON DELETE RESTRICT ON UPDATE CASCADE
+        FOREIGN KEY (plane_id) REFERENCES vehicles (vehicle_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (driver_id) REFERENCES drivers (driver_id) ON DELETE RESTRICT ON UPDATE CASCADE
         
 
     )""",

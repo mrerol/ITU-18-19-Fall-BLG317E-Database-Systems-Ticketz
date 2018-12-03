@@ -1,0 +1,39 @@
+
+<link href="../../static/admin/admin_home_page.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+{% extends "layout.html" %}
+{% block title %}Admin Home Page{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+              <div class="card-counter alert-warning">
+                <i class="fas fa-hotel"></i>
+                <a href="/"><span class="count-name">See The Hotels</span></a>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card-counter alert-danger">
+                <i class="fas fa-cog"></i>
+                <a href="/admin/edit_hotels"><span class="count-name">Edit The Hotels</span></a>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card-counter alert-success">
+                <i class="fas fa-plus-square"></i>
+                <a href="/admin/add_hotel"><span class="count-name">Add Hotel</span></a>
+              </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    {% include "components/admin/footer.html" %}
+{% endblock %}
