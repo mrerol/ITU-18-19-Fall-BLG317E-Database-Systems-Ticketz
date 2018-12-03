@@ -192,32 +192,35 @@ def driver_profile_page(id):
 def driver_edit_page(id):
     return views.driver_edit_page(id)
 
-@app.route('/firm/<int:id>/add_expedition', methods=['GET', 'POST'])
-def add_expedition(id):
-    if request.method == "GET":
-        return views.add_expedition(id)
-    else:
-        from_ = request.form["from"]
-        from_ter = request.form["from_ter"]
-        to = request.form["to"]
-        to_ter = request.form["to_ter"]
-        dep_time = request.form["dep_time"]
-        arr_time = request.form["arr_time"]
-        date = request.form["date"]
-        price = request.form["price"]
-        plane = request.form["selected_plane"]
-        vehicle = vehicle_db.get_vehicle(plane)
-        total_cap = vehicle.capacity
-        driver_id  = request.form["driver"]
-        if "document" in request.files:
-            document = request.files["document"]
-            expedition_db.add_expedition_with_document(Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane,driver_id,  total_cap, 0, document.read()))
-
+@app.route('/firm/add_expedition', methods=['GET', 'POST'])
+def add_expedition():
+    firm_id = session.get("firm_id")
+    if firm_id != None:
+        if request.method == "GET":
+            return views.add_expedition()
         else:
-            expedition_db.add_expedition(Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, driver_id, total_cap, 0,  None ))
+            from_ = request.form["from"]
+            from_ter = request.form["from_ter"]
+            to = request.form["to"]
+            to_ter = request.form["to_ter"]
+            dep_time = request.form["dep_time"]
+            arr_time = request.form["arr_time"]
+            date = request.form["date"]
+            price = request.form["price"]
+            plane = request.form["selected_plane"]
+            vehicle = vehicle_db.get_vehicle(plane)
+            total_cap = vehicle.capacity
+            driver_id  = request.form["driver"]
+            if "document" in request.files:
+                document = request.files["document"]
+                expedition_db.add_expedition_with_document(Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, driver_id, firm_id, total_cap, 0, document.read()))
 
-        return redirect(url_for('admin_home_page'))
+            else:
+                expedition_db.add_expedition(Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, driver_id, firm_id, total_cap, 0,  None ))
 
+            return redirect(url_for('firms_page', id=firm_id))
+    else:
+        return unAuth403()
 
 
 

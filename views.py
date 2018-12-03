@@ -173,7 +173,9 @@ def firm_login(request):
         return render_template("firm/login.html")
 
 
-def add_expedition(id):
+def add_expedition():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
     drivers = driver_db.get_drivers()
     vehicles = vehicle_db.get_vehicles()
     cities = {}
@@ -183,7 +185,7 @@ def add_expedition(id):
             cities[t[7]] = {'city_name': t[-1], 'terminals': []}
         cities[t[7]]['terminals'].append({'id': t[0], 'name': t[1]})
 
-    return render_template("firm/add_expedition.html", vehicles = vehicles, cities = cities, drivers= drivers)
+    return render_template("firm/add_expedition.html", user = user, vehicles = vehicles, cities = cities, drivers= drivers)
 
 def edit_hotel_page(id):
     user_id = session.get('user_id')
