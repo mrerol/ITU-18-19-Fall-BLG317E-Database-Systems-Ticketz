@@ -6,6 +6,29 @@ var d = q.getDate();
 var y = q.getFullYear();
 $(document).ready(function() {
     $('.datepicker').datepicker({});
+    id = $('#selected_plane').val()
+    category = $('#category' + id).val()
+    description = $('#description' + id).val()
+    model = $('#model' + id).val()
+    capacity = $('#capacity' + id).val()
+    $('#hidden_category').val(category)
+    $('#hidden_description').val(description)
+    $('#hidden_model').val(model)
+    $('#hidden_capacity').val(capacity)
+    $('#hidden_plane').show()
+
+    $('#js_from').val( $('#from')[0].selectedOptions[0].innerHTML)
+    $('#js_to').val( $('#to')[0].selectedOptions[0].innerHTML)
+    $('#js_from_ter').val( $('#from_ter')[0].selectedOptions[0].innerHTML)
+    $('#js_to_ter').val( $('#to_ter')[0].selectedOptions[0].innerHTML)
+    $('#js_dep_time').val( $('#dep_time').val())
+    $('#js_arr_time').val( $('#arr_time').val())
+    $('#js_date').val( $('#date').val())
+    $('#js_price').val( $('#price').val())
+    $('#js_plane').val( $('#selected_plane')[0].selectedOptions[0].innerHTML)
+    $('#js_driver').val( $('#driver')[0].selectedOptions[0].innerHTML)
+
+
 }).on('change', function(){
     tempDay = $('#date').val().split('/')
     if(tempDay[2]<y){
@@ -45,10 +68,12 @@ $(document).ready(function() {
         $('#js_date').val(value);
         document.getElementById("date").style.borderColor = "";
     }
+
+
+
 });
 
 $('#selected_plane').on('change keyup paste delete', function () {
-    let value = this.value;
     id = $('#selected_plane').val()
     category = $('#category' + id).val()
     description = $('#description' + id).val()

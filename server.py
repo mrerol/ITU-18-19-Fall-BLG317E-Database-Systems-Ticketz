@@ -1,4 +1,5 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify, session
+from flask import Flask, render_template, redirect, url_for, request, jsonify, session, send_file
+from io import BytesIO
 import views
 from base64 import b64encode
 from dao.user_dao import UserDao
@@ -223,6 +224,74 @@ def add_expedition():
         return unAuth403()
 
 
+@app.route('/firm/edit_expedition/<int:expedition_id>', methods=['GET', 'POST'])
+def edit_expedition(expedition_id):
+    firm_id = session.get("firm_id")
+    if firm_id != None:
+        if request.method == "GET":
+            return views.edit_expedition(expedition_id)
+        else:
+            from_ = request.form["from"]
+            from_ter = request.form["from_ter"]
+            to = request.form["to"]
+            to_ter = request.form["to_ter"]
+            dep_time = request.form["dep_time"]
+            arr_time = request.form["arr_time"]
+            date = request.form["date"]
+            price = request.form["price"]
+            plane = request.form["selected_plane"]
+            vehicle = vehicle_db.get_vehicle(plane)
+            total_cap = vehicle.capacity
+            driver_id  = request.form["driver"]
+            if "document" in request.files:
+                document = request.files["document"]
+                expedition_db.update_expedition_with_document(expedition_id ,Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, driver_id, firm_id, total_cap, 0, document.read()))
+
+            else:
+                expedition_db.update_expedition(expedition_id, Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, driver_id, firm_id, total_cap, 0,  None ))
+
+            return redirect(url_for('firms_page', id=firm_id))
+    else:
+        return unAuth403()
+
+
+
+@app.route('/firm/expedition_list', methods=['GET', 'POST'])
+def expedition_list():
+    firm_id = session.get('firm_id')
+    if firm_id:
+        return views.expedition_list()
+    else:
+        return unAuth403()
+
+@app.route('/firm/expedition/<int:id>', methods=['GET', 'POST'])
+def expedition_page(id):
+    return views.expedition_page(id)
+
+@app.route('/expedition/document/<int:expedition_id>', methods=['GET'])
+def expedition_document(expedition_id):
+    file_data = expedition_db.get_expedition(expedition_id).document
+    file_name = str(expedition_id) + '.pdf'
+    return send_file(BytesIO(file_data), attachment_filename = file_name, as_attachment=True)
+
+
+@app.route('/expedition/document/delete_document/<int:expedition_id>')
+def delete_expedition_document(expedition_id):
+    firm_id = session.get('firm_id')
+    if firm_id == expedition_db.get_expedition(expedition_id).firm_id:
+        expedition_db.delete_expedition_document(expedition_id)
+        return "<script>alert('document has been deleted sucsessfuly'); window.close();</script>"
+    else:
+        return unAuth403()
+
+@app.route('/firm/delete_expedition/<int:expedition_id>')
+def delete_expedition(expedition_id):
+    firm_id = session.get('firm_id')
+    if firm_id == expedition_db.get_expedition(expedition_id).firm_id:
+        expedition_db.delete_expedition(expedition_id)
+        return redirect(url_for('expedition_list'))
+    else:
+        return unAuth403()
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

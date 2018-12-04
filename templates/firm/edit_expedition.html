@@ -166,7 +166,7 @@
                             <div class="container-fluid">
                                 <div class="row mb-2">
                                     <div class="col-sm-6">
-                                        <h1>Add Expedition</h1>
+                                        <h1>Edit Expedition</h1>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +183,9 @@
                                       <select class="form-control" name="from" id="from" onchange="onCitySelectedFrom()">
                                         <option selected disabled></option>
                                         {% for id in cities %}
-                                            <option value="{{ id }}">{{ cities[id]['city_name'] }}</option>
+                                            <option {% if (expedition.from_ == id) %}
+                                                selected
+                                            {% endif %} value="{{ id }}">{{ cities[id]['city_name'] }}</option>
                                         {% endfor %}
                                       </select>
                                       <select class="form-control" name="from_ter" id="from_ter">
@@ -203,7 +205,9 @@
                                         <select class="form-control" name="to" id="to" onchange="onCitySelectedTo()">
                                             <option selected disabled></option>
                                             {% for id in cities %}
-                                                <option value="{{ id }}">{{ cities[id]['city_name'] }}</option>
+                                                <option {% if (expedition.to == id) %}
+                                                selected
+                                            {% endif %} value="{{ id }}">{{ cities[id]['city_name'] }}</option>
                                             {% endfor %}
                                         </select>
                                         <select class="form-control" name="to_ter" id="to_ter">
@@ -222,7 +226,7 @@
                                             <i class="fas fa-clock"></i>
                                         </span>
                                     </div>
-                                    <input type="text" id="dep_time" name="dep_time" class="form-control" value="19:05">
+                                    <input type="text" id="dep_time" name="dep_time" class="form-control" value="{{ expedition.dep_time }}">
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-time"></span>
                                     </span>
@@ -237,7 +241,7 @@
                                             <i class="fas fa-calendar-alt"></i>
                                         </span>
                                     </div>
-                                    <input type="text" id="arr_time" name="arr_time" class="form-control" value="19:05">
+                                    <input type="text" id="arr_time" name="arr_time" class="form-control" value="{{ expedition.arr_time }}">
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-time"></span>
                                     </span>
@@ -252,7 +256,7 @@
                                             <i class="far fa-clock"></i>
                                         </span>
                                     </div>
-                                    <input type="text" id="date"  name="date" class="form-control">
+                                    <input type="text" id="date"  name="date" value="{{ expedition.date }}" class="form-control">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
@@ -266,7 +270,7 @@
                                             <i class="fas fa-dollar-sign"></i>
                                         </span>
                                     </div>
-                                    <input type="number" id="price"  name="price" min="1" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control currency">
+                                    <input type="number" id="price" value="{{ expedition.price }}"  name="price" min="1" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control currency">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
@@ -285,7 +289,9 @@
                                         <select class="form-control" name="selected_plane" id="selected_plane">
                                             <option disabled selected></option>
                                             {% for (id, vehicle) in vehicles %}
-                                                <option value="{{ id }}">{{ vehicle.name }}</option>
+                                                <option {% if (expedition.selected_plane == id) %}
+                                                selected
+                                            {% endif %} value="{{ id }}">{{ vehicle.name }}</option>
                                                 <option hidden id="category{{ id }}" value="{{ vehicle.category }}"></option>
                                                 <option hidden id="model{{ id }}" value="{{ vehicle.model }}"></option>
                                                 <option hidden id="description{{ id }}" value="{{ vehicle.description }}"></option>
@@ -348,7 +354,9 @@
                                     <select class="form-control" name="driver" id="driver">
                                             <option disabled selected></option>
                                             {% for (id, driver) in drivers %}
-                                                <option value="{{ id }}">{{ driver.name }}</option>
+                                                <option {% if (expedition.driver_id == id) %}
+                                                selected
+                                            {% endif %} value="{{ id }}">{{ driver.name }}</option>
                                             {% endfor %}
                                       </select>
 
@@ -365,10 +373,18 @@
                                             <i class="fas fa-file"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="document"  name="document" accept="application/pdf" class="form-control">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
+
+                                    {% if expedition.document_link %}<a id="link1" href="{{ expedition.document_link }}" target="_blank" class="btn btn-primary"><b>Download</b></a>
+                                        <a id="link2" onclick="$('#link1').hide();$('#link2').hide(); $('#document').show() " href="/expedition/document/delete_document/{{expedition.expedition_id}}" target="_blank" class="btn btn-danger">Delete</a>
+                                        <input style="display: none" type="file" id="document"  name="document" accept="application/pdf" class="form-control">
+
+                                    {% else %}
+                                        <input type="file" id="document"  name="document" accept="application/pdf" class="form-control">
+
+                                    {% endif %}
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
                                 </div>
 
                                 <br>
@@ -466,6 +482,6 @@ onCitySelectedTo();
     </script>
 <script src="../../static/js/firm/jquery-clockpicker.min.js"></script>
 <script src="../../static/js/firm/bootstrap-datepicker.js"></script>
-<script src="../../static/js/firm/add_expedition.js"></script>
+<script src="../../static/js/firm/edit_expedition.js"></script>
 
 {% endblock %}

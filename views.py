@@ -5,25 +5,32 @@ import sys
 from base64 import b64encode
 
 
+
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
 from DBOP.firms_db import firm_database
 from DBOP.vehicles_db import vehicle_database
 from DBOP.drivers_db import driver_database
+from DBOP.expedition_db import expedition_database
 from dao.city_dao import CityDao
 from dao.terminal_dao import TerminalDao
+
+from DBOP.tables.expedition_table import Expedition
+
 
 db_hotel = hotel_database()
 db_image = image_database()
 db_firm = firm_database()
 db_vehicle = vehicle_database()
 db_driver = driver_database()
+db_expedition = expedition_database()
 
 hotel_db = db_hotel.hotel
 image_db = db_image.image
 firm_db = db_firm.firm
 vehicle_db = db_vehicle.vehicle
 driver_db = db_driver.driver
+expedition_db = db_expedition.expedition
 
 userop = UserDao()
 city_db = CityDao()
@@ -174,8 +181,6 @@ def firm_login(request):
 
 
 def add_expedition():
-    user_id = session.get('user_id')
-    user = userop.get_user(user_id)
     drivers = driver_db.get_drivers()
     vehicles = vehicle_db.get_vehicles()
     cities = {}
@@ -185,7 +190,69 @@ def add_expedition():
             cities[t[7]] = {'city_name': t[-1], 'terminals': []}
         cities[t[7]]['terminals'].append({'id': t[0], 'name': t[1]})
 
-    return render_template("firm/add_expedition.html", user = user, vehicles = vehicles, cities = cities, drivers= drivers)
+    return render_template("firm/add_expedition.html", vehicles = vehicles, cities = cities, drivers= drivers)
+
+def edit_expedition(expedition_id):
+    expedition = expedition_db.get_expedition(expedition_id)
+    expedition.expedition_id = expedition_id
+    drivers = driver_db.get_drivers()
+    vehicles = vehicle_db.get_vehicles()
+    cities = {}
+    terminals = terminalop.get_all_terminal()
+    if expedition.document is not None:
+        expedition.document_link = "/expedition/document/" + str(id)
+    else:
+        expedition.document_link = None
+    for t in terminals:
+        if t[7] not in cities:
+            cities[t[7]] = {'city_name': t[-1], 'terminals': []}
+        cities[t[7]]['terminals'].append({'id': t[0], 'name': t[1]})
+
+    return render_template("firm/edit_expedition.html", expedition = expedition, vehicles = vehicles, cities = cities, drivers= drivers)
+
+
+def expedition_list():
+    firm_id = session.get('firm_id')
+    firm = firm_db.get_firm(firm_id)
+    if firm_id is not None:
+        firm.firm_id = firm_id
+    expeditions = expedition_db.get_firms_expedition(firm_id)
+    return render_template("firm/expedition_list.html", firm = firm , expeditions = expeditions)
+
+
+def expedition_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    temp_expedition = expedition_db.get_expedition(id)
+    if temp_expedition is None:
+        return render_template("404_not_found.html")
+    else:
+        firm = firm_db.get_firm(temp_expedition.firm_id)
+        firm.firm_id = id
+        from_city = city_db.get_city(temp_expedition.from_ )
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
+        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
+        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+        if temp_expedition.document is not None:
+            temp_expedition.document_link = "/expedition/document/" + str(id)
+        else:
+            temp_expedition.document_link = None
+
+
+        return render_template("firm/expedition.html", user = user, firm = firm, expedition = temp_expedition)
+
+
 
 def edit_hotel_page(id):
     user_id = session.get('user_id')
