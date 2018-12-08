@@ -150,6 +150,33 @@ INIT_STATEMENTS = [
 
     )""",
 
+    """CREATE TABLE IF NOT EXISTS seats(
+        expedition_id INT NOT NULL,
+        user_id INT NOT NULL,
+        seat_number INT NOT NULL,
+        PRIMARY KEY (expedition_id, user_id, seat_number),
+        FOREIGN KEY (expedition_id) REFERENCES expeditions (expedition_id) ON DELETE RESTRICT ON UPDATE CASCADE ,
+        FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE ,
+        UNIQUE (expedition_id, user_id, seat_number)
+    )
+    """,
+
+    """CREATE TABLE IF NOT EXISTS tickets(
+        expedition_id INT NOT NULL,
+        user_id INT NOT NULL,
+        seat_number INT NOT NULL,
+        ticket_id SERIAL NOT NULL,
+        bought_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        is_cancelable BOOLEAN DEFAULT FALSE,
+        extra_baggage BOOLEAN DEFAULT FALSE,
+        UNIQUE (expedition_id, user_id, seat_number),
+        PRIMARY KEY (ticket_id),
+        FOREIGN KEY (expedition_id, user_id, seat_number) REFERENCES seats (expedition_id, user_id, seat_number) ON DELETE RESTRICT ON UPDATE CASCADE     
+    )
+    """,
+
+
     """INSERT INTO drivers VALUES (
                         1,
                         'rasit',

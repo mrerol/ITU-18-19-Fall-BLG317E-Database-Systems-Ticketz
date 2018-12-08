@@ -1,0 +1,85 @@
+from DBOP.tables.ticket_table import Ticket
+import psycopg2 as dbapi2
+import os
+
+
+class ticket_database:
+    def __init__(self):
+        self.ticket = self.Ticket()
+
+    class Ticket:
+        def __init__(self):
+            if os.getenv("DATABASE_URL") is None:
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
+            else:
+                self.url = os.getenv("DATABASE_URL")
+
+        def add_ticket(self, ticket):
+            with dbapi2.connect(self.url) as connection:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "INSERT INTO tickets ( expedition_id, user_id, seat_number, is_cancelable, extra_baggage) VALUES (%s, %s, %s, %s, %s)",
+                    (ticket.expedition_id, ticket.user_id, ticket.seat_number, ticket.is_cancelable, ticket.extra_baggage))
+                cursor.close()
+
+        def delete_ticket(self, ticket_id):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("DELETE FROM tickets WHERE ticket_id = %s", (ticket_id, ))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+
+        def get_tickets_of_users(self, user_id):
+            tickets = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM tickets WHERE user_id = %s;", (user_id, ) )
+                for ticket in cursor:
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[7], ticket[6], ticket[4], ticket[5])
+                    tickets.append((ticket[3], _ticket))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return tickets
+
+        def get_ticket(self, ticket_id):
+            tickets = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM tickets WHERE ticket_id = %s;", (ticket_id, ) )
+                for ticket in cursor:
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[7], ticket[6], ticket[4], ticket[5])
+                    tickets.append(_ticket)
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return tickets
+
+        def update_ticket(self, ticket,new_seat_number, new_cancel, new_baggage):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("""UPDATE tickets SET seat_number = %s, is_cancelable = %s, extra_baggage = %s, edited_at = CURRENT_TIMESTAMP WHERE expedition_id = %s AND user_id = %s AND seat_number = %s """, ( new_seat_number, new_cancel, new_baggage ,ticket.expedition_id, ticket.user_id, new_seat_number))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()

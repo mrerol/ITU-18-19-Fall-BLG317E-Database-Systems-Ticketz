@@ -1,0 +1,95 @@
+<link href="../../static/css/ticket/buy.css" rel="stylesheet">
+
+{% extends "layout.html" %}
+{% block title %}Ticketz Buy Ticket {% endblock %}
+{% block body %}
+
+    {% include "components/admin/navbar.html" %}
+    <br><br>
+    <div class="container">
+
+         <a href="/firm/expedition/{{ expedition.expedition_id }}" target="_blank"> <div class="alert alert-info">
+            <strong>Info!</strong> If you wanna see more details about expedition please click!
+        </div></a>
+
+
+
+        <form method="post" action="" enctype = "multipart/form-data"  role="form" name="add_ticket" id="add_ticket">
+            <!--  seat -->
+            <div id="plane" class="plane">
+                <div class="cockpit">
+                    <h1>Please Select A Seat</h1>
+                </div>
+                <div class="exit exit--front fuselage">
+
+                </div>
+                <ol class="cabin fuselage">
+                    {% for i in range (expedition.total_cap) %}
+                        {% if i%6 == 0 %}
+                            <li  class="row row--{{ i/6  }}">
+                        {% endif %}
+                            <ol class="seats" type="A">
+                                <li class="seat">
+                                {% for seat in seats if seat.seat_number == i %}
+                                    <input disabled name="seat" type="checkbox" value="{{ i }}" id="{{ i }}">
+                                    {% else %}
+                                        <input  name="seat" type="checkbox" value="{{ i }}" id="{{ i }}">
+                                {% endfor %}
+
+
+                                  <label for="{{ i }}">
+                                        {% if i <10 %}
+                                            00{{ i }}
+                                        {% elif i <100 %}
+                                            0{{ i }}
+                                        {% else %}
+                                            {{ i }}
+                                        {% endif %}
+                                  </label>
+                                </li>
+                            </ol>
+                        {% if i%6 == 5 %}
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+                </ol>
+              <div class="exit exit--back fuselage">
+
+              </div>
+            </div>
+            <!-- end seat-->
+            <div class="input-group">
+                <input style="margin-left: 5px; margin-right: 5px;" type="radio" name="is_cancelable" value="TRUE">  Cancellable<br>
+                <input checked style="margin-left: 5px; margin-right: 5px;"type="radio" name="is_cancelable" value="FALSE">  Can not be cancellable<br>
+            </div>
+            <div class="input-group">
+                <input style="margin-left: 5px; margin-right: 5px;" type="radio" name="extra_baggage" value="TRUE">  Extra Baggage<br>
+                <input checked style="margin-left: 5px; margin-right: 5px;"type="radio" name="extra_baggage" value="FALSE">  Normal Baggage<br>
+            </div>
+
+
+
+
+        </form>
+        <div class="card-footer">
+                <button type="submit" onclick="add()" class="btn btn-info float-right">Buy Now</button>
+        </div>
+
+        <div class="message-box-danger" style="display: none">
+            <div class="alert alert-danger alert-dismissible" style="display:block; margin: 10px;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                Please Select A Seat *</div>
+        </div>
+
+    </div>
+
+
+
+
+
+    {% include "components/admin/footer.html" %}
+
+ <script src="../../static/js/ticket/buy.js"></script>
+
+{% endblock %}

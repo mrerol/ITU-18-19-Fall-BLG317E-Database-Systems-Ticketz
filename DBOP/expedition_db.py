@@ -134,3 +134,19 @@ class expedition_database:
             finally:
                 if connection is not None:
                     connection.close()
+
+        def bought(self, expedition_id ):
+            with dbapi2.connect(self.url) as connection:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "UPDATE expeditions SET current_cap = current_cap + 1 WHERE expedition_id = %s",
+                    (expedition_id, ))
+                cursor.close()
+
+        def cancelled(self, expedition_id):
+            with dbapi2.connect(self.url) as connection:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "UPDATE expeditions SET current_cap = current_cap - 1 WHERE expedition_id = %s",
+                    (expedition_id,))
+                cursor.close()

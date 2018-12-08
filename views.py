@@ -4,10 +4,10 @@ from psycopg2 import IntegrityError
 import sys
 from base64 import b64encode
 
-
-
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
+from DBOP.seat_db import seat_database
+from DBOP.ticket_db import ticket_database
 from DBOP.firms_db import firm_database
 from DBOP.vehicles_db import vehicle_database
 from DBOP.drivers_db import driver_database
@@ -16,6 +16,7 @@ from dao.city_dao import CityDao
 from dao.terminal_dao import TerminalDao
 
 from DBOP.tables.expedition_table import Expedition
+from DBOP.tables.ticket_table import Ticket
 
 
 db_hotel = hotel_database()
@@ -24,6 +25,8 @@ db_firm = firm_database()
 db_vehicle = vehicle_database()
 db_driver = driver_database()
 db_expedition = expedition_database()
+db_seat = seat_database()
+db_ticket = ticket_database()
 
 hotel_db = db_hotel.hotel
 image_db = db_image.image
@@ -31,6 +34,8 @@ firm_db = db_firm.firm
 vehicle_db = db_vehicle.vehicle
 driver_db = db_driver.driver
 expedition_db = db_expedition.expedition
+seat_db = db_seat.seat
+ticket_db = db_ticket.ticket
 
 userop = UserDao()
 city_db = CityDao()
@@ -39,14 +44,35 @@ terminalop = TerminalDao()
 def home_page():
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
-    hotels = hotel_db.get_hotels()
+    expeditions = expedition_db.get_all_expeditions()
+    for (expedition_id, temp_expedition) in expeditions:
+        firm = firm_db.get_firm(temp_expedition.firm_id)
 
-    for (id , hotel) in hotels:
-        if hotel.logo is not None:
-            temp = b64encode(hotel.logo).decode("utf-8")
-            hotel.logo = temp
+        firm.firm_id = temp_expedition.firm_id
+        temp_expedition.firm = firm
 
-    return render_template("home_page.html", hotels = hotels, user = user)
+        from_city = city_db.get_city(temp_expedition.from_)
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
+        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
+        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+        if temp_expedition.document is not None:
+            temp_expedition.document_link = "/expedition/document/" + str(expedition_id)
+        else:
+            temp_expedition.document_link = None
+
+    return render_template("home_page.html", user=user, expeditions = expeditions)
+
 
 
 
@@ -249,8 +275,106 @@ def expedition_page(id):
         else:
             temp_expedition.document_link = None
 
-
         return render_template("firm/expedition.html", user = user, firm = firm, expedition = temp_expedition)
+
+
+def buy_ticket(expedition_id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    temp_expedition = expedition_db.get_expedition(expedition_id)
+    if temp_expedition is None:
+        return render_template("404_not_found.html")
+    else:
+        firm = firm_db.get_firm(temp_expedition.firm_id)
+        firm.firm_id = id
+        from_city = city_db.get_city(temp_expedition.from_ )
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+        temp_expedition.expedition_id = expedition_id
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
+        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+
+        seats = seat_db.get_seats_of_expedition(expedition_id)
+
+
+
+        return render_template("ticket/buy.html", user = user, firm = firm, expedition = temp_expedition, seats = seats)
+
+
+def edit_ticket(ticket_id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    ticket = ticket_db.get_ticket(ticket_id)[0]
+    temp_expedition = expedition_db.get_expedition(ticket.expedition_id)
+    if temp_expedition is None:
+        return render_template("404_not_found.html")
+    else:
+        firm = firm_db.get_firm(temp_expedition.firm_id)
+        firm.firm_id = id
+        from_city = city_db.get_city(temp_expedition.from_ )
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+        temp_expedition.expedition_id = ticket.expedition_id
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
+        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+
+        seats = seat_db.get_seats_of_expedition(ticket.expedition_id)
+        ticket.ticket_id = ticket_id
+        return render_template("ticket/edit.html", user = user, firm = firm, expedition = temp_expedition, seats = seats , ticket = ticket)
+
+
+def my_tickets():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    tickets = ticket_db.get_tickets_of_users(user_id)
+    for (id, ticket) in tickets:
+        temp_expedition = expedition_db.get_expedition(ticket.expedition_id)
+        firm = firm_db.get_firm(temp_expedition.firm_id)
+        firm.firm_id = id
+        from_city = city_db.get_city(temp_expedition.from_ )
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
+        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
+        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+        if temp_expedition.document is not None:
+            temp_expedition.document_link = "/expedition/document/" + str(id)
+        else:
+            temp_expedition.document_link = None
+
+
+        ticket.expedition = temp_expedition
+        ticket.firm = firm
+        ticket.ticket_id = id
+
+    return render_template("ticket/my_tickets.html", user = user, tickets = tickets)
 
 
 

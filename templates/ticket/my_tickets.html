@@ -1,6 +1,6 @@
-<link href="../static/css/home.css" rel="stylesheet">
+<link href="../../static/css/home.css" rel="stylesheet">
 {% extends "layout.html" %}
-{% block title %}Ticketz Home Page{% endblock %}
+{% block title %}Ticketz Expedition {% endblock %}
 {% block body %}
     {% include "components/admin/navbar.html" %}
 
@@ -11,11 +11,11 @@
 
 
       <div class="row m-auto text-center w-75">
-      {% for (id, expedition) in expeditions %}
-        <div class="col-4 col-centered princing-item green">
+      {% for (id, ticket) in tickets %}
+        <div class="col-4 princing-item green" id="ticket-{{ ticket.ticket_id }}">
               <div class="pricing-divider ">
-                  <h3 class="text-light">{{ expedition.firm.name }}</h3>
-                    <h4 class="my-0 display-2 text-light font-weight-normal mb-3"><span class="h3">$</span> {{ expedition.price }} <span class="h5"></span></h4>
+                  <h3 class="text-light">{{ ticket.firm.name }}</h3>
+                    <h4 class="my-0 display-2 text-light font-weight-normal mb-3"><span class="h3">$</span> {{ ticket.expedition.price }} <span class="h5"></span></h4>
                     <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
                               <path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
                         c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z' fill='#FFFFFF' opacity='0.6'></path>
@@ -30,30 +30,27 @@
 
               <div class="card-body bg-white mt-0 shadow">
                 <ul class="list-unstyled mb-5 position-relative">
-                  <li><b>{{ expedition.date }}</b> Date</li>
-                  <li><b>{{ expedition.dep_time }}</b> Departure Time</li>
-                  <li><b>{{ expedition.arr_time }}</b> Arrival Time</li>
-                  <li><b>{{ expedition.from_city }}</b> From City</li>
-                  <li><b>{{ expedition.from_ter_name }}</b> From Terminal</li>
-                  <li><b>{{ expedition.to_city }}</b> To City</li>
-                  <li><b>{{ expedition.from_ter_name }}</b> To Terminal</li>
-                  <li><b>{{ expedition.current_cap }}</b> bought</li>
-                  <li><b>{{ expedition.total_cap }}</b> capacity</li>
-                  <li><b>{{ expedition.plane_name }}</b> Plane Name</li>
-                  <li><b>{{ expedition.plane_category }}</b> Plane Category</li>
-                  <li><b>{{ expedition.driver_name }}</b> Driver Name</li>
-                    {% if (expedition.document_link) %}
-                        <li><a href="{{ expedition.document_link }}" target="_blank"><b>Click to Download</b></a> Document</li>
+                  <li><b>{{ ticket.seat_number }}</b> Seat Number</li>
+                  <li><b>{{ ticket.extra_baggage }}</b> Extra Baggage</li>
+                  <li><b>{{ ticket.expedition.date }}</b> Date</li>
+                  <li><b>{{ ticket.expedition.dep_time }}</b> Departure Time</li>
+                  <li><b>{{ ticket.expedition.arr_time }}</b> Arrival Time</li>
+                  <li><b>{{ ticket.expedition.from_city }}</b> From City</li>
+                  <li><b>{{ ticket.expedition.from_ter_name }}</b> From Terminal</li>
+                  <li><b>{{ ticket.expedition.to_city }}</b> To City</li>
+                  <li><b>{{ ticket.expedition.from_ter_name }}</b> To Terminal</li>
+                  <li><b>{{ ticket.expedition.plane_name }}</b> Plane Name</li>
+                  <li><b>{{ ticket.expedition.driver_name }}</b> Driver Name</li>
+                    {% if (ticket.expedition.document_link) %}
+                        <li><a href="{{ ticket.expedition.document_link }}" target="_blank"><b>Click to Download</b></a> Document</li>
                     {% endif %}
                 </ul>
-              {% if user %}
-                  <a href="/ticket/buy/{{ id }}"><button type="button" class="btn btn-lg btn-block  btn-success ">Buy a Ticket </button></a>
-
-              {% else %}
-                  <a href="/login"><button type="button" class="btn btn-lg btn-block  btn-custom ">Login</button></a>
-
+              <a href="/ticket/edit/{{ ticket.ticket_id }}"><button type="button" class="btn btn-lg btn-block  btn-info ">Edit Ticket </button></a>
+              {% if ticket.is_cancelable %}
+                  <a href="/ticket/delete/{{ ticket.ticket_id }}" target="_blank" onclick="$('#ticket-{{ ticket.ticket_id }}').hide();"><button type="button"  class="btn btn-lg btn-block  btn-custom ">Cancel The Ticket </button></a>
               {% endif %}
-                </div>
+
+              </div>
         </div>
       {% endfor %}
       </div>
@@ -63,5 +60,7 @@
 
 
 
+    </div>
     {% include "components/admin/footer.html" %}
+
 {% endblock %}

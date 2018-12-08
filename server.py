@@ -5,19 +5,27 @@ from base64 import b64encode
 from dao.user_dao import UserDao
 from DBOP.tables.image_table import Image
 from DBOP.tables.hotel_table import Hotel
+from DBOP.tables.seat_table import Seat
+from DBOP.tables.ticket_table import Ticket
 from DBOP.tables.expedition_table import Expedition
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
 from DBOP.expedition_db import expedition_database
 from DBOP.vehicles_db import vehicle_database
+from DBOP.seat_db import seat_database
+from DBOP.ticket_db import ticket_database
 
 db_hotel = hotel_database()
 db_image = image_database()
 db_expedition = expedition_database()
 db_vehicle = vehicle_database()
+db_seat = seat_database()
+db_ticket = ticket_database()
 
 hotel_db = db_hotel.hotel
 image_db = db_image.image
+seat_db = db_seat.seat
+ticket_db = db_ticket.ticket
 expedition_db = db_expedition.expedition
 vehicle_db = db_vehicle.vehicle
 userop = UserDao()
@@ -292,6 +300,92 @@ def delete_expedition(expedition_id):
         return redirect(url_for('expedition_list'))
     else:
         return unAuth403()
+
+
+@app.route('/ticket/buy/<int:expedition_id>', methods=["POST", "GET"])
+def buy_ticket(expedition_id):
+
+    user_id = session.get('user_id')
+    if user_id != None:
+        if request.method == "POST":
+            temp_expedition = expedition_db.get_expedition(expedition_id)
+            if temp_expedition.current_cap < temp_expedition.total_cap:
+                if request.form.getlist('seat'):
+                    seat_number = request.form["seat"]
+                    is_cancellable = request.form["is_cancelable"]
+                    extra_baggage = request.form["extra_baggage"]
+                    seat_db.add_seat(Seat(expedition_id, user_id, seat_number))
+                    ticket_db.add_ticket(Ticket(expedition_id, user_id, seat_number, extra_baggage, is_cancellable))
+                    expedition_db.bought(expedition_id)
+                    return redirect(url_for('my_tickets'))
+                else:
+                    return views.buy_ticket(expedition_id)
+            else:
+                return redirect(url_for('/'))
+        else:
+            return views.buy_ticket(expedition_id)
+    else:
+        return unAuth403()
+
+@app.route('/ticket/edit/<int:ticket_id>', methods=["POST", "GET"])
+def edit_ticket(ticket_id):
+
+    user_id = session.get('user_id')
+    if user_id != None:
+        if request.method == "POST":
+            ticket = ticket_db.get_ticket(ticket_id)
+            if len(ticket) is not 0:
+                ticket = ticket_db.get_ticket(ticket_id)[0]
+                temp_expedition = expedition_db.get_expedition(ticket.expedition_id)
+                if temp_expedition.current_cap < temp_expedition.total_cap:
+                    if request.form.getlist('seat'):
+                        seat_number = request.form["seat"]
+                        is_cancellable = request.form["is_cancelable"]
+                        extra_baggage = request.form["extra_baggage"]
+                        print(is_cancellable, extra_baggage)
+                        seat_db.update_seat_number(Seat(ticket.expedition_id, ticket.user_id, ticket.seat_number), seat_number)
+                        ticket_db.update_ticket(Ticket(ticket.expedition_id, ticket.user_id, ticket.seat_number, ticket.extra_baggage, ticket.is_cancelable), seat_number, is_cancellable, extra_baggage)
+                        return redirect(url_for('my_tickets'))
+                    else:
+                        return views.edit_ticket(ticket_id)
+                else:
+                    return redirect(url_for('/'))
+            else:
+                render_template('404_not_found.html')
+        else:
+            ticket = ticket_db.get_ticket(ticket_id)
+            if len(ticket) is not 0:
+                return views.edit_ticket(ticket_id)
+            else:
+                return render_template('404_not_found.html')
+    else:
+        return unAuth403()
+
+
+@app.route('/ticket/delete/<int:ticket_id>')
+def delete_ticket(ticket_id):
+    user_id = session.get('user_id')
+    ticket = ticket_db.get_ticket(ticket_id)
+    if ticket is not None:
+        if user_id[0] == ticket[0].user_id:
+            ticket_db.delete_ticket(ticket_id)
+            expedition_db.cancelled(ticket[0].expedition_id)
+            seat_db.delete_seat(Seat(ticket[0].expedition_id, ticket[0].user_id, ticket[0].seat_number))
+            return "<script>alert('ticket has been deleted sucsessfuly'); window.close();</script>"
+        else:
+            return unAuth403()
+    else:
+        return unAuth403()
+
+
+@app.route('/my_tickets', methods=['GET', 'POST'])
+def my_tickets():
+    user_id = session.get('user_id')
+    if user_id:
+        return views.my_tickets()
+    else:
+        return unAuth403()
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
