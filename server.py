@@ -182,12 +182,16 @@ def home_page():
     return views.home_page()
 
 @app.route('/firm/<int:id>', methods=['GET', 'POST'])
-def firms_page(id):
-    return views.firms_page(id)
+def firm_page(id):
+    return views.firm_page(id)
 
 @app.route('/firm/login', methods=['GET', 'POST'])
-def firms_login():
+def firm_login():
     return views.firm_login(request)
+
+@app.route('/firm/signup', methods=['GET', 'POST'])
+def firm_signup():
+    return views.firm_signup(request)
 
 @app.route('/firm/driver_list/<int:id>', methods=['GET', 'POST'])
 def driver_list_page(id):

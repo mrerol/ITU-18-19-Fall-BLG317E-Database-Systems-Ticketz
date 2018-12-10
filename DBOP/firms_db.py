@@ -43,12 +43,12 @@ class firm_database:
                 cursor.close()
                 return temp_id
 
-        def get_firm_id_login(self, username, password):
+        def get_firm_id_login(self, email, password):
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "SELECT firm_id FROM firms WHERE name = %s AND password = %s ",
-                    (username, password))
+                    "SELECT firm_id FROM firms WHERE email = %s AND password = %s ",
+                    (email, password))
                 temp_id = cursor.fetchone()
                 cursor.close()
                 return temp_id

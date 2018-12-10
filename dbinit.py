@@ -6,8 +6,8 @@ import psycopg2 as dbapi2
 DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd3645c95c712b9ba888f28cab791b@ec2-54-243-187-30.compute-1.amazonaws.com:5432/d96hqqveldfnft'
 
 INIT_STATEMENTS = [
-    #"""DROP TABLE IF EXISTS images""",
-    #"""DROP TABLE IF EXISTS hotels""",
+    """DROP TABLE IF EXISTS images""",
+    """DROP TABLE IF EXISTS hotels""",
     """DROP TABLE IF EXISTS users""",
     """DROP TABLE IF EXISTS firms""",
     """DROP TABLE IF EXISTS drivers""",
@@ -95,15 +95,15 @@ INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS firms 
     (
         firm_id SERIAL NOT NULL PRIMARY KEY,
-        name VARCHAR (50) NOT NULL,
-        password VARCHAR (16) NOT NULL,
-        email VARCHAR (50) NOT NULL,
-        city VARCHAR (20) NOT NULL,
-        address VARCHAR (250) NOT NULL,
-        phone VARCHAR (15) NOT NULL,
-        website VARCHAR (50) NOT NULL,
-        description VARCHAR (250),
-        logo VARCHAR (50) 
+        name VARCHAR (20) NOT NULL,
+        password VARCHAR (20) NOT NULL,
+        email VARCHAR (20) NOT NULL,
+        city VARCHAR (20),
+        address VARCHAR (100),
+        phone VARCHAR (20) NOT NULL,
+        website VARCHAR (20),
+        description VARCHAR (200),
+        logo BYTEA
 
     )""",
 
@@ -215,6 +215,22 @@ INIT_STATEMENTS = [
                         'dememe.com',
                         'aciklama'
 
+    )""",
+
+    """INSERT INTO users VALUES (
+                        1,
+                        'admin',
+                        'admin@admin.com',
+                        'admin',
+                        'admin',
+                        'admin',
+                        '0321221222',
+                        '1',
+                        'deneme sokak deneme cadde deneme',
+                        '2017-08-02 12:10:11.123456',
+                        '2017-08-02 12:10:11.123456',
+                        'true'
+    
     )""",
 
     """INSERT INTO city VALUES 

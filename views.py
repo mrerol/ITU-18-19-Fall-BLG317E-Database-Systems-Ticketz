@@ -176,24 +176,34 @@ def driver_profile_page(id):
 def driver_edit_page(id):
     return render_template("driver/driver_edit.html")
 
-def firms_page(id):
+def firm_page(id):
     print()
     if id != session.get("firm_id"):
         return redirect(url_for("unAuth403"))
     else:
         return render_template("firm/firm.html")
+
+def firm_signup(request):
+    error = None
+    if request.method == "GET":
+        cities = city_db.get_all_city()
+        return render_template("firm/signup.html", error=error, cities=cities)
+    else:
+        return redirect(url_for('firm_login'))
+
+
 def firm_login(request):
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["pass"]
+        email = request.form['e_mail']
+        password = request.form['password']
         try:
-            temp = firm_db.get_firm_id_login(username,password)
-            (firm_id,)=temp
-            #print("firmid ", firm_id)
+            temp = firm_db.get_firm_id_login(email, password)
+            (firm_id,) = temp
+
+                #print("firmid ", firm_id)
             if firm_id is not None:
                 session['firm_id'] = firm_id
-
-                return redirect(url_for('firms_page', id=firm_id))
+                return redirect(url_for('firm_page', id=firm_id))
             else:
                 error = "invalid credentials"
                 # return render_template("404_not_found.html")# TODO add 403
