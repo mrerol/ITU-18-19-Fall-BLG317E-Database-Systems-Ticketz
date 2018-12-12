@@ -137,7 +137,7 @@ class hotel_database:
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                cursor.execute("SELECT * FROM hotels WHERE (name like %s) or (email like %s) or (description like %s) or (address like %s) or (website like %s) or (city like %s)    ;", (to_search, to_search, to_search, to_search, to_search, to_search))
+                cursor.execute("SELECT * FROM hotels JOIN city ON city.code = hotels.city WHERE (name like %s) or (email like %s) or (description like %s) or (address like %s) or (website like %s) or (city_name like %s)    ;", (to_search, to_search, to_search, to_search, to_search, to_search))
                 for hotel in cursor:
                     _hotel = Hotel(hotel[1], hotel[2], hotel[3], hotel[4], hotel[5], hotel[6], hotel[7], hotel[8])
                     hotels.append((hotel[0], _hotel))

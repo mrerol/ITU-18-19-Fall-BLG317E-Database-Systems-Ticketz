@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Hotels{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+
+
+        <div class="row">
+
+
+
+            {% for (id, hotel) in hotels %}
+
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        {% if hotel.logo %}
+                                <img class="card-img-top"  src='data:image/png;base64,{{ hotel.logo }}' >
+
+                        {% else %}
+                            <img class="card-img-top" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ hotel.name }}</h5>
+                            <p class="card-text">{{ hotel.description }}</p>
+                            <a href="/hotels/{{ id }}" class="btn btn-primary">{{ hotel.email }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-danger">
+                  <strong>Not Found!</strong> There is no Hotel record
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% include "components/admin/footer.html" %}
+{% endblock %}

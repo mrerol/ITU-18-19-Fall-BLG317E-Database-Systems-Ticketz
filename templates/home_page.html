@@ -39,12 +39,7 @@
                   <li><b>{{ expedition.from_ter_name }}</b> To Terminal</li>
                   <li><b>{{ expedition.current_cap }}</b> bought</li>
                   <li><b>{{ expedition.total_cap }}</b> capacity</li>
-                  <li><b>{{ expedition.plane_name }}</b> Plane Name</li>
-                  <li><b>{{ expedition.plane_category }}</b> Plane Category</li>
-                  <li><b>{{ expedition.driver_name }}</b> Driver Name</li>
-                    {% if (expedition.document_link) %}
-                        <li><a href="{{ expedition.document_link }}" target="_blank"><b>Click to Download</b></a> Document</li>
-                    {% endif %}
+
                 </ul>
               {% if user %}
                   <a href="/ticket/buy/{{ id }}"><button type="button" class="btn btn-lg btn-block  btn-success ">Buy a Ticket </button></a>
@@ -53,6 +48,8 @@
                   <a href="/login"><button type="button" class="btn btn-lg btn-block  btn-custom ">Login</button></a>
 
               {% endif %}
+                <a href="/firm/expedition/{{ expedition.expedition_id }}"><button type="button" class="btn btn-lg btn-block  btn-info ">Details About Expedition </button></a>
+
                 </div>
         </div>
       {% endfor %}

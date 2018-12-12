@@ -32,7 +32,7 @@
                     <tbody>
                         {% for (id, expedition) in expeditions %}
                             <tr>
-                                <th scope="row">{{id}}</th>
+                                <th scope="row"><a href="/firm/expedition/{{ id }}">{{id}}</a></th>
                                 <td>{{ expedition.date}}</td>
                                 <td>{{ expedition.dep_time}}</td>
                                 <td>{{ expedition.arr_time}}</td>

@@ -46,6 +46,7 @@ def home_page():
     user = userop.get_user(user_id)
     expeditions = expedition_db.get_all_expeditions()
     for (expedition_id, temp_expedition) in expeditions:
+        temp_expedition.expedition_id = expedition_id
         firm = firm_db.get_firm(temp_expedition.firm_id)
 
         firm.firm_id = temp_expedition.firm_id
@@ -83,17 +84,25 @@ def admin_home_page():
     return render_template("admin/admin_home_page.html", user = user)
 
 
+def hotels_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    hotels = hotel_db.get_hotels()
+    for (id , hotel) in hotels:
+        if hotel.logo is not None:
+            temp = b64encode(hotel.logo).decode("utf-8")
+            hotel.logo = temp
+    return render_template("hotel/hotel_list.html", hotels = (hotels), user = user)
+
 def search_hotel_page(text):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     hotels = hotel_db.search(text)
     for (id , hotel) in hotels:
-        print(hotel.logo)
         if hotel.logo is not None:
             temp = b64encode(hotel.logo).decode("utf-8")
             hotel.logo = temp
-        print(hotel.logo)
-    return render_template("home_page.html", hotels = (hotels), user = user)
+    return render_template("hotel/hotel_list.html", hotels = (hotels), user = user)
 
 def add_hotel_page():
     user_id = session.get('user_id')

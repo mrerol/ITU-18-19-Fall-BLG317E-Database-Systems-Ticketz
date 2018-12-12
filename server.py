@@ -41,6 +41,11 @@ app = create_app()
 app.secret_key = b'_5#y2L"F4Q8z_^?4c]/'
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404_not_found.html")
+
+
 @app.route('/admin_home_page', methods=['GET', 'POST'])
 def admin_home_page():
     user_id = session.get('user_id')
@@ -50,9 +55,15 @@ def admin_home_page():
     else:
         return unAuth403()
 
+@app.route('/hotels/', methods=['GET', 'POST'])
+def hotels_page():
+    return views.hotels_page()
+
 @app.route('/search_hotel/<string:text>', methods=['GET', 'POST'])
 def search_hotel(text):
     return views.search_hotel_page(text)
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -231,7 +242,7 @@ def add_expedition():
             else:
                 expedition_db.add_expedition(Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, driver_id, firm_id, total_cap, 0,  None ))
 
-            return redirect(url_for('firms_page', id=firm_id))
+            return redirect(url_for('firm_page', id=firm_id))
     else:
         return unAuth403()
 
@@ -262,7 +273,7 @@ def edit_expedition(expedition_id):
             else:
                 expedition_db.update_expedition(expedition_id, Expedition(from_, from_ter, to, to_ter, dep_time, arr_time, date, price, plane, driver_id, firm_id, total_cap, 0,  None ))
 
-            return redirect(url_for('firms_page', id=firm_id))
+            return redirect(url_for('firm_page', id=firm_id))
     else:
         return unAuth403()
 
