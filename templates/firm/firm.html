@@ -9,10 +9,14 @@
     {% include "components/firm/navbar.html" %}
     <div class="container">
         <section class="content-header" style="text-align: center;">
-
-            <h1>Firm Name</h1>
+            <h1>{{ firm.name }}</h1>
             <hr>
-            <img src=" https://www.logo.com.tr/img/250x250.png" class="img-thumbnail" width="150" alt="logo">
+            {% if firm.logo %}
+                <img class="img-thumbnail" width="150" alt="logo"  src='data:image/png;base64,{{ firm.logo }}' >
+
+            {% else %}
+                <img class="img-thumbnail" width="150" alt="logo" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
+            {% endif %}
             <hr>
         </section>
 
@@ -24,21 +28,19 @@
                             <a class="nav-link active show" href="#images" data-toggle="tab"><i class="fa fa-images" aria-hidden="true"></i> Photos</a>
                         </li>
 -->
-                        <li class="nav-item text-center" style="width: 20%">
+                        <li class="nav-item text-center" style="width: 33%">
                             <a class="nav-link active show" class="nav-link" href="#information" data-toggle="tab"><i class="fas fa-info-circle" aria-hidden="true"></i></i> Information</a>
                         </li>
 
-                        <li class="nav-item text-center" style="width: 20%">
+                        <li class="nav-item text-center" style="width: 33%">
                             <a class="nav-link" href="#contact" data-toggle="tab"><i class="fas fa-address-book" aria-hidden="true"></i> Contact</a>
                         </li>
 
-                        <li class="nav-item text-center" style="width: 20%">
-                            <a class="nav-link" href="#location" data-toggle="tab"><i class="fas fa-map-marked-alt" aria-hidden="true"></i> InFO2</a>
+                        <li class="nav-item text-center" style="width: 33%">
+                            <a class="nav-link" href="#location" data-toggle="tab"><i class="fas fa-map-marked-alt" aria-hidden="true"></i> Address</a>
                         </li>
 
-                        <li class="nav-item text-center" style="width: 20%">
-                            <a class="nav-link" href="#comments" data-toggle="tab"><i class="fas fa-comments" aria-hidden="true"></i> Infor2r</a>
-                        </li>
+
 
                     </ul>
                 </div>
@@ -58,34 +60,31 @@
                                         <div class="col-sm-12">
                                             <div id="demo" class="carousel slide" data-ride="carousel">
                                               <!-- Indicators -->
+
                                                 <ul class="carousel-indicators">
-                                                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                                                    <li data-target="#demo" data-slide-to="1"></li>
-                                                    <li data-target="#demo" data-slide-to="2"></li>
+
+                                                    {% for image in images %}
+                                                        <li data-target="#demo" data-slide-to="{{ loop.index0 }}"></li>
+                                                    {% endfor %}
+
                                                 </ul>
+
                                               <!-- The slideshow -->
                                                 <div class="carousel-inner">
-                                                    <div class="carousel-item active">
-                                                        <img class="img-rounded"     src="https://www.rwsentosa.com/-/media/project/non-gaming/rwsentosa/hotels/hard-rock-hotel-singapore/hardrockhotelsg-exterior.jpg" alt="Los Angeles" width="1100" height="500">
-                                                        <div class="carousel-caption d-none d-md-block">
-                                                            <h5>Image Header</h5>
-                                                            <p>Image Description</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img class="img-rounded" src="https://www.ahstatic.com/photos/7205_ho_00_p_2048x1536.jpg" alt="Chicago" width="1100" height="500">
-                                                            <div class="carousel-caption d-none d-md-block">
-                                                                <h5>Image Header</h5>
-                                                                <p>Image Description</p>
+                                                    {% for image in images %}
+                                                        {% if image == images[0] %}
+                                                            <div class="carousel-item active">
+                                                                <img class="img-rounded" src='data:image/png;base64,{{ image }}'  width="1100" height="500">
+
                                                             </div>
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img class="img-rounded" src="https://cdn.tatilbudur.net/otel/960x475/michell-hotel-spa-16_176263.jpg" alt="New York" width="1100" height="500">
-                                                        <div class="carousel-caption d-none d-md-block">
-                                                            <h5>Image Header</h5>
-                                                            <p>Image Description</p>
-                                                        </div>
-                                                    </div>
+                                                        {% else %}
+                                                            <div class="carousel-item">
+                                                                <img class="img-rounded" src='data:image/png;base64,{{ image }}'  width="1100" height="500">
+
+                                                            </div>
+
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </div>
                                             <!-- Left and right controls -->
                                                 <a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -112,10 +111,7 @@
                                 <div class="card-body firm-info">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            firm description<br>
-                                            firm description<br>
-                                            firm description<br>
-                                            ...
+                                           {{ firm.description }}
                                         </div>
                                     </div>
                                 </div>
@@ -127,11 +123,22 @@
                                 <div class="card-header">
                                     <h3 class="card-title">
                                         <i class="fas fa-address-book" aria-hidden="true"></i>
+                                        e-mail
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    {{ firm.email }}
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-address-book" aria-hidden="true"></i>
                                         Phone
                                     </h3>
                                 </div>
                                 <div class="card-body firm-info">
-                                    0212 212 21 21
+                                    {{ firm.phone }}
                                 </div>
                             </div>
                             <div class="card card-default color-palette-box">
@@ -144,7 +151,7 @@
                                 <div class="card-body firm-info">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a target="_blank" href="#">www.hotel.hotel</a>
+                                            <a target="_blank" href="#">{{ firm.website }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +167,7 @@
                                     </h3>
                                 </div>
                                 <div class="card-body firm-info">
-                                    Hotel Address
+                                    {{ firm.address }}
                                 </div>
                             </div>
                             <div class="card card-default color-palette-box">
@@ -171,7 +178,7 @@
                                     </h3>
                                 </div>
                                 <div class="card-body firm-info">
-                                    Hotel City
+                                    {{ city_name }}
                                 </div>
                             </div>
                         </div>

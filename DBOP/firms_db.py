@@ -18,27 +18,26 @@ class firm_database:
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO firms ( name, password, email, city, address, phone, website, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-                    (firm.name, firm.password, firm.email, firm.city, firm.address, firm.phone, firm.website, firm.description))
+                    "INSERT INTO firms ( name, password, email, phone, city, address, website, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                    (firm.name, firm.password, firm.email, firm.phone, firm.city, firm.address, firm.website, firm.description))
                 cursor.close()
 
         def add_firm_with_logo(self, firm_with_logo):
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO firms ( name, password, email, city, address, phone, website, description, logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s))",
-                    (firm_with_logo.name, firm_with_logo.password, firm_with_logo.email, firm_with_logo.city, firm_with_logo.address, firm_with_logo.phone, firm_with_logo.website,
+                    "INSERT INTO firms ( name, password, email, phone, city, address, website, description, logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s))",
+                    (firm_with_logo.name, firm_with_logo.password, firm_with_logo.email, firm_with_logo.phone, firm_with_logo.city, firm_with_logo.address, firm_with_logo.website,
                      firm_with_logo.description, firm_with_logo.logo))
                 cursor.close()
 
 
-        def get_firm_id(self,firm):
+        def get_firm_id(self, firm):
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "SELECT firm_id FROM firms WHERE name = %s AND password = %s AND email = %s AND city = %s AND address = %s AND phone= %s AND website = %s AND description = %s",
-                    (firm.name, firm.password, firm.email, firm.city, firm.address, firm.phone, firm.website,
-                     firm.description))
+                    "SELECT firm_id FROM firms WHERE name = %s AND password = %s AND email = %s AND phone= %s  AND city = %s AND address = %s AND website = %s AND description = %s",
+                    (firm.name, firm.password, firm.email, firm.phone, firm.city, firm.address, firm.website, firm.description))
                 temp_id = cursor.fetchone()
                 cursor.close()
                 return temp_id
@@ -134,7 +133,7 @@ class firm_database:
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                cursor.execute("""UPDATE firms SET name = %s, password = %s, email = %s, city = %s, address = %s, phone = %s, website = %s, description = %s, logo = %s WHERE firm_id = %s """, (firm.name, firm.password, firm.email, firm.city, firm.address, firm.phone, firm.website, firm.descrpition, firm.logo, firm_id))
+                cursor.execute("""UPDATE firms SET name = %s, password = %s, email = %s, phone = %s, city = %s, address = %s, website = %s, description = %s, logo = %s WHERE firm_id = %s """, (firm.name, firm.password, firm.email,firm.phone, firm.city, firm.address, firm.website, firm.descrpition, firm.logo, firm_id))
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:

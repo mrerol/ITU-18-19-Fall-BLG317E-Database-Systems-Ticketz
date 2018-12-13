@@ -8,11 +8,11 @@ DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd36
 INIT_STATEMENTS = [
     #"""DROP TABLE IF EXISTS images""",
     #"""DROP TABLE IF EXISTS hotels""",
-    """DROP TABLE IF EXISTS users""",
-    """DROP TABLE IF EXISTS firms""",
-    """DROP TABLE IF EXISTS drivers""",
-    """DROP TABLE IF EXISTS vehicles""",
-    """DROP TABLE IF EXISTS city""",
+    """DROP TABLE IF EXISTS users cascade """,
+    """DROP TABLE IF EXISTS firms cascade""",
+    """DROP TABLE IF EXISTS drivers cascade""",
+    """DROP TABLE IF EXISTS vehicles cascade""",
+    """DROP TABLE IF EXISTS city cascade""",
 
     """CREATE TABLE IF NOT EXISTS city 
     (
@@ -98,12 +98,13 @@ INIT_STATEMENTS = [
         name VARCHAR (20) NOT NULL,
         password VARCHAR (20) NOT NULL,
         email VARCHAR (20) NOT NULL,
-        city VARCHAR (20),
-        address VARCHAR (100),
         phone VARCHAR (20) NOT NULL,
+        city VARCHAR (2),
+        address VARCHAR (100),
         website VARCHAR (20),
         description VARCHAR (200),
-        logo BYTEA
+        logo BYTEA,
+        FOREIGN KEY (city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE
 
     )""",
 
@@ -201,19 +202,6 @@ INIT_STATEMENTS = [
                         '2020',
                         'guzel',
                         'image'
-
-    )""",
-
-    """INSERT INTO firms VALUES (
-                        1,
-                        'itu',
-                        'parola',
-                        'deneme@deneme.com',
-                        'istanbul',
-                        'deneme sokak deneme cadde deneme',
-                        '0321221222',
-                        'dememe.com',
-                        'aciklama'
 
     )""",
 

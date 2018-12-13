@@ -4,6 +4,7 @@ from psycopg2 import IntegrityError
 import sys
 from base64 import b64encode
 
+from DBOP.tables.firms_table import Firm
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
 from DBOP.seat_db import seat_database
@@ -186,19 +187,67 @@ def driver_edit_page(id):
     return render_template("driver/driver_edit.html")
 
 def firm_page(id):
-    print()
-    if id != session.get("firm_id"):
-        return redirect(url_for("unAuth403"))
+    firm_id = session.get('firm_id')
+    if id != firm_id:
+        return render_template("404_not_found.html")
+    elif id == firm_id:
+        firm = firm_db.get_firm(firm_id)
+        if firm is None:
+            return render_template("404_not_found.html")
+        else:
+            toSend = []
+            #images = image_db.get_images()
+            if firm.logo is not None:
+                firm.logo = b64encode(firm.logo).decode("utf-8")
+            """for ( temp_id, trash, image) in images:
+                if temp_id is id:
+                    toSend.append(b64encode(image.file_data).decode("utf-8"))"""
+
+            city = city_db.get_city(firm.city)
+            #print(city)
+            (code, city_name) = city
+            return render_template("firm/firm.html", firm=firm, city_name = city_name, firm_id=id)
     else:
-        return render_template("firm/firm.html")
+        return render_template("404_not_found.html")
 
 def firm_signup(request):
     error = None
     if request.method == "GET":
         cities = city_db.get_all_city()
         return render_template("firm/signup.html", error=error, cities=cities)
-    else:
+    elif request.method == "POST":
+
+        firm_name = request.form["firm_name"]
+        password = request.form["password"]
+        e_mail = request.form["e_mail"]
+        phone = request.form["phone"]
+        description = request.form["description"]
+        city = request.form["city"]
+        address = request.form["address"]
+        website = request.form["website"]
+
+        if "logo" in request.files:
+            logo = request.files["logo"]
+            firm_db.add_firm_with_logo(
+                Firm(firm_name, password, e_mail, phone, city, address, website, description, logo.read()))
+        else:
+            firm_db.add_firm(Firm(firm_name, password, e_mail, phone, city, address, website, description, None))
+
+        s = request.form["s"]
+
+        (temp_id,) = firm_db.get_firm_id(
+            Firm(firm_name, password, e_mail, phone, city, address, website, description, None))
+        """"
+        uploaded_files = request.form.getlist("file[]")
+        for i in range(int(s) + 1):
+            temp = "image" + str(i)
+            if temp in request.files:
+                file = request.files[temp]
+                image_db.add_image(Image(temp_id, file.read()))
+        """
         return redirect(url_for('firm_login'))
+    else:
+        return redirect(url_for('/403'))
 
 
 def firm_login(request):
@@ -208,21 +257,22 @@ def firm_login(request):
         try:
             temp = firm_db.get_firm_id_login(email, password)
             (firm_id,) = temp
-
-                #print("firmid ", firm_id)
+            #print(firm_id)
             if firm_id is not None:
                 session['firm_id'] = firm_id
                 return redirect(url_for('firm_page', id=firm_id))
             else:
-                error = "invalid credentials"
-                # return render_template("404_not_found.html")# TODO add 403
+                return redirect(url_for('/403'))
         except:
-            print("login generic errorrrrrrr", sys.exc_info())
-            error = "error"
+            print("exception", sys.exc_info())
 
-        return "aloo"
-    else:
+        return redirect(url_for('/403'))
+
+    elif request.method=="GET":
         return render_template("firm/login.html")
+    else:
+        return redirect(url_for('/403'))
+
 
 
 def add_expedition():
