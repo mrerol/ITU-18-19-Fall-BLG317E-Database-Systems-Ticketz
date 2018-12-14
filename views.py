@@ -46,6 +46,7 @@ def home_page():
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     expeditions = expedition_db.get_all_expeditions()
+    cities = city_db.get_all_city();
     for (expedition_id, temp_expedition) in expeditions:
         temp_expedition.expedition_id = expedition_id
         firm = firm_db.get_firm(temp_expedition.firm_id)
@@ -73,7 +74,8 @@ def home_page():
         else:
             temp_expedition.document_link = None
 
-    return render_template("home_page.html", user=user, expeditions = expeditions)
+
+    return render_template("home_page.html", user=user, expeditions = expeditions, cities = cities)
 
 
 

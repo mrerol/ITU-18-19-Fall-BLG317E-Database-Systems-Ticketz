@@ -65,6 +65,7 @@ class expedition_database:
                     _expedition = Expedition(expedition[1], expedition[2], expedition[3], expedition[4], expedition[5],
                                              expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
                                              expedition[13], expedition[11], expedition[10], expedition[14])
+                    _expedition.expedition_id  =expedition[0]
                     expeditions.append((expedition[0], _expedition))
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:

@@ -14,9 +14,10 @@ ul li {
 }
 
 .pricing-divider {
-border-radius: 20px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
 background: #C64545;
-padding: 1em 0 4em;
+padding: 1em 0 1em;
 position: relative;
 }
 .blue .pricing-divider{

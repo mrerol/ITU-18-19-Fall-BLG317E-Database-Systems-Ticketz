@@ -17,7 +17,9 @@ from DBOP.expedition_db import expedition_database
 from DBOP.vehicles_db import vehicle_database
 from DBOP.seat_db import seat_database
 from DBOP.ticket_db import ticket_database
+from dao.terminal_dao import TerminalDao
 
+terminalop = TerminalDao()
 
 
 db_hotel = hotel_database()
@@ -423,6 +425,15 @@ def signup():
 @app.route('/403')
 def unAuth403():
     return "un authorized"
+
+
+
+## for AJAX
+@app.route('/get_city_of_terminal_with_city_id/<string:city_id>', methods=['POST'])
+def get_city_of_terminal_with_city_id(city_id):
+    terminals = terminalop.get_all_terminal_city_wcity_id(city_id)
+    print(terminals)
+    return jsonify(terminals)
 
 
 if __name__ == "__main__":
