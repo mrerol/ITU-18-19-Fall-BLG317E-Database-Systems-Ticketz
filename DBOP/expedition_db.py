@@ -1,5 +1,12 @@
 from DBOP.tables.expedition_table import Expedition
 
+def isInt(value):
+  try:
+    int(value)
+    return True
+  except ValueError:
+    return False
+
 import psycopg2 as dbapi2
 import os
 
@@ -150,3 +157,43 @@ class expedition_database:
                     "UPDATE expeditions SET current_cap = current_cap - 1 WHERE expedition_id = %s",
                     (expedition_id,))
                 cursor.close()
+
+        def search(self, text):
+            expeditions = []
+            print(text)
+            to_search = "%" + text + "%"
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                if isInt(text):
+
+                    cursor.execute("""select * from expeditions where expedition_id in (
+                                    select expedition_id
+                                    from expeditions, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter 
+                                    where (firms.firm_id = expeditions.firm_id and expeditions.to_city = to_city.code and expeditions.from_city = from_city.code and expeditions.to_ter = to_ter.terminal_id and expeditions.from_ter = from_ter.terminal_id ) 
+                                    and 
+                                    ( (price = %s) or (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""", (int(text) ,to_search, to_search, to_search, to_search, to_search, to_search,to_search,to_search, ))
+                else:
+                    cursor.execute("""select * from expeditions where expedition_id in (
+                                    select expedition_id
+                                    from expeditions, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter 
+                                    where (firms.firm_id = expeditions.firm_id and expeditions.to_city = to_city.code and expeditions.from_city = from_city.code and expeditions.to_ter = to_ter.terminal_id and expeditions.from_ter = from_ter.terminal_id ) 
+                                    and 
+                                    (  (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""",
+                                   ( to_search, to_search, to_search, to_search, to_search, to_search, to_search,
+                                    to_search,))
+
+                for expedition in cursor:
+
+                    _expedition = Expedition(expedition[1], expedition[2], expedition[3], expedition[4], expedition[5],
+                                             expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
+                                             expedition[13], expedition[11], expedition[10], expedition[14])
+                    expeditions.append((expedition[0], _expedition))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return expeditions

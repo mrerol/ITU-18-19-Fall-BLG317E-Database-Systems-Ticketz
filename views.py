@@ -105,6 +105,51 @@ def search_hotel_page(text):
             hotel.logo = temp
     return render_template("hotel/hotel_list.html", hotels = (hotels), user = user)
 
+def search_ticket_page(text):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    hotels = hotel_db.search(text)
+    for (id , hotel) in hotels:
+        if hotel.logo is not None:
+            temp = b64encode(hotel.logo).decode("utf-8")
+            hotel.logo = temp
+    return render_template("hotel/hotel_list.html", hotels = (hotels), user = user)
+
+def search_expedition_page(text):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    expeditions = expedition_db.search(text)
+
+    for (expedition_id, temp_expedition) in expeditions:
+        temp_expedition.expedition_id = expedition_id
+        firm = firm_db.get_firm(temp_expedition.firm_id)
+
+        firm.firm_id = temp_expedition.firm_id
+        temp_expedition.firm = firm
+
+        from_city = city_db.get_city(temp_expedition.from_)
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
+        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
+        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+        if temp_expedition.document is not None:
+            temp_expedition.document_link = "/expedition/document/" + str(expedition_id)
+        else:
+            temp_expedition.document_link = None
+
+
+    return render_template("firm/expedition_search.html", user=user, expeditions = expeditions)
+
 def add_hotel_page():
     user_id = session.get('user_id')
     user = userop.get_user(user_id)

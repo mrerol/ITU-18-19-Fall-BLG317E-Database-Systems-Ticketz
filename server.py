@@ -1,5 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify, session, send_file
 from io import BytesIO
+from urllib.parse import unquote
+
+
 import views
 from base64 import b64encode
 from dao.user_dao import UserDao
@@ -14,6 +17,8 @@ from DBOP.expedition_db import expedition_database
 from DBOP.vehicles_db import vehicle_database
 from DBOP.seat_db import seat_database
 from DBOP.ticket_db import ticket_database
+
+
 
 db_hotel = hotel_database()
 db_image = image_database()
@@ -63,6 +68,14 @@ def hotels_page():
 def search_hotel(text):
     return views.search_hotel_page(text)
 
+@app.route('/search_expedition/<string:text>', methods=['GET', 'POST'])
+def search_expedition(text):
+    text = text.replace("date", "/")
+    return views.search_expedition_page(text)
+
+@app.route('/search_ticket/<string:text>', methods=['GET', 'POST'])
+def search_ticket(text):
+    return views.search_ticket_page(text)
 
 
 @app.route('/login', methods=['GET', 'POST'])

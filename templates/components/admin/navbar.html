@@ -2,6 +2,7 @@
     Navbar with brand and links left, full width search form and toggler right
     The links collapse into the mobile menu
 -->
+
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
     <a href="/" class="navbar-brand">Ticketz</a>
     <button onclick="deneme()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar5">
@@ -36,6 +37,14 @@
         {% endif %}
 
             <div class="input-group">
+
+                <select class="form-control text-light bg-dark col-md-3" name="search_for" id="search_for">
+                    <option selected value="expedition"> Expeditions</option>
+                    {% if user %}
+                        <option value="ticket" > Tickets</option>
+                    {% endif %}
+                    <option value="hotel"> Hotels</option>
+                </select>
                 <input name="search" id="search" type="text" class="form-control border border-right-0" placeholder="Search...">
                 <span class="input-group-append">
                 <button class="btn btn-outline-secondary border border-left-0" onclick="ara()" type="button">
@@ -82,14 +91,41 @@
     if (e.keyCode == 13) {
         if($('#search').val() != "")
         text = $('#search').val()
-        window.location = "/search_hotel/" + text
+        search_for = $('#search_for').val()
+        text = text.split('/')
+        if( text.length == 3 ){
+            text = text[0] + 'date' + text[1] + 'date' + text[2]
+            window.location = "/search_" + search_for + "/" +text
+        }
+        else if( text.length == 1){
+            text = text[0]
+            window.location = "/search_" + search_for + "/" +text
+        }
+        else{
+            alert('Please search with valid key')
+            $('#search').val("")
+        }
+
     }
     });
 
     function ara(){
         if($('#search').val() != "")
         text = $('#search').val()
-        window.location = "/search_hotel/" + text
+        search_for = $('#search_for').val()
+        text = text.split('/')
+        if( text.length == 3 ){
+            text = text[0] + 'date' + text[1] + 'date' + text[2]
+            window.location = "/search_" + search_for + "/" +text
+        }
+        else if( text.length == 1){
+            text = text[0]
+            window.location = "/search_" + search_for + "/" +text
+        }
+        else{
+            alert('Please search with valid key')
+            $('#search').val("")
+        }
     }
 
     let i=0;
