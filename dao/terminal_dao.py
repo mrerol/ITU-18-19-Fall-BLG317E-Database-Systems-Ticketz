@@ -53,3 +53,11 @@ class TerminalDao(BaseDao):
             terminal = cursor.fetchall()
             cursor.close()
         return terminal
+
+    def get_all_terminal_city_wcity_id(self, city_id):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT terminal_id, terminal_name FROM terminal where city_id = %s ", (city_id,))
+            terminal = cursor.fetchall()
+            cursor.close()
+        return terminal
