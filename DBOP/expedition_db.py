@@ -1,4 +1,31 @@
 from DBOP.tables.expedition_table import Expedition
+from datetime import datetime
+
+today = datetime.today()
+
+str_today = str(today.month) + '/' + str(today.day) + '/' + str(today.year)
+
+def dayCompare( toCompare):
+    print(toCompare)
+    t0 = toCompare.split('/', 3)
+    t1 = toCompare.split('/', 3)
+    print(t0)
+    if t0[2] > t1[2]:
+        return False
+    elif t0[2] == t1[2]:
+        if t0[1] > t1[1]:
+            return False
+        elif t0[1] == t1[1]:
+            if t0[0] >= t1[0]:
+                return False
+            else:
+                return True
+        else:
+            return True
+    else:
+        return True
+
+
 
 def isInt(value):
   try:
@@ -55,17 +82,39 @@ class expedition_database:
                 cursor.close()
 
 
-        def get_all_expeditions(self):
+        def get_all_valid_expeditions(self):
             expeditions = []
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                cursor.execute("SELECT * FROM expeditions;")
+                cursor.execute("SELECT * FROM expeditions where current_cap < total_cap;")
                 for expedition in cursor:
                     _expedition = Expedition(expedition[1], expedition[2], expedition[3], expedition[4], expedition[5],
                                              expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
                                              expedition[13], expedition[11], expedition[10], expedition[14])
                     _expedition.expedition_id  =expedition[0]
+                    if dayCompare(_expedition.date):
+                        expeditions.append((expedition[0], _expedition))
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return expeditions
+
+        def get_all_expeditions(self):
+            expeditions = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM expeditions ;")
+                for expedition in cursor:
+                    _expedition = Expedition(expedition[1], expedition[2], expedition[3], expedition[4], expedition[5],
+                                             expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
+                                             expedition[13], expedition[11], expedition[10], expedition[14])
+                    _expedition.expedition_id  =expedition[0]
+
                     expeditions.append((expedition[0], _expedition))
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
@@ -95,6 +144,7 @@ class expedition_database:
                 statement += "and date like '%" + date + "%' "
             if max_price is not "":
                 statement += "and price <= " + str(max_price)
+            statement += "and current_cap < total_cap"
             print(statement)
             try:
                 connection = dbapi2.connect(self.url)
@@ -105,7 +155,8 @@ class expedition_database:
                                              expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
                                              expedition[13], expedition[11], expedition[10], expedition[14])
                     _expedition.expedition_id  =expedition[0]
-                    expeditions.append((expedition[0], _expedition))
+                    if dayCompare(_expedition.date):
+                        expeditions.append((expedition[0], _expedition))
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
                 print(error)

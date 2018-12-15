@@ -47,7 +47,7 @@ def home_page():
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     firms = firm_db.get_firms()
-    expeditions = expedition_db.get_all_expeditions()
+    expeditions = expedition_db.get_all_valid_expeditions()
     cities = city_db.get_all_city();
     for (expedition_id, temp_expedition) in expeditions:
         temp_expedition.expedition_id = expedition_id
