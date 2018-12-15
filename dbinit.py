@@ -126,9 +126,7 @@ INIT_STATEMENTS = [
           recovery_time VARCHAR (20) NOT NULL,
           description VARCHAR (200),
           image VARCHAR (50),
-          driver_id INT,
           firm_id INT,
-          FOREIGN KEY (driver_id) REFERENCES drivers (driver_id),
           FOREIGN KEY (firm_id) REFERENCES firms (firm_id)
     
       )""",
@@ -327,17 +325,17 @@ INIT_STATEMENTS = [
     """,
 
     """INSERT INTO vehicles
-        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, driver_id, firm_id)
-        VALUES(100, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 100, 100);
+        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, firm_id)
+        VALUES(100, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 100);
 """,
 
     """INSERT INTO vehicles
-        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, driver_id, firm_id)
-        VALUES(101, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 102, 101);
+        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, firm_id)
+        VALUES(101, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 102);
 """,
 
     """INSERT INTO users VALUES (
-                        1,
+                        100,
                         'admin',
                         'admin@admin.com',
                         'admin',
@@ -351,6 +349,21 @@ INIT_STATEMENTS = [
                         'true'
     
     )""",
+    """INSERT INTO users VALUES (
+                        101,
+                        'user',
+                        'user@user.com',
+                        'user',
+                        'user',
+                        'user',
+                        '0321221222',
+                        '1',
+                        'deneme sokak deneme cadde deneme',
+                        '2017-08-02 12:10:11.123456',
+                        '2017-08-02 12:10:11.123456',
+                        'false'
+    
+    )"""
 
 ]
 
