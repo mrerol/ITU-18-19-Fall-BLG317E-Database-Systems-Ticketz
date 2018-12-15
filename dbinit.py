@@ -14,6 +14,7 @@ INIT_STATEMENTS = [
     """DROP TABLE IF EXISTS vehicles cascade""",
     """DROP TABLE IF EXISTS city cascade""",
     """DROP TABLE IF EXISTS sale cascade""",
+    """DROP TABLE IF EXISTS terminal cascade""",
     """DROP TABLE IF EXISTS user_has_sale cascade""",
 
     """CREATE TABLE IF NOT EXISTS city 
@@ -80,37 +81,6 @@ INIT_STATEMENTS = [
 
     )""",
 
-    """CREATE TABLE IF NOT EXISTS drivers 
-    (
-        driver_id SERIAL NOT NULL PRIMARY KEY,
-        name VARCHAR (20) NOT NULL,
-        email VARCHAR (20) NOT NULL,
-        gender VARCHAR (20),
-        city VARCHAR (2),
-        address VARCHAR (200),
-        phone VARCHAR (20) NOT NULL,
-        vote_number VARCHAR (20),
-        score VARCHAR (20),
-        logo BYTEA,
-        FOREIGN KEY (city) REFERENCES city (code) ON DELETE CASCADE ON UPDATE CASCADE
-    )""",
-
-    """CREATE TABLE IF NOT EXISTS vehicles 
-      (
-          vehicle_id SERIAL NOT NULL PRIMARY KEY,
-          name VARCHAR (50) NOT NULL,
-          category VARCHAR (50) NOT NULL,
-          model VARCHAR (15) NOT NULL,
-          capacity INT NOT NULL,
-          production_year VARCHAR (20) NOT NULL,
-          production_place VARCHAR (20) NOT NULL,
-          recovery_time VARCHAR (20) NOT NULL,
-          description VARCHAR (250),
-          image VARCHAR (50)
-    
-    
-      )""",
-
     """CREATE TABLE IF NOT EXISTS firms 
     (
         firm_id SERIAL NOT NULL PRIMARY KEY,
@@ -123,14 +93,45 @@ INIT_STATEMENTS = [
         website VARCHAR (20),
         description VARCHAR (200),
         logo BYTEA,
-        driver_id INT,
-        vehicle_id INT,
-        FOREIGN KEY (city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE,
-        FOREIGN KEY (driver_id) REFERENCES drivers (driver_id), 
-        FOREIGN KEY (vehicle_id) REFERENCES vehicles (vehicle_id) 
-
+        FOREIGN KEY (city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE
+    
     )""",
 
+    """CREATE TABLE IF NOT EXISTS drivers 
+    (
+        driver_id SERIAL NOT NULL PRIMARY KEY,
+        name VARCHAR (20) NOT NULL,
+        email VARCHAR (20) NOT NULL,
+        gender VARCHAR (20),
+        city VARCHAR (2),
+        address VARCHAR (200),
+        phone VARCHAR (20) NOT NULL,
+        vote_number VARCHAR (20),
+        score VARCHAR (20),
+        logo BYTEA,
+        firm_id INT,
+        FOREIGN KEY (city) REFERENCES city (code) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (firm_id) REFERENCES firms (firm_id) ON DELETE CASCADE ON UPDATE CASCADE
+    )""",
+
+    """CREATE TABLE IF NOT EXISTS vehicles 
+      (
+          vehicle_id SERIAL NOT NULL PRIMARY KEY,
+          name VARCHAR (20) NOT NULL,
+          category VARCHAR (20) NOT NULL,
+          model VARCHAR (20) NOT NULL,
+          capacity INT NOT NULL,
+          production_year VARCHAR (20) NOT NULL,
+          production_place VARCHAR (20) NOT NULL,
+          recovery_time VARCHAR (20) NOT NULL,
+          description VARCHAR (200),
+          image VARCHAR (50),
+          driver_id INT,
+          firm_id INT,
+          FOREIGN KEY (driver_id) REFERENCES drivers (driver_id),
+          FOREIGN KEY (firm_id) REFERENCES firms (firm_id)
+    
+      )""",
 
     """CREATE TABLE IF NOT EXISTS expeditions 
     (
@@ -295,6 +296,11 @@ INIT_STATEMENTS = [
 
     """INSERT INTO terminal VALUES(6,'3devm2','3d1n12', '3emadil', '3phodne2','addres2s','descrip2tion', '01')""",
 
+    """ INSERT INTO firms
+        (firm_id, name, "password", email, phone, city, address, website, description, logo)
+        VALUES(100, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL);
+    """,
+
     """ INSERT INTO drivers 
         (driver_id, name, email, gender, city, address, phone, vote_number, score, logo)
         VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL);
@@ -314,10 +320,6 @@ INIT_STATEMENTS = [
   
     )""",
 
-    """ INSERT INTO firms
-        (firm_id, name, "password", email, phone, city, address, website, description, logo, driver_id, vehicle_id)
-        VALUES(100, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL, 100, 100);
-    """,
 
     """INSERT INTO users VALUES (
                         1,
