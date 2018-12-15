@@ -100,7 +100,7 @@ class driver_database:
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                cursor.execute("SELECT * FROM drivers where (firm_id = %s)",(firm_id))
+                cursor.execute("SELECT * FROM drivers WHERE (firm_id = %s)",(firm_id,))
                 for driver in cursor:
                     _driver = Driver(driver[1], driver[2], driver[3], driver[4], driver[5], driver[6], driver[7])
                     drivers.append((driver[0], _driver))

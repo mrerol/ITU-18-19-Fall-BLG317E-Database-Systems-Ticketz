@@ -258,9 +258,9 @@ def driver_list_page(id):
 def driver_profile_page(id):
     return views.driver_profile_page(id)
 
-@app.route('/firm/<int:firm_id>/driver_edit/<int:driver_id>', methods=['GET', 'POST'])
-def driver_edit_page(firm_id,driver_id):
-    return views.driver_edit_page(firm_id,driver_id)
+@app.route('/firm/driver_edit/<int:driver_id>', methods=['GET', 'POST'])
+def driver_edit_page(driver_id):
+    return views.driver_edit_page(driver_id)
 
 @app.route('/firm/delete_driver/<int:driver_id>', methods=['GET', 'POST'])
 def driver_delete_page(driver_id):
@@ -278,7 +278,7 @@ def vehicle_list_page(id):
     else:
         return unAuth403()
 
-@app.route('/firm/<int:firm_id>/vehicle_edit/<int:vehicle_id>', methods=['GET', 'POST'])
+@app.route('/firm/vehicle_edit/<int:vehicle_id>', methods=['GET', 'POST'])
 def vehicle_edit_page(firm_id,vehicle_id):
     return views.vehicle_edit_page(firm_id,vehicle_id)
 

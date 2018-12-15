@@ -410,10 +410,11 @@ def driver_list_page(id):
 def driver_profile_page(id):
     return render_template("driver/driver_profile.html")
 
-def driver_edit_page(firm_id,driver_id):
+def driver_edit_page(driver_id):
 
-    temp_id = session.get('firm_id')
-    if temp_id != firm_id or temp_id is None:
+    firm_id = session.get('firm_id')
+
+    if firm_id is None:
         return render_template("un_authorized.html")
 
     driver=driver_db.get_driver(driver_id)
@@ -436,6 +437,7 @@ def driver_edit_page(firm_id,driver_id):
 
     city=city_db.get_city(driver.city)
     (thresh,temp_city)=city
+
     return render_template("driver/driver_edit.html",driver=driver, city=temp_city)
 
 def driver_delete_page(driver_id):
@@ -466,10 +468,10 @@ def vehicle_list_page(id):
     #print(vehicles)
     return render_template("vehicle/vehicle_list.html", vehicles=vehicles)
 
-def vehicle_edit_page(firm_id, vehicle_id):
+def vehicle_edit_page(vehicle_id):
 
-    temp_id = session.get('firm_id')
-    if temp_id != firm_id or temp_id is None:
+    firm_id = session.get('firm_id')
+    if firm_id is None:
         return render_template("un_authorized.html")
 
     vehicle=vehicle_db.get_vehicle(vehicle_id)
