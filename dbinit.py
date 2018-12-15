@@ -49,6 +49,7 @@ INIT_STATEMENTS = [
     )
     """,
 
+
     """CREATE TABLE IF NOT EXISTS users 
     (
         user_id SERIAL NOT NULL PRIMARY KEY,
@@ -97,6 +98,16 @@ INIT_STATEMENTS = [
     
     )""",
 
+    """CREATE TABLE IF NOT EXISTS images_for_firms(
+        firm_id INT,
+        image_id SERIAL NOT NULL,
+        file_data BYTEA,
+        PRIMARY KEY (firm_id, image_id),
+        FOREIGN KEY (firm_id) REFERENCES firms (firm_id) ON DELETE CASCADE ON UPDATE CASCADE ,
+        UNIQUE (firm_id, image_id)
+    )
+    """,
+
     """CREATE TABLE IF NOT EXISTS drivers 
     (
         driver_id SERIAL NOT NULL PRIMARY KEY,
@@ -106,8 +117,6 @@ INIT_STATEMENTS = [
         city VARCHAR (2),
         address VARCHAR (200),
         phone VARCHAR (20) NOT NULL,
-        vote_number VARCHAR (20),
-        score VARCHAR (20),
         logo BYTEA,
         firm_id INT,
         FOREIGN KEY (city) REFERENCES city (code) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -123,9 +132,8 @@ INIT_STATEMENTS = [
           capacity INT NOT NULL,
           production_year VARCHAR (20) NOT NULL,
           production_place VARCHAR (20) NOT NULL,
-          recovery_time VARCHAR (20) NOT NULL,
           description VARCHAR (200),
-          image VARCHAR (50),
+          document BYTEA,
           firm_id INT,
           FOREIGN KEY (firm_id) REFERENCES firms (firm_id)
     
@@ -310,28 +318,28 @@ INIT_STATEMENTS = [
     """,
 
     """ INSERT INTO drivers 
-        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo, firm_id)
-        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL,100);
+        (driver_id, name, email, gender, city, address, phone, logo, firm_id)
+        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL,100);
     """,
 
     """ INSERT INTO drivers 
-        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo, firm_id)
-        VALUES(101, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL,100);
+        (driver_id, name, email, gender, city, address, phone, logo, firm_id)
+        VALUES(101, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL,100);
     """,
 
     """ INSERT INTO drivers 
-        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo, firm_id)
-        VALUES(102, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL,101);
+        (driver_id, name, email, gender, city, address, phone, logo, firm_id)
+        VALUES(102, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL,101);
     """,
 
     """INSERT INTO vehicles
-        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, firm_id)
-        VALUES(100, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 100);
+        (vehicle_id, name, category, model, capacity, production_year, production_place, description, firm_id)
+        VALUES(100, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', 'guzel', 100);
 """,
 
     """INSERT INTO vehicles
-        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, firm_id)
-        VALUES(101, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 102);
+        (vehicle_id, name, category, model, capacity, production_year, production_place, description, firm_id)
+        VALUES(101, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', 'guzel', 102);
 """,
 
     """INSERT INTO users VALUES (

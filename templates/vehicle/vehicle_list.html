@@ -2,40 +2,50 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 {% extends "layout.html" %}
-{% block title %}Driver List{% endblock %}
+{% block title %}Vehicle List{% endblock %}
 {% block body %}
     {% include "components/firm/navbar.html" %}
     <div class="container">
         <div style="margin-top: 150px;" class="container">
-        <h3>Driver List</h3>
+        <h3>Vehicle List</h3>
         <hr>
 
         <br>
         <table class="table">
-            {% if drivers==[] %}
+            {% if vehicles==[] %}
                 <div class="alert alert-warning" role="alert">
-                    There is not any Driver
+                    There is not any Vehicle
                 </div>
             {% else%}
                 <thead>
                         <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Driver Name</th>
-                        <th scope="col">score</th>
-                        <th scope="col">Vote Number</th>
+                        <th scope="col">Vehicle Name</th>
+                        <th scope="col">Category</th>
+                            <th scope="col">Capacity</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Production Year</th>
+                        <th scope="col">Production Place</th>
+                        <th scope="col">Recovery Time</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for (id, driver) in drivers %}
+                        {% for (id, vehicle) in vehicles %}
                             <tr>
                                 <th scope="row">{{id}}</th>
-                                <td>{{ driver.name}}</td>
-                                <td>{{ driver.score}}</td>
-                                <td>{{ driver.vote_number}}</td>
-                                <td><a href="/firm/{{  session.get('firm_id')  }}/driver_edit/{{ id}}" class="btn btn-info">Edit</a></td>
-                                <td><a href="/firm/{{  session.get('firm_id') }}/delete_driver/{{ id}}" class="btn btn-danger">Delete</a></td>
+                                <td>{{ vehicle.name}}</td>
+                                <td>{{ vehicle.category}}</td>
+                                <td>{{ vehicle.capacity}}</td>
+                                <td>{{ vehicle.model}}</td>
+                                <td>{{ vehicle.production_year}}</td>
+                                <td>{{ vehicle.production_place}}</td>
+                                <td>{{ vehicle.recovery_time}}</td>
+                                <td>{{ vehicle.description}}</td>
+                                <td><a href="/firm/{{  session.get('firm_id')  }}/vehicle_edit/{{ id}}" class="btn btn-info">Edit</a></td>
+                                <td><a href="/firm/{{  session.get('firm_id') }}/delete_vehicle/{{ id}}" class="btn btn-danger">Delete</a></td>
 
 
                             </tr>

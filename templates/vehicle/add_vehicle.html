@@ -11,9 +11,9 @@
     }
 </style>
 {% extends "layout.html" %}
-{% block title %}Ticketz -  Hotel Add{% endblock %}
+{% block title %}Ticketz -  Vehicle Add{% endblock %}
 {% block body %}
-    {% include "components/admin/navbar.html" %}
+    {% include "components/firm/navbar.html" %}
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
@@ -30,18 +30,18 @@
                             </div>
                         </section>
                         <div class="card-body">
-                            <label>Hotel Name</label>
+                            <label>Vehicle Name</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fas fa-hotel"></i>
                                     </span>
                                 </div>
-                                    <input disabled id="js_hotel_name" type="text" class="form-control" >
+                                    <input disabled id="js_vehicle_name" type="text" class="form-control" >
                             </div>
                             <br>
 
-                            <label>Hotel e-Mail</label>
+                            <label> e-Mail</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -283,7 +283,7 @@
 
     <br>
     <br>
-    {% include "components/admin/footer.html" %}
-<script src="../../static/js/admin/add_hotel.js"></script>
+    {% include "components/firm/footer.html" %}
+<script src="../../static/js/firm/add_vehicle.js"></script>
 
 {% endblock %}

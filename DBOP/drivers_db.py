@@ -26,7 +26,7 @@ class driver_database:
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO drivers ( name, email, gender, city, address, phone, vote_number, score, logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    "INSERT INTO drivers ( name, email, gender, city, address, phone, vote_number, score, logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ",
                     (driver.name, driver.email, driver.gender, driver.city, driver.address, driver.phone, driver.vote_number, driver.score, driver.logo))
                 cursor.close()
 

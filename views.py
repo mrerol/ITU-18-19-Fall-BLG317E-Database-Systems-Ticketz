@@ -375,8 +375,9 @@ def add_vehicle_page(request):
 
 def vehicle_list_page(id):
     #session.permanent = True
-    drivers = driver_db.get_drivers();
-    return render_template("vehicle/vehicle_list.html",drivers=drivers)
+    vehicles = vehicle_db.get_vehicles_for_firms(id);
+    #print(vehicles)
+    return render_template("vehicle/vehicle_list.html", vehicles=vehicles)
 
 def firm_page(id):
     firm_id = session.get('firm_id')

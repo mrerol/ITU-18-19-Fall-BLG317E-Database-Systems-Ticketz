@@ -102,6 +102,24 @@ class vehicle_database:
                     connection.close()
             return vehicles
 
+        def get_vehicles_for_firms(self, firm_id):
+            vehicles = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM vehicles WHERE firm_id=%s;",(firm_id,))
+                for vehicle in cursor:
+                    _vehicle = Vehicle(vehicle[1], vehicle[2], vehicle[3], vehicle[4], vehicle[5], vehicle[6], vehicle[7], vehicle[8], vehicle[9])
+                    vehicles.append((vehicle[0], _vehicle))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return vehicles
+
         def update_vehicle(self, vehicle_id, vehicle):
             try:
                 connection = dbapi2.connect(self.url)
