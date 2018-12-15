@@ -13,6 +13,8 @@ INIT_STATEMENTS = [
     """DROP TABLE IF EXISTS drivers cascade""",
     """DROP TABLE IF EXISTS vehicles cascade""",
     """DROP TABLE IF EXISTS city cascade""",
+    """DROP TABLE IF EXISTS sale cascade""",
+    """DROP TABLE IF EXISTS user_has_sale cascade""",
 
     """CREATE TABLE IF NOT EXISTS city 
     (
@@ -183,6 +185,26 @@ INIT_STATEMENTS = [
         FOREIGN KEY (expedition_id, user_id, seat_number) REFERENCES seats (expedition_id, user_id, seat_number) ON DELETE RESTRICT ON UPDATE CASCADE     
     )
     """,
+
+    """CREATE TABLE IF NOT EXISTS sale(
+        sale_id SERIAL NOT NULL PRIMARY KEY,
+        sale_code VARCHAR(6) UNIQUE NOT NULL,
+        sale_start_at DATE NOT NULL,
+        sale_finish_at DATE NOT NULL,
+        sale_description VARCHAR (60) NOT NULL,
+        is_active BOOLEAN NOT NULL,
+        firm_id INT NOT NULL,
+        FOREIGN KEY (firm_id) REFERENCES firms (firm_id) ON DELETE CASCADE ON UPDATE CASCADE
+    )""",
+
+    """CREATE TABLE IF NOT EXISTS user_has_sale(
+        sale_id INT NOT NULL,
+        user_id INT NOT NULL,
+        is_used BOOLEAN NOT NULL,
+        PRIMARY KEY (sale_id, user_id),
+        FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (sale_id) REFERENCES sale (sale_id) ON DELETE CASCADE ON UPDATE CASCADE
+    )""",
 
     """INSERT INTO city VALUES 
                             ('01', 'Adana'),
