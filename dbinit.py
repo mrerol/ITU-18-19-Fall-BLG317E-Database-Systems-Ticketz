@@ -269,7 +269,7 @@ INIT_STATEMENTS = [
         """,
 
     """INSERT INTO drivers VALUES (
-                          0,
+                          100,
                           'rasit',
                           'rasit@rasit.com',
                           'true',
@@ -282,7 +282,7 @@ INIT_STATEMENTS = [
       )""",
 
     """INSERT INTO vehicles VALUES (
-                        0,
+                        100,
                         'Safiye Soyman',
                         'yuruyen ucak',
                         'X2342SD',
@@ -297,7 +297,7 @@ INIT_STATEMENTS = [
 
     """ INSERT INTO public.firms
         (firm_id, name, "password", email, phone, city, address, website, description, logo, driver_id, vehicle_id)
-        VALUES(0, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL, 0, 0);
+        VALUES(100, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL, 100, 100);
     """,
 
 
