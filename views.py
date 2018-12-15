@@ -225,6 +225,7 @@ def hotel_page(id):
 
 
 def driver_list_page(id):
+    #session.permanent = True
     drivers = driver_db.get_drivers();
     return render_template("driver/driver_list.html",drivers=drivers)
 
@@ -323,6 +324,7 @@ def firm_login(request):
         return render_template("404_not_found.html")
 
 def firm_logout():
+    session.permanent=False
     session['firm_id'] = False
     return redirect(url_for('firm_login'))
 
