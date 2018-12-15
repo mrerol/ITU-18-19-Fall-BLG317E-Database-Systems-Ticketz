@@ -641,28 +641,6 @@ def my_tickets():
 
     return render_template("ticket/my_tickets.html", user = user, tickets = tickets)
 
-
-
-def edit_hotel_page(id):
-    user_id = session.get('user_id')
-    user = userop.get_user(user_id)
-    temp_hotel = hotel_db.get_hotel(id)
-    if temp_hotel is None:
-        return render_template("404_not_found.html")
-    else:
-        hotel_city = city_db.get_city(temp_hotel.city)
-        (city_code, hotel_city_name) = hotel_city
-        cities = city_db.get_all_city()
-        tmp = image_db.get_images()
-        if temp_hotel.logo is not None:
-            temp_hotel.logo = b64encode(temp_hotel.logo).decode("utf-8")
-        images = []
-        for (h_id, image_id,  im) in tmp:
-            if id == h_id:
-                image = b64encode(im.file_data).decode("utf-8")
-                images.append((image_id, image) )
-        return render_template("hotel/edit_hotel.html", hotel = temp_hotel, images = images, hotel_id = id, cities = cities, code = city_code, hotel_city = hotel_city_name, user =user)
-
 def signup_page():
     error = None
     try: 
