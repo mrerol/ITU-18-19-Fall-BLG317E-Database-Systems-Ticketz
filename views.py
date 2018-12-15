@@ -7,6 +7,7 @@ from datetime import datetime
 
 from DBOP.tables.firms_table import Firm
 from DBOP.tables.drivers_table import Driver
+from DBOP.tables.vehicles_table import Vehicle
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
 from DBOP.seat_db import seat_database
@@ -466,13 +467,31 @@ def add_vehicle_page(request):
     #session.permanent = True
     firm_id = session.get('firm_id')
 
-    if firm_id == None:
+    if firm_id is None:
         return render_template("un_authorized.html")
 
     if request.method == "GET":
         return render_template("vehicle/add_vehicle.html")
+
     elif request.method == "POST":
-         print("sa")
+
+        vehicle_name = request.form["vehicle_name"]
+        category = request.form["category"]
+        model = request.form["model"]
+        capacity = request.form["capacity"]
+        production_year = request.form["production_year"]
+        production_place = request.form["production_place"]
+        description = request.form["description"]
+
+        if "document" in request.files:
+            document = request.files["document"]
+            vehicle_db.add_vehicle_with_document(Vehicle(vehicle_name,category,model,capacity,production_year,production_place,description,firm_id,document))
+
+        else:
+            vehicle_db.add_vehicle(Vehicle(vehicle_name, category, model, capacity, production_year, production_place, description, firm_id, None))
+
+        return redirect(url_for('vehicle_list_page', id=firm_id))
+
     else:
         return render_template("un_authorized.html")
 
@@ -482,31 +501,58 @@ def vehicle_list_page(id):
     #print(vehicles)
     return render_template("vehicle/vehicle_list.html", vehicles=vehicles)
 
-def vehicle_edit_page(vehicle_id):
+def vehicle_edit_page(request, vehicle_id):
 
     firm_id = session.get('firm_id')
+
     if firm_id is None:
         return render_template("un_authorized.html")
 
-    vehicle=vehicle_db.get_vehicle(vehicle_id)
+    vehicle = vehicle_db.get_vehicle(vehicle_id)
 
-    if vehicle is None:
+    if request.method == "GET":
+
+        if vehicle is None:
+            return render_template("un_authorized.html")
+
+        temp=driver_db.get_firm_ids(vehicle_id)
+
+        flag=0
+        for item in temp:
+            (temp_item,)=item
+            #print(temp_item)
+            #print(driver_id)
+            if temp_item == firm_id:
+                    flag=1
+
+        if flag != 1:
+            return render_template("un_authorized.html")
+
+        return render_template("vehicle/vehicle_edit.html",vehicle=vehicle)
+
+    elif request.method == "POST":
+
+        if vehicle is None:
+            return render_template("un_authorized.html")
+
+        vehicle_name = request.form["vehicle_name"]
+        category = request.form["category"]
+        model = request.form["model"]
+        capacity = request.form["capacity"]
+        production_year = request.form["production_year"]
+        production_place = request.form["production_place"]
+        description = request.form["description"]
+
+        if "document" in request.files:
+            document = request.files["document"]
+            vehicle_db.update_vehicle(vehicle_id, Vehicle(vehicle_name, category, model, capacity, production_year, production_place, description,firm_id,document))
+        else:
+            vehicle_db.update_vehicle(vehicle_id, Vehicle(vehicle_name, category, model, capacity, production_year,
+                                                          production_place, description, firm_id))
+
+        return redirect(url_for('vehicle_list_page', id=firm_id))
+    else:
         return render_template("un_authorized.html")
-
-    temp=driver_db.get_firm_ids(vehicle_id)
-
-    flag=0
-    for item in temp:
-        (temp_item,)=item
-        #print(temp_item)
-        #print(driver_id)
-        if temp_item == firm_id:
-                flag=1
-
-    if flag != 1:
-        return render_template("un_authorized.html")
-
-    return render_template("vehicle/vehicle_edit.html",vehicle=vehicle)
 
 def vehicle_delete_page(vehicle_id):
 

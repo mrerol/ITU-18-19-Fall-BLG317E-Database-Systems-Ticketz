@@ -1,4 +1,3 @@
-
 function add()
 {
     /*
@@ -21,29 +20,52 @@ function add()
     let fill = true;
     let value_length = true;
 
-    if($('#driver_name').val().length < 5 || $('#driver_name').val().length > 20 ){
-        document.getElementById("driver_name").style.borderColor = "red";
+    if($('#vehicle_name').val().length < 5 || $('#vehicle_name').val().length > 20 ){
+        document.getElementById("vehicle_name").style.borderColor = "red";
         value_length = false;
     }
     else
-        document.getElementById("driver_name").style.borderColor = "green";
+        document.getElementById("vehicle_name").style.borderColor = "green";
 
-    if (($('#e_mail').val().length < 5 || $('#e_mail').val().length > 20 )){
-        document.getElementById("e_mail").style.borderColor = "red";
+    if (($('#category').val().length < 5 || $('#category').val().length > 20 )){
+        document.getElementById("category").style.borderColor = "red";
         value_length = false;
     }
     else
-        document.getElementById("e_mail").style.borderColor = "green";
+        document.getElementById("category").style.borderColor = "green";
 
-    if (($('#phone').val().length < 5 || $('#phone').val().length > 20 )){
-        document.getElementById("phone").style.borderColor = "red";
+    if (($('#model').val().length < 5 || $('#model').val().length > 20 )){
+        document.getElementById("model").style.borderColor = "red";
         value_length = false;
     }
     else
-        document.getElementById("phone").style.borderColor = "green";
+        document.getElementById("model").style.borderColor = "green";
+
+        if (($('#capacity').val().length < 5 || $('#capacity').val().length > 20 )){
+        document.getElementById("capacity").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("capacity").style.borderColor = "green";
+
+    if (($('#production_year').val().length < 5 || $('#production_year').val().length > 20 )){
+        document.getElementById("production_year").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("production_year").style.borderColor = "green";
+
+    if (($('#production_place').val().length < 5 || $('#production_place').val().length > 20 )){
+        document.getElementById("production_place").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("production_place").style.borderColor = "green";
+
+
 
     if(fill && value_length){
-        document.getElementById("add_driver").submit()
+        document.getElementById("edit_vehicle").submit()
     }
     else{
             $(".message-box-danger-length").toggle(750, function () {
@@ -55,5 +77,4 @@ function add()
    }
 
 }
-
 

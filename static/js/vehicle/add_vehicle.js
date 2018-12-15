@@ -21,29 +21,52 @@ function add()
     let fill = true;
     let value_length = true;
 
-    if($('#driver_name').val().length < 5 || $('#driver_name').val().length > 20 ){
-        document.getElementById("driver_name").style.borderColor = "red";
+    if($('#vehicle_name').val().length < 5 || $('#vehicle_name').val().length > 20 ){
+        document.getElementById("vehicle_name").style.borderColor = "red";
         value_length = false;
     }
     else
-        document.getElementById("driver_name").style.borderColor = "green";
+        document.getElementById("vehicle_name").style.borderColor = "green";
 
-    if (($('#e_mail').val().length < 5 || $('#e_mail').val().length > 20 )){
-        document.getElementById("e_mail").style.borderColor = "red";
+    if (($('#category').val().length < 5 || $('#category').val().length > 20 )){
+        document.getElementById("category").style.borderColor = "red";
         value_length = false;
     }
     else
-        document.getElementById("e_mail").style.borderColor = "green";
+        document.getElementById("category").style.borderColor = "green";
 
-    if (($('#phone').val().length < 5 || $('#phone').val().length > 20 )){
-        document.getElementById("phone").style.borderColor = "red";
+    if (($('#model').val().length < 5 || $('#model').val().length > 20 )){
+        document.getElementById("model").style.borderColor = "red";
         value_length = false;
     }
     else
-        document.getElementById("phone").style.borderColor = "green";
+        document.getElementById("model").style.borderColor = "green";
+
+        if (($('#capacity').val().length < 5 || $('#capacity').val().length > 20 )){
+        document.getElementById("capacity").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("capacity").style.borderColor = "green";
+
+    if (($('#production_year').val().length < 5 || $('#production_year').val().length > 20 )){
+        document.getElementById("production_year").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("production_year").style.borderColor = "green";
+
+    if (($('#production_place').val().length < 5 || $('#production_place').val().length > 20 )){
+        document.getElementById("production_place").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("production_place").style.borderColor = "green";
+
+
 
     if(fill && value_length){
-        document.getElementById("add_driver").submit()
+        document.getElementById("add_vehicle").submit()
     }
     else{
             $(".message-box-danger-length").toggle(750, function () {
@@ -56,53 +79,60 @@ function add()
 
 }
 
-$('#driver_name').on('change keyup paste delete', function () {
+$('#vehicle_name').on('change keyup paste delete', function () {
 
     let value = this.value;
-    $('#js_driver_name').val(value);
-    document.getElementById("driver_name").style.borderColor = "";
+    $('#js_vehicle_name').val(value);
+    document.getElementById("vehicle_name").style.borderColor = "";
 
 });
 
-$('#e_mail').on('change keyup paste delete', function () {
+$('#category').on('change keyup paste delete', function () {
 
     let value = this.value;
-    $('#js_e_mail').val(value);
-    document.getElementById("e_mail").style.borderColor = "";
+    $('#js_category').val(value);
+    document.getElementById("category").style.borderColor = "";
 
 });
 
-$('#gender').on('change keyup paste delete', function () {
+$('#model').on('change keyup paste delete', function () {
 
     let value = this.value;
-    $('#js_gender').val(value);
-    document.getElementById("gender").style.borderColor = "";
+    $('#js_model').val(value);
+    document.getElementById("model").style.borderColor = "";
 
 });
 
-$('#city').on('change keyup paste delete', function () {
+$('#capacity').on('change keyup paste delete', function () {
 
-    let value = $('#city')[0].selectedOptions[0].innerHTML
-    $('#js_city').val(value);
-    document.getElementById("city").style.borderColor = "";
+    let value = this.value;
+    $('#js_capacity').val(value);
+    document.getElementById("capacity").style.borderColor = "";
 
 });
 
 
-
-$('#address').on('change keyup paste delete', function () {
+$('#production_year').on('change keyup paste delete', function () {
 
     let value = this.value;
-    $('#js_address').val(value);
-    document.getElementById("address").style.borderColor = "";
+    $('#js_production_year').val(value);
+    document.getElementById("production_year").style.borderColor = "";
 
 });
 
-$('#phone').on('change keyup paste delete', function () {
+$('#production_place').on('change keyup paste delete', function () {
 
     let value = this.value;
-    $('#js_phone').val(value);
-    document.getElementById("phone").style.borderColor = "";
+    $('#js_production_place').val(value);
+    document.getElementById("production_place").style.borderColor = "";
+
+});
+
+$('#description').on('change keyup paste delete', function () {
+
+    let value = this.value;
+    $('#js_description').val(value);
+    document.getElementById("description").style.borderColor = "";
 
 });
 
