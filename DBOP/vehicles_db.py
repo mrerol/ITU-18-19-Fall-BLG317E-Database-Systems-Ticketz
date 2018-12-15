@@ -155,15 +155,15 @@ class vehicle_database:
                 if connection is not None:
                     connection.close()
 
-        def search(self, text):
+        def search(self, text,firm_id):
             vehicles = []
             to_search = "%" + text + "%"
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                cursor.execute("SELECT * FROM vehicles WHERE (name like %s) or (category like %s) or (model like %s) or (capacity like %s) or (production_year like %s) or (production_place like %s)  or (description like %s) ;", (to_search, to_search, to_search, to_search, to_search, to_search, to_search))
+                cursor.execute("SELECT * FROM vehicles  WHERE ((LOWER(name) like LOWER(%s)) or (LOWER(category) like LOWER(%s)) or (LOWER(model) like LOWER(%s)) or (LOWER(CAST(capacity AS VARCHAR )) like LOWER(%s)) or (LOWER(production_year) like LOWER(%s)) or (LOWER(production_place) like LOWER(%s)) or (LOWER(description) like LOWER(%s)) ) and firm_id = %s ;", (to_search, to_search, to_search, to_search, to_search, to_search,to_search,firm_id))
                 for vehicle in cursor:
-                    _vehicle = Vehicle(vehicle[1], vehicle[2], vehicle[3], vehicle[4], vehicle[5], vehicle[6], vehicle[7], vehicle[8], vehicle[9])
+                    _vehicle = Vehicle(vehicle[1], vehicle[2], vehicle[3], vehicle[4], vehicle[5], vehicle[6], vehicle[7], vehicle[8],vehicle[9])
                     vehicles.append((vehicle[0], _vehicle))
                 connection.commit()
                 cursor.close()

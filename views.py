@@ -403,8 +403,16 @@ def driver_list_page(id):
     drivers = driver_db.get_drivers_for_firms(id);
     return render_template("driver/driver_list.html",drivers=drivers)
 
-def driver_profile_page(id):
-    return render_template("driver/driver_profile.html")
+def search_driver_page(search_for):
+
+    firm_id = session.get('firm_id')
+
+    if firm_id is None:
+        return render_template("un_authorized.html")
+
+    drivers = driver_db.search(search_for,firm_id)
+
+    return render_template("driver/driver_list.html", drivers = drivers)
 
 def driver_edit_page(request,driver_id):
 
@@ -500,6 +508,17 @@ def vehicle_list_page(id):
     vehicles = vehicle_db.get_vehicles_for_firms(id);
     #print(vehicles)
     return render_template("vehicle/vehicle_list.html", vehicles=vehicles)
+
+def search_vehicle_page(search_for):
+
+    firm_id = session.get('firm_id')
+
+    if firm_id is None:
+        return render_template("un_authorized.html")
+
+    vehicles = vehicle_db.search(search_for,firm_id)
+
+    return render_template("vehicle/vehicle_list.html", vehicles = vehicles)
 
 def vehicle_edit_page(request, vehicle_id):
 
@@ -653,8 +672,7 @@ def firm_login(request):
         return render_template("404_not_found.html")
 
 def firm_logout():
-    session.permanent=False
-    session['firm_id'] = False
+    session.pop('firm_id')
     return redirect(url_for('firm_login'))
 
 def add_expedition():

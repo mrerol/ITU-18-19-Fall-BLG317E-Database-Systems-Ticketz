@@ -126,13 +126,13 @@ class driver_database:
                     connection.close()
 
 
-        def search(self, text):
+        def search(self, text, firm_id):
             drivers = []
             to_search = "%" + text + "%"
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                cursor.execute("SELECT * FROM drivers WHERE (name like %s)  or (email like %s) or (gender like %s) or (city like %s) or (address like %s)  or (phone like %s)  ;", (to_search, to_search, to_search, to_search, to_search, to_search))
+                cursor.execute("SELECT * FROM drivers WHERE ((name like %s)  or (email like %s) or (gender like %s) or (city like %s) or (address like %s)  or (phone like %s) ) and firm_id=%s ;", (to_search, to_search, to_search, to_search, to_search, to_search,firm_id))
                 for driver in cursor:
                     _driver = Driver(driver[1], driver[2], driver[3], driver[4], driver[5], driver[6], driver[7])
                     drivers.append((driver[0], _driver))

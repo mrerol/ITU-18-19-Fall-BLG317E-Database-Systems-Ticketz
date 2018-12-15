@@ -322,27 +322,27 @@ INIT_STATEMENTS = [
 
     """ INSERT INTO drivers 
         (driver_id, name, email, gender, city, address, phone, firm_id)
-        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123',100);
+        VALUES(100, 'driver1', 'driver1', 'kadin','10', 'address', '123123',100);
     """,
 
     """ INSERT INTO drivers 
         (driver_id, name, email, gender, city, address, phone, firm_id)
-        VALUES(101, 'driver', 'driver', 'kadin','10', 'address', '123123',100);
+        VALUES(101, 'driver2', 'driver2', 'erkek','10', 'address', '123123',100);
     """,
 
     """ INSERT INTO drivers 
         (driver_id, name, email, gender, city, address, phone, firm_id)
-        VALUES(102, 'driver', 'driver', 'kadin','10', 'address', '123123',101);
+        VALUES(102, 'driver3', 'driver3', 'kadin','10', 'address', '123123',101);
     """,
 
     """INSERT INTO vehicles
         (vehicle_id, name, category, model, capacity, production_year, production_place, description, firm_id)
-        VALUES(100, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', 'guzel', 100);
+        VALUES(100, 'rasit', 'ucak', '23423', 100, '1930', 'istabul', 'guzel', 100);
 """,
 
     """INSERT INTO vehicles
         (vehicle_id, name, category, model, capacity, production_year, production_place, description, firm_id)
-        VALUES(101, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', 'guzel', 102);
+        VALUES(101, 'Safiye Soyman', 'yuruyen', 'X2342SD', 50, '1920', 'istabul', 'guzel', 102);
 """,
 
     """INSERT INTO users VALUES (

@@ -55,9 +55,12 @@
 
 
             <div class="input-group">
+                <select class="form-control text-light bg-dark col-md-3" name="search_for" id="search_for">
+                    <option  value="driver"> Driver</option>
+                    <option  value="vehicle"> Vehicle</option>
                 <input name="search" id="search" type="text" class="form-control border border-right-0" placeholder="Search...">
                 <span class="input-group-append">
-                <button class="btn btn-outline-secondary border border-left-0"  type="button">
+                <button class="btn btn-outline-secondary border border-left-0" onclick="ara()" type="button">
                     <i class="fa fa-search"></i>
                 </button>
               </span>
@@ -78,13 +81,23 @@
 <br>
 <script>
 
-
-    let i=0;
-    function deneme() {
-        i++;
-        if(i%2==1)
-            $('#navbar5').show()
-        else
-            $('#navbar5').hide()
+    function ara(){
+        if($('#search').val() != "")
+        text = $('#search').val()
+        search_for = $('#search_for').val()
+        text = text.split('/')
+        if( text.length == 3 ){
+            text = text[0] + 'date' + text[1] + 'date' + text[2]
+            window.location = "search_" + search_for + "/" +text
+        }
+        else if( text.length == 1){
+            text = text[0]
+            window.location = "/search_" + search_for + "/" +text
+        }
+        else{
+            alert('Please search with valid key')
+            $('#search').val("")
+        }
     }
+
 </script>
