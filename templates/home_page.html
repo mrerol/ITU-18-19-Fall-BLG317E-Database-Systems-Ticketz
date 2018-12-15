@@ -15,7 +15,7 @@
                 <span class="input-group-text" id="">Filter</span>
               </div>
               <select class="form-control" name="from" id="from" onchange="$('#from_ter').show()">
-                <option selected disabled value="*">Select From City</option>
+                <option selected disabled value="">Select From City</option>
                 {% for city in cities %}
                     <option  value="{{ city[0] }}"> {{ city[1]  }} </option>
                 {% endfor %}
@@ -24,7 +24,7 @@
 
               </select>
                 <select class="form-control" name="to" id="to" onchange="$('#to_ter').show()">
-                <option selected disabled value="*">Select To City</option>
+                <option selected disabled value="">Select To City</option>
                 {% for city in cities %}
                     <option  value="{{ city[0] }}"> {{ city[1]  }} </option>
                 {% endfor %}
@@ -34,9 +34,9 @@
               </select>
 
               <select class="form-control" name="firm_id" id="firm_id">
-                    <option value="*" disabled selected>Select a Firm</option>
-                    {% for (id, expedition) in expeditions %}
-                        <option value="{{ expedition.firm_id }}"> {{ expedition.firm.name }}</option>
+                    <option value="" disabled selected>Select a Firm</option>
+                    {% for (id, firm) in firms %}
+                        <option value="{{ id }}"> {{ firm.name }}</option>
                     {% endfor %}
               </select>
 
@@ -89,6 +89,10 @@
 
                 </div>
         </div>
+          {% else %}
+            <div class="alert alert-warning" role="alert">
+                    There is not any Expedition
+            </div>
       {% endfor %}
       </div>
 

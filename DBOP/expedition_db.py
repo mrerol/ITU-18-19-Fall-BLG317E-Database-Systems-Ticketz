@@ -77,27 +77,29 @@ class expedition_database:
 
         def get_filtered_expeditions(self, to_city, to_ter, from_city, from_ter, firm_id, date, max_price):
             expeditions = []
+            print(max_price)
+            print(to_city, to_ter, from_city, from_ter, firm_id, date, max_price)
+            statement = " SELECT * FROM expeditions WHERE TRUE  "
 
-            statement = " SELECT * FROM expeditions WHERE to_city like %" + to_city + "% and to_ter"
-            if to_ter == "NULL":
-                statement += "is not NULL and"
-            else:
-                statement += "= " + to_ter + " and"
-            statement += "from_city like %" + from_city + "% and from_ter"
-            if from_ter == "NULL":
-                statement += "is not NULL and firm_id"
-            else:
-                statement += "= " + from_ter + " and firm_id"
-            if firm_id == "NULL":
-                statement += "is not NULL and"
-            else:
-                statement += "= " + firm_id + " and"
-
-
+            if to_city is not None:
+                statement += " and to_city = '" + to_city + "' "
+            if to_ter is not None:
+                statement += "and to_ter = " + str(to_ter) + " "
+            if from_city is not None:
+                statement += " and from_city = '" + from_city + "' "
+            if from_ter is not None:
+                statement += " and from_ter = " + str(from_ter) + " "
+            if firm_id is not None:
+                statement += "and firm_id = " + str(firm_id) + " "
+            if date is not "":
+                statement += "and date like '%" + date + "%' "
+            if max_price is not "":
+                statement += "and price <= " + str(max_price)
+            print(statement)
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                cursor.execute("SELECT * FROM expeditions;")
+                cursor.execute(statement)
                 for expedition in cursor:
                     _expedition = Expedition(expedition[1], expedition[2], expedition[3], expedition[4], expedition[5],
                                              expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
@@ -110,6 +112,7 @@ class expedition_database:
             finally:
                 if connection is not None:
                     connection.close()
+
             return expeditions
 
         def get_firms_expedition(self, firm_id):

@@ -45,11 +45,13 @@ terminalop = TerminalDao()
 def home_page():
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
+    firms = firm_db.get_firms()
     expeditions = expedition_db.get_all_expeditions()
     cities = city_db.get_all_city();
     for (expedition_id, temp_expedition) in expeditions:
         temp_expedition.expedition_id = expedition_id
         firm = firm_db.get_firm(temp_expedition.firm_id)
+        print(firm)
 
         firm.firm_id = temp_expedition.firm_id
         temp_expedition.firm = firm
@@ -75,7 +77,7 @@ def home_page():
             temp_expedition.document_link = None
 
 
-    return render_template("home_page.html", user=user, expeditions = expeditions, cities = cities)
+    return render_template("home_page.html", user=user, expeditions = expeditions, firms = firms,  cities = cities)
 
 
 def filtered_home_page():
@@ -100,20 +102,13 @@ def filtered_home_page():
         date = request.form["date"]
     if request.form.getlist("max_price"):
         max_price = request.form["max_price"]
-    if to_ter is None:
-        to_ter = 0
-    if from_ter is None:
-        to_ter = 0
-    if firm_id is None:
-        to_ter = 0
-    if to_ter is None:
-        max_price = 99999999
+
 
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     firms = firm_db.get_firms()
 
-
+    print(to_ter)
     expeditions = expedition_db.get_filtered_expeditions(to_city, to_ter, from_city, from_ter, firm_id, date, max_price)
     cities = city_db.get_all_city();
     for (expedition_id, temp_expedition) in expeditions:
@@ -254,6 +249,11 @@ def edit_hotels_page():
     hotels = hotel_db.get_hotels()
     return render_template("hotel/edit_hotels.html", hotels = reversed(hotels), cities = cities, user = user)
 
+def edit_expeditions_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    expeditions = expedition_db.get_all_expeditions()
+    return render_template("admin/expedition_list.html", user = user, expeditions=expeditions)
 
 def login_page(request):
     error = None

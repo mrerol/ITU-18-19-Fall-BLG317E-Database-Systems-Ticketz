@@ -164,6 +164,15 @@ def edit_hotels_page():
     else:
         return unAuth403()
 
+@app.route('/admin/edit_expeditions', methods=['GET', 'POST'])
+def edit_expeditions_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.edit_expeditions_page()
+    else:
+        return unAuth403()
+
 @app.route('/admin/delete_hotel/<int:id>')
 def delete_hotel(id):
     user_id = session.get('user_id')
@@ -277,7 +286,10 @@ def add_expedition():
 @app.route('/firm/edit_expedition/<int:expedition_id>', methods=['GET', 'POST'])
 def edit_expedition(expedition_id):
     firm_id = session.get("firm_id")
-    if firm_id != None:
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    temp_firm_id = expedition_db.get_expedition(expedition_id).firm_id
+    if (firm_id != None and firm_id is temp_firm_id ) or user[-1]:
         if request.method == "GET":
             return views.edit_expedition(expedition_id)
         else:
@@ -337,9 +349,14 @@ def delete_expedition_document(expedition_id):
 @app.route('/firm/delete_expedition/<int:expedition_id>')
 def delete_expedition(expedition_id):
     firm_id = session.get('firm_id')
-    if firm_id == expedition_db.get_expedition(expedition_id).firm_id:
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if firm_id == expedition_db.get_expedition(expedition_id).firm_id or user[-1]:
         expedition_db.delete_expedition(expedition_id)
-        return redirect(url_for('expedition_list'))
+        if user[-1]:
+            return redirect(url_for('edit_expeditions_page'))
+        else:
+            return redirect(url_for('expedition_list'))
     else:
         return unAuth403()
 
