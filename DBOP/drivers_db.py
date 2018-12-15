@@ -66,6 +66,24 @@ class driver_database:
                     connection.close()
             return _driver
 
+        def get_drivers_for_firms(self, firm_id):
+            drivers = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM drivers where (firm_id = %s)",(firm_id))
+                for driver in cursor:
+                    _driver = Driver(driver[1], driver[2], driver[3], driver[4], driver[5], driver[6], driver[7],
+                                     driver[8])
+                    drivers.append((driver[0], _driver))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return drivers
         def get_drivers(self):
             drivers = []
             try:

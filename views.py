@@ -225,7 +225,8 @@ def hotel_page(id):
 
 
 def driver_list_page(id):
-    return render_template("driver/driver_list.html")
+    drivers = driver_db.get_drivers();
+    return render_template("driver/driver_list.html",drivers=drivers)
 
 def driver_profile_page(id):
     return render_template("driver/driver_profile.html")
@@ -236,7 +237,7 @@ def driver_edit_page(id):
 def firm_page(id):
     firm_id = session.get('firm_id')
     if id != firm_id:
-        return render_template("404_not_found.html")
+        return render_template("un_authorized.html")
     elif id == firm_id:
         firm = firm_db.get_firm(firm_id)
         if firm is None:
@@ -255,7 +256,7 @@ def firm_page(id):
             (code, city_name) = city
             return render_template("firm/firm.html", firm=firm, city_name = city_name, firm_id=id)
     else:
-        return render_template("404_not_found.html")
+        return render_template("un_authorized.html")
 
 def firm_signup(request):
     error = None
@@ -294,7 +295,7 @@ def firm_signup(request):
         """
         return redirect(url_for('firm_login'))
     else:
-        return redirect(url_for('/403'))
+        return render_template("un_authorized.html")
 
 
 def firm_login(request):
@@ -306,21 +307,24 @@ def firm_login(request):
             (firm_id,) = temp
             #print(firm_id)
             if firm_id is not None:
+                session.permanent = True
                 session['firm_id'] = firm_id
                 return redirect(url_for('firm_page', id=firm_id))
             else:
-                return redirect(url_for('/403'))
+                return render_template("un_authorized.html")
         except:
             print("exception", sys.exc_info())
 
-        return redirect(url_for('/403'))
+        return render_template("un_authorized.html")
 
-    elif request.method=="GET":
+    elif request.method == "GET":
         return render_template("firm/login.html")
     else:
-        return redirect(url_for('/403'))
+        return render_template("404_not_found.html")
 
-
+def firm_logout():
+    session['firm_id'] = False
+    return redirect(url_for('firm_login'))
 
 def add_expedition():
     drivers = driver_db.get_drivers()

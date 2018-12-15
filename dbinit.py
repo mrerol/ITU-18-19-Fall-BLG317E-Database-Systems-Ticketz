@@ -92,6 +92,22 @@ INIT_STATEMENTS = [
 
     )""",
 
+    """CREATE TABLE IF NOT EXISTS vehicles 
+     (
+         vehicle_id SERIAL NOT NULL PRIMARY KEY,
+         name VARCHAR (50) NOT NULL,
+         category VARCHAR (50) NOT NULL,
+         model VARCHAR (15) NOT NULL,
+         capacity INT NOT NULL,
+         production_year VARCHAR (20) NOT NULL,
+         production_place VARCHAR (20) NOT NULL,
+         recovery_time VARCHAR (20) NOT NULL,
+         description VARCHAR (250),
+         image VARCHAR (50)
+    
+    
+     )""",
+
     """CREATE TABLE IF NOT EXISTS firms 
     (
         firm_id SERIAL NOT NULL PRIMARY KEY,
@@ -104,24 +120,14 @@ INIT_STATEMENTS = [
         website VARCHAR (20),
         description VARCHAR (200),
         logo BYTEA,
-        FOREIGN KEY (city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE
+        driver_id INT,
+        vehicle_id INT,
+        FOREIGN KEY (city) REFERENCES city (code) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (driver_id) REFERENCES drivers (driver_id), 
+        FOREIGN KEY (vehicle_id) REFERENCES vehicles (vehicle_id) 
 
     )""",
 
-    """CREATE TABLE IF NOT EXISTS vehicles 
-    (
-        vehicle_id SERIAL NOT NULL PRIMARY KEY,
-        name VARCHAR (50) NOT NULL,
-        category VARCHAR (50) NOT NULL,
-        model VARCHAR (15) NOT NULL,
-        capacity INT NOT NULL,
-        production_year VARCHAR (20) NOT NULL,
-        production_place VARCHAR (20) NOT NULL,
-        recovery_time VARCHAR (20) NOT NULL,
-        description VARCHAR (250),
-        image VARCHAR (50)
-
-    )""",
 
     """CREATE TABLE IF NOT EXISTS expeditions 
     (
@@ -176,50 +182,6 @@ INIT_STATEMENTS = [
         FOREIGN KEY (expedition_id, user_id, seat_number) REFERENCES seats (expedition_id, user_id, seat_number) ON DELETE RESTRICT ON UPDATE CASCADE     
     )
     """,
-
-
-    """INSERT INTO drivers VALUES (
-                        1,
-                        'rasit',
-                        'rasit@rasit.com',
-                        'true',
-                        'istanbul',
-                        'deneme sokak deneme cadde deneme',
-                        '0321221222',
-                        '100',
-                        '6'
-
-    )""",
-
-    """INSERT INTO vehicles VALUES (
-                        1,
-                        'Safiye Soyman',
-                        'yuruyen ucak',
-                        'X2342SD',
-                        '500',
-                        '1920',
-                        'istabul',
-                        '2020',
-                        'guzel',
-                        'image'
-
-    )""",
-
-    """INSERT INTO users VALUES (
-                        1,
-                        'admin',
-                        'admin@admin.com',
-                        'admin',
-                        'admin',
-                        'admin',
-                        '0321221222',
-                        '1',
-                        'deneme sokak deneme cadde deneme',
-                        '2017-08-02 12:10:11.123456',
-                        '2017-08-02 12:10:11.123456',
-                        'true'
-    
-    )""",
 
     """INSERT INTO city VALUES 
                             ('01', 'Adana'),
@@ -303,8 +265,58 @@ INIT_STATEMENTS = [
                             ('79', 'Kilis'),
                             ('80', 'Osmaniye'),
                             ('81', 'Düzce')
+    
+        """,
 
-        """
+    """INSERT INTO drivers VALUES (
+                          0,
+                          'rasit',
+                          'rasit@rasit.com',
+                          'true',
+                          'istanbul',
+                          'deneme sokak deneme cadde deneme',
+                          '0321221222',
+                          '100',
+                          '6'
+    
+      )""",
+
+    """INSERT INTO vehicles VALUES (
+                        0,
+                        'Safiye Soyman',
+                        'yuruyen ucak',
+                        'X2342SD',
+                        '500',
+                        '1920',
+                        'istabul',
+                        '2020',
+                        'guzel',
+                        'image'
+  
+    )""",
+
+    """ INSERT INTO public.firms
+        (firm_id, name, "password", email, phone, city, address, website, description, logo, driver_id, vehicle_id)
+        VALUES(0, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL, 0, 0);
+    """,
+
+
+    """INSERT INTO users VALUES (
+                        1,
+                        'admin',
+                        'admin@admin.com',
+                        'admin',
+                        'admin',
+                        'admin',
+                        '0321221222',
+                        '1',
+                        'deneme sokak deneme cadde deneme',
+                        '2017-08-02 12:10:11.123456',
+                        '2017-08-02 12:10:11.123456',
+                        'true'
+    
+    )""",
+
 
 ]
 

@@ -215,13 +215,22 @@ def firm_page(id):
 def firm_login():
     return views.firm_login(request)
 
+@app.route('/firm/logout', methods=['GET', 'POST'])
+def firm_logout():
+    return views.firm_logout()
+
 @app.route('/firm/signup', methods=['GET', 'POST'])
 def firm_signup():
     return views.firm_signup(request)
 
 @app.route('/firm/driver_list/<int:id>', methods=['GET', 'POST'])
 def driver_list_page(id):
-    return views.driver_list_page(id)
+    firm_id = session.get('firm_id')
+    if firm_id == id:
+        return views.driver_list_page(id)
+    else:
+        return unAuth403()
+
 
 @app.route('/firm/driver_profile/<int:id>', methods=['GET', 'POST'])
 def driver_profile_page(id):
