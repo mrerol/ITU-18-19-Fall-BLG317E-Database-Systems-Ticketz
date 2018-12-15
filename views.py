@@ -404,7 +404,7 @@ def add_driver_page(request):
 
 def driver_list_page(id):
     #session.permanent = True
-    drivers = driver_db.get_drivers();
+    drivers = driver_db.get_drivers_for_firms(id);
     return render_template("driver/driver_list.html",drivers=drivers)
 
 def driver_profile_page(id):
@@ -446,6 +446,7 @@ def driver_delete_page(driver_id):
     if temp_id is None:
         return render_template("un_authorized.html")
 
+    driver_db.delete_driver(driver_id)
     return redirect(url_for('driver_list_page',id=temp_id))
 
 def add_vehicle_page(request):
@@ -501,6 +502,7 @@ def vehicle_delete_page(vehicle_id):
     if temp_id is None:
         return render_template("un_authorized.html")
 
+    vehicle_db.delete_vehicle(vehicle_id)
     return redirect(url_for('vehicle_list_page',id=temp_id))
 
 def firm_page(id):
