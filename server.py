@@ -279,8 +279,8 @@ def vehicle_list_page(id):
         return unAuth403()
 
 @app.route('/firm/vehicle_edit/<int:vehicle_id>', methods=['GET', 'POST'])
-def vehicle_edit_page(firm_id,vehicle_id):
-    return views.vehicle_edit_page(firm_id,vehicle_id)
+def vehicle_edit_page(vehicle_id):
+    return views.vehicle_edit_page(vehicle_id)
 
 @app.route('/firm/delete_vehicle/<int:vehicle_id>', methods=['GET', 'POST'])
 def vehicle_delete_page(vehicle_id):
