@@ -81,32 +81,33 @@ INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS drivers 
     (
         driver_id SERIAL NOT NULL PRIMARY KEY,
-        name VARCHAR (50) NOT NULL,
-        email VARCHAR (50) NOT NULL,
-        gender VARCHAR (20) NOT NULL,
-        city VARCHAR (20) NOT NULL,
-        address VARCHAR (250) NOT NULL,
-        phone VARCHAR (15) NOT NULL,
+        name VARCHAR (20) NOT NULL,
+        email VARCHAR (20) NOT NULL,
+        gender VARCHAR (20),
+        city VARCHAR (2),
+        address VARCHAR (200),
+        phone VARCHAR (20) NOT NULL,
         vote_number VARCHAR (20),
-        score VARCHAR (20)
-
+        score VARCHAR (20),
+        logo BYTEA,
+        FOREIGN KEY (city) REFERENCES city (code) ON DELETE CASCADE ON UPDATE CASCADE
     )""",
 
     """CREATE TABLE IF NOT EXISTS vehicles 
-     (
-         vehicle_id SERIAL NOT NULL PRIMARY KEY,
-         name VARCHAR (50) NOT NULL,
-         category VARCHAR (50) NOT NULL,
-         model VARCHAR (15) NOT NULL,
-         capacity INT NOT NULL,
-         production_year VARCHAR (20) NOT NULL,
-         production_place VARCHAR (20) NOT NULL,
-         recovery_time VARCHAR (20) NOT NULL,
-         description VARCHAR (250),
-         image VARCHAR (50)
+      (
+          vehicle_id SERIAL NOT NULL PRIMARY KEY,
+          name VARCHAR (50) NOT NULL,
+          category VARCHAR (50) NOT NULL,
+          model VARCHAR (15) NOT NULL,
+          capacity INT NOT NULL,
+          production_year VARCHAR (20) NOT NULL,
+          production_place VARCHAR (20) NOT NULL,
+          recovery_time VARCHAR (20) NOT NULL,
+          description VARCHAR (250),
+          image VARCHAR (50)
     
     
-     )""",
+      )""",
 
     """CREATE TABLE IF NOT EXISTS firms 
     (
@@ -268,18 +269,14 @@ INIT_STATEMENTS = [
     
         """,
 
-    """INSERT INTO drivers VALUES (
-                          100,
-                          'rasit',
-                          'rasit@rasit.com',
-                          'true',
-                          'istanbul',
-                          'deneme sokak deneme cadde deneme',
-                          '0321221222',
-                          '100',
-                          '6'
-    
-      )""",
+    """INSERT INTO terminal VALUES(5,'3de3m2','3d112','3email','3phone2','addres2s','descrip2tion','01')""",
+
+    """INSERT INTO terminal VALUES(6,'3devm2','3d1n12', '3emadil', '3phodne2','addres2s','descrip2tion', '01')""",
+
+    """ INSERT INTO drivers 
+        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo)
+        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL);
+    """,
 
     """INSERT INTO vehicles VALUES (
                         100,
@@ -295,11 +292,10 @@ INIT_STATEMENTS = [
   
     )""",
 
-    """ INSERT INTO public.firms
+    """ INSERT INTO firms
         (firm_id, name, "password", email, phone, city, address, website, description, logo, driver_id, vehicle_id)
         VALUES(100, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL, 100, 100);
     """,
-
 
     """INSERT INTO users VALUES (
                         1,
@@ -316,7 +312,6 @@ INIT_STATEMENTS = [
                         'true'
     
     )""",
-
 
 ]
 

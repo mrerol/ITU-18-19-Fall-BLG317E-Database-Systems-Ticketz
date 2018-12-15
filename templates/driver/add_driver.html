@@ -11,7 +11,7 @@
     }
 </style>
 {% extends "layout.html" %}
-{% block title %}Ticketz -  Driver Edit{% endblock %}
+{% block title %}Ticketz -  Driver Add{% endblock %}
 {% block body %}
     {% include "components/firm/navbar.html" %}
     <div class="container">
@@ -37,7 +37,7 @@
                                         <i class="fas fa-hotel"></i>
                                     </span>
                                 </div>
-                                    <input disabled value="{{ driver.name }}" id="js_driver_name" type="text" class="form-control" >
+                                    <input disabled id="js_driver_name" type="text" class="form-control" >
                             </div>
                             <br>
 
@@ -48,7 +48,7 @@
                                         <i class="fas fa-at"></i>
                                     </span>
                                 </div>
-                                <input disabled value="{{ driver.email }}" id="js_e_mail" type="text" class="form-control" >
+                                <input disabled id="js_e_mail" type="text" class="form-control" >
                             </div>
                             <br>
                             <label>Phone</label>
@@ -58,7 +58,7 @@
                                         <i class="fas fa-phone-square"></i>
                                     </span>
                                 </div>
-                                <input disabled value="{{ driver.phone }}" id="js_phone" type="text" class="form-control" >
+                                <input disabled id="js_phone" type="text" class="form-control" >
                             </div>
                             <br>
                             <label>Gender</label>
@@ -68,7 +68,7 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                     </div>
-                                    <textarea disabled value="{{ driver.gender }}" id="js_gender" class="form-control"></textarea>
+                                    <textarea disabled id="js_gender" class="form-control"></textarea>
                                 </div>
                             <br>
 
@@ -79,7 +79,7 @@
                                         <i class="fas fa-map"></i>
                                     </span>
                                 </div>
-                                <input disabled value="{{ city }}" id="js_city" type="text" class="form-control" >
+                                <input disabled id="js_city" type="text" class="form-control" >
                             </div>
                             <br>
 
@@ -90,7 +90,7 @@
                                             <i class="fas fa-map-marked-alt"></i>
                                         </span>
                                     </div>
-                                    <textarea value="{{ driver.address }}" disabled id="js_address" class="form-control"></textarea>
+                                    <textarea disabled id="js_address" class="form-control"></textarea>
                                 </div>
                             <br>
 
@@ -110,7 +110,7 @@
                             <div class="container-fluid">
                                 <div class="row mb-2">
                                     <div class="col-sm-6">
-                                        <h1>Edit Driver</h1>
+                                        <h1>Add Driver</h1>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
 
                             </form>
                             <div class="card-footer">
-                                <button type="submit" onclick="add()" class="btn btn-info float-right">Update</button>
+                                <button type="submit" onclick="add()" class="btn btn-info float-right">Submit</button>
                                 <button type="submit" class="btn btn-default" onclick="document.getElementById('add_driver').reset();">Clear</button>
                             </div>
 
@@ -236,6 +236,6 @@
     <br>
     <br>
     {% include "components/firm/footer.html" %}
-<script src="../../static/js/driver/edit_driver.js"></script>
+<script src="../../static/js/driver/add_driver.js"></script>
 
 {% endblock %}

@@ -5,6 +5,7 @@ import sys
 from base64 import b64encode
 
 from DBOP.tables.firms_table import Firm
+from DBOP.tables.drivers_table import Driver
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
 from DBOP.seat_db import seat_database
@@ -293,6 +294,36 @@ def hotel_page(id):
         return render_template("hotel/hotels.html", hotel = temp_hotel, images = toSend, city_name = city_name, user = user)
 
 
+def add_driver_page(request):
+    #session.permanent = True
+    firm_id = session.get('firm_id')
+
+    if firm_id is None:
+        return render_template("un_authorized.html")
+
+    if request.method == "GET":
+        cities = city_db.get_all_city()
+        return render_template("driver/add_driver.html", cities=cities )
+    elif request.method == "POST":
+        driver_name = request.form["driver_name"]
+        e_mail = request.form["e_mail"]
+        phone = request.form["phone"]
+        gender = request.form["gender"]
+        city = request.form["city"]
+        address = request.form["address"]
+
+        if "logo" in request.files:
+            logo = request.files["logo"]
+            driver_db.add_driver_with_logo(
+                Driver(driver_name, e_mail, gender, city, address, phone, '0', '0', logo.read()))
+        else:
+            driver_db.add_driver(Driver(driver_name, e_mail, gender, city, address, phone, '0', '0', None))
+
+        return redirect(url_for('driver_list_page', id=firm_id))
+
+    else:
+        return render_template("un_authorized.html")
+
 def driver_list_page(id):
     #session.permanent = True
     drivers = driver_db.get_drivers();
@@ -301,8 +332,51 @@ def driver_list_page(id):
 def driver_profile_page(id):
     return render_template("driver/driver_profile.html")
 
-def driver_edit_page(id):
-    return render_template("driver/driver_edit.html")
+def driver_edit_page(firm_id,driver_id):
+
+    temp_id = session.get('firm_id')
+    if temp_id != firm_id or temp_id is None:
+        return render_template("un_authorized.html")
+
+    driver=driver_db.get_driver(driver_id)
+
+    if driver is None:
+        return render_template("un_authorized.html")
+
+    temp=driver_db.get_firm_ids(driver_id)
+
+    for item in temp:
+        (temp_item,)=item
+        #print(temp_item)
+        #print(driver_id)
+        if temp_item != driver_id:
+            return render_template("un_authorized.html")
+
+    city=city_db.get_city(driver.city)
+    (thresh,temp_city)=city
+    return render_template("driver/driver_edit.html",driver=driver, city=temp_city)
+
+def driver_delete_page(firm_id,driver_id):
+    return ("sds")
+
+def add_vehicle_page(request):
+    #session.permanent = True
+    firm_id = session.get('firm_id')
+
+    if firm_id == None:
+        return render_template("un_authorized.html")
+
+    if request.method == "GET":
+        return render_template("vehicle/add_vehicle.html")
+    elif request.method == "POST":
+         print("sa")
+    else:
+        return render_template("un_authorized.html")
+
+def vehicle_list_page(id):
+    #session.permanent = True
+    drivers = driver_db.get_drivers();
+    return render_template("vehicle/vehicle_list.html",drivers=drivers)
 
 def firm_page(id):
     firm_id = session.get('firm_id')

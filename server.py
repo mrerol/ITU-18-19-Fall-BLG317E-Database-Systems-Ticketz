@@ -235,6 +235,11 @@ def firm_logout():
 def firm_signup():
     return views.firm_signup(request)
 
+@app.route('/firm/add_driver', methods=['GET', 'POST'])
+def add_driver():
+    return views.add_driver_page(request)
+
+
 @app.route('/firm/driver_list/<int:id>', methods=['GET', 'POST'])
 def driver_list_page(id):
     firm_id = session.get('firm_id')
@@ -248,10 +253,29 @@ def driver_list_page(id):
 def driver_profile_page(id):
     return views.driver_profile_page(id)
 
-@app.route('/firm/driver_edit/<int:id>', methods=['GET', 'POST'])
-def driver_edit_page(id):
-    return views.driver_edit_page(id)
+@app.route('/firm/<int:firm_id>/driver_edit/<int:driver_id>', methods=['GET', 'POST'])
+def driver_edit_page(firm_id,driver_id):
+    return views.driver_edit_page(firm_id,driver_id)
 
+@app.route('/firm/<int:firm_id>/driver_edit/<int:driver_id>', methods=['GET', 'POST'])
+def driver_delete_page(firm_id,driver_id):
+    return views.driver_delete_page(firm_id,driver_id)
+
+@app.route('/firm/add_vehicle', methods=['GET', 'POST'])
+def add_vehicle():
+    return views.add_vehicle_page(request)
+
+@app.route('/firm/vehicle_list/<int:id>', methods=['GET', 'POST'])
+def vehicle_list_page(id):
+    firm_id = session.get('firm_id')
+    if firm_id == id:
+        return views.vehicle_list_page(id)
+    else:
+        return unAuth403()
+
+@app.route('/firm/<int:firm_id>/vehcile_edit/<int:vehicle_id>', methods=['GET', 'POST'])
+def vehicle_edit_page(firm_id,vehicle_id):
+    return views.driver_edit_page(firm_id,vehicle_id)
 @app.route('/firm/add_expedition', methods=['GET', 'POST'])
 def add_expedition():
     firm_id = session.get("firm_id")
