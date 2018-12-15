@@ -65,8 +65,8 @@ $('#selected_plane').on('change keyup paste delete', function () {
 
 $('#price').on('change delete', function () {
 
-    if($('#price').val()<1)
-        $('#price').val(1)
+    if($('#price').val()<10)
+        $('#price').val(10)
 });
 
 $('#from').on('change keyup paste delete', function () {

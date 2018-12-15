@@ -139,7 +139,7 @@ INIT_STATEMENTS = [
         dep_time VARCHAR (5) NOT NULL ,
         arr_time VARCHAR (5) NOT NULL ,
         date VARCHAR (10) NOT NULL ,
-        price INT NOT NULL CHECK (price > 0),
+        price INT NOT NULL CHECK (price >= 10),
         plane_id INT NOT NULL ,
         current_cap INT NOT NULL DEFAULT 0,
         total_cap INT NOT NULL,
