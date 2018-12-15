@@ -40,6 +40,15 @@ class vehicle_database:
                 cursor.close()
                 return temp_id
 
+        def get_firm_ids(self, vehicle_id):
+            with dbapi2.connect(self.url) as connection:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "SELECT firm_id FROM vehicles WHERE vehicle_id = %s ", (vehicle_id,))
+                vehicles = cursor.fetchall()
+                cursor.close()
+                return vehicles
+
         def delete_vehicle(self, vehicle_id):
             try:
                 connection = dbapi2.connect(self.url)

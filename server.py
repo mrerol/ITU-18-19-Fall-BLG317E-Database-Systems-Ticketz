@@ -273,9 +273,10 @@ def vehicle_list_page(id):
     else:
         return unAuth403()
 
-@app.route('/firm/<int:firm_id>/vehcile_edit/<int:vehicle_id>', methods=['GET', 'POST'])
+@app.route('/firm/<int:firm_id>/vehicle_edit/<int:vehicle_id>', methods=['GET', 'POST'])
 def vehicle_edit_page(firm_id,vehicle_id):
-    return views.driver_edit_page(firm_id,vehicle_id)
+    return views.vehicle_edit_page(firm_id,vehicle_id)
+
 @app.route('/firm/add_expedition', methods=['GET', 'POST'])
 def add_expedition():
     firm_id = session.get("firm_id")

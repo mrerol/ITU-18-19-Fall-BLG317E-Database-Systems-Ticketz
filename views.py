@@ -364,12 +364,16 @@ def driver_edit_page(firm_id,driver_id):
 
     temp=driver_db.get_firm_ids(driver_id)
 
+    flag=0
     for item in temp:
         (temp_item,)=item
         #print(temp_item)
         #print(driver_id)
-        if temp_item != driver_id:
-            return render_template("un_authorized.html")
+        if temp_item == firm_id:
+                flag=1
+
+    if flag != 1:
+        return render_template("un_authorized.html")
 
     city=city_db.get_city(driver.city)
     (thresh,temp_city)=city
@@ -397,6 +401,32 @@ def vehicle_list_page(id):
     vehicles = vehicle_db.get_vehicles_for_firms(id);
     #print(vehicles)
     return render_template("vehicle/vehicle_list.html", vehicles=vehicles)
+
+def vehicle_edit_page(firm_id, vehicle_id):
+
+    temp_id = session.get('firm_id')
+    if temp_id != firm_id or temp_id is None:
+        return render_template("un_authorized.html")
+
+    vehicle=vehicle_db.get_vehicle(vehicle_id)
+
+    if vehicle is None:
+        return render_template("un_authorized.html")
+
+    temp=driver_db.get_firm_ids(vehicle_id)
+
+    flag=0
+    for item in temp:
+        (temp_item,)=item
+        #print(temp_item)
+        #print(driver_id)
+        if temp_item == firm_id:
+                flag=1
+
+    if flag != 1:
+        return render_template("un_authorized.html")
+
+    return render_template("vehicle/vehicle_edit.html",vehicle=vehicle)
 
 def firm_page(id):
     firm_id = session.get('firm_id')

@@ -11,7 +11,7 @@
     }
 </style>
 {% extends "layout.html" %}
-{% block title %}Ticketz -  Vehicle Add{% endblock %}
+{% block title %}Ticketz -  Vehicle Edit{% endblock %}
 {% block body %}
     {% include "components/firm/navbar.html" %}
     <div class="container">
@@ -37,7 +37,7 @@
                                         <i class="fas fa-hotel"></i>
                                     </span>
                                 </div>
-                                    <input disabled id="js_vehicle_name" type="text" class="form-control" >
+                                    <input disabled value="{{ vehicle.name }}" id="js_vehicle_name" type="text" class="form-control" >
                             </div>
                             <br>
 
@@ -48,63 +48,59 @@
                                         <i class="fas fa-at"></i>
                                     </span>
                                 </div>
-                                <input disabled id="js_category" type="text" class="form-control" >
+                                <input disabled value="{{ vehicle.category }}" id="js_category" type="text" class="form-control" >
                             </div>
                             <br>
-
                             <label>Model</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                    </div>
-                                    <textarea disabled id="js_description" class="form-control"></textarea>
-                                </div>
-                            <br>
-
-                            <label>City</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-map"></i>
-                                    </span>
-                                </div>
-                                <input disabled id="js_city" type="text" class="form-control" >
-                            </div>
-                            <br>
-
-                            <label>Hotel Address</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-map-marked-alt"></i>
-                                        </span>
-                                    </div>
-                                    <textarea disabled id="js_address" class="form-control"></textarea>
-                                </div>
-                            <br>
-
-                            <label>Phone</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fas fa-phone-square"></i>
                                     </span>
                                 </div>
-                                <input disabled id="js_phone" type="text" class="form-control" >
+                                <input disabled value="{{ vehicle.model }}" id="js_model" type="text" class="form-control" >
                             </div>
                             <br>
+                            <label>Capacity</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                    </div>
+                                    <input disabled value="{{ vehicle.capacity }}" id="js_capacity" type="text" class="form-control" >
+                                </div>
+                            <br>
 
-                            <label>Website</label>
+                            <label>Production Year</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="fas fa-globe"></i>
+                                        <i class="fas fa-map"></i>
                                     </span>
                                 </div>
-                                <input disabled id="js_website" type="text" class="form-control" >
+                                <input disabled value="{{ vehicle.production_year }}" id="js_production_year" type="text" class="form-control" >
                             </div>
+                            <br>
+                            <label>Production Place</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-map"></i>
+                                    </span>
+                                </div>
+                                <input disabled value="{{ vehicle.production_place }}" id="js_production_palce" type="text" class="form-control" >
+                            </div>
+                            <br>
+                            <label>Description</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </span>
+                                    </div>
+                                    <textarea value="{{ vehicle.description }}" disabled id="js_description" class="form-control"></textarea>
+                                </div>
                             <br>
 
 
@@ -123,24 +119,88 @@
                             <div class="container-fluid">
                                 <div class="row mb-2">
                                     <div class="col-sm-6">
-                                        <h1>Add Hotel</h1>
+                                        <h1>Edit Vehicle</h1>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <div class="card-body">
-                            <form method="post" action="" enctype = "multipart/form-data"  role="form" name="add_hotel" id="add_hotel">
-                                <label for="hotel_name" >Hotel Name*</label>
+                            <form method="post" action="" enctype = "multipart/form-data"  role="form" name="edit_vehicle" id="edit_vehicle">
+                                <label for="vehicle_name" >Vehicle Name*</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="fas fa-hotel"></i>
                                         </span>
                                     </div>
-                                    <input name="hotel_name" id="hotel_name" type="text" class="form-control" placeholder="Enter The Hotel Name" maxlength="25" required>
+                                    <input name="vehicle_name" id="vehicle_name" type="text" class="form-control" placeholder="Enter The Vehicle Name" maxlength="20" required>
                                 </div>
 
-                                <label for="photo">Logo</label>
+                                <br>
+                                <label for="category">Category*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-at"></i>
+                                        </span>
+                                    </div>
+                                    <input name="category" id="category" type="text" class="form-control" placeholder="Category" maxlength="20" required>
+                                </div>
+                                <br>
+                             <label for="model">Model*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-phone-square"></i>
+                                        </span>
+                                    </div>
+                                    <input name="model" id="model" type="text" class="form-control" placeholder="Enter The Model" maxlength="20" required>
+                                </div>
+                                <br>
+
+
+                                <label for="capacity">Capacity*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                    </div>
+                                    <input name="capacity" id="capacity" type="text" class="form-control" placeholder="Capacity" maxlength="20" required>
+                                </div>
+                                <br>
+
+                                <label for="production_year">Production Year*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input name="production_year" id="production_year" type="text" class="form-control" placeholder="Production Year" maxlength="20" required>
+                                </div>
+                                <br>
+                                <label for="production_place">Production Place*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input name="production_place" id="productioproduction_placen_year" type="text" class="form-control" placeholder="Production Place" maxlength="20" required>
+                                </div>
+                                <br>
+
+                                <label for="description">Description</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </span>
+                                    </div>
+                                    <textarea name="description" id="description" class="form-control" placeholder="Description" maxlength="200" required></textarea>
+                                </div>
+                                <label for="photo">File</label>
                                 <div class="input-group" id="logos">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -156,100 +216,6 @@
                                     </div>
                                 </div>
 
-                                <br>
-                                <label for="e_mail">Hotel e-Mail*</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-at"></i>
-                                        </span>
-                                    </div>
-                                    <input name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Hotel e-Mail" maxlength="50" required>
-                                </div>
-
-                                <br>
-                                <label for="description">Hotel Description*</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                    </div>
-                                    <textarea name="description" id="description" class="form-control" placeholder="Enter The Hotel Description" maxlength="250" required></textarea>
-                                </div>
-                                <br>
-
-                                <label for="city">City*</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-map"></i>
-                                        </span>
-                                    </div>
-                                    <select class="form-control" name="city" id="city">
-                                        {% for (id, city_name) in cities %}
-                                            <option value="{{ id }}">{{ city_name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <br>
-
-                                <label for="address">Hotel Address*</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-map-marked-alt"></i>
-                                        </span>
-                                    </div>
-                                    <textarea name="address" id="address" class="form-control" placeholder="Enter The Hotel Address" maxlength="250" required></textarea>
-                                </div>
-                                <br>
-
-                                <label for="phone">Phone*</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-phone-square"></i>
-                                        </span>
-                                    </div>
-                                    <input name="phone" id="phone" type="text" class="form-control" placeholder="Enter The Phone" maxlength="15" required>
-                                </div>
-                                <br>
-
-                                <label for="website">Website</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-phone-square"></i>
-                                        </span>
-                                    </div>
-                                    <input name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="50" required>
-                                </div>
-                                <br>
-                                <label for="s" hidden></label>
-                                <input type="number" id="s" name="s" hidden >
-                                <label for="photo">Photos</label>
-                                <div class="input-group" id="images">
-                                    <div class="input-group" id="i0">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="far fa-images"></i>
-                                            </span>
-                                        </div>
-                                        <label for="images0" hidden></label>
-                                        <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
-                                        <img id="images0" >
-                                        <input onchange="loadImage(event, 0)" type="file" name="image0" accept="image/*" />
-                                        <span onclick="imageAdd()" class="input-group-text">
-                                            <i  class="fas fa-plus"></i>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <br>
-
-                                <br>
-
                                 <div class="input-group">
                                     <div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>
 
@@ -260,8 +226,8 @@
 
                             </form>
                             <div class="card-footer">
-                                <button type="submit" onclick="add()" class="btn btn-info float-right">Submit</button>
-                                <button type="submit" class="btn btn-default" onclick="document.getElementById('add_hotel').reset();">Clear</button>
+                                <button type="submit" onclick="add()" class="btn btn-info float-right">Update</button>
+                                <button type="submit" class="btn btn-default" onclick="document.getElementById('edit_vehicle').reset();">Clear</button>
                             </div>
 
                             <div class="message-box-danger" style="display: none">
@@ -284,6 +250,6 @@
     <br>
     <br>
     {% include "components/firm/footer.html" %}
-<script src="../../static/js/firm/add_vehicle.js"></script>
+<script src="../../static/js/vehicle/edit_vehicle.js"></script>
 
 {% endblock %}

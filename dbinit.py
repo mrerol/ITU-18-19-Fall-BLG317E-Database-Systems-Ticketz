@@ -117,7 +117,6 @@ INIT_STATEMENTS = [
         city VARCHAR (2),
         address VARCHAR (200),
         phone VARCHAR (20) NOT NULL,
-        logo BYTEA,
         firm_id INT,
         FOREIGN KEY (city) REFERENCES city (code) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (firm_id) REFERENCES firms (firm_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -318,18 +317,18 @@ INIT_STATEMENTS = [
     """,
 
     """ INSERT INTO drivers 
-        (driver_id, name, email, gender, city, address, phone, logo, firm_id)
-        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL,100);
+        (driver_id, name, email, gender, city, address, phone, firm_id)
+        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123',100);
     """,
 
     """ INSERT INTO drivers 
-        (driver_id, name, email, gender, city, address, phone, logo, firm_id)
-        VALUES(101, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL,100);
+        (driver_id, name, email, gender, city, address, phone, firm_id)
+        VALUES(101, 'driver', 'driver', 'kadin','10', 'address', '123123',100);
     """,
 
     """ INSERT INTO drivers 
-        (driver_id, name, email, gender, city, address, phone, logo, firm_id)
-        VALUES(102, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL,101);
+        (driver_id, name, email, gender, city, address, phone, firm_id)
+        VALUES(102, 'driver', 'driver', 'kadin','10', 'address', '123123',101);
     """,
 
     """INSERT INTO vehicles

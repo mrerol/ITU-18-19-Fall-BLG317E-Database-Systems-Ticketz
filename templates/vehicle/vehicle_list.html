@@ -26,7 +26,6 @@
                         <th scope="col">Model</th>
                         <th scope="col">Production Year</th>
                         <th scope="col">Production Place</th>
-                        <th scope="col">Recovery Time</th>
                         <th scope="col">Description</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
@@ -42,7 +41,6 @@
                                 <td>{{ vehicle.model}}</td>
                                 <td>{{ vehicle.production_year}}</td>
                                 <td>{{ vehicle.production_place}}</td>
-                                <td>{{ vehicle.recovery_time}}</td>
                                 <td>{{ vehicle.description}}</td>
                                 <td><a href="/firm/{{  session.get('firm_id')  }}/vehicle_edit/{{ id}}" class="btn btn-info">Edit</a></td>
                                 <td><a href="/firm/{{  session.get('firm_id') }}/delete_vehicle/{{ id}}" class="btn btn-danger">Delete</a></td>

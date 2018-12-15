@@ -21,8 +21,10 @@
                         <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Driver Name</th>
-                        <th scope="col">score</th>
-                        <th scope="col">Vote Number</th>
+                        <th scope="col">e-mail</th>
+                        <th scope="col">Gender </th>
+                        <th scope="col">address</th>
+                        <th scope="col">phone </th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         </tr>
@@ -32,8 +34,10 @@
                             <tr>
                                 <th scope="row">{{id}}</th>
                                 <td>{{ driver.name}}</td>
-                                <td>{{ driver.score}}</td>
-                                <td>{{ driver.vote_number}}</td>
+                                <td>{{ driver.email}}</td>
+                                <td>{{ driver.gender}}</td>
+                                <td>{{ driver.address}}</td>
+                                <td>{{ driver.phone}}</td>
                                 <td><a href="/firm/{{  session.get('firm_id')  }}/driver_edit/{{ id}}" class="btn btn-info">Edit</a></td>
                                 <td><a href="/firm/{{  session.get('firm_id') }}/delete_driver/{{ id}}" class="btn btn-danger">Delete</a></td>
 

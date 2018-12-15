@@ -44,7 +44,7 @@ class driver_database:
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "SELECT driver_id FROM firms WHERE driver_id = %s ", (driver_id,))
+                    "SELECT firm_id FROM drivers WHERE driver_id = %s ", (driver_id,))
                 drivers = cursor.fetchall()
                 cursor.close()
                 return drivers
