@@ -68,7 +68,7 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                     </div>
-                                    <textarea disabled id="js_gender" class="form-control"></textarea>
+                                    <input disabled id="js_gender" type="text" class="form-control" >
                                 </div>
                             <br>
 
@@ -157,7 +157,7 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                     </div>
-                                    <textarea name="gender" id="gender" class="form-control" placeholder="Gender" maxlength="20" required></textarea>
+                                    <input name="gender" id="gender" type="text" class="form-control" placeholder="Gender" maxlength="20" required>
                                 </div>
                                 <br>
 
@@ -186,21 +186,6 @@
                                     <textarea name="address" id="address" class="form-control" placeholder="Enter The Driver Address" maxlength="200" required></textarea>
                                 </div>
                                 <br>
-                                <label for="photo">Logo</label>
-                                <div class="input-group" id="logos">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="far fa-images"></i>
-                                            </span>
-                                        </div>
-                                        <label for="logo" hidden></label>
-                                        <!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
-
-                                        <img id="logo" >
-                                        <input onchange="loadFile(event)" type="file" name="logo" accept="image/*" />
-                                    </div>
-                                </div>
 
                                 <div class="input-group">
                                     <div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>

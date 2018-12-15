@@ -260,9 +260,9 @@ def driver_profile_page(id):
 def driver_edit_page(firm_id,driver_id):
     return views.driver_edit_page(firm_id,driver_id)
 
-@app.route('/firm/<int:firm_id>/driver_edit/<int:driver_id>', methods=['GET', 'POST'])
-def driver_delete_page(firm_id,driver_id):
-    return views.driver_delete_page(firm_id,driver_id)
+@app.route('/firm/delete_driver/<int:driver_id>', methods=['GET', 'POST'])
+def driver_delete_page(driver_id):
+    return views.driver_delete_page(driver_id)
 
 @app.route('/firm/add_vehicle', methods=['GET', 'POST'])
 def add_vehicle():
@@ -279,6 +279,10 @@ def vehicle_list_page(id):
 @app.route('/firm/<int:firm_id>/vehicle_edit/<int:vehicle_id>', methods=['GET', 'POST'])
 def vehicle_edit_page(firm_id,vehicle_id):
     return views.vehicle_edit_page(firm_id,vehicle_id)
+
+@app.route('/firm/delete_vehicle/<int:vehicle_id>', methods=['GET', 'POST'])
+def vehicle_delete_page(vehicle_id):
+    return views.vehicle_delete_page(vehicle_id)
 
 @app.route('/firm/add_expedition', methods=['GET', 'POST'])
 def add_expedition():

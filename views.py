@@ -410,8 +410,13 @@ def driver_edit_page(firm_id,driver_id):
     (thresh,temp_city)=city
     return render_template("driver/driver_edit.html",driver=driver, city=temp_city)
 
-def driver_delete_page(firm_id,driver_id):
-    return ("sds")
+def driver_delete_page(driver_id):
+    temp_id = session.get('firm_id')
+
+    if temp_id is None:
+        return render_template("un_authorized.html")
+
+    return redirect(url_for('driver_list_page',id=temp_id))
 
 def add_vehicle_page(request):
     #session.permanent = True
@@ -458,6 +463,15 @@ def vehicle_edit_page(firm_id, vehicle_id):
         return render_template("un_authorized.html")
 
     return render_template("vehicle/vehicle_edit.html",vehicle=vehicle)
+
+def vehicle_delete_page(vehicle_id):
+
+    temp_id = session.get('firm_id')
+
+    if temp_id is None:
+        return render_template("un_authorized.html")
+
+    return redirect(url_for('vehicle_list_page',id=temp_id))
 
 def firm_page(id):
     firm_id = session.get('firm_id')
