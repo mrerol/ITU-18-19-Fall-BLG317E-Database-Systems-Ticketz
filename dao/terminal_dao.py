@@ -11,7 +11,7 @@ class TerminalDao(BaseDao):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
             cursor.execute(
-                "INSERT INTO terminal (terminal_name, terminal_code, email, phone, address, description, city) VALUES (%s, %s, %s, %s, %s, %s, %s) ", 
+                "INSERT INTO terminal (terminal_name, terminal_code, email, phone, address, description, city_id) VALUES (%s, %s, %s, %s, %s, %s, %s) ", 
                 (terminal_name, terminal_code, email, phone, address, description, city))
             cursor.close()
     
@@ -58,6 +58,14 @@ class TerminalDao(BaseDao):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT terminal_id, terminal_name FROM terminal where city_id = %s ", (city_id,))
+            terminal = cursor.fetchall()
+            cursor.close()
+        return terminal
+
+    def get_all_terminal_v2(self):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT terminal_name,terminal_code FROM terminal JOIN city ON (terminal.city_id = city.code)")
             terminal = cursor.fetchall()
             cursor.close()
         return terminal

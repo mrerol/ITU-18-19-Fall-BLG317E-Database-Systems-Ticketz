@@ -488,6 +488,25 @@ def get_city_of_terminal_with_city_id(city_id):
     print(terminals)
     return jsonify(terminals)
 
+@app.route('/admin/add_terminal', methods=['GET', 'POST'])
+def add_terminal_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET": 
+            return views.add_terminal_page()
+        else:
+            terminalop.add_terminal(request.form['terminal_name'],request.form['terminal_code'],request.form['e_mail'],
+                                        request.form['phone'],request.form['address'],request.form['description'],
+                                        request.form['city'])
+            return redirect(url_for('admin_home_page'))
+    else:
+        return unAuth403()
+
+@app.route('/admin/terminals', methods=['GET', 'POST'])
+def terminals_page():
+    return views.terminals_page()
+
 
 if __name__ == "__main__":
     port = app.config.get("PORT", 5000)

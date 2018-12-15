@@ -659,3 +659,14 @@ def signup_page():
         pass # TODO show generic pop up error
     return render_template("signup.html",error = error)
 
+def add_terminal_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    cities = city_db.get_all_city()
+    return render_template("terminal/add_terminal.html", cities = cities, user = user)
+
+def terminals_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    terminals = terminalop.get_all_terminal_v2()
+    return render_template("terminal/terminals.html", terminals = terminals, user = user)
