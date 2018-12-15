@@ -203,6 +203,7 @@ INIT_STATEMENTS = [
         sale_description VARCHAR (60) NOT NULL,
         is_active BOOLEAN NOT NULL,
         firm_id INT NOT NULL,
+        sale_price INT NOT NULL,
         FOREIGN KEY (firm_id) REFERENCES firms (firm_id) ON DELETE CASCADE ON UPDATE CASCADE
     )""",
 
