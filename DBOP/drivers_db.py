@@ -18,17 +18,10 @@ class driver_database:
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO drivers ( name, email, gender, city, address, phone) VALUES (%s, %s, %s, %s, %s, %s)",
-                    (driver.name, driver.email, driver.gender, driver.city, driver.address, driver.phone))
+                    "INSERT INTO drivers ( name, email, gender, city, address, phone, firm_id) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    (driver.name, driver.email, driver.gender, driver.city, driver.address, driver.phone, driver.firm_id))
                 cursor.close()
 
-        def add_driver_with_logo(self, driver):
-            with dbapi2.connect(self.url) as connection:
-                cursor = connection.cursor()
-                cursor.execute(
-                    "INSERT INTO drivers ( name, email, gender, city, address, phone, logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ",
-                    (driver.name, driver.email, driver.gender, driver.city, driver.address, driver.phone, driver.logo))
-                cursor.close()
 
         def get_driver_id(self, driver):
             with dbapi2.connect(self.url) as connection:

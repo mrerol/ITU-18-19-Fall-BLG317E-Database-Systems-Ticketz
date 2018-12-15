@@ -260,7 +260,7 @@ def driver_profile_page(id):
 
 @app.route('/firm/driver_edit/<int:driver_id>', methods=['GET', 'POST'])
 def driver_edit_page(driver_id):
-    return views.driver_edit_page(driver_id)
+    return views.driver_edit_page(request, driver_id)
 
 @app.route('/firm/delete_driver/<int:driver_id>', methods=['GET', 'POST'])
 def driver_delete_page(driver_id):

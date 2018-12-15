@@ -390,12 +390,7 @@ def add_driver_page(request):
         city = request.form["city"]
         address = request.form["address"]
 
-        if "logo" in request.files:
-            logo = request.files["logo"]
-            driver_db.add_driver_with_logo(
-                Driver(driver_name, e_mail, gender, city, address, phone, '0', '0', logo.read()))
-        else:
-            driver_db.add_driver(Driver(driver_name, e_mail, gender, city, address, phone, '0', '0', None))
+        driver_db.add_driver(Driver(driver_name, e_mail, gender, city, address, phone, firm_id))
 
         return redirect(url_for('driver_list_page', id=firm_id))
 
@@ -410,36 +405,41 @@ def driver_list_page(id):
 def driver_profile_page(id):
     return render_template("driver/driver_profile.html")
 
-def driver_edit_page(driver_id):
+def driver_edit_page(request,driver_id):
+
 
     firm_id = session.get('firm_id')
 
     if firm_id is None:
         return render_template("un_authorized.html")
 
-    driver=driver_db.get_driver(driver_id)
+    if request.method ==  "GET":
+        driver=driver_db.get_driver(driver_id)
 
-    if driver is None:
+        if driver is None:
+         return render_template("un_authorized.html")
+
+        temp=driver_db.get_firm_ids(driver_id)
+
+        flag=0
+        for item in temp:
+          (temp_item,)=item
+          #print(temp_item)
+          #print(driver_id)
+          if temp_item == firm_id:
+                  flag=1
+
+        if flag != 1:
+         return render_template("un_authorized.html")
+
+        city=city_db.get_city(driver.city)
+        (thresh,temp_city)=city
+
+        return render_template("driver/driver_edit.html",driver=driver, city=temp_city)
+    elif request.method == "POST":
+        return ("asd")
+    else:
         return render_template("un_authorized.html")
-
-    temp=driver_db.get_firm_ids(driver_id)
-
-    flag=0
-    for item in temp:
-        (temp_item,)=item
-        #print(temp_item)
-        #print(driver_id)
-        if temp_item == firm_id:
-                flag=1
-
-    if flag != 1:
-        return render_template("un_authorized.html")
-
-    city=city_db.get_city(driver.city)
-    (thresh,temp_city)=city
-
-    return render_template("driver/driver_edit.html",driver=driver, city=temp_city)
-
 def driver_delete_page(driver_id):
     temp_id = session.get('firm_id')
 
