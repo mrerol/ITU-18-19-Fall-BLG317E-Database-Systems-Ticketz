@@ -186,9 +186,12 @@ INIT_STATEMENTS = [
         edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         is_cancelable BOOLEAN DEFAULT FALSE,
         extra_baggage BOOLEAN DEFAULT FALSE,
+        price INT NOT NULL,
+        firm_id INT NOT NULL,
         UNIQUE (expedition_id, user_id, seat_number),
         PRIMARY KEY (ticket_id),
-        FOREIGN KEY (expedition_id, user_id, seat_number) REFERENCES seats (expedition_id, user_id, seat_number) ON DELETE RESTRICT ON UPDATE CASCADE     
+        FOREIGN KEY (expedition_id, user_id, seat_number) REFERENCES seats (expedition_id, user_id, seat_number) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (firm_id) REFERENCES firms (firm_id) ON DELETE RESTRICT ON UPDATE CASCADE     
     )
     """,
 

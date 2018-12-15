@@ -18,6 +18,7 @@ from DBOP.vehicles_db import vehicle_database
 from DBOP.seat_db import seat_database
 from DBOP.ticket_db import ticket_database
 from dao.terminal_dao import TerminalDao
+from dao.sale_dao import SaleDao
 
 terminalop = TerminalDao()
 
@@ -36,6 +37,7 @@ ticket_db = db_ticket.ticket
 expedition_db = db_expedition.expedition
 vehicle_db = db_vehicle.vehicle
 userop = UserDao()
+sale_db = SaleDao()
 
 def create_app():
     app = Flask(__name__)
@@ -77,6 +79,7 @@ def search_expedition(text):
 
 @app.route('/search_ticket/<string:text>', methods=['GET', 'POST'])
 def search_ticket(text):
+    text = text.replace("date", "/")
     return views.search_ticket_page(text)
 
 
@@ -399,7 +402,10 @@ def buy_ticket(expedition_id):
                     is_cancellable = request.form["is_cancelable"]
                     extra_baggage = request.form["extra_baggage"]
                     seat_db.add_seat(Seat(expedition_id, user_id, seat_number))
-                    ticket_db.add_ticket(Ticket(expedition_id, user_id, seat_number, extra_baggage, is_cancellable))
+                    temp_expedition = expedition_db.get_expedition(expedition_id)
+                    sale = sale_db.get_sale_price(temp_expedition.firm_id, user_id)
+                    price = temp_expedition.price - sale
+                    ticket_db.add_ticket(Ticket(expedition_id, user_id, seat_number, temp_expedition.firm_id, price, extra_baggage, is_cancellable))
                     expedition_db.bought(expedition_id)
                     return redirect(url_for('my_tickets'))
                 else:
@@ -428,7 +434,7 @@ def edit_ticket(ticket_id):
                         extra_baggage = request.form["extra_baggage"]
                         print(is_cancellable, extra_baggage)
                         seat_db.update_seat_number(Seat(ticket.expedition_id, ticket.user_id, ticket.seat_number), seat_number)
-                        ticket_db.update_ticket(Ticket(ticket.expedition_id, ticket.user_id, ticket.seat_number, ticket.extra_baggage, ticket.is_cancelable), seat_number, is_cancellable, extra_baggage)
+                        ticket_db.update_ticket(Ticket(ticket.expedition_id, ticket.user_id, ticket.seat_number, ticket.firm_id, ticket.price, ticket.extra_baggage, ticket.is_cancelable), seat_number, is_cancellable, extra_baggage)
                         return redirect(url_for('my_tickets'))
                     else:
                         return views.edit_ticket(ticket_id)

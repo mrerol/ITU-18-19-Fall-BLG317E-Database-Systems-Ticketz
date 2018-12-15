@@ -25,8 +25,8 @@ class ticket_database:
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO tickets ( expedition_id, user_id, seat_number, is_cancelable, extra_baggage) VALUES (%s, %s, %s, %s, %s)",
-                    (ticket.expedition_id, ticket.user_id, ticket.seat_number, ticket.is_cancelable, ticket.extra_baggage))
+                    "INSERT INTO tickets ( expedition_id, user_id, seat_number, is_cancelable, extra_baggage, firm_id, price) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    (ticket.expedition_id, ticket.user_id, ticket.seat_number, ticket.is_cancelable, ticket.extra_baggage, ticket.firm_id, ticket.price))
                 cursor.close()
 
         def delete_ticket(self, ticket_id):
@@ -49,7 +49,7 @@ class ticket_database:
                 cursor = connection.cursor()
                 cursor.execute("SELECT * FROM tickets WHERE user_id = %s;", (user_id, ) )
                 for ticket in cursor:
-                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[7], ticket[6], ticket[4], ticket[5])
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[9], ticket[8], ticket[7], ticket[6], ticket[4], ticket[5])
                     tickets.append((ticket[3], _ticket))
                 connection.commit()
                 cursor.close()
@@ -67,7 +67,7 @@ class ticket_database:
                 cursor = connection.cursor()
                 cursor.execute("SELECT * FROM tickets WHERE ticket_id = %s;", (ticket_id, ) )
                 for ticket in cursor:
-                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[7], ticket[6], ticket[4], ticket[5])
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[9], ticket[8], ticket[7], ticket[6], ticket[4], ticket[5])
                     tickets.append(_ticket)
                 connection.commit()
                 cursor.close()
@@ -98,6 +98,7 @@ class ticket_database:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
                 if isInt(text):
+                    print("aloo")
 
                     cursor.execute("""select * from tickets where ticket_id in (
                                     select ticket_id
@@ -116,7 +117,7 @@ class ticket_database:
                                     to_search,))
 
                 for ticket in cursor:
-                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[7], ticket[6], ticket[4], ticket[5])
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[9], ticket[8], ticket[7], ticket[6], ticket[4], ticket[5])
                     tickets.append(_ticket)
                 connection.commit()
                 cursor.close()
@@ -125,4 +126,4 @@ class ticket_database:
             finally:
                 if connection is not None:
                     connection.close()
-            return expeditions
+            return tickets

@@ -197,12 +197,43 @@ def search_hotel_page(text):
 def search_ticket_page(text):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
-    hotels = hotel_db.search(text)
-    for (id , hotel) in hotels:
-        if hotel.logo is not None:
-            temp = b64encode(hotel.logo).decode("utf-8")
-            hotel.logo = temp
-    return render_template("hotel/hotel_list.html", hotels = (hotels), user = user)
+    tickets = ticket_db.search(text)
+    for (id, ticket) in tickets:
+        temp_expedition = expedition_db.get_expedition(ticket.expedition_id)
+        firm = firm_db.get_firm(temp_expedition.firm_id)
+        firm.firm_id = id
+        from_city = city_db.get_city(temp_expedition.from_)
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+        if dayCompare(temp_expedition.date) and ticket.is_cancelable:
+            ticket.is_cancelable = True
+            ticket.editable = True
+        elif dayCompare(temp_expedition.date):
+            ticket.editable = True
+        else:
+            ticket.is_cancelable = False
+            ticket.editable = False
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        if temp_expedition.document is not None:
+            temp_expedition.document_link = "/expedition/document/" + str(id)
+
+        else:
+            temp_expedition.document_link = None
+
+        ticket.expedition = temp_expedition
+        ticket.firm = firm
+        ticket.ticket_id = id
+
+    return render_template("ticket/ticket_search.html", user=user, tickets=tickets)
+
 
 def search_expedition_page(text):
     user_id = session.get('user_id')
