@@ -301,25 +301,40 @@ INIT_STATEMENTS = [
         VALUES(100, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL);
     """,
 
-    """ INSERT INTO drivers 
-        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo)
-        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL);
+    """ INSERT INTO firms
+        (firm_id, name, "password", email, phone, city, address, website, description, logo)
+        VALUES(101, 'deneme1', 'deneme1', 'deneme1', '234523245', '10', NULL, NULL, NULL, NULL);
     """,
 
-    """INSERT INTO vehicles VALUES (
-                        100,
-                        'Safiye Soyman',
-                        'yuruyen ucak',
-                        'X2342SD',
-                        '500',
-                        '1920',
-                        'istabul',
-                        '2020',
-                        'guzel',
-                        'image'
-  
-    )""",
+    """ INSERT INTO firms
+        (firm_id, name, "password", email, phone, city, address, website, description, logo)
+        VALUES(102, 'deneme2', 'deneme2', 'deneme1', '234523245', '10', NULL, NULL, NULL, NULL);
+    """,
 
+    """ INSERT INTO drivers 
+        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo, firm_id)
+        VALUES(100, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL,100);
+    """,
+
+    """ INSERT INTO drivers 
+        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo, firm_id)
+        VALUES(101, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL,100);
+    """,
+
+    """ INSERT INTO drivers 
+        (driver_id, name, email, gender, city, address, phone, vote_number, score, logo, firm_id)
+        VALUES(102, 'driver', 'driver', 'kadin','10', 'address', '123123', NULL, NULL, NULL,101);
+    """,
+
+    """INSERT INTO vehicles
+        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, driver_id, firm_id)
+        VALUES(100, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 100, 100);
+""",
+
+    """INSERT INTO vehicles
+        (vehicle_id, name, category, model, capacity, production_year, production_place, recovery_time, description, image, driver_id, firm_id)
+        VALUES(101, 'Safiye Soyman', 'yuruyen ucak', 'X2342SD', 500, '1920', 'istabul', '2020', 'guzel', 'image', 102, 101);
+""",
 
     """INSERT INTO users VALUES (
                         1,
