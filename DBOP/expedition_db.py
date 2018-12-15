@@ -75,6 +75,43 @@ class expedition_database:
                     connection.close()
             return expeditions
 
+        def get_filtered_expeditions(self, to_city, to_ter, from_city, from_ter, firm_id, date, max_price):
+            expeditions = []
+
+            statement = " SELECT * FROM expeditions WHERE to_city like %" + to_city + "% and to_ter"
+            if to_ter == "NULL":
+                statement += "is not NULL and"
+            else:
+                statement += "= " + to_ter + " and"
+            statement += "from_city like %" + from_city + "% and from_ter"
+            if from_ter == "NULL":
+                statement += "is not NULL and firm_id"
+            else:
+                statement += "= " + from_ter + " and firm_id"
+            if firm_id == "NULL":
+                statement += "is not NULL and"
+            else:
+                statement += "= " + firm_id + " and"
+
+
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM expeditions;")
+                for expedition in cursor:
+                    _expedition = Expedition(expedition[1], expedition[2], expedition[3], expedition[4], expedition[5],
+                                             expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
+                                             expedition[13], expedition[11], expedition[10], expedition[14])
+                    _expedition.expedition_id  =expedition[0]
+                    expeditions.append((expedition[0], _expedition))
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return expeditions
+
         def get_firms_expedition(self, firm_id):
             expeditions = []
             try:

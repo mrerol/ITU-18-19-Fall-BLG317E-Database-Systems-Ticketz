@@ -205,7 +205,10 @@ def hotel_page(id):
 
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
-    return views.home_page()
+    if request.method == 'GET':
+        return views.home_page()
+    else:
+        return views.filtered_home_page()
 
 @app.route('/firm/<int:id>', methods=['GET', 'POST'])
 def firm_page(id):

@@ -1,4 +1,5 @@
 <link href="../static/css/home.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../../static/css/firm/bootstrap-datepicker.css">
 {% extends "layout.html" %}
 {% block title %}Ticketz Home Page{% endblock %}
 {% block body %}
@@ -8,44 +9,56 @@
 
     <div class="container-fluid p-5">
 
-
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Filter</span>
-          </div>
-          <select class="form-control" name="from" id="from" onchange="$('#from_ter').show()">
-            <option selected disabled value="*">Select From City</option>
-            {% for city in cities %}
-                <option  value="{{ city[0] }}"> {{ city[1]  }} </option>
-            {% endfor %}
-          </select>
-          <select class="form-control" style="display: none;" name="from_ter" id="from_ter">
-                <option>asdasdas</option>
-                <option>asdasdas</option>
-          </select>
-            <select class="form-control" name="to" id="to" onchange="$('#to_ter').show()">
-            <option selected disabled value="*">Select To City</option>
-            {% for city in cities %}
-                <option  value="{{ city[0] }}"> {{ city[1]  }} </option>
-            {% endfor %}
-          </select>
-          <select class="form-control" style="display: none;" name="to_ter" id="to_ter">
-
-          </select>
-
-          <select class="form-control" name="firm_id" id="firm_id">
-                {% for (id, expedition) in expeditions %}
-                    <option value="{{ expedition.firm_id }}"> {{ expedition.firm.name }}</option>
+        <form action="/" method="POST" >
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="">Filter</span>
+              </div>
+              <select class="form-control" name="from" id="from" onchange="$('#from_ter').show()">
+                <option selected disabled value="*">Select From City</option>
+                {% for city in cities %}
+                    <option  value="{{ city[0] }}"> {{ city[1]  }} </option>
                 {% endfor %}
-          </select>
-           <input placeholder="Maximum Price" type="number" id="max_price"  name="max_price" min="1" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control currency">
+              </select>
+              <select class="form-control" style="display: none;" name="from_ter" id="from_ter">
 
-        </div>
+              </select>
+                <select class="form-control" name="to" id="to" onchange="$('#to_ter').show()">
+                <option selected disabled value="*">Select To City</option>
+                {% for city in cities %}
+                    <option  value="{{ city[0] }}"> {{ city[1]  }} </option>
+                {% endfor %}
+              </select>
+              <select class="form-control" style="display: none;" name="to_ter" id="to_ter">
+
+              </select>
+
+              <select class="form-control" name="firm_id" id="firm_id">
+                    <option value="*" disabled selected>Select a Firm</option>
+                    {% for (id, expedition) in expeditions %}
+                        <option value="{{ expedition.firm_id }}"> {{ expedition.firm.name }}</option>
+                    {% endfor %}
+              </select>
+
+                <div class="date" data-provide="datepicker">
+
+                    <input placeholder="Pick a Day" type="text" id="date"  autocomplete="off" name="date" class="form-control">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+               <input placeholder="Maximum Price" type="number" id="max_price"  name="max_price" min="1" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control currency">
+                <button type="button" class="btn btn-lg btn-block  btn-info" onclick="submit()">Filter </button>
+            </div>
+        </form>
     <br>
 
       <div class="row m-auto text-center w-75">
+      <input hidden value="{{ expeditions|length }}" id="hidden_expedition">
       {% for (id, expedition) in expeditions %}
         <div class="col-4 col-centered princing-item green">
+            <input hidden value="{{ id }}" id="expedition-{{ loop.index }}" >
+
               <div class="pricing-divider ">
                   <h3 class="text-light">{{ expedition.firm.name }}</h3>
                     <h4 class="my-0 display-2 text-light font-weight-normal mb-3"><span class="h3">$</span> {{ expedition.price }} <span class="h5"></span></h4>
@@ -84,6 +97,6 @@
 
 
     <script src="../static/js/home_page.js"></script>
-
+    <script src="../static/js/firm/bootstrap-datepicker.js"></script>
     {% include "components/admin/footer.html" %}
 {% endblock %}

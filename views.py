@@ -78,6 +78,75 @@ def home_page():
     return render_template("home_page.html", user=user, expeditions = expeditions, cities = cities)
 
 
+def filtered_home_page():
+    to_city = None
+    to_ter = None
+    from_city = None
+    from_ter = None
+    firm_id = None
+    date = None
+    max_price = None
+    if request.form.getlist('to'):
+        to_city = request.form["to"]
+    if request.form.getlist("to_ter"):
+        to_ter = request.form["to_ter"]
+    if request.form.getlist("from"):
+        from_city = request.form["from"]
+    if request.form.getlist("from_ter"):
+        from_ter = request.form["from_ter"]
+    if request.form.getlist("firm_id"):
+        firm_id = request.form["firm_id"]
+    if request.form.getlist("date"):
+        date = request.form["date"]
+    if request.form.getlist("max_price"):
+        max_price = request.form["max_price"]
+    if to_ter is None:
+        to_ter = 0
+    if from_ter is None:
+        to_ter = 0
+    if firm_id is None:
+        to_ter = 0
+    if to_ter is None:
+        max_price = 99999999
+
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    firms = firm_db.get_firms()
+
+
+    expeditions = expedition_db.get_filtered_expeditions(to_city, to_ter, from_city, from_ter, firm_id, date, max_price)
+    cities = city_db.get_all_city();
+    for (expedition_id, temp_expedition) in expeditions:
+        temp_expedition.expedition_id = expedition_id
+        firm = firm_db.get_firm(temp_expedition.firm_id)
+
+        firm.firm_id = temp_expedition.firm_id
+        temp_expedition.firm = firm
+
+        from_city = city_db.get_city(temp_expedition.from_)
+        (city_code, city_name) = from_city
+        temp_expedition.from_city = city_name
+        to_city = city_db.get_city(temp_expedition.to)
+        (city_code, city_name) = to_city
+        temp_expedition.to_city = city_name
+
+        from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
+        temp_expedition.from_ter_name = from_ter[1]
+        to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
+        temp_expedition.to_ter_name = to_ter[1]
+
+        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
+        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
+        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+        if temp_expedition.document is not None:
+            temp_expedition.document_link = "/expedition/document/" + str(expedition_id)
+        else:
+            temp_expedition.document_link = None
+
+
+    return render_template("home_page.html", user=user, expeditions = expeditions, cities = cities, firms = firms)
+
+
 
 
 def admin_home_page():
