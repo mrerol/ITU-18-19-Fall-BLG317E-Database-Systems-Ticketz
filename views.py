@@ -407,20 +407,22 @@ def driver_profile_page(id):
 
 def driver_edit_page(request,driver_id):
 
-
     firm_id = session.get('firm_id')
 
     if firm_id is None:
         return render_template("un_authorized.html")
 
-    if request.method ==  "GET":
-        driver=driver_db.get_driver(driver_id)
+    driver = driver_db.get_driver(driver_id)
+    city=city_db.get_city(driver.city)
+    (thresh,temp_city)=city
+    cities = city_db.get_all_city()
+
+    if request.method == "GET":
 
         if driver is None:
-         return render_template("un_authorized.html")
+            return render_template("un_authorized.html")
 
         temp=driver_db.get_firm_ids(driver_id)
-
         flag=0
         for item in temp:
           (temp_item,)=item
@@ -430,16 +432,27 @@ def driver_edit_page(request,driver_id):
                   flag=1
 
         if flag != 1:
-         return render_template("un_authorized.html")
+            return render_template("un_authorized.html")
+        return render_template("driver/driver_edit.html",driver=driver, city=temp_city, cities=cities)
 
-        city=city_db.get_city(driver.city)
-        (thresh,temp_city)=city
-
-        return render_template("driver/driver_edit.html",driver=driver, city=temp_city)
     elif request.method == "POST":
-        return ("asd")
+
+        if driver is None:
+            return render_template("un_authorized.html")
+
+        driver_name = request.form["driver_name"]
+        e_mail = request.form["e_mail"]
+        phone = request.form["phone"]
+        gender = request.form["gender"]
+        city = request.form["city"]
+        address = request.form["address"]
+
+        driver_db.update_driver(driver_id, Driver(driver_name, e_mail, gender, city, address, phone, firm_id))
+
+        return redirect(url_for('driver_list_page', id=firm_id))
     else:
         return render_template("un_authorized.html")
+
 def driver_delete_page(driver_id):
     temp_id = session.get('firm_id')
 

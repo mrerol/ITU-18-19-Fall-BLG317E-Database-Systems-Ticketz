@@ -43,7 +43,7 @@ function add()
         document.getElementById("phone").style.borderColor = "green";
 
     if(fill && value_length){
-        document.getElementById("add_driver").submit()
+        document.getElementById("edit_driver").submit()
     }
     else{
             $(".message-box-danger-length").toggle(750, function () {

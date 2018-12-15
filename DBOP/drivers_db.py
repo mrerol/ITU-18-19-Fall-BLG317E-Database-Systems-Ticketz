@@ -56,18 +56,6 @@ class driver_database:
                 if connection is not None:
                     connection.close()
 
-        def delete_driver_logo(self, driver_id):
-            try:
-                connection = dbapi2.connect(self.url)
-                cursor = connection.cursor()
-                cursor.execute("UPDATE drivers SET logo = NULL WHERE driver_id = %s", (driver_id,))
-                connection.commit()
-                cursor.close()
-            except (Exception, dbapi2.DatabaseError) as error:
-                print(error)
-            finally:
-                if connection is not None:
-                    connection.close()
 
         def get_driver(self, driver_id):
             _driver = None
@@ -128,8 +116,7 @@ class driver_database:
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                statement = """UPDATE drivers SET name = '""" + driver.name + """' , email = '""" + driver.email +"""' , gender = '""" + driver.gender + """', city = ' """ + driver.city +"""' ,  address = '""" + driver.address + """', phone = '""" + driver.phone +"""' WHERE driver_id = """ + str(driver_id)
-                cursor.execute(statement)
+                cursor.execute("""UPDATE drivers SET name = %s, email = %s, gender = %s, city = %s, address = %s, phone = %s, firm_id = %s WHERE driver_id= %s """, (driver.name, driver.email, driver.gender, driver.city, driver.address, driver.phone, driver.firm_id, driver_id))
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
@@ -138,18 +125,6 @@ class driver_database:
                 if connection is not None:
                     connection.close()
 
-        def update_driver_with_logo(self, driver_id, driver):
-            try:
-                connection = dbapi2.connect(self.url)
-                cursor = connection.cursor()
-                cursor.execute("""UPDATE drivers SET name = %s, email = %s, gender = %s, city = %s, address = %s, phone = %s, logo = %s WHERE driver_id = %s """, (driver.name, driver.email, driver.gender, driver.city, driver.address, driver.phone, driver.logo, driver_id))
-                connection.commit()
-                cursor.close()
-            except (Exception, dbapi2.DatabaseError) as error:
-                print(error)
-            finally:
-                if connection is not None:
-                    connection.close()
 
         def search(self, text):
             drivers = []
