@@ -58,10 +58,28 @@
       {% for (id, expedition) in expeditions %}
         <div class="col-4 col-centered princing-item green">
             <input hidden value="{{ id }}" id="expedition-{{ loop.index }}" >
-
               <div class="pricing-divider ">
+                  {% if expedition.has_sale %}
+                    <span style="
+                        position: absolute;
+                        top: 15%;
+                        left: 12%;
+                        background: #bc0012;
+                        padding: auto;
+                        color: #fff;
+                        font-size: 12px;
+                        border-radius: 4px;
+                        -webkit-border-radius: 4px;
+                        -moz-border-radius: 4px;
+                        -ms-border-radius: 4px;
+                        -o-border-radius: 4px;
+                        transform: translate(-50%,-50%);
+
+                    "><h4>Sale</h4></span>
+                  {% endif %}
                   <h3 class="text-light">{{ expedition.firm.name }}</h3>
                     <h4 class="my-0 display-2 text-light font-weight-normal mb-3"><span class="h3">$</span> {{ expedition.price }} <span class="h5"></span></h4>
+
 
               </div>
 

@@ -19,6 +19,7 @@ from DBOP.seat_db import seat_database
 from DBOP.ticket_db import ticket_database
 from dao.terminal_dao import TerminalDao
 from dao.sale_dao import SaleDao
+from dao.city_dao import CityDao
 
 terminalop = TerminalDao()
 
@@ -38,6 +39,7 @@ expedition_db = db_expedition.expedition
 vehicle_db = db_vehicle.vehicle
 userop = UserDao()
 sale_db = SaleDao()
+city_db = CityDao()
 
 def create_app():
     app = Flask(__name__)
@@ -205,7 +207,7 @@ def delete_hotel_logo(hotel_id):
     user = userop.get_user(user_id)
     if user and user[-1]:
         hotel_db.delete_hotel_logo(hotel_id)
-        return redirect(url_for('edit_hotel_page', id=hotel_id))
+        return redirect(url_for('edit_hotel_page'), id=hotel_id)
     else:
         return unAuth403()
 
@@ -408,10 +410,18 @@ def buy_ticket(expedition_id):
                     seat_db.add_seat(Seat(expedition_id, user_id, seat_number))
                     temp_expedition = expedition_db.get_expedition(expedition_id)
                     sale = sale_db.get_sale_price(temp_expedition.firm_id, user_id)
-                    price = temp_expedition.price - sale
+                    price = temp_expedition.price
+                    if sale is not None:
+                        price -= sale[0]
                     ticket_db.add_ticket(Ticket(expedition_id, user_id, seat_number, temp_expedition.firm_id, price, extra_baggage, is_cancellable))
                     expedition_db.bought(expedition_id)
-                    return redirect(url_for('my_tickets'))
+
+                    hotel_city = city_db.get_city(temp_expedition.to)
+                    (city_code, city_name) = hotel_city
+                    print(city_name)
+
+
+                    return redirect(url_for('search_hotel', text = city_name))
                 else:
                     return views.buy_ticket(expedition_id)
             else:

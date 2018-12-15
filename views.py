@@ -17,6 +17,8 @@ from DBOP.drivers_db import driver_database
 from DBOP.expedition_db import expedition_database
 from dao.city_dao import CityDao
 from dao.terminal_dao import TerminalDao
+from dao.sale_dao import SaleDao
+
 
 from DBOP.tables.expedition_table import Expedition
 from DBOP.tables.ticket_table import Ticket
@@ -43,6 +45,8 @@ ticket_db = db_ticket.ticket
 userop = UserDao()
 city_db = CityDao()
 terminalop = TerminalDao()
+sale_db = SaleDao()
+
 
 
 
@@ -96,7 +100,13 @@ def home_page():
         to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
         temp_expedition.to_ter_name = to_ter[1]
 
-
+        sale = sale_db.get_sale_price(temp_expedition.firm_id, user_id)
+        price = temp_expedition.price
+        temp_expedition.has_sale = False
+        if sale is not None:
+            price -= sale[0]
+            temp_expedition.has_sale = True
+        temp_expedition.price = price
         if temp_expedition.document is not None:
             temp_expedition.document_link = "/expedition/document/" + str(expedition_id)
         else:
@@ -150,6 +160,14 @@ def filtered_home_page():
         to_city = city_db.get_city(temp_expedition.to)
         (city_code, city_name) = to_city
         temp_expedition.to_city = city_name
+
+        sale = sale_db.get_sale_price(temp_expedition.firm_id, user_id)
+        price = temp_expedition.price
+        temp_expedition.has_sale = False
+        if sale is not None:
+            price -= sale[0]
+            temp_expedition.has_sale = True
+        temp_expedition.price = price
 
         from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
         temp_expedition.from_ter_name = from_ter[1]
@@ -217,6 +235,8 @@ def search_ticket_page(text):
             ticket.is_cancelable = False
             ticket.editable = False
 
+
+
         from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
         temp_expedition.from_ter_name = from_ter[1]
         to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
@@ -253,6 +273,14 @@ def search_expedition_page(text):
         to_city = city_db.get_city(temp_expedition.to)
         (city_code, city_name) = to_city
         temp_expedition.to_city = city_name
+
+        sale = sale_db.get_sale_price(temp_expedition.firm_id, user_id)
+        price = temp_expedition.price
+        temp_expedition.has_sale = False
+        if sale is not None:
+            price -= sale[0]
+            temp_expedition.has_sale = True
+        temp_expedition.price = price
 
         from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
         temp_expedition.from_ter_name = from_ter[1]
