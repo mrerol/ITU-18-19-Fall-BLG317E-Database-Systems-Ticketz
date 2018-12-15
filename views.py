@@ -3,6 +3,7 @@ from dao.user_dao import UserDao
 from psycopg2 import IntegrityError
 import sys
 from base64 import b64encode
+from datetime import datetime
 
 from DBOP.tables.firms_table import Firm
 from DBOP.tables.drivers_table import Driver
@@ -43,6 +44,32 @@ userop = UserDao()
 city_db = CityDao()
 terminalop = TerminalDao()
 
+
+
+today = datetime.today()
+
+str_today = str(today.month) + '/' + str(today.day) + '/' + str(today.year)
+
+def dayCompare( toCompare):
+    t0 = str_today.split('/', 3)
+    t1 = toCompare.split('/', 3)
+    if t0[2] > t1[2]:
+        return False
+    elif t0[2] == t1[2]:
+        if t0[1] > t1[1]:
+            return False
+        elif t0[1] == t1[1]:
+            if t0[0] >= t1[0]:
+                return False
+            else:
+                return True
+        else:
+            return True
+    else:
+        return True
+
+
+
 def home_page():
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
@@ -69,9 +96,7 @@ def home_page():
         to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
         temp_expedition.to_ter_name = to_ter[1]
 
-        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
-        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
-        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
+
         if temp_expedition.document is not None:
             temp_expedition.document_link = "/expedition/document/" + str(expedition_id)
         else:
@@ -131,9 +156,6 @@ def filtered_home_page():
         to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
         temp_expedition.to_ter_name = to_ter[1]
 
-        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
-        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
-        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
         if temp_expedition.document is not None:
             temp_expedition.document_link = "/expedition/document/" + str(expedition_id)
         else:
@@ -206,9 +228,6 @@ def search_expedition_page(text):
         to_ter = terminalop.get_terminal_wid(temp_expedition.to_ter)
         temp_expedition.to_ter_name = to_ter[1]
 
-        temp_expedition.plane_name = vehicle_db.get_vehicle(temp_expedition.selected_plane).name
-        temp_expedition.plane_category = vehicle_db.get_vehicle(temp_expedition.selected_plane).category
-        temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
         if temp_expedition.document is not None:
             temp_expedition.document_link = "/expedition/document/" + str(expedition_id)
         else:
@@ -621,6 +640,14 @@ def my_tickets():
         to_city = city_db.get_city(temp_expedition.to)
         (city_code, city_name) = to_city
         temp_expedition.to_city = city_name
+        if dayCompare(temp_expedition.date) and ticket.is_cancelable:
+            ticket.is_cancelable = True
+            ticket.editable = True
+        elif dayCompare(temp_expedition.date):
+            ticket.editable = True
+        else:
+            ticket.is_cancelable = False
+            ticket.editable = False
 
         from_ter = terminalop.get_terminal_wid(temp_expedition.from_ter)
         temp_expedition.from_ter_name = from_ter[1]
@@ -632,6 +659,7 @@ def my_tickets():
         temp_expedition.driver_name = driver_db.get_driver(temp_expedition.driver_id).name
         if temp_expedition.document is not None:
             temp_expedition.document_link = "/expedition/document/" + str(id)
+
         else:
             temp_expedition.document_link = None
 

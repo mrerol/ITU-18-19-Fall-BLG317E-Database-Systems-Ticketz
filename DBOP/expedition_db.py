@@ -273,7 +273,8 @@ class expedition_database:
                     _expedition = Expedition(expedition[1], expedition[2], expedition[3], expedition[4], expedition[5],
                                              expedition[6], expedition[7], expedition[8], expedition[9], expedition[12],
                                              expedition[13], expedition[11], expedition[10], expedition[14])
-                    expeditions.append((expedition[0], _expedition))
+                    if dayCompare(_expedition.date):
+                        expeditions.append((expedition[0], _expedition))
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:

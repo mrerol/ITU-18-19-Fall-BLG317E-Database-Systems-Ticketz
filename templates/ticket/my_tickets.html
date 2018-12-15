@@ -36,7 +36,10 @@
                         <li><a href="{{ ticket.expedition.document_link }}" target="_blank"><b>Click to Download</b></a> Document</li>
                     {% endif %}
                 </ul>
-              <a href="/ticket/edit/{{ ticket.ticket_id }}"><button type="button" class="btn btn-lg btn-block  btn-info ">Edit Ticket </button></a>
+
+              {% if ticket.editable %}
+                  <a href="/ticket/edit/{{ ticket.ticket_id }}"><button type="button" class="btn btn-lg btn-block  btn-info ">Edit Ticket </button></a>
+              {% endif %}
               {% if ticket.is_cancelable %}
                   <a href="/ticket/delete/{{ ticket.ticket_id }}" target="_blank" onclick="$('#ticket-{{ ticket.ticket_id }}').hide();"><button type="button"  class="btn btn-lg btn-block  btn-custom ">Cancel The Ticket </button></a>
               {% endif %}

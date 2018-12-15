@@ -2,6 +2,13 @@ from DBOP.tables.ticket_table import Ticket
 import psycopg2 as dbapi2
 import os
 
+def isInt(value):
+  try:
+    int(value)
+    return True
+  except ValueError:
+    return False
+
 
 class ticket_database:
     def __init__(self):
@@ -83,3 +90,39 @@ class ticket_database:
             finally:
                 if connection is not None:
                     connection.close()
+
+        def search(self, text):
+            tickets = []
+            to_search = "%" + text + "%"
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                if isInt(text):
+
+                    cursor.execute("""select * from tickets where ticket_id in (
+                                    select ticket_id
+                                    from tickets, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter 
+                                    where (firms.firm_id = tickets.firm_id and tickets.to_city = to_city.code and tickets.from_city = from_city.code and tickets.to_ter = to_ter.terminal_id and tickets.from_ter = from_ter.terminal_id ) 
+                                    and 
+                                    ( (price = %s) or (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""", (int(text) ,to_search, to_search, to_search, to_search, to_search, to_search,to_search,to_search, ))
+                else:
+                    cursor.execute("""select * from tickets where ticket_id in (
+                                    select ticket_id
+                                    from tickets, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter 
+                                    where (firms.firm_id = tickets.firm_id and tickets.to_city = to_city.code and tickets.from_city = from_city.code and tickets.to_ter = to_ter.terminal_id and tickets.from_ter = tickets.terminal_id ) 
+                                    and 
+                                    (  (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""",
+                                   ( to_search, to_search, to_search, to_search, to_search, to_search, to_search,
+                                    to_search,))
+
+                for ticket in cursor:
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[7], ticket[6], ticket[4], ticket[5])
+                    tickets.append(_ticket)
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return expeditions
