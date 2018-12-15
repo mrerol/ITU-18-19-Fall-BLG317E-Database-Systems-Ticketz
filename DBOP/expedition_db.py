@@ -6,10 +6,8 @@ today = datetime.today()
 str_today = str(today.month) + '/' + str(today.day) + '/' + str(today.year)
 
 def dayCompare( toCompare):
-    print(toCompare)
-    t0 = toCompare.split('/', 3)
+    t0 = str_today.split('/', 3)
     t1 = toCompare.split('/', 3)
-    print(t0)
     if t0[2] > t1[2]:
         return False
     elif t0[2] == t1[2]:
@@ -126,8 +124,6 @@ class expedition_database:
 
         def get_filtered_expeditions(self, to_city, to_ter, from_city, from_ter, firm_id, date, max_price):
             expeditions = []
-            print(max_price)
-            print(to_city, to_ter, from_city, from_ter, firm_id, date, max_price)
             statement = " SELECT * FROM expeditions WHERE TRUE  "
 
             if to_city is not None:
@@ -145,7 +141,6 @@ class expedition_database:
             if max_price is not "":
                 statement += "and price <= " + str(max_price)
             statement += "and current_cap < total_cap"
-            print(statement)
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
@@ -180,7 +175,6 @@ class expedition_database:
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
-                print("hata")
                 print(error)
             finally:
                 if connection is not None:
@@ -252,7 +246,6 @@ class expedition_database:
 
         def search(self, text):
             expeditions = []
-            print(text)
             to_search = "%" + text + "%"
             try:
                 connection = dbapi2.connect(self.url)
