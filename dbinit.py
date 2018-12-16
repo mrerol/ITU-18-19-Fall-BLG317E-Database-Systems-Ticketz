@@ -20,7 +20,10 @@ INIT_STATEMENTS = [
     """CREATE TABLE IF NOT EXISTS city 
     (
         code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
-        city_name VARCHAR(25) UNIQUE NOT NULL        
+        city_name VARCHAR(25) UNIQUE NOT NULL,
+        population VARCHAR(20) DEFAULT NULL,
+        region VARCHAR(20) DEFAULT NULL,
+        altitude VARCHAR(20) DEFAULT NULL     
 
     )""",
 
