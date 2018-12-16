@@ -349,7 +349,7 @@ INIT_STATEMENTS = [
                         100,
                         'admin',
                         'admin@admin.com',
-                        'admin',
+                        '81ba6f6fb506d7459c0160c52004f352',
                         'admin',
                         'admin',
                         '0321221222',

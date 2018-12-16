@@ -90,7 +90,14 @@ def search_ticket(text):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    return views.login_page(request)
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return redirect(url_for('admin_home_page'))
+    elif user and not user[-1]:
+        return redirect(url_for('home_page'))
+    else:
+        return views.login_page(request)
 
 @app.route('/admin/add_hotel', methods=['GET', 'POST'])
 def add_hotel_page():

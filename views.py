@@ -915,8 +915,8 @@ def signup_page():
         userid = userop.add_user(request.form['username'],request.form['name'],request.form['surname'],
                                 request.form['gender'],request.form['mail'],h.hexdigest(),
                                 request.form['phone'],request.form['address'])
-        print("userid: ",userid)
-        session['user_id'] = userid
+        #print("userid: ",userid)
+        #session['user_id'] = userid
         return redirect(url_for('login'))
     except IntegrityError:
         print("duplicate entry")
