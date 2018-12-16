@@ -34,6 +34,7 @@
 							<div class="row mb-2">
 								<div class="col-sm-6">
 									<h1>Firm Login</h1>
+                                    <h1 style="color:red;">{{ error }}<h1>
 								</div>
 							</div>
 						</div>
@@ -67,7 +68,7 @@
 
 						</form>
 						<div class="card-footer">
-							<button type="submit" onclick="document.getElementById('login_firm').submit();" class="btn btn-info float-right">Submit</button>
+							<button type="submit" onclick="add();" class="btn btn-info float-right">Submit</button>
 							<button type="submit" class="btn btn-default" onclick="document.getElementById('login_firm').reset();">Clear</button>
 						</div>
 
@@ -91,6 +92,58 @@
 
 <br>
 <br>
+    <script>
+    function add()
+{
+    /*
+    var $captcha = $( '#recaptcha' ),
+        response = grecaptcha.getResponse();
+
+    if (response.length === 0) {
+        $( '.msg-error').text( "reCAPTCHA is mandatory" );
+        if( !$captcha.hasClass( "error" ) ){
+            $captcha.addClass( "error" );
+            return false;
+        }
+    }
+    else {
+        $( '.msg-error' ).text('');
+        $captcha.removeClass( "error" );
+    }
+
+*/
+    let fill = true;
+    let value_length = true;
+
+    if($('#e_mail').val().length < 5 || $('#e_mail').val().length > 20 ){
+        document.getElementById("e_mail").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("e_mail").style.borderColor = "green";
+
+    if (($('#password').val().length < 5 || $('#password').val().length > 20 )){
+        document.getElementById("password").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("password").style.borderColor = "green";
+
+
+    if(fill && value_length){
+        document.getElementById("login_firm").submit()
+    }
+    else{
+            $(".message-box-danger-length").toggle(750, function () {
+                setTimeout(function () {
+                    $(".message-box-danger-length").toggle(750);
+                }, 2500);
+            });
+
+   }
+
+}
+    </script>>
 {% include "components/firm/footer.html" %}
 
 {% endblock %}
