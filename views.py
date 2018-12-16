@@ -4,6 +4,7 @@ from psycopg2 import IntegrityError
 import sys
 from base64 import b64encode
 from datetime import datetime
+import hashlib
 
 from DBOP.tables.firms_table import Firm
 from DBOP.tables.firm_image_table import FirmImage
@@ -52,7 +53,7 @@ terminalop = TerminalDao()
 sale_db = SaleDao()
 
 
-
+salt = "3re"
 
 today = datetime.today()
 
@@ -343,7 +344,9 @@ def login_page(request):
     error = None
     if request.method == 'POST':
         try:
-            user_id = userop.get_user_id(request.form['username'],request.form['password'])
+            db_password = request.form['password']+salt
+            h = hashlib.md5(db_password.encode())
+            user_id = userop.get_user_id(request.form['username'],h.hexdigest())
             print("userid ",user_id)
             if user_id is not None:
                 session['user_id'] = user_id
@@ -907,8 +910,10 @@ def my_tickets():
 def signup_page():
     error = None
     try: 
+        db_password = request.form['password']+salt
+        h = hashlib.md5(db_password.encode())
         userid = userop.add_user(request.form['username'],request.form['name'],request.form['surname'],
-                                request.form['gender'],request.form['mail'],request.form['password'],
+                                request.form['gender'],request.form['mail'],h.hexdigest(),
                                 request.form['phone'],request.form['address'])
         print("userid: ",userid)
         session['user_id'] = userid
@@ -979,23 +984,12 @@ def users_page():
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     users = userop.get_all_user_listing()
-    print(users[0])
     return render_template("user/users.html", users = users, user = user)
 
 def edit_user_page(id):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     edit_user = userop.get_user(id)
-    print("edit_user[0]",edit_user[0])
-    print("edit_user[1]",edit_user[1])
-    print("edit_user[2]",edit_user[2])
-    print("edit_user[3]",edit_user[3])
-    print("edit_user[4]",edit_user[4])
-    print("edit_user[5]",edit_user[5])
-    print("edit_user[6]",edit_user[6])
-    print("edit_user[7]",edit_user[7])
-    print("edit_user[8]",edit_user[8])
-    print("edit_user[11]",edit_user[11])
     if edit_user is None:
         return render_template("404_not_found.html")
     else:
