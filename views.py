@@ -511,7 +511,7 @@ def add_vehicle_page(request):
 
         if "document" in request.files:
             document = request.files["document"]
-            vehicle_db.add_vehicle_with_document(Vehicle(vehicle_name,category,model,capacity,production_year,production_place,description,firm_id,document))
+            vehicle_db.add_vehicle_with_document(Vehicle(vehicle_name,category,model,capacity,production_year,production_place,description,firm_id,document.read()))
 
         else:
             vehicle_db.add_vehicle(Vehicle(vehicle_name, category, model, capacity, production_year, production_place, description, firm_id, None))
@@ -546,14 +546,12 @@ def vehicle_edit_page(request, vehicle_id):
         return render_template("403_un_authorized.html")
 
     vehicle = vehicle_db.get_vehicle(vehicle_id)
-
     if request.method == "GET":
 
         if vehicle is None:
             return render_template("403_un_authorized.html")
 
-        temp=driver_db.get_firm_ids(vehicle_id)
-
+        temp = vehicle_db.get_firm_ids(vehicle_id)
         flag=0
         for item in temp:
             (temp_item,)=item
@@ -750,7 +748,8 @@ def add_expedition():
     terminals = terminalop.get_all_terminal()
     for t in terminals:
         if t[7] not in cities:
-            cities[t[7]] = {'city_name': t[-1], 'terminals': []}
+            print(t)
+            cities[t[7]] = {'city_name': t[9], 'terminals': []}
         cities[t[7]]['terminals'].append({'id': t[0], 'name': t[1]})
 
     return render_template("firm/add_expedition.html", vehicles = vehicles, cities = cities, drivers= drivers)
@@ -768,7 +767,7 @@ def edit_expedition(expedition_id):
         expedition.document_link = None
     for t in terminals:
         if t[7] not in cities:
-            cities[t[7]] = {'city_name': t[-1], 'terminals': []}
+            cities[t[7]] = {'city_name': t[9], 'terminals': []}
         cities[t[7]]['terminals'].append({'id': t[0], 'name': t[1]})
 
     return render_template("firm/edit_expedition.html", expedition = expedition, vehicles = vehicles, cities = cities, drivers= drivers)
