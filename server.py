@@ -718,6 +718,11 @@ def edit_user_page(id):
     else:
         return unAuth403()
 
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    session.pop('user_id')
+    return redirect(url_for('home_page'))
+
 if __name__ == "__main__":
     port = app.config.get("PORT", 5000)
     app.run(host="0.0.0.0", port=port)
