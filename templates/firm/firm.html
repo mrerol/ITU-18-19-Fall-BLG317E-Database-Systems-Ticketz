@@ -4,9 +4,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 {% extends "layout.html" %}
-{% block title %}Firm Name{% endblock %}
+{% block title %}{{ firm.name }}{% endblock %}
 {% block body %}
-    {% include "components/firm/navbar.html" %}
+
+    {% if logged_firm %}
+        {% include "components/firm/navbar.html" %}
+    {% else %}
+        {% include "components/admin/navbar.html" %}
+    {% endif %}
+
     <div class="container">
         <section class="content-header" style="text-align: center;">
             <h1>{{ firm.name }}</h1>

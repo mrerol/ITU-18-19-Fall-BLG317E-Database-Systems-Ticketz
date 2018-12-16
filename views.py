@@ -592,31 +592,31 @@ def vehicle_delete_page(vehicle_id):
 
 def firm_page(id):
     firm_id = session.get('firm_id')
-    if id != firm_id:
+    user_id = session.get('user_id')
+    print(user_id)
+    user = userop.get_user(user_id)
+    print(user)
+    if firm_id is None and user is None:
         return render_template("403_un_authorized.html")
-
-    elif id == firm_id:
-        firm = firm_db.get_firm(firm_id)
-        if firm is None:
-            return render_template("404_not_found.html")
-        else:
-
-            toSend = []
-            images = firm_image_db.get_images()
-
-            if firm.logo is not None:
-                firm.logo = b64encode(firm.logo).decode("utf-8")
-
-            for ( temp_id, trash, image) in images:
-                if temp_id is id:
-                    toSend.append(b64encode(image.file_data).decode("utf-8"))
-
-            city = city_db.get_city(firm.city)
-            #print(city)
-            (code, city_name) = city
-            return render_template("firm/firm.html", firm=firm, city_name = city_name, firm_id=id, images=toSend)
     else:
-        return render_template("403_un_authorized.html")
+
+        firm = firm_db.get_firm(id)
+        logged_firm = firm_db.get_firm(firm_id)
+
+        toSend = []
+        images = firm_image_db.get_images()
+
+        if firm.logo is not None:
+            firm.logo = b64encode(firm.logo).decode("utf-8")
+
+        for ( temp_id, trash, image) in images:
+            if temp_id is id:
+                toSend.append(b64encode(image.file_data).decode("utf-8"))
+
+        city = city_db.get_city(firm.city)
+        (code, city_name) = city
+        return render_template("firm/firm.html", user = user, firm=firm, logged_firm=logged_firm, city_name = city_name, firm_id=id, images=toSend)
+
 
 def firm_signup(request):
     error = None
