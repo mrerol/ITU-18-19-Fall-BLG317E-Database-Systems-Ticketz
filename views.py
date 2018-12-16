@@ -673,21 +673,21 @@ def firm_login(request):
         password = request.form['password']
         try:
             temp = firm_db.get_firm_id_login(email, password)
-            (firm_id,) = temp
-            #print(firm_id)
-            if firm_id is not None:
+
+            if temp is not None:
+                (firm_id,) = temp
+                print(firm_id)
                 session.permanent = True
                 session['firm_id'] = firm_id
                 return redirect(url_for('firm_page', id=firm_id))
             else:
-                return render_template("403_un_authorized.html")
+                return render_template("firm/login.html", error = "Wrong e mail or password")
         except:
-            print("exception", sys.exc_info())
+            return render_template("firm/login.html", error="Something wents wrong please try again")
 
-        return render_template("403_un_authorized.html")
 
     elif request.method == "GET":
-        return render_template("firm/login.html")
+        return render_template("firm/login.html", error = None)
     else:
         return render_template("404_not_found.html")
 
