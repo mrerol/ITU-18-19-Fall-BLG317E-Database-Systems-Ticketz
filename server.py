@@ -91,13 +91,22 @@ def search_ticket(text):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     user_id = session.get('user_id')
-    user = userop.get_user(user_id)
-    if user and user[-1]:
-        return redirect(url_for('admin_home_page'))
-    elif user and not user[-1]:
+    firm_id = session.get('firm_id')
+    if firm_id is None and user_id is None:
+        user = userop.get_user(user_id)
+        if user and user[-1]:
+            return redirect(url_for('admin_home_page'))
+        elif user and not user[-1]:
+            return redirect(url_for('home_page'))
+        else:
+            return views.login_page(request)
+    elif firm_id is not None:
+        return redirect(url_for('firm_page', id=firm_id))
+    elif user_id is not None:
         return redirect(url_for('home_page'))
     else:
-        return views.login_page(request)
+        return render_template('500_internal_error.html')
+
 
 @app.route('/admin/add_hotel', methods=['GET', 'POST'])
 def add_hotel_page():
