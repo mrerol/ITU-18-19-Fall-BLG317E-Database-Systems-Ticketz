@@ -196,6 +196,13 @@ def admin_home_page():
 
     return render_template("admin/admin_home_page.html", user = user)
 
+def my_profile():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+
+    return render_template("user/my_profile.html", user = user)
+
+
 
 def hotels_page():
     user_id = session.get('user_id')

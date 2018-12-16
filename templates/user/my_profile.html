@@ -1,0 +1,161 @@
+<link href="../../static/css/admin/admin_home_page.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+{% extends "layout.html" %}
+{% block title %}Ticketz - Profile {{ user[2] }}{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+        <section class="content-header" style="text-align: center;">
+
+            <h1>{{ user[1] }}</h1>
+            <hr>
+
+            <img class="img-thumbnail" width="150" alt="logo" src="http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png">
+
+            <hr>
+        </section>
+
+        <section class="content">
+            <div class="card" style="box-shadow: 0 0 0px rgba(0,0,0,0);">
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item text-center" style="width: 75%">
+                            <a class="nav-link active show" href="#images" data-toggle="tab"><i class="far fa-images" aria-hidden="true"></i> Information</a>
+                        </li>
+
+                        <li class="nav-item text-center" style="width: 25%">
+                            <a class="nav-link" href="#information" data-toggle="tab"><i class="fas fa-info-circle" aria-hidden="true"></i></i> Last Login</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                <div class="card-body" style="background-color: #f4f6fa;border-color: #f4f6fa; padding: 0px; padding-top: 10px;">
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="images">
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                                        User Name & Surname
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {{ user[4] }} {{ user[5] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-address-book" aria-hidden="true"></i>
+                                        Phone
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    {{ user[6] }}
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                                        E-Mail
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    {{ user[2] }}
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-globe-americas" aria-hidden="true"></i>
+                                        Address
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {{ user[8]  }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-transgender" aria-hidden="true"></i>
+                                        Gender
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {{ user[7] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="tab-pane" id="information">
+
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        Last Login
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {{ user[-3]  }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-default color-palette-box">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="far fa-clock" aria-hidden="true"></i>
+                                        Registered
+                                    </h3>
+                                </div>
+                                <div class="card-body firm-info">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {{ user[-2]  }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <br>
+
+    {% include "components/admin/footer.html" %}
+
+{% endblock %}

@@ -70,6 +70,16 @@ def admin_home_page():
     else:
         return unAuth403()
 
+@app.route('/my_profile', methods=['GET'])
+def my_profile():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user:
+        return views.my_profile()
+    else:
+        return unAuth403()
+
+
 @app.route('/hotels/', methods=['GET', 'POST'])
 def hotels_page():
     return views.hotels_page()
