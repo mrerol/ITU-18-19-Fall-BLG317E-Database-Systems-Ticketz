@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify, session, send_file
 from io import BytesIO
-from urllib.parse import unquote
+import mail
 
 
 import views
@@ -449,6 +449,7 @@ def delete_expedition(expedition_id):
 def buy_ticket(expedition_id):
 
     user_id = session.get('user_id')
+    user = userop.get_user(user_id)
     if user_id != None:
         if request.method == "POST":
             temp_expedition = expedition_db.get_expedition(expedition_id)
@@ -468,7 +469,15 @@ def buy_ticket(expedition_id):
 
                     hotel_city = city_db.get_city(temp_expedition.to)
                     (city_code, city_name) = hotel_city
-                    print(city_name)
+
+
+                    message = "Ticketz \n" \
+                              "Ticket Succesfully Bought \n" \
+                              "Thank you " + user[1] + "\n" \
+                                                                    "Your Seat Number: " + seat_number + "\n" \
+                                                                                                              "Good Luck in " + city_name
+                    print(message)
+                    mail.send_email( "Ticketz - Ticket Bought", message, user[2])
 
 
                     return redirect(url_for('search_hotel', text = city_name))
