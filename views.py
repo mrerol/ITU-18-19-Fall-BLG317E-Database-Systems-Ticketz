@@ -965,3 +965,37 @@ def edit_sale_page(id):
         return render_template("404_not_found.html")
     else:
         return render_template("sale/edit_sale.html", sale= sale, firms = firms, user = user)
+
+def add_user_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user is None:
+        return render_template("404_not_found.html")
+    else:
+        return render_template("user/add_user.html", user=user)
+
+def users_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    users = userop.get_all_user_listing()
+    print(users[0])
+    return render_template("user/users.html", users = users, user = user)
+
+def edit_user_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    edit_user = userop.get_user(id)
+    print("edit_user[0]",edit_user[0])
+    print("edit_user[1]",edit_user[1])
+    print("edit_user[2]",edit_user[2])
+    print("edit_user[3]",edit_user[3])
+    print("edit_user[4]",edit_user[4])
+    print("edit_user[5]",edit_user[5])
+    print("edit_user[6]",edit_user[6])
+    print("edit_user[7]",edit_user[7])
+    print("edit_user[8]",edit_user[8])
+    print("edit_user[11]",edit_user[11])
+    if edit_user is None:
+        return render_template("404_not_found.html")
+    else:
+        return render_template("user/edit_user.html", edit_user = edit_user, user = user)

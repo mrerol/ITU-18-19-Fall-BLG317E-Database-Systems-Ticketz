@@ -616,6 +616,57 @@ def edit_sale_page(id):
     else:
         return unAuth403()
 
+
+@app.route('/admin/add_user', methods=['GET', 'POST'])
+def add_user_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET": 
+            return views.add_user_page()
+        else:
+            userop.add_user_with_adminfo(request.form['user_name'],request.form['name'],request.form['surname'],
+                                        request.form['gender'],request.form['email'],request.form['password'],
+                                        request.form['phone'],request.form['address'],request.form['is_admin'])
+            return redirect(url_for('admin_home_page'))
+    else:
+        return unAuth403()
+
+@app.route('/admin/users', methods=['GET', 'POST'])
+def users_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.users_page()
+    else:
+        return unAuth403()
+
+@app.route('/admin/delete_user/<int:id>',  methods=['GET', 'POST'])
+def delete_user(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        userop.delete_user(id)
+        return redirect(url_for('users_page'))
+    else:
+        return unAuth403()
+
+@app.route('/admin/edit_user/<int:id>', methods=['GET', 'POST'])
+def edit_user_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET":
+            return views.edit_user_page(id)
+        else:
+            #user_id,user_name, name, surname, gender, email, password, phone, address, is_admin
+            userop.edit_user(id,request.form['user_name'],request.form['name'],request.form['surname'],
+                                        request.form['gender'],request.form['email'],request.form['password'],
+                                        request.form['phone'],request.form['address'],request.form['is_admin'])
+            return redirect(url_for('edit_user_page', id=id))
+    else:
+        return unAuth403()
+
 if __name__ == "__main__":
     port = app.config.get("PORT", 5000)
     app.run(host="0.0.0.0", port=port)
