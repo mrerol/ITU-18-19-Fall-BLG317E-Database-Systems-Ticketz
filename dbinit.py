@@ -55,7 +55,7 @@ INIT_STATEMENTS = [
         user_id SERIAL NOT NULL PRIMARY KEY,
         user_name VARCHAR(15) UNIQUE NOT NULL,
         email VARCHAR (50) NOT NULL,
-        password VARCHAR (16) NOT NULL,
+        password VARCHAR (50) NOT NULL,
         name VARCHAR (50) NOT NULL,
         surname VARCHAR (50) NOT NULL,
         phone VARCHAR (15) NOT NULL,
