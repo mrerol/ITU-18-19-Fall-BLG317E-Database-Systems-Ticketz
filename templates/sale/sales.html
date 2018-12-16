@@ -1,0 +1,83 @@
+<link href="../../static/css/admin/admin_home_page.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+{% extends "layout.html" %}
+{% block title %}Sales{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-7">
+                <section class="content">
+                    <div class="card">
+
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1>Sales</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <table>
+                                    <tr>
+                                        <th>Sale Id</th>
+                                        <th>Sale Code</th>
+                                        <th>Sale Start</th>
+                                        <th>Sale Finish</th>
+                                        <th>Active</th>
+                                        <th>Firm</th>
+                                        <th>Sale Price</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+
+                                    
+                                        {% for (sale_id, sale_code,sale_start_at, sale_finish_at, sale_price, firm_id,is_active) in sales %}
+                                            <tr>
+                                                <td>{{ sale_id }}</td>
+                                                <td>{{ sale_code }}</td>
+                                                <td>{{ sale_start_at }}</td>
+                                                <td>{{ sale_finish_at }}</td>
+                                                <td>{{ is_active }}</td>
+                                                <td>{{ firm_id }}</td>
+                                                <td>{{ sale_price }}</td>
+                                                <td><a href="/admin/edit_sale/{{ sale_id }}" class="btn btn-info">Edit</a></td>
+                                                <td><a href="/admin/delete_sale/{{ sale_id }}" class="btn btn-danger">Delete</a></td>
+                                            </tr>
+                                        {% endfor %}
+                                    
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    {% include "components/admin/footer.html" %}
+{% endblock %}

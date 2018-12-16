@@ -561,10 +561,58 @@ def edit_terminal_page(id):
             print("*****************test1***")
             return views.edit_terminal_page(id)
         else:
-         #def edit_terminal(self, terminal_id,terminal_name, terminal_code, email, phone, address, description, city):
             print("*****************test2***")
             terminalop.edit_terminal(id,request.form['terminal_name'],request.form['terminal_code'],request.form['e_mail'],request.form['phone'],request.form['address'],request.form['description'],request.form['city'] )
             return redirect(url_for('edit_terminal_page', id=id))
+    else:
+        return unAuth403()
+
+
+@app.route('/admin/add_sale', methods=['GET', 'POST'])
+def add_sale_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET": 
+            return views.add_sale_page()
+        else:
+            sale_db.add_sale(request.form['sale_code'],request.form['sale_start_at'],request.form['sale_finish_at'],
+                                        request.form['description'],request.form['is_active'],request.form['firm'],
+                                        request.form['sale_price'])
+            return redirect(url_for('admin_home_page'))
+    else:
+        return unAuth403()
+
+@app.route('/admin/sales', methods=['GET', 'POST'])
+def sales_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.sales_page()
+    else:
+        return unAuth403()
+
+@app.route('/admin/delete_sale/<int:id>',  methods=['GET', 'POST'])
+def delete_sale(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        sale_db.delete_sale(id)
+        return redirect(url_for('sales_page'))
+    else:
+        return unAuth403()
+
+
+@app.route('/admin/edit_sale/<int:id>', methods=['GET', 'POST'])
+def edit_sale_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET":
+            return views.edit_sale_page(id)
+        else:
+            sale_db.edit_sale(id,request.form['sale_code'],request.form['sale_start_at'],request.form['sale_finish_at'],request.form['description'],request.form['is_active'],request.form['firm'],request.form['sale_price'] )
+            return redirect(url_for('edit_sale_page', id=id))
     else:
         return unAuth403()
 

@@ -942,3 +942,26 @@ def edit_terminal_page(id):
     else:
         cities = city_db.get_all_city()
         return render_template("terminal/edit_terminal.html", terminal= terminal, cities = cities, user = user)
+
+def add_sale_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    firm = firm_db.get_firms()
+    return render_template("sale/add_sale.html", firm = firm, user = user)
+
+def sales_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    sales = sale_db.get_all_sales()
+    return render_template("sale/sales.html", sales = sales, user = user)
+
+def edit_sale_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    sale = sale_db.get_sale(id)
+    firms = firm_db.get_firms()
+
+    if sale is None:
+        return render_template("404_not_found.html")
+    else:
+        return render_template("sale/edit_sale.html", sale= sale, firms = firms, user = user)
