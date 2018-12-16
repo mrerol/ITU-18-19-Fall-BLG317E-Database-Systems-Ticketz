@@ -883,3 +883,13 @@ def terminals_page():
     user = userop.get_user(user_id)
     terminals = terminalop.get_all_terminal_v2()
     return render_template("terminal/terminals.html", terminals = terminals, user = user)
+
+def edit_terminal_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    terminal = terminalop.get_terminal_wid(id)
+    if terminal is None:
+        return render_template("404_not_found.html")
+    else:
+        cities = city_db.get_all_city()
+        return render_template("terminal/edit_terminal.html", terminal= terminal, cities = cities, user = user)

@@ -43,15 +43,21 @@
                             <div class="input-group">
                                 <table>
                                     <tr>
-                                        <th>terminal name</th>
-                                        <th>terminal code</th>
+                                        <th>Terminal Id</th>
+                                        <th>Terminal Name</th>
+                                        <th>Terminal Code</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
 
                                     
-                                        {% for (terminal_name, terminal_code) in terminals %}
+                                        {% for (terminal_id,terminal_name, terminal_code) in terminals %}
                                             <tr>
+                                                <td>{{ terminal_id }}</td>
                                                 <td>{{ terminal_name }}</td>
                                                 <td>{{ terminal_code }}</td>
+                                                <td><a href="/admin/edit_terminal/{{ terminal_id }}" class="btn btn-info">Edit</a></td>
+                                                <td><a href="/admin/delete_terminal/{{ terminal_id }}" class="btn btn-danger">Delete</a></td>
                                             </tr>
                                         {% endfor %}
                                     

@@ -529,8 +529,39 @@ def add_terminal_page():
 
 @app.route('/admin/terminals', methods=['GET', 'POST'])
 def terminals_page():
-    return views.terminals_page()
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.terminals_page()
+    else:
+        return unAuth403()
 
+
+@app.route('/admin/delete_terminal/<int:id>',  methods=['GET', 'POST'])
+def delete_terminal(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        terminalop.delete_terminal(id)
+        return redirect(url_for('terminals_page'))
+    else:
+        return unAuth403()
+
+@app.route('/admin/edit_terminal/<int:id>', methods=['GET', 'POST'])
+def edit_terminal_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET":
+            print("*****************test1***")
+            return views.edit_terminal_page(id)
+        else:
+         #def edit_terminal(self, terminal_id,terminal_name, terminal_code, email, phone, address, description, city):
+            print("*****************test2***")
+            terminalop.edit_terminal(id,request.form['terminal_name'],request.form['terminal_code'],request.form['e_mail'],request.form['phone'],request.form['address'],request.form['description'],request.form['city'] )
+            return redirect(url_for('edit_terminal_page', id=id))
+    else:
+        return unAuth403()
 
 if __name__ == "__main__":
     port = app.config.get("PORT", 5000)

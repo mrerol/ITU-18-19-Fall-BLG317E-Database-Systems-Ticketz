@@ -65,7 +65,33 @@ class TerminalDao(BaseDao):
     def get_all_terminal_v2(self):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT terminal_name,terminal_code FROM terminal JOIN city ON (terminal.city_id = city.code)")
+            cursor.execute("SELECT terminal_id, terminal_name,terminal_code FROM terminal JOIN city ON (terminal.city_id = city.code)")
             terminal = cursor.fetchall()
             cursor.close()
         return terminal
+
+    def delete_terminal(self, terminal_id):
+        try:
+            connection = dbapi2.connect(self.url)
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM terminal WHERE terminal_id = %s", (terminal_id,))
+            connection.commit()
+            cursor.close()
+        except (Exception, dbapi2.DatabaseError) as error:
+            print(error)
+        finally:
+            if connection is not None:
+                connection.close()
+
+    def edit_terminal(self, terminal_id,terminal_name, terminal_code, email, phone, address, description, city_code):
+        try:
+            connection = dbapi2.connect(self.url)
+            cursor = connection.cursor()
+            cursor.execute("""UPDATE terminal SET terminal_name = %s, terminal_code = %s, email = %s, phone = %s, address = %s, description = %s, city_id = %s WHERE terminal_id = %s """, (terminal_name, terminal_code, email, phone, address, description, city_code, terminal_id,))
+            connection.commit()
+            cursor.close()
+        except (Exception, dbapi2.DatabaseError) as error:
+            print(error)
+        finally:
+            if connection is not None:
+                connection.close()
