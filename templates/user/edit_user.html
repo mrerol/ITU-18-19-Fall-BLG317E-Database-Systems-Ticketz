@@ -23,6 +23,11 @@
                                 </div>
                             </div>
                         </section>
+                        {% if err_msg != "" %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ err_msg }}
+                        </div>
+                        {% endif %}
                         <div class="card-body">
                             <form method="post" action="" enctype = "multipart/form-data"  role="form" name="add_terminal" id="add_terminal">
                                 <label for="user_name" >Username</label>

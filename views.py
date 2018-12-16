@@ -948,7 +948,7 @@ def terminals_page():
     terminals = terminalop.get_all_terminal_v2()
     return render_template("terminal/terminals.html", terminals = terminals, user = user)
 
-def edit_terminal_page(id):
+def edit_terminal_page(id, err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     terminal = terminalop.get_terminal_wid(id)
@@ -956,13 +956,13 @@ def edit_terminal_page(id):
         return render_template("404_not_found.html")
     else:
         cities = city_db.get_all_city()
-        return render_template("terminal/edit_terminal.html", terminal= terminal, cities = cities, user = user)
+        return render_template("terminal/edit_terminal.html", terminal= terminal, cities = cities, user = user, err_msg=err_msg)
 
-def add_sale_page():
+def add_sale_page(err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     firm = firm_db.get_firms()
-    return render_template("sale/add_sale.html", firm = firm, user = user)
+    return render_template("sale/add_sale.html", firm = firm, user = user,err_msg=err_msg)
 
 def sales_page():
     user_id = session.get('user_id')
@@ -970,7 +970,7 @@ def sales_page():
     sales = sale_db.get_all_sales()
     return render_template("sale/sales.html", sales = sales, user = user)
 
-def edit_sale_page(id):
+def edit_sale_page(id, err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     sale = sale_db.get_sale(id)
@@ -979,15 +979,15 @@ def edit_sale_page(id):
     if sale is None:
         return render_template("404_not_found.html")
     else:
-        return render_template("sale/edit_sale.html", sale= sale, firms = firms, user = user)
+        return render_template("sale/edit_sale.html", sale= sale, firms = firms, user = user,err_msg=err_msg)
 
-def add_user_page():
+def add_user_page(err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     if user is None:
         return render_template("404_not_found.html")
     else:
-        return render_template("user/add_user.html", user=user)
+        return render_template("user/add_user.html", user=user,err_msg=err_msg)
 
 def users_page():
     user_id = session.get('user_id')
@@ -995,14 +995,14 @@ def users_page():
     users = userop.get_all_user_listing()
     return render_template("user/users.html", users = users, user = user)
 
-def edit_user_page(id):
+def edit_user_page(id,err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     edit_user = userop.get_user(id)
     if edit_user is None:
         return render_template("404_not_found.html")
     else:
-        return render_template("user/edit_user.html", edit_user = edit_user, user = user)
+        return render_template("user/edit_user.html", edit_user = edit_user, user = user,err_msg=err_msg)
 
 def cities_page():
     user_id = session.get('user_id')
@@ -1010,22 +1010,19 @@ def cities_page():
     cities = city_db.get_all_cities()
     return render_template("city/cities.html", cities = cities, user = user)
 
-def add_city_page():
+def add_city_page(err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
-    return render_template("city/add_city.html", user = user)
+    return render_template("city/add_city.html", user = user,err_msg=err_msg)
 
-def edit_city_page(code):
+def edit_city_page(code,err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     city = city_db.get_city_all(str(code))
-    print("city[0]",city[0])
-    print("city[1]",city[1])
-    print("city[2]",city[2])
-    print("city[3]",city[3])
-    print("city[4]",city[4])
     if city is None:
         return render_template("404_not_found.html")
     else:
-        return render_template("city/edit_city.html", city= city, user = user)
+        return render_template("city/edit_city.html", city= city, user = user,err_msg=err_msg)
+
+
 

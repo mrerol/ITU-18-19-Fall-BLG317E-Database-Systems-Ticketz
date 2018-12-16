@@ -21,6 +21,9 @@ from dao.terminal_dao import TerminalDao
 from dao.sale_dao import SaleDao
 from dao.city_dao import CityDao
 from form_validation.terminal_validator import TerminalValidator
+from form_validation.sale_validator import SaleValidator
+from form_validation.user_validator import UserValidator
+from form_validation.city_validator import CityValidator
 
 terminalop = TerminalDao()
 
@@ -634,12 +637,14 @@ def edit_terminal_page(id):
     user = userop.get_user(user_id)
     if user and user[-1]:
         if request.method == "GET":
-            print("*****************test1***")
             return views.edit_terminal_page(id)
         else:
-            print("*****************test2***")
-            terminalop.edit_terminal(id,request.form['terminal_name'],request.form['terminal_code'],request.form['e_mail'],request.form['phone'],request.form['address'],request.form['description'],request.form['city'] )
-            return redirect(url_for('edit_terminal_page', id=id))
+            is_ok,err_msg = TerminalValidator.validate_add(request)
+            if is_ok:
+                terminalop.edit_terminal(id,request.form['terminal_name'],request.form['terminal_code'],request.form['e_mail'],request.form['phone'],request.form['address'],request.form['description'],request.form['city'] )
+                return redirect(url_for('edit_terminal_page', id=id))
+            else:
+                return views.edit_terminal_page(id, err_msg=err_msg)
     else:
         return unAuth403()
 
@@ -652,10 +657,14 @@ def add_sale_page():
         if request.method == "GET": 
             return views.add_sale_page()
         else:
-            sale_db.add_sale(request.form['sale_code'],request.form['sale_start_at'],request.form['sale_finish_at'],
+            is_ok,err_msg = SaleValidator.validate_add(request)
+            if is_ok:
+                sale_db.add_sale(request.form['sale_code'],request.form['sale_start_at'],request.form['sale_finish_at'],
                                         request.form['description'],request.form['is_active'],request.form['firm'],
                                         request.form['sale_price'])
-            return redirect(url_for('admin_home_page'))
+                return redirect(url_for('admin_home_page'))
+            else:
+                return views.add_sale_page(err_msg=err_msg)
     else:
         return unAuth403()
 
@@ -687,8 +696,12 @@ def edit_sale_page(id):
         if request.method == "GET":
             return views.edit_sale_page(id)
         else:
-            sale_db.edit_sale(id,request.form['sale_code'],request.form['sale_start_at'],request.form['sale_finish_at'],request.form['description'],request.form['is_active'],request.form['firm'],request.form['sale_price'] )
-            return redirect(url_for('edit_sale_page', id=id))
+            is_ok,err_msg = SaleValidator.validate_add(request)
+            if is_ok:
+                sale_db.edit_sale(id,request.form['sale_code'],request.form['sale_start_at'],request.form['sale_finish_at'],request.form['description'],request.form['is_active'],request.form['firm'],request.form['sale_price'] )
+                return redirect(url_for('edit_sale_page', id=id))
+            else:
+                return views.edit_sale_page(id, err_msg=err_msg)
     else:
         return unAuth403()
 
@@ -701,10 +714,14 @@ def add_user_page():
         if request.method == "GET": 
             return views.add_user_page()
         else:
-            userop.add_user_with_adminfo(request.form['user_name'],request.form['name'],request.form['surname'],
+            is_ok,err_msg = UserValidator.validate_add(request)
+            if is_ok:
+                userop.add_user_with_adminfo(request.form['user_name'],request.form['name'],request.form['surname'],
                                         request.form['gender'],request.form['email'],request.form['password'],
                                         request.form['phone'],request.form['address'],request.form['is_admin'])
-            return redirect(url_for('admin_home_page'))
+                return redirect(url_for('admin_home_page'))
+            else:
+                return views.add_user_page(err_msg=err_msg)
     else:
         return unAuth403()
 
@@ -735,11 +752,14 @@ def edit_user_page(id):
         if request.method == "GET":
             return views.edit_user_page(id)
         else:
-            #user_id,user_name, name, surname, gender, email, password, phone, address, is_admin
-            userop.edit_user(id,request.form['user_name'],request.form['name'],request.form['surname'],
+            is_ok,err_msg = UserValidator.validate_add(request)
+            if is_ok:
+                userop.edit_user(id,request.form['user_name'],request.form['name'],request.form['surname'],
                                         request.form['gender'],request.form['email'],request.form['password'],
                                         request.form['phone'],request.form['address'],request.form['is_admin'])
-            return redirect(url_for('edit_user_page', id=id))
+                return redirect(url_for('edit_user_page', id=id))
+            else:
+                return views.edit_user_page(id, err_msg=err_msg)
     else:
         return unAuth403()
 
@@ -776,9 +796,13 @@ def add_city_page():
         if request.method == "GET": 
             return views.add_city_page()
         else:
-            city_db.add_city_allCol(request.form['city_code'],request.form['city_name'],request.form['region'],
+            is_ok,err_msg = CityValidator.validate_add(request)
+            if is_ok:
+                city_db.add_city_allCol(request.form['city_code'],request.form['city_name'],request.form['region'],
                                         request.form['population'],request.form['altitude'])
-            return redirect(url_for('cities_page'))
+                return redirect(url_for('cities_page'))
+            else:
+                return views.add_city_page(err_msg=err_msg)
     else:
         return unAuth403()
 
@@ -791,8 +815,12 @@ def edit_city_page(code):
         if request.method == "GET":
             return views.edit_city_page(str(code))
         else:
-            city_db.edit_city(code,request.form['city_code'],request.form['city_name'],request.form['region'],request.form['population'],request.form['altitude'])
-            return redirect(url_for('edit_city_page', code=code))
+            is_ok,err_msg = CityValidator.validate_add(request)
+            if is_ok:
+                city_db.edit_city(code,request.form['city_code'],request.form['city_name'],request.form['region'],request.form['population'],request.form['altitude'])
+                return redirect(url_for('edit_city_page', code=code))
+            else:
+                return views.edit_city_page(str(code), err_msg=err_msg)
     else:
         return unAuth403()
 
