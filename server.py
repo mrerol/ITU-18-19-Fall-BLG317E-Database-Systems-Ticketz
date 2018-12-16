@@ -228,6 +228,11 @@ def home_page():
 def firm_page(id):
     return views.firm_page(id)
 
+@app.route('/firm/edit_firmpage', methods=['GET', 'POST'])
+def edit_firm_page():
+    return views.edit_firm_page(request)
+
+
 @app.route('/firm/login', methods=['GET', 'POST'])
 def firm_login():
     return views.firm_login(request)

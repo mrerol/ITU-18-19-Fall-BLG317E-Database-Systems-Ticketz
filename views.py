@@ -6,10 +6,12 @@ from base64 import b64encode
 from datetime import datetime
 
 from DBOP.tables.firms_table import Firm
+from DBOP.tables.firm_image_table import FirmImage
 from DBOP.tables.drivers_table import Driver
 from DBOP.tables.vehicles_table import Vehicle
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
+from DBOP.firm_image_db import firm_image_database
 from DBOP.seat_db import seat_database
 from DBOP.ticket_db import ticket_database
 from DBOP.firms_db import firm_database
@@ -24,7 +26,7 @@ from dao.sale_dao import SaleDao
 from DBOP.tables.expedition_table import Expedition
 from DBOP.tables.ticket_table import Ticket
 
-
+db_firm_image = firm_image_database()
 db_hotel = hotel_database()
 db_image = image_database()
 db_firm = firm_database()
@@ -37,6 +39,7 @@ db_ticket = ticket_database()
 hotel_db = db_hotel.hotel
 image_db = db_image.image
 firm_db = db_firm.firm
+firm_image_db = db_firm_image.firm_image
 vehicle_db = db_vehicle.vehicle
 driver_db = db_driver.driver
 expedition_db = db_expedition.expedition
@@ -587,23 +590,27 @@ def firm_page(id):
     firm_id = session.get('firm_id')
     if id != firm_id:
         return render_template("un_authorized.html")
+
     elif id == firm_id:
         firm = firm_db.get_firm(firm_id)
         if firm is None:
             return render_template("404_not_found.html")
         else:
+
             toSend = []
-            #images = image_db.get_images()
+            images = firm_image_db.get_images()
+
             if firm.logo is not None:
                 firm.logo = b64encode(firm.logo).decode("utf-8")
-            """for ( temp_id, trash, image) in images:
+
+            for ( temp_id, trash, image) in images:
                 if temp_id is id:
-                    toSend.append(b64encode(image.file_data).decode("utf-8"))"""
+                    toSend.append(b64encode(image.file_data).decode("utf-8"))
 
             city = city_db.get_city(firm.city)
             #print(city)
             (code, city_name) = city
-            return render_template("firm/firm.html", firm=firm, city_name = city_name, firm_id=id)
+            return render_template("firm/firm.html", firm=firm, city_name = city_name, firm_id=id, images=toSend)
     else:
         return render_template("un_authorized.html")
 
@@ -612,6 +619,7 @@ def firm_signup(request):
     if request.method == "GET":
         cities = city_db.get_all_city()
         return render_template("firm/signup.html", error=error, cities=cities)
+
     elif request.method == "POST":
 
         firm_name = request.form["firm_name"]
@@ -625,6 +633,7 @@ def firm_signup(request):
 
         if "logo" in request.files:
             logo = request.files["logo"]
+
             firm_db.add_firm_with_logo(
                 Firm(firm_name, password, e_mail, phone, city, address, website, description, logo.read()))
         else:
@@ -634,14 +643,14 @@ def firm_signup(request):
 
         (temp_id,) = firm_db.get_firm_id(
             Firm(firm_name, password, e_mail, phone, city, address, website, description, None))
-        """"
-        uploaded_files = request.form.getlist("file[]")
+
+        #uploaded_files = request.form.getlist("file[]")
         for i in range(int(s) + 1):
             temp = "image" + str(i)
             if temp in request.files:
                 file = request.files[temp]
-                image_db.add_image(Image(temp_id, file.read()))
-        """
+                firm_image_db.add_image(FirmImage(temp_id, file.read()))
+
         return redirect(url_for('firm_login'))
     else:
         return render_template("un_authorized.html")
@@ -674,6 +683,46 @@ def firm_login(request):
 def firm_logout():
     session.pop('firm_id')
     return redirect(url_for('firm_login'))
+
+def edit_firm_page(request):
+
+    firm_id = session.get('firm_id')
+    if firm_id is None:
+        return render_template("un_authorized.html")
+
+    if request.method == "GET":
+        firm=firm_db.get_firm(firm_id)
+        return render_template("firm/edit_firmpage.html",firm=firm)
+
+    elif request.method == "POST":
+
+        firm_name = request.form["firm_name"]
+        password = request.form["password"]
+        e_mail = request.form["e_mail"]
+        phone = request.form["phone"]
+        description = request.form["description"]
+        city = request.form["city"]
+        address = request.form["address"]
+        website = request.form["website"]
+
+        if "logo" in request.files:
+            logo = request.files["logo"]
+            firm_db.update_firm_with_logo(firm_id, Firm(firm_name, password, e_mail, phone, city, address, website, description,logo.read()))
+        else:
+            firm_db.update_firm_with_logo(firm_id,  Firm(firm_name, password, e_mail, phone, city, address, website, description,None))
+
+        s = request.form["s"]
+        uploaded_files = request.form.getlist("file[]")
+        for i in range(int(s) + 1):
+            temp = "image" + str(i)
+            if temp in request.files:
+                file = request.files[temp]
+                firm_image_db.add_image(FirmImage(firm_id, file.read()))
+
+        return render_template("un_authorized.html")
+
+    else:
+        return render_template("un_authorized.html")
 
 def add_expedition():
     drivers = driver_db.get_drivers()

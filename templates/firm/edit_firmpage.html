@@ -1,0 +1,308 @@
+<link href="../../static/css/admin/admin_home_page.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
+
+.g-recaptcha.error {
+  border: solid 2px #c64848;
+  padding: .2em;
+  width: 19em;
+}
+</style>
+{% extends "layout.html" %}
+{% block title %}Ticketz -  Firm Signup{% endblock %}
+{% block body %}
+    {% include "components/firm/navbar.html" %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <section class="content">
+                    <div style="background-color:powderblue;" class="card">
+
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1>Preview</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="card-body">
+                            <label>Firm Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-hotel"></i>
+                                    </span>
+                                </div>
+                                    <input value="{{ firm.name }}" disabled id="js_firm_name" type="text" class="form-control" >
+                            </div>
+                            <br>
+
+                            <label>Firm Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-at"></i>
+                                    </span>
+                                </div>
+                                <input value="{{ firm.password }}" disabled id="js_password" type="text" class="form-control" >
+                            </div>
+                            <br>
+                            <label>E-mail</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-phone-square"></i>
+                                    </span>
+                                </div>
+                                <input value="{{ firm.email }}" disabled id="js_e_mail" type="text" class="form-control" >
+                            </div>
+                            <br>
+                            <label>Phone</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                    </div>
+                                    <input value="{{ firm.phone }}" disabled id="js_phone" type="text" class="form-control" >
+                                </div>
+                            <br>
+                                <label>Firm Description</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </span>
+                                    </div>
+                                    <textarea value="{{ firm.description }}" disabled id="js_description" class="form-control"></textarea>
+                                </div>
+                            <br>
+                            <label>City</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-map"></i>
+                                    </span>
+                                </div>
+                                <input value="{{ city }}" disabled id="js_city" type="text" class="form-control" >
+                            </div>
+                            <br>
+
+                            <label>Firm Address</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </span>
+                                    </div>
+                                    <textarea value="{{ firm.address }}" disabled id="js_address" class="form-control"></textarea>
+                                </div>
+                            <br>
+                            <label>Firm Website</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input value="{{ firm.website }}" disabled id="js_website" type="text" class="form-control" >
+
+                                </div>
+                            <br>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+            </div>
+		<div class="col-sm-7">
+			<section class="content">
+				<div class="card">
+
+					<section class="content-header">
+						<div class="container-fluid">
+							<div class="row mb-2">
+								<div class="col-sm-6">
+									<h1>Firm Signup</h1>
+								</div>
+							</div>
+						</div>
+					</section>
+					<div class="card-body">
+						<form method="POST" action="" enctype = "multipart/form-data"  role="form" name="edit_firm" id="edit_firm">
+							<label for="firm_name" >Firm Name*</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-hotel"></i>
+									</span>
+								</div>
+								<input name="firm_name" id="firm_name" type="text" class="form-control"  placeholder="Enter The Firm Name" maxlength="20" required>
+							</div>
+
+							<br>
+							<label for="firm_password" >Firm Password*</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-hotel"></i>
+									</span>
+								</div>
+								<input name="password" id="password" type="password" class="form-control"  placeholder="Enter The Firm Password" maxlength="20" required>
+							</div>
+
+							<br>
+							<label for="e_mail">Firm e-Mail*</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-at"></i>
+									</span>
+								</div>
+								<input name="e_mail" id="e_mail" type="text" class="form-control" placeholder="Enter The Firm e-Mail" maxlength="20" required>
+							</div>
+							<br>
+							<label for="phone">Phone*</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-phone-square"></i>
+									</span>
+								</div>
+								<input name="phone" id="phone" type="text" class="form-control"  placeholder="Enter The Phone" maxlength="20" required>
+							</div>
+
+							<br>
+							<label for="description">Firm Description</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-info-circle"></i>
+									</span>
+								</div>
+								<textarea name="description" id="description" class="form-control" placeholder="Enter The Firm Description" maxlength="200" ></textarea>
+							</div>
+							<br>
+
+							<label for="city">City</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-map"></i>
+									</span>
+								</div>
+								<select class="form-control" name="city" id="city">
+									{% for (id, city_name) in cities %}
+										<option value="{{ id }}">{{ city_name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<br>
+
+							<label for="address">Firm Address</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-map-marked-alt"></i>
+									</span>
+								</div>
+								<textarea name="address" id="address" class="form-control" placeholder="Enter The Firm Address" maxlength="100" ></textarea>
+							</div>
+							<br>
+
+
+							<label for="website">Website</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="fas fa-phone-square"></i>
+									</span>
+								</div>
+								<input name="website" id="website" type="text" class="form-control" placeholder="Enter The Website" maxlength="20" >
+							</div>
+							<br>
+
+							<label for="photo">Logo</label>
+							<div class="input-group" id="logos">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="far fa-images"></i>
+										</span>
+									</div>
+									<label for="logo" hidden></label>
+									<!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
+
+									<img id="logo" >
+									<input onchange="loadFile(event)" type="file" name="logo" accept="image/*" />
+								</div>
+							</div>
+							<label for="s" hidden></label>
+							<input type="number" id="s" name="s" hidden >
+							<label for="photo">Photos</label>
+							<div class="input-group" id="images">
+								<div class="input-group" id="i0">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="far fa-images"></i>
+										</span>
+									</div>
+									<label for="images0" hidden></label>
+									<!--<input hidden type="file" name="file[]" multiple="" accept="image/*">-->
+									<img id="images0" >
+									<input onchange="loadImage(event, 0)" type="file" name="image0" accept="image/*" />
+									<span onclick="imageAdd()" class="input-group-text">
+										<i  class="fas fa-plus"></i>
+									</span>
+								</div>
+							</div>
+
+							<br>
+
+							<br>
+
+							<div class="input-group">
+								<div id="recaptcha" class="g-recaptcha" data-sitekey="6LccwnwUAAAAAG8JphQH654xXnS00pNpgzmjTxUX"></div>
+
+							</div>
+
+
+							<br>
+
+						</form>
+						<div class="card-footer">
+							<button type="submit" onclick="edit()" class="btn btn-info float-right">Update</button>
+							<button type="submit" class="btn btn-default" onclick="document.getElementById('edit_firm').reset();">Clear</button>
+						</div>
+
+
+                        <div class="message-box-danger-length" style="display: none">
+							<div class="alert alert-danger alert-dismissible" style="display:block; margin: 10px;">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								5-20 characters*</div>
+						</div>
+					</div>
+
+						</div>
+			</section>
+
+
+
+		</div>
+
+	</div>
+</div>
+
+<br>
+<br>
+{% include "components/firm/footer.html" %}
+<script src="../../static/js/firm/edit_firm.js"></script>
+
+{% endblock %}

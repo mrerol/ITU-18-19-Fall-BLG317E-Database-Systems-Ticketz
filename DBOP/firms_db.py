@@ -26,9 +26,8 @@ class firm_database:
             with dbapi2.connect(self.url) as connection:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO firms ( name, password, email, phone, city, address, website, description, logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s))",
-                    (firm_with_logo.name, firm_with_logo.password, firm_with_logo.email, firm_with_logo.phone, firm_with_logo.city, firm_with_logo.address, firm_with_logo.website,
-                     firm_with_logo.description, firm_with_logo.logo))
+                    "INSERT INTO firms ( name, password, email, phone, city, address, website, description, logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    (firm_with_logo.name, firm_with_logo.password, firm_with_logo.email, firm_with_logo.phone, firm_with_logo.city, firm_with_logo.address, firm_with_logo.website,firm_with_logo.description, firm_with_logo.logo))
                 cursor.close()
 
 
@@ -150,7 +149,7 @@ class firm_database:
                 cursor = connection.cursor()
                 cursor.execute("SELECT * FROM firms WHERE (name like %s)  or (email like %s) or (city like %s) or (address like %s)  or (phone like %s) or (website like %s) or (description like %s) or (logo like %s)      ;", (to_search, to_search, to_search, to_search, to_search, to_search,to_search,to_search))
                 for firm in cursor:
-                    _firm = Firm(firm[1], "foo", firm[3], firm[4], firm[5], firm[6], firm[7], firm[8], firm[9])
+                    _firm = Firm(firm[1], firm[2], firm[3], firm[4], firm[5], firm[6], firm[7], firm[8], firm[9])
                     firms.append((firm[0], _firm))
                 connection.commit()
                 cursor.close()
