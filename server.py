@@ -57,7 +57,7 @@ def page_not_found(e):
     return render_template("404_not_found.html")
 
 @app.errorhandler(500)
-def page_not_found(e):
+def internal_server_error(e):
     return render_template("500_internal_error.html")
 
 @app.route('/admin_home_page', methods=['GET', 'POST'])
@@ -217,7 +217,7 @@ def delete_hotel_logo(hotel_id):
     user = userop.get_user(user_id)
     if user and user[-1]:
         hotel_db.delete_hotel_logo(hotel_id)
-        return redirect(url_for('edit_hotel_page'), id=hotel_id)
+        return redirect(url_for('edit_hotel_page', id=hotel_id))
     else:
         return unAuth403()
 
@@ -245,7 +245,18 @@ def edit_firm_page():
 
 @app.route('/firm/login', methods=['GET', 'POST'])
 def firm_login():
-    return views.firm_login(request)
+    user_id = session.get('user_id')
+    print(user_id)
+    firm_id = session.get('firm_id')
+    if firm_id is None and user_id is None:
+        return views.firm_login(request)
+    elif firm_id is not None:
+        return redirect(url_for('firm_page', id = firm_id))
+    elif user_id is not None:
+        return redirect(url_for('home_page'))
+    else:
+        return render_template('500_internal_error.html')
+
 
 @app.route('/firm/logout', methods=['GET', 'POST'])
 def firm_logout():
@@ -253,7 +264,18 @@ def firm_logout():
 
 @app.route('/firm/signup', methods=['GET', 'POST'])
 def firm_signup():
-    return views.firm_signup(request)
+    user_id = session.get('user_id')
+    firm_id = session.get('firm_id')
+    if firm_id is None and user_id is None:
+        return views.firm_signup(request)
+    elif firm_id is not None:
+        return redirect(url_for('firm_page', id=firm_id))
+    elif user_id is not None:
+        return redirect(url_for('home_page'))
+    else:
+        return render_template('500_internal_error.html')
+
+
 
 @app.route('/firm/add_driver', methods=['GET', 'POST'])
 def add_driver():
