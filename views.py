@@ -382,7 +382,7 @@ def add_driver_page(request):
     firm_id = session.get('firm_id')
 
     if firm_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     if request.method == "GET":
         cities = city_db.get_all_city()
@@ -400,7 +400,7 @@ def add_driver_page(request):
         return redirect(url_for('driver_list_page', id=firm_id))
 
     else:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
 def driver_list_page(id):
     #session.permanent = True
@@ -412,7 +412,7 @@ def search_driver_page(search_for):
     firm_id = session.get('firm_id')
 
     if firm_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     drivers = driver_db.search(search_for,firm_id)
 
@@ -423,7 +423,7 @@ def driver_edit_page(request,driver_id):
     firm_id = session.get('firm_id')
 
     if firm_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     driver = driver_db.get_driver(driver_id)
     city=city_db.get_city(driver.city)
@@ -433,7 +433,7 @@ def driver_edit_page(request,driver_id):
     if request.method == "GET":
 
         if driver is None:
-            return render_template("un_authorized.html")
+            return render_template("403_un_authorized.html")
 
         temp=driver_db.get_firm_ids(driver_id)
         flag=0
@@ -445,13 +445,13 @@ def driver_edit_page(request,driver_id):
                   flag=1
 
         if flag != 1:
-            return render_template("un_authorized.html")
+            return render_template("403_un_authorized.html")
         return render_template("driver/driver_edit.html",driver=driver, city=temp_city, cities=cities)
 
     elif request.method == "POST":
 
         if driver is None:
-            return render_template("un_authorized.html")
+            return render_template("403_un_authorized.html")
 
         driver_name = request.form["driver_name"]
         e_mail = request.form["e_mail"]
@@ -464,13 +464,13 @@ def driver_edit_page(request,driver_id):
 
         return redirect(url_for('driver_list_page', id=firm_id))
     else:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
 def driver_delete_page(driver_id):
     temp_id = session.get('firm_id')
 
     if temp_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     driver_db.delete_driver(driver_id)
     return redirect(url_for('driver_list_page',id=temp_id))
@@ -480,7 +480,7 @@ def add_vehicle_page(request):
     firm_id = session.get('firm_id')
 
     if firm_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     if request.method == "GET":
         return render_template("vehicle/add_vehicle.html")
@@ -505,7 +505,7 @@ def add_vehicle_page(request):
         return redirect(url_for('vehicle_list_page', id=firm_id))
 
     else:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
 def vehicle_list_page(id):
     #session.permanent = True
@@ -518,7 +518,7 @@ def search_vehicle_page(search_for):
     firm_id = session.get('firm_id')
 
     if firm_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     vehicles = vehicle_db.search(search_for,firm_id)
 
@@ -529,14 +529,14 @@ def vehicle_edit_page(request, vehicle_id):
     firm_id = session.get('firm_id')
 
     if firm_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     vehicle = vehicle_db.get_vehicle(vehicle_id)
 
     if request.method == "GET":
 
         if vehicle is None:
-            return render_template("un_authorized.html")
+            return render_template("403_un_authorized.html")
 
         temp=driver_db.get_firm_ids(vehicle_id)
 
@@ -549,14 +549,14 @@ def vehicle_edit_page(request, vehicle_id):
                     flag=1
 
         if flag != 1:
-            return render_template("un_authorized.html")
+            return render_template("403_un_authorized.html")
 
         return render_template("vehicle/vehicle_edit.html",vehicle=vehicle)
 
     elif request.method == "POST":
 
         if vehicle is None:
-            return render_template("un_authorized.html")
+            return render_template("403_un_authorized.html")
 
         vehicle_name = request.form["vehicle_name"]
         category = request.form["category"]
@@ -575,14 +575,14 @@ def vehicle_edit_page(request, vehicle_id):
 
         return redirect(url_for('vehicle_list_page', id=firm_id))
     else:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
 def vehicle_delete_page(vehicle_id):
 
     temp_id = session.get('firm_id')
 
     if temp_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     vehicle_db.delete_vehicle(vehicle_id)
     return redirect(url_for('vehicle_list_page',id=temp_id))
@@ -590,7 +590,7 @@ def vehicle_delete_page(vehicle_id):
 def firm_page(id):
     firm_id = session.get('firm_id')
     if id != firm_id:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     elif id == firm_id:
         firm = firm_db.get_firm(firm_id)
@@ -613,7 +613,7 @@ def firm_page(id):
             (code, city_name) = city
             return render_template("firm/firm.html", firm=firm, city_name = city_name, firm_id=id, images=toSend)
     else:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
 def firm_signup(request):
     error = None
@@ -654,7 +654,7 @@ def firm_signup(request):
 
         return redirect(url_for('firm_login'))
     else:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
 
 def firm_login(request):
@@ -670,11 +670,11 @@ def firm_login(request):
                 session['firm_id'] = firm_id
                 return redirect(url_for('firm_page', id=firm_id))
             else:
-                return render_template("un_authorized.html")
+                return render_template("403_un_authorized.html")
         except:
             print("exception", sys.exc_info())
 
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     elif request.method == "GET":
         return render_template("firm/login.html")
@@ -689,7 +689,7 @@ def edit_firm_page(request):
 
     firm_id = session.get('firm_id')
     if firm_id is None:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     if request.method == "GET":
         firm=firm_db.get_firm(firm_id)
@@ -720,10 +720,10 @@ def edit_firm_page(request):
                 file = request.files[temp]
                 firm_image_db.add_image(FirmImage(firm_id, file.read()))
 
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
     else:
-        return render_template("un_authorized.html")
+        return render_template("403_un_authorized.html")
 
 def add_expedition():
     drivers = driver_db.get_drivers()

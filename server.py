@@ -56,6 +56,9 @@ app.secret_key = b'_5#y2L"F4Q8z_^?4c]/'
 def page_not_found(e):
     return render_template("404_not_found.html")
 
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template("500_internal_error.html")
 
 @app.route('/admin_home_page', methods=['GET', 'POST'])
 def admin_home_page():
@@ -506,7 +509,7 @@ def signup():
 
 @app.route('/403')
 def unAuth403():
-    return render_template('un_authorized.html')
+    return render_template('403_un_authorized.html')
 
 
 
