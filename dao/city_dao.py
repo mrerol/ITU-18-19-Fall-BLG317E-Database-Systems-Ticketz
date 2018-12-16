@@ -25,7 +25,7 @@ class CityDao(BaseDao):
     def get_all_city(self):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM city")
+            cursor.execute("SELECT code, city_name FROM city")
             cities = cursor.fetchall()
             cursor.close()
         return cities
@@ -33,7 +33,7 @@ class CityDao(BaseDao):
     def get_city(self,code):
         with dbapi2.connect(self.url) as connection:
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM city WHERE (city.code = %s)",(code,))
+            cursor.execute("SELECT code, city_name FROM city WHERE (city.code = %s)",(code,))
             city = cursor.fetchone()
             cursor.close()
         return city
