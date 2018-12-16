@@ -89,7 +89,7 @@ INIT_STATEMENTS = [
     (
         firm_id SERIAL NOT NULL PRIMARY KEY,
         name VARCHAR (20) NOT NULL,
-        password VARCHAR (20) NOT NULL,
+        password VARCHAR (50) NOT NULL,
         email VARCHAR (20) NOT NULL,
         phone VARCHAR (20) NOT NULL,
         city VARCHAR (2),
@@ -310,17 +310,17 @@ INIT_STATEMENTS = [
 
     """ INSERT INTO firms
         (firm_id, name, "password", email, phone, city, address, website, description, logo)
-        VALUES(100, 'deneme', 'deneme', 'deneme', '23452345', '10', NULL, NULL, NULL, NULL);
+        VALUES(100, 'deneme', 'deneme', 'deneme@deneme.com', '23452345', '10', NULL, NULL, NULL, NULL);
     """,
 
     """ INSERT INTO firms
         (firm_id, name, "password", email, phone, city, address, website, description, logo)
-        VALUES(101, 'deneme1', 'deneme1', 'deneme1', '234523245', '10', NULL, NULL, NULL, NULL);
+        VALUES(101, 'deneme1', 'deneme1', 'deneme1@deneme.com', '234523245', '10', NULL, NULL, NULL, NULL);
     """,
 
     """ INSERT INTO firms
         (firm_id, name, "password", email, phone, city, address, website, description, logo)
-        VALUES(102, 'deneme2', 'deneme2', 'deneme1', '234523245', '10', NULL, NULL, NULL, NULL);
+        VALUES(102, 'deneme2', 'deneme2', 'deneme2@deneme.com', '234523245', '10', NULL, NULL, NULL, NULL);
     """,
 
     """ INSERT INTO drivers 

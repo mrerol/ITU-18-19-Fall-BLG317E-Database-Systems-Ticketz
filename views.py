@@ -634,7 +634,6 @@ def firm_signup(request):
     elif request.method == "POST":
 
         firm_name = request.form["firm_name"]
-        password = request.form["password"]
         e_mail = request.form["e_mail"]
         phone = request.form["phone"]
         description = request.form["description"]
@@ -642,18 +641,21 @@ def firm_signup(request):
         address = request.form["address"]
         website = request.form["website"]
 
+        db_password = request.form['password']+salt
+        h = hashlib.md5(db_password.encode())
+
         if "logo" in request.files:
             logo = request.files["logo"]
 
             firm_db.add_firm_with_logo(
-                Firm(firm_name, password, e_mail, phone, city, address, website, description, logo.read()))
+                Firm(firm_name, h.hexdigest(), e_mail, phone, city, address, website, description, logo.read()))
         else:
-            firm_db.add_firm(Firm(firm_name, password, e_mail, phone, city, address, website, description, None))
+            firm_db.add_firm(Firm(firm_name, h.hexdigest(), e_mail, phone, city, address, website, description, None))
 
         s = request.form["s"]
 
         (temp_id,) = firm_db.get_firm_id(
-            Firm(firm_name, password, e_mail, phone, city, address, website, description, None))
+            Firm(firm_name, h.hexdigest(), e_mail, phone, city, address, website, description, None))
 
         #uploaded_files = request.form.getlist("file[]")
         for i in range(int(s) + 1):
@@ -670,9 +672,11 @@ def firm_signup(request):
 def firm_login(request):
     if request.method == "POST":
         email = request.form['e_mail']
-        password = request.form['password']
+        db_password = request.form['password']+salt
+        h = hashlib.md5(db_password.encode())
+
         try:
-            temp = firm_db.get_firm_id_login(email, password)
+            temp = firm_db.get_firm_id_login(email, h.hexdigest())
 
             if temp is not None:
                 (firm_id,) = temp
