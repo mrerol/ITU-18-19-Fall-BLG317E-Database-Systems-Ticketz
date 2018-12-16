@@ -414,7 +414,11 @@ def add_driver_page(request):
 
 def driver_list_page(id):
     #session.permanent = True
+
     drivers = driver_db.get_drivers_for_firms(id);
+    for (id, driver) in drivers:
+        driver.city_name = city_db.get_city(driver.city)[1]
+
     return render_template("driver/driver_list.html",drivers=drivers)
 
 def search_driver_page(search_for):
