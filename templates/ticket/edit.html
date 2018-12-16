@@ -63,21 +63,26 @@
               </div>
             </div>
             <!-- end seat-->
+        {% if ticket.is_cancelable %}
             <div class="input-group">
                 <input {% if ticket.is_cancelable %}
                     checked
                 {% endif %} style="margin-left: 5px; margin-right: 5px;" type="radio" name="is_cancelable" value="TRUE">  Cancellable<br>
-                <input {% if  ticket.is_cancelable != TRUE %}
+                <input {% if not  ticket.is_cancelable %}
                     checked
-                {% endif %}  style="margin-left: 5px; margin-right: 5px;"type="radio" name="is_cancelable" value="FALSE">  Can not be cancellable<br>
+                {% endif %}  style="margin-left: 5px; margin-right: 5px;" type="radio" name="is_cancelable" value="FALSE">  Can not be cancellable<br>
             </div>
+        {% else %}
+            <input hidden disabled checked style="margin-left: 5px; margin-right: 5px;" type="radio" name="is_cancelable" value="FALSE"><br>
+
+        {% endif %}
             <div class="input-group">
                 <input {% if ticket.extra_baggage %}
                     checked
                 {% endif %} style="margin-left: 5px; margin-right: 5px;" type="radio" name="extra_baggage" value="TRUE">  Extra Baggage<br>
-                <input {% if ticket.extra_baggage != TRUE %}
+                <input {% if not ticket.extra_baggage %}
                     checked
-                {% endif %} style="margin-left: 5px; margin-right: 5px;"type="radio" name="extra_baggage" value="FALSE">  Normal Baggage<br>
+                {% endif %} style="margin-left: 5px; margin-right: 5px;" type="radio" name="extra_baggage" value="FALSE">  Normal Baggage<br>
             </div>
 
 

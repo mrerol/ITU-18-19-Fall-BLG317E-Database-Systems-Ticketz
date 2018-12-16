@@ -14,7 +14,7 @@
       {% for (id, ticket) in tickets %}
         <div class="col-4 princing-item green" id="ticket-{{ ticket.ticket_id }}">
               <div class="pricing-divider ">
-                  <h3 class="text-light">{{ ticket.firm.name }}</h3>
+                  <a href="firm/{{ ticket.firm_id }}"><h3 class="text-light">{{ ticket.firm.name }}</h3></a>
                     <h4 class="my-0 display-2 text-light font-weight-normal mb-3"><span class="h3">$</span> {{ ticket.price }} <span class="h5"></span></h4>
 
               </div>
@@ -43,6 +43,9 @@
               {% if ticket.is_cancelable %}
                   <a href="/ticket/delete/{{ ticket.ticket_id }}" target="_blank" onclick="$('#ticket-{{ ticket.ticket_id }}').hide();"><button type="button"  class="btn btn-lg btn-block  btn-custom ">Cancel The Ticket </button></a>
               {% endif %}
+              <a href="/firm/expedition/{{ ticket.expedition_id }}"><button type="button" class="btn btn-lg btn-block  btn-link btn-sm ">Details About Expedition </button></a>
+
+
 
               </div>
         </div>

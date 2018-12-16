@@ -220,6 +220,7 @@ def search_ticket_page(text):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     tickets = ticket_db.search(text)
+    print(tickets)
     for (id, ticket) in tickets:
         temp_expedition = expedition_db.get_expedition(ticket.expedition_id)
         firm = firm_db.get_firm(temp_expedition.firm_id)

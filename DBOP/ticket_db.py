@@ -98,19 +98,18 @@ class ticket_database:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
                 if isInt(text):
-                    print("aloo")
 
                     cursor.execute("""select * from tickets where ticket_id in (
                                     select ticket_id
-                                    from tickets, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter 
-                                    where (firms.firm_id = tickets.firm_id and tickets.to_city = to_city.code and tickets.from_city = from_city.code and tickets.to_ter = to_ter.terminal_id and tickets.from_ter = from_ter.terminal_id ) 
+                                    from tickets, expeditions, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter 
+                                    where (firms.firm_id = tickets.firm_id and expeditions.to_city = to_city.code and expeditions.from_city = from_city.code and expeditions.to_ter = to_ter.terminal_id and expeditions.from_ter = from_ter.terminal_id ) 
                                     and 
-                                    ( (price = %s) or (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""", (int(text) ,to_search, to_search, to_search, to_search, to_search, to_search,to_search,to_search, ))
+                                    ( (tickets.price = %s) or (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""", (int(text) ,to_search, to_search, to_search, to_search, to_search, to_search,to_search,to_search, ))
                 else:
                     cursor.execute("""select * from tickets where ticket_id in (
                                     select ticket_id
                                     from tickets, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter 
-                                    where (firms.firm_id = tickets.firm_id and tickets.to_city = to_city.code and tickets.from_city = from_city.code and tickets.to_ter = to_ter.terminal_id and tickets.from_ter = tickets.terminal_id ) 
+                                    where (firms.firm_id = tickets.firm_id and expeditions.to_city = to_city.code and expeditions.from_city = from_city.code and expeditions.to_ter = to_ter.terminal_id and expeditions.from_ter = from_ter.terminal_id ) 
                                     and 
                                     (  (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""",
                                    ( to_search, to_search, to_search, to_search, to_search, to_search, to_search,
@@ -118,7 +117,7 @@ class ticket_database:
 
                 for ticket in cursor:
                     _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[9], ticket[8], ticket[7], ticket[6], ticket[4], ticket[5])
-                    tickets.append(_ticket)
+                    tickets.append((ticket[3], _ticket))
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
