@@ -20,6 +20,7 @@ from DBOP.ticket_db import ticket_database
 from dao.terminal_dao import TerminalDao
 from dao.sale_dao import SaleDao
 from dao.city_dao import CityDao
+from form_validation.terminal_validator import TerminalValidator
 
 terminalop = TerminalDao()
 
@@ -576,10 +577,15 @@ def add_terminal_page():
         if request.method == "GET": 
             return views.add_terminal_page()
         else:
-            terminalop.add_terminal(request.form['terminal_name'],request.form['terminal_code'],request.form['e_mail'],
-                                        request.form['phone'],request.form['address'],request.form['description'],
-                                        request.form['city'])
-            return redirect(url_for('admin_home_page'))
+            is_ok,err_msg = TerminalValidator.validate_add(request)
+            if is_ok:
+                terminalop.add_terminal(request.form['terminal_name'],request.form['terminal_code'],request.form['e_mail'],
+                                            request.form['phone'],request.form['address'],request.form['description'],
+                                            request.form['city'])
+                return redirect(url_for('admin_home_page'))
+            else:
+                return views.add_terminal_page(err_msg=err_msg)
+                
     else:
         return unAuth403()
 
@@ -722,6 +728,54 @@ def edit_user_page(id):
 def logout():
     session.pop('user_id')
     return redirect(url_for('home_page'))
+
+@app.route('/admin/cities', methods=['GET', 'POST'])
+def cities_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.cities_page()
+    else:
+        return unAuth403()
+
+
+@app.route('/admin/delete_city/<int:code>',  methods=['GET', 'POST'])
+def delete_city(code):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        city_db.delete_city(str(code))
+        return redirect(url_for('cities_page'))
+    else:
+        return unAuth403()
+
+@app.route('/admin/add_city', methods=['GET', 'POST'])
+def add_city_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET": 
+            return views.add_city_page()
+        else:
+            city_db.add_city_allCol(request.form['city_code'],request.form['city_name'],request.form['region'],
+                                        request.form['population'],request.form['altitude'])
+            return redirect(url_for('cities_page'))
+    else:
+        return unAuth403()
+
+
+@app.route('/admin/edit_city/<int:code>', methods=['GET', 'POST'])
+def edit_city_page(code):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        if request.method == "GET":
+            return views.edit_city_page(str(code))
+        else:
+            city_db.edit_city(code,request.form['city_code'],request.form['city_name'],request.form['region'],request.form['population'],request.form['altitude'])
+            return redirect(url_for('edit_city_page', code=code))
+    else:
+        return unAuth403()
 
 if __name__ == "__main__":
     port = app.config.get("PORT", 5000)

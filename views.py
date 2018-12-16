@@ -927,11 +927,11 @@ def signup_page():
         pass # TODO show generic pop up error
     return render_template("signup.html",error = error)
 
-def add_terminal_page():
+def add_terminal_page(err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     cities = city_db.get_all_city()
-    return render_template("terminal/add_terminal.html", cities = cities, user = user)
+    return render_template("terminal/add_terminal.html", cities = cities, user = user, err_msg =err_msg)
 
 def terminals_page():
     user_id = session.get('user_id')
@@ -994,3 +994,29 @@ def edit_user_page(id):
         return render_template("404_not_found.html")
     else:
         return render_template("user/edit_user.html", edit_user = edit_user, user = user)
+
+def cities_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    cities = city_db.get_all_cities()
+    return render_template("city/cities.html", cities = cities, user = user)
+
+def add_city_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    return render_template("city/add_city.html", user = user)
+
+def edit_city_page(code):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    city = city_db.get_city_all(str(code))
+    print("city[0]",city[0])
+    print("city[1]",city[1])
+    print("city[2]",city[2])
+    print("city[3]",city[3])
+    print("city[4]",city[4])
+    if city is None:
+        return render_template("404_not_found.html")
+    else:
+        return render_template("city/edit_city.html", city= city, user = user)
+

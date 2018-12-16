@@ -1,0 +1,77 @@
+<link href="../../static/css/admin/admin_home_page.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+{% extends "layout.html" %}
+{% block title %}Terminals{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-7">
+                <section class="content">
+                    <div class="card">
+
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1>Cities</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <table>
+                                    <tr>
+                                        <th>City Code</th>
+                                        <th>City Name</th>
+                                        <th>Population</th>
+                                        <th>Region</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+
+                                    
+                                    {% for (code, city_name, population, region,altitude) in cities %}
+                                        <tr>
+                                            <td>{{ code }}</td>
+                                            <td>{{ city_name }}</td>
+                                            <td>{{ population }}</td>
+                                            <td>{{ region }}</td>
+                                            <td><a href="/admin/edit_city/{{ code }}" class="btn btn-info">Edit</a></td>
+                                            <td><a href="/admin/delete_city/{{ code }}" class="btn btn-danger">Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    {% include "components/admin/footer.html" %}
+{% endblock %}

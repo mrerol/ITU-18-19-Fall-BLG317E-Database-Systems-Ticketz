@@ -1,0 +1,103 @@
+<link href="../../static/css/admin/admin_home_page.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+{% extends "layout.html" %}
+{% block title %}Add City{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-7">
+                <section class="content">
+                    <div class="card">
+
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1>Add City</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        {% if err_msg != "" %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ err_msg }}
+                        </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <form method="post" action="" enctype = "multipart/form-data"  role="form" name="add_city" id="add_city">
+                                <label for="city_name" >City Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input name="city_name" id="city_name" type="text" class="form-control" placeholder="Enter The City Name" maxlength="50" required>
+                                </div>
+
+                                <br>
+
+                                <label for="city_code">City Code</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input name="city_code" id="city_code" type="text" class="form-control" placeholder="Enter The City Code" maxlength="2" required>
+                                </div>
+                                
+                            </br>
+
+
+                            <label for="region">Region</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input name="region" id="region" type="text" class="form-control" placeholder="Enter The City Region" maxlength="20" required>
+                            </div>
+                            
+                        </br>
+
+                        <label for="population">Population</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input name="population" id="population" type="text" class="form-control" placeholder="Enter The Population" required>
+                        </div>
+                        
+                    </br>
+
+                    <label for="altitude">Altitude</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input name="altitude" id="altitude" type="text" class="form-control" placeholder="Enter The Altitude" required>
+                    </div>
+                    
+                </br>
+                                
+                
+                                <br>
+                                <div class="form-group">
+                                    <input type="submit" value="submit" class="btn float-right login_btn">
+                                </div>         
+                            </form>
+
+
+                            
+                        </div>
+
+                    </div>
+                </section>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+    {% include "components/admin/footer.html" %}
+{% endblock %}

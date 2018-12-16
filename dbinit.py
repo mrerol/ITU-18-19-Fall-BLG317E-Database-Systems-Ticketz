@@ -21,9 +21,9 @@ INIT_STATEMENTS = [
     (
         code VARCHAR(2) UNIQUE NOT NULL PRIMARY KEY,
         city_name VARCHAR(25) UNIQUE NOT NULL,
-        population VARCHAR(20) DEFAULT NULL,
-        region VARCHAR(20) DEFAULT NULL,
-        altitude VARCHAR(20) DEFAULT NULL     
+        population INT DEFAULT -1,
+        region VARCHAR(20) DEFAULT 'MARMARA',
+        altitude INT DEFAULT -1      
 
     )""",
 
