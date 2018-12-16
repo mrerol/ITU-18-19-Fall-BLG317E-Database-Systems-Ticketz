@@ -354,7 +354,6 @@ def login_page(request):
             db_password = request.form['password']+salt
             h = hashlib.md5(db_password.encode())
             user_id = userop.get_user_id(request.form['username'],h.hexdigest())
-            print("userid ",user_id)
             if user_id is not None:
                 session['user_id'] = user_id
                 return redirect(url_for('home_page'))
@@ -602,9 +601,7 @@ def vehicle_delete_page(vehicle_id):
 def firm_page(id):
     firm_id = session.get('firm_id')
     user_id = session.get('user_id')
-    print(user_id)
     user = userop.get_user(user_id)
-    print(user)
     if firm_id is None and user is None:
         return render_template("403_un_authorized.html")
     else:
@@ -709,7 +706,8 @@ def edit_firm_page(request):
 
     if request.method == "GET":
         firm=firm_db.get_firm(firm_id)
-        return render_template("firm/edit_firmpage.html",firm=firm)
+        cities = city_db.get_all_city()
+        return render_template("firm/edit_firmpage.html",firm=firm, cities = cities)
 
     elif request.method == "POST":
 
@@ -721,13 +719,11 @@ def edit_firm_page(request):
         city = request.form["city"]
         address = request.form["address"]
         website = request.form["website"]
-
         if "logo" in request.files:
             logo = request.files["logo"]
             firm_db.update_firm_with_logo(firm_id, Firm(firm_name, password, e_mail, phone, city, address, website, description,logo.read()))
         else:
-            firm_db.update_firm_with_logo(firm_id,  Firm(firm_name, password, e_mail, phone, city, address, website, description,None))
-
+            firm_db.update_firm(firm_id,  Firm(firm_name, password, e_mail, phone, city, address, website, description,None))
         s = request.form["s"]
         uploaded_files = request.form.getlist("file[]")
         for i in range(int(s) + 1):
@@ -736,7 +732,7 @@ def edit_firm_page(request):
                 file = request.files[temp]
                 firm_image_db.add_image(FirmImage(firm_id, file.read()))
 
-        return render_template("403_un_authorized.html")
+        return redirect(url_for('firm_page', id = firm_id))
 
     else:
         return render_template("403_un_authorized.html")
@@ -748,7 +744,6 @@ def add_expedition():
     terminals = terminalop.get_all_terminal()
     for t in terminals:
         if t[7] not in cities:
-            print(t)
             cities[t[7]] = {'city_name': t[9], 'terminals': []}
         cities[t[7]]['terminals'].append({'id': t[0], 'name': t[1]})
 
