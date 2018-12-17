@@ -16,6 +16,7 @@ INIT_STATEMENTS = [
     """DROP TABLE IF EXISTS sale cascade""",
     """DROP TABLE IF EXISTS terminal cascade""",
     """DROP TABLE IF EXISTS user_has_sale cascade""",
+    """DROP TABLE IF EXISTS images_for_firms cascade""",
 
     """CREATE TABLE IF NOT EXISTS city 
     (
@@ -132,7 +133,7 @@ INIT_STATEMENTS = [
           category VARCHAR (20) NOT NULL,
           model VARCHAR (20) NOT NULL,
           capacity INT NOT NULL,
-          production_year VARCHAR (20) NOT NULL,
+          production_year INT NOT NULL,
           production_place VARCHAR (20) NOT NULL,
           description VARCHAR (200),
           document BYTEA,
