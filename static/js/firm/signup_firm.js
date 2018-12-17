@@ -55,7 +55,7 @@ function imageAdd() {
 
 function add()
 {
-    /*
+
     var $captcha = $( '#recaptcha' ),
         response = grecaptcha.getResponse();
 
@@ -71,7 +71,7 @@ function add()
         $captcha.removeClass( "error" );
     }
 
-*/
+
     let fill = true;
     let value_length = true;
 
