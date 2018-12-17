@@ -14,6 +14,8 @@
 {% block title %}Ticketz -  Vehicle Edit{% endblock %}
 {% block body %}
     {% include "components/firm/navbar.html" %}
+
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
@@ -99,10 +101,29 @@
                                             <i class="fas fa-map-marked-alt"></i>
                                         </span>
                                     </div>
-                                    <textarea value="{{ vehicle.description }}" disabled id="js_description" class="form-control"></textarea>
+                                    <input disabled value="{{ vehicle.description }}" id="js_description" type="text" class="form-control" >
                                 </div>
                             <br>
+                                <label for="document">Document (only pdf)</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-file"></i>
+                                        </span>
+                                    </div>
 
+                                    {% if vehicle.document_link %}<a id="link1" href="{{ vehicle.document_link }}" target="_blank" class="btn btn-primary"><b>Download</b></a>
+                                        <a id="link2" onclick="$('#link1').hide();$('#link2').hide(); $('#document').show() " href="/vehicle/document/delete_document/{{vehicle_id}}" target="_blank" class="btn btn-danger">Delete</a>
+                                        <input style="display: none" type="file" id="document"  name="document" accept="application/pdf" class="form-control">
+
+                                    {% else %}
+                                        <input type="file" id="document"  name="document" accept="application/pdf" class="form-control">
+
+                                    {% endif %}
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                </div>
 
                         </div>
 

@@ -561,6 +561,7 @@ def vehicle_edit_page(request, vehicle_id):
         return render_template("403_un_authorized.html")
 
     vehicle = vehicle_db.get_vehicle(vehicle_id)
+
     if request.method == "GET":
 
         if vehicle is None:
@@ -570,15 +571,18 @@ def vehicle_edit_page(request, vehicle_id):
         flag=0
         for item in temp:
             (temp_item,)=item
-            #print(temp_item)
-            #print(driver_id)
             if temp_item == firm_id:
                     flag=1
 
         if flag != 1:
             return render_template("403_un_authorized.html")
 
-        return render_template("vehicle/vehicle_edit.html",vehicle=vehicle)
+        if vehicle.document is not None:
+            vehicle.document_link = "/vehicle/document/" + str(vehicle_id)
+        else:
+            vehicle.document_link = None
+
+        return render_template("vehicle/vehicle_edit.html",vehicle=vehicle,vehicle_id=vehicle_id)
 
     elif request.method == "POST":
 
@@ -595,7 +599,7 @@ def vehicle_edit_page(request, vehicle_id):
 
         if "document" in request.files:
             document = request.files["document"]
-            vehicle_db.update_vehicle(vehicle_id, Vehicle(vehicle_name, category, model, capacity, production_year, production_place, description,firm_id,document))
+            vehicle_db.update_vehicle_with_document(vehicle_id, Vehicle(vehicle_name, category, model, capacity, production_year, production_place, description,firm_id,document.read()))
         else:
             vehicle_db.update_vehicle(vehicle_id, Vehicle(vehicle_name, category, model, capacity, production_year,
                                                           production_place, description, firm_id))

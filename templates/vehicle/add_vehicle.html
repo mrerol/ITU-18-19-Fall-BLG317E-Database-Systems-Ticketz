@@ -14,6 +14,7 @@
 {% block title %}Ticketz -  Vehicle Add{% endblock %}
 {% block body %}
     {% include "components/firm/navbar.html" %}
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
@@ -166,7 +167,7 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                     </div>
-                                    <input name="capacity" id="capacity" type="text" class="form-control" placeholder="Capacity" maxlength="20" required>
+                                    <input name="capacity" id="capacity" type="number" class="form-control" placeholder="Capacity" maxlength="20" required>
                                 </div>
                                 <br>
 
@@ -177,7 +178,7 @@
                                             <i class="fas fa-map-marked-alt"></i>
                                         </span>
                                     </div>
-                                    <input name="production_year" id="production_year" type="text" class="form-control" placeholder="Production Year" maxlength="20" required>
+                                    <input name="production_year" id="production_year" type="number" class="form-control" placeholder="Production Year" maxlength="20" required>
                                 </div>
                                 <br>
                                 <label for="production_place">Production Place*</label>
@@ -228,10 +229,10 @@
                                 <button type="submit" class="btn btn-default" onclick="document.getElementById('add_vehicle').reset();">Clear</button>
                             </div>
 
-                            <div class="message-box-danger" style="display: none">
+                            <div class="message-box-danger-length" style="display: none">
                                 <div class="alert alert-danger alert-dismissible" style="display:block; margin: 10px;">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    Please Fill All Necessary *</div>
+                                    5-20 characters and capacity and year is number *</div>
                             </div>
                         </div>
 

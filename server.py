@@ -404,6 +404,22 @@ def vehicle_edit_page(vehicle_id):
 def vehicle_delete_page(vehicle_id):
     return views.vehicle_delete_page(vehicle_id)
 
+@app.route('/vehicle/document/delete_document/<int:vehicle_id>')
+def delete_vehicle_document(vehicle_id):
+    firm_id = session.get('firm_id')
+    (id,)=vehicle_db.get_firm_id(vehicle_id)
+    if firm_id == id:
+        vehicle_db.delete_vehicle_document(vehicle_id)
+        return "<script>alert('document has been deleted sucsessfuly'); window.close();</script>"
+    else:
+        return unAuth403()
+
+@app.route('/vehicle/document/<int:vehicle_id>', methods=['GET'])
+def vehicle_document(vehicle_id):
+    file_data = vehicle_db.get_vehicle(vehicle_id).document
+    file_name = str(vehicle_id) + '.pdf'
+    return send_file(BytesIO(file_data), attachment_filename = file_name, as_attachment=True)
+
 @app.route('/firm/add_expedition', methods=['GET', 'POST'])
 def add_expedition():
     firm_id = session.get("firm_id")

@@ -49,6 +49,15 @@ class vehicle_database:
                 cursor.close()
                 return vehicles
 
+        def get_firm_id(self, vehicle_id):
+            with dbapi2.connect(self.url) as connection:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "SELECT firm_id FROM vehicles WHERE vehicle_id = %s ", (vehicle_id,))
+                firm_id = cursor.fetchone()
+                cursor.close()
+                return firm_id
+
         def delete_vehicle(self, vehicle_id):
             try:
                 connection = dbapi2.connect(self.url)
@@ -154,6 +163,20 @@ class vehicle_database:
             finally:
                 if connection is not None:
                     connection.close()
+
+        def delete_vehicle_document(self, vehicle_id):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("UPDATE vehicles SET document = NULL WHERE vehicle_id = %s", (vehicle_id,))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+
 
         def search(self, text,firm_id):
             vehicles = []
