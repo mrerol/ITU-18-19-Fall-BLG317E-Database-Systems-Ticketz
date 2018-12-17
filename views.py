@@ -616,7 +616,6 @@ def vehicle_delete_page(vehicle_id):
 
 def delete_firm_page(firm_id):
 
-
     firm_db.delete_firm(firm_id)
 
     user_id = session.get('user_id')
@@ -776,7 +775,6 @@ def edit_firm_page(request):
         return render_template("firm/edit_firmpage.html",firm=firm, cities = cities, city_name=city_name, images=images,firm_id=firm_id)
 
     elif request.method == "POST":
-
         firm_name = request.form["firm_name"]
         password = request.form["password"]
         e_mail = request.form["e_mail"]
@@ -785,12 +783,15 @@ def edit_firm_page(request):
         city = request.form["city"]
         address = request.form["address"]
         website = request.form["website"]
+
         if "logo" in request.files:
             logo = request.files["logo"]
-            firm_db.update_firm_with_logo(firm_id, Firm(firm_name, password, e_mail, phone, city, address, website, description,logo.read()))
+            firm_db.update_firm_with_logo(firm_id, Firm(firm_name, password, e_mail, phone, city, address, website, description, logo.read()))
         else:
             firm_db.update_firm(firm_id,  Firm(firm_name, password, e_mail, phone, city, address, website, description,None))
+
         s = request.form["s"]
+
         uploaded_files = request.form.getlist("file[]")
         for i in range(int(s) + 1):
             temp = "image" + str(i)

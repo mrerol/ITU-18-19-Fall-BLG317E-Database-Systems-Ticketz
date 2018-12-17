@@ -8,10 +8,13 @@ from base64 import b64encode
 from dao.user_dao import UserDao
 from DBOP.tables.image_table import Image
 from DBOP.tables.firm_image_table import FirmImage
+from DBOP.tables.firms_table import Firm
 from DBOP.tables.hotel_table import Hotel
 from DBOP.tables.seat_table import Seat
 from DBOP.tables.ticket_table import Ticket
 from DBOP.tables.expedition_table import Expedition
+
+from DBOP.firms_db import firm_database
 from DBOP.hotel_db import hotel_database
 from DBOP.image_db import image_database
 from DBOP.firm_image_db import firm_image_database
@@ -32,6 +35,7 @@ terminalop = TerminalDao()
 
 db_hotel = hotel_database()
 db_image = image_database()
+db_firm=firm_database()
 db_image_firms = firm_image_database()
 db_expedition = expedition_database()
 db_vehicle = vehicle_database()
@@ -39,6 +43,7 @@ db_seat = seat_database()
 db_ticket = ticket_database()
 
 hotel_db = db_hotel.hotel
+firm_db=db_firm.firm
 image_db = db_image.image
 firm_image_db = db_image_firms.firm_image
 seat_db = db_seat.seat
@@ -226,7 +231,6 @@ def delete_hotel(id):
         return unAuth403()
 
 
-
 @app.route('/admin/delete_image/<int:hotel_id>/<int:image_id>')
 def delete_image(hotel_id, image_id):
     user_id = session.get('user_id')
@@ -324,24 +328,21 @@ def firm_signup():
 
 @app.route('/firm/delete_image/<int:firm_id>/<int:image_id>')
 def delete_image_firm(firm_id, image_id):
-
     firm_id_s = session.get('firm_id')
     if firm_id == firm_id_s:
         firm_image_db.delete_image(firm_id, image_id)
-        return redirect(url_for('edit_firm_page',))
+        return redirect(url_for('edit_firm_page', id=firm_id))
     else:
         return unAuth403()
-
 
 @app.route('/firm/delete_logo/<int:firm_id>')
 def delete_firm_logo(firm_id):
     firm_id_s = session.get('firm_id')
     if firm_id == firm_id_s:
-        firm_image_db.delete_image(firm_id, firm_id)
-        return redirect(url_for('edit_firm_page',))
+        firm_db.delete_firm_logo(firm_id)
+        return redirect(url_for('edit_firm_page', id=firm_id))
     else:
         return unAuth403()
-
 
 @app.route('/firm/add_driver', methods=['GET', 'POST'])
 def add_driver():

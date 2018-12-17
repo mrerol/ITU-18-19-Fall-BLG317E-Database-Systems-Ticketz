@@ -118,8 +118,7 @@ class firm_database:
             try:
                 connection = dbapi2.connect(self.url)
                 cursor = connection.cursor()
-                statement = """UPDATE firms SET name = '""" + firm.name + """' , password = '""" + firm.password +"""' , email = '""" + firm.email + """', city = ' """ + firm.city +"""' ,  address = '""" + firm.address + """', phone = '""" + firm.phone +"""', website = '""" + firm.website + """', description = '""" + firm.description + """', logo = '""" + firm.logo + """'     WHERE firm_id = """ + str(firm_id)
-                cursor.execute(statement)
+                cursor.execute("""UPDATE firms SET name = %s, password = %s, email = %s, phone = %s, city = %s, address = %s, website = %s, description = %s WHERE firm_id = %s """, (firm.name, firm.password, firm.email,firm.phone, firm.city, firm.address, firm.website, firm.descrpition, firm_id))
                 connection.commit()
                 cursor.close()
             except (Exception, dbapi2.DatabaseError) as error:
