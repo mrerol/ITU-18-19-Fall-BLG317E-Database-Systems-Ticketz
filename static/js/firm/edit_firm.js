@@ -1,4 +1,4 @@
-
+let image_count = 0
 var loadImage = function(event, i) {
     var output = document.getElementById('images'+i);
     if(event.target.files.length != 0){
@@ -99,6 +99,12 @@ function edit()
     else
         document.getElementById("e_mail").style.borderColor = "green";
 
+    if (($('#phone').val().length < 5 || $('#phone').val().length > 20 )){
+        document.getElementById("phone").style.borderColor = "red";
+        value_length = false;
+    }
+    else
+        document.getElementById("phone").style.borderColor = "green";
 
 
     if(fill && value_length){

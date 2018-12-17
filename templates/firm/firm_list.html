@@ -1,0 +1,72 @@
+<link href="../../static/css/admin/admin_home_page.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{% extends "layout.html" %}
+{% block title %}Admin Edit Firms{% endblock %}
+{% block body %}
+    {% include "components/admin/navbar.html" %}
+    <div class="container">
+        <div style="margin-top: 150px;" class="container">
+        <h3>Firm List</h3>
+        <hr>
+
+        <br>
+        <table class="table">
+            {% if firms==[] %}
+                <div class="alert alert-warning" role="alert">
+                    There is not any Firm
+                </div>
+            {% else%}
+                <thead>
+                        <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Firm Name</th>
+                        <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Address </th>
+                        <th scope="col">Website</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for (id, firm) in firms %}
+                            <tr>
+                                <th scope="row">{{id}}</th>
+                                <td>{{ firm.name}}</td>
+                                <td>{{ firm.email}}</td>
+                                <td>{{ firm.phone}}</td>
+                                <td>{{ firm.city_name}}</td>
+                                <td>{{ firm.address}}</td>
+                                <td>{{ firm.website}}</td>
+                                <td>{{ firm.description}}</td>
+                                <td><a href="/admin/delete_firm/{{ id}}" class="btn btn-danger">Delete</a></td>
+
+
+                            </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+
+            {% endif %}
+
+
+
+    </div>
+    </div>
+    {% include "components/admin/footer.html" %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+{% endblock %}
+
+
+
+
+
+

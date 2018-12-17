@@ -257,6 +257,25 @@ def home_page():
     else:
         return views.filtered_home_page()
 
+
+@app.route('/admin/firm_list', methods=['GET', 'POST'])
+def firm_list_page():
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.firm_list_page(request)
+    else:
+        return unAuth403()
+
+@app.route('/admin/delete_firm/<int:id>', methods=['GET', 'POST'])
+def delete_firm_page(id):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.delete_firm_page(id)
+    else:
+        return unAuth403()
+
 @app.route('/firm/<int:id>', methods=['GET', 'POST'])
 def firm_page(id):
     return views.firm_page(id)

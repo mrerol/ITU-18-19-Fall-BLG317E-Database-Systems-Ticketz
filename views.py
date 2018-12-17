@@ -598,6 +598,23 @@ def vehicle_delete_page(vehicle_id):
     vehicle_db.delete_vehicle(vehicle_id)
     return redirect(url_for('vehicle_list_page',id=temp_id))
 
+def delete_firm_page(firm_id):
+
+
+    firm_db.delete_firm(firm_id)
+
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    firms = firm_db.get_firms()
+
+    for (id, firm) in firms:
+        if firm.logo is not None:
+            temp = b64encode(firm.logo).decode("utf-8")
+            firm.logo = temp
+
+    cities = city_db.get_all_city()
+    return render_template("firm/firm_list.html", firms=(firms), user=user, cities=cities)
+
 def firm_page(id):
     firm_id = session.get('firm_id')
     user_id = session.get('user_id')
@@ -697,6 +714,25 @@ def firm_login(request):
 def firm_logout():
     session.pop('firm_id')
     return redirect(url_for('firm_login'))
+
+def firm_list_page(request):
+    if request.method == "GET":
+        user_id = session.get('user_id')
+        user = userop.get_user(user_id)
+        firms = firm_db.get_firms()
+
+        for (id, firm) in firms:
+            if firm.logo is not None:
+                temp = b64encode(firm.logo).decode("utf-8")
+                firm.logo = temp
+
+        firms = firm_db.get_firms()
+        for (id, firm) in firms:
+            firm.city_name = city_db.get_city(firm.city)[1]
+
+        return render_template("firm/firm_list.html", firms=(firms), user=user)
+
+    return render_template("firm/firm_list.html", firms=firms)
 
 def edit_firm_page(request):
 

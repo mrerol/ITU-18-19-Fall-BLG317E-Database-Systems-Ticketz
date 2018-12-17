@@ -11,7 +11,7 @@
 }
 </style>
 {% extends "layout.html" %}
-{% block title %}Ticketz -  Firm Signup{% endblock %}
+{% block title %}Ticketz -  Firm Edit{% endblock %}
 {% block body %}
     {% include "components/firm/navbar.html" %}
     <br>
@@ -104,6 +104,24 @@
 
                                 </div>
                             <br>
+                           <label> Photos</label>
+                            {%  for (id, image) in images %}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-image"></i>
+                                        </span>
+                                    </div>
+                                    <img class="card-img-top"  src='data:image/png;base64,{{image}}' style="height: 40%; width: 40%;">
+                                    <a href="/firm/delete_image/{{firm_id }}/{{id}}">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </span>
+                                    </a>
+                                </div>
+
+                            <br>
+                            {% endfor %}
 
                         </div>
 
@@ -120,7 +138,7 @@
 						<div class="container-fluid">
 							<div class="row mb-2">
 								<div class="col-sm-6">
-									<h1>Firm Signup</h1>
+									<h1>Firm Edit</h1>
 								</div>
 							</div>
 						</div>
@@ -138,7 +156,7 @@
 							</div>
 
 							<br>
-							<label for="firm_password" >Firm Password*</label>
+							<label for="password" >Firm Password*</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text">
@@ -166,7 +184,7 @@
 										<i class="fas fa-phone-square"></i>
 									</span>
 								</div>
-								<input name="phone" id="phone" type="text" class="form-control"  placeholder="Enter The Phone" maxlength="20" required>
+								<input name="phone" id="phone" type="number" class="form-control"  placeholder="Enter The Phone" maxlength="20" required>
 							</div>
 
 							<br>
