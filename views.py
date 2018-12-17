@@ -348,7 +348,7 @@ def edit_expeditions_page():
     return render_template("admin/expedition_list.html", user = user, expeditions=expeditions)
 
 def login_page(request):
-    error = None
+    error = ""
     if request.method == 'POST':
         try:
             db_password = request.form['password']+salt
@@ -988,7 +988,7 @@ def my_tickets():
     return render_template("ticket/my_tickets.html", user = user, tickets = tickets)
 
 def signup_page():
-    error = None
+    error = ""
     try: 
         db_password = request.form['password']+salt
         h = hashlib.md5(db_password.encode())
@@ -999,11 +999,12 @@ def signup_page():
         #session['user_id'] = userid
         return redirect(url_for('login'))
     except IntegrityError:
-        print("duplicate entry")
+        #print("duplicate entry")
         error = "duplicate entry"
         pass # TODO show error pop up for already existing user
     except:
-        print("generic errorrrrrrr",sys.exc_info())
+        #print("generic errorrrrrrr",sys.exc_info())
+        error = "error occured"
         pass # TODO show generic pop up error
     return render_template("signup.html",error = error)
 
