@@ -1,4 +1,5 @@
 let image_count = 0
+
 var loadImage = function(event, i) {
     var output = document.getElementById('images'+i);
     if(event.target.files.length != 0){
@@ -26,7 +27,6 @@ var output = document.getElementById('logo_image');
     }
 };
 
-let image_count = 0
 
 function clicked() {
     $('#logo_image').hide()
@@ -55,7 +55,6 @@ function imageAdd() {
 
     $('#images').append(a)
 }
-
 
 function edit()
 {
@@ -108,7 +107,7 @@ function edit()
 
 
     if(fill && value_length){
-        $('#s').val(image_count)
+      $('#s').val(image_count)
         document.getElementById("edit_firm").submit()
     }
     else{

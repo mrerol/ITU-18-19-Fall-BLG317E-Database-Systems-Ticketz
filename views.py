@@ -396,6 +396,7 @@ def search_firm_page(search_for):
             temp = b64encode(firm.logo).decode("utf-8")
             firm.logo = temp
 
+
     for (id, firm) in firms:
         firm.city_name = city_db.get_city(firm.city)[1]
 
@@ -756,9 +757,23 @@ def edit_firm_page(request):
         return render_template("403_un_authorized.html")
 
     if request.method == "GET":
+
         firm=firm_db.get_firm(firm_id)
+        city = city_db.get_city(firm.city)
+        (code, city_name) = city
         cities = city_db.get_all_city()
-        return render_template("firm/edit_firmpage.html",firm=firm, cities = cities)
+        tmp = firm_image_db.get_images()
+
+        if firm.logo is not None:
+            firm.logo = b64encode(firm.logo).decode("utf-8")
+
+        images = []
+        for (h_id, image_id,  im) in tmp:
+            if firm_id == h_id:
+                image = b64encode(im.file_data).decode("utf-8")
+                images.append((image_id, image) )
+
+        return render_template("firm/edit_firmpage.html",firm=firm, cities = cities, city_name=city_name, images=images,firm_id=firm_id)
 
     elif request.method == "POST":
 
