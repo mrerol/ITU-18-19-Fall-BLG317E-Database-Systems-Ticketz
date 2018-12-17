@@ -64,3 +64,16 @@ class SaleDao(BaseDao):
             terminal = cursor.fetchone()
             cursor.close()
         return terminal
+
+    def delete_sale_from_user(self, user_id):
+        try:
+            connection = dbapi2.connect(self.url)
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM user_has_sale WHERE user_id = %s", (user_id,))
+            connection.commit()
+            cursor.close()
+        except (Exception, dbapi2.DatabaseError) as error:
+            print(error)
+        finally:
+            if connection is not None:
+                connection.close()
