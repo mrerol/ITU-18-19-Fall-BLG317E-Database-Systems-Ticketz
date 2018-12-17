@@ -41,14 +41,14 @@ function add()
     else
         document.getElementById("model").style.borderColor = "green";
 
-        if (($('#capacity').val().length < 5 || $('#capacity').val().length > 20 )){
+        if (($('#capacity').val().length < 1 || $('#capacity').val().length > 20 )){
         document.getElementById("capacity").style.borderColor = "red";
         value_length = false;
     }
     else
         document.getElementById("capacity").style.borderColor = "green";
 
-    if (($('#production_year').val().length < 5 || $('#production_year').val().length > 20 )){
+    if (($('#production_year').val().length < 1 || $('#production_year').val().length > 20 )){
         document.getElementById("production_year").style.borderColor = "red";
         value_length = false;
     }

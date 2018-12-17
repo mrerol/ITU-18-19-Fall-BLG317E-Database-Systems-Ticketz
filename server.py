@@ -414,11 +414,6 @@ def delete_vehicle_document(vehicle_id):
     else:
         return unAuth403()
 
-@app.route('/vehicle/document/<int:vehicle_id>', methods=['GET'])
-def vehicle_document(vehicle_id):
-    file_data = vehicle_db.get_vehicle(vehicle_id).document
-    file_name = str(vehicle_id) + '.pdf'
-    return send_file(BytesIO(file_data), attachment_filename = file_name, as_attachment=True)
 
 @app.route('/firm/add_expedition', methods=['GET', 'POST'])
 def add_expedition():

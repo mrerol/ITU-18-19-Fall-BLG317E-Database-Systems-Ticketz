@@ -599,6 +599,7 @@ def vehicle_edit_page(request, vehicle_id):
 
         if "document" in request.files:
             document = request.files["document"]
+
             vehicle_db.update_vehicle_with_document(vehicle_id, Vehicle(vehicle_name, category, model, capacity, production_year, production_place, description,firm_id,document.read()))
         else:
             vehicle_db.update_vehicle(vehicle_id, Vehicle(vehicle_name, category, model, capacity, production_year,

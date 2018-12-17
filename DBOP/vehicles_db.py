@@ -58,6 +58,7 @@ class vehicle_database:
                 cursor.close()
                 return firm_id
 
+
         def delete_vehicle(self, vehicle_id):
             try:
                 connection = dbapi2.connect(self.url)
