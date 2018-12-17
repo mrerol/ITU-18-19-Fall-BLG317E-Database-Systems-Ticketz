@@ -323,6 +323,15 @@ def firm_signup():
 def add_driver():
     return views.add_driver_page(request)
 
+@app.route('/search_firms/<string:search_for>', methods=['GET', 'POST'])
+def search_firm_page(search_for):
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+    if user and user[-1]:
+        return views.search_firm_page(search_for)
+    else:
+        return unAuth403()
+
 
 @app.route('/firm/driver_list/<int:id>', methods=['GET', 'POST'])
 def driver_list_page(id):

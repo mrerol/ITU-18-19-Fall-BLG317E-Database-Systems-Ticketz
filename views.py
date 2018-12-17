@@ -385,6 +385,21 @@ def hotel_page(id):
         (code, city_name) = city
         return render_template("hotel/hotels.html", hotel = temp_hotel, images = toSend, city_name = city_name, user = user)
 
+def search_firm_page(search_for):
+
+    firms = firm_db.search(search_for)
+    user_id = session.get('user_id')
+    user = userop.get_user(user_id)
+
+    for (id, firm) in firms:
+        if firm.logo is not None:
+            temp = b64encode(firm.logo).decode("utf-8")
+            firm.logo = temp
+
+    for (id, firm) in firms:
+        firm.city_name = city_db.get_city(firm.city)[1]
+
+    return render_template("firm/firm_list.html", firms=(firms), user=user)
 
 def add_driver_page(request):
     #session.permanent = True

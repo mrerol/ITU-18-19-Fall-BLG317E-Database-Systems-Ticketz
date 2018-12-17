@@ -31,6 +31,9 @@
                     {% if user %}
                         <option value="ticket" > Tickets</option>
                     {% endif %}
+                    {% if user[-1] %}
+                        <option value="firms" > Firms</option>
+                    {% endif %}
                     <option value="hotel"> Hotels</option>
                 </select>
                 <input name="search" id="search" type="text" class="form-control border border-right-0" placeholder="Search...">
