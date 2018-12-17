@@ -1091,7 +1091,13 @@ def add_city_page(err_msg=""):
 def edit_city_page(code,err_msg=""):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
-    city = city_db.get_city_all(str(code))
+    str_code = ""
+    if int(code) < 10 and int(code) > 0:
+        str_code = "0"+str(code)
+        city = city_db.get_city_all(str_code)
+    else:
+        city = city_db.get_city_all(str(code))
+    
     if city is None:
         return render_template("404_not_found.html")
     else:

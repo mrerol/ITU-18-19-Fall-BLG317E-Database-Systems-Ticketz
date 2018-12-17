@@ -69,7 +69,7 @@ class CityDao(BaseDao):
         try:
             connection = dbapi2.connect(self.url)
             cursor = connection.cursor()
-            cursor.execute("""UPDATE city SET code = %s, city_name = %s, region = %s, population = %s, altitude = %s WHERE code = %s """, (city_code, city_name, region, population, altitude, str(code),))
+            cursor.execute("""UPDATE city SET code = %s, city_name = %s, region = %s, population = %s, altitude = %s WHERE code = %s """, (city_code, city_name, region, population, altitude, code,))
             connection.commit()
             cursor.close()
         except (Exception, dbapi2.DatabaseError) as error:

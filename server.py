@@ -849,8 +849,14 @@ def delete_city(code):
     user_id = session.get('user_id')
     user = userop.get_user(user_id)
     if user and user[-1]:
-        city_db.delete_city(str(code))
-        return redirect(url_for('cities_page'))
+        str_code = ""
+        if int(code) < 10 and int(code) > 0:
+            str_code = "0"+str(code)
+            city_db.delete_city(str_code)
+            return redirect(url_for('cities_page'))
+        else:
+            city_db.delete_city(str(code))
+            return redirect(url_for('cities_page'))
     else:
         return unAuth403()
 
@@ -883,8 +889,9 @@ def edit_city_page(code):
         else:
             is_ok,err_msg = CityValidator.validate_add(request)
             if is_ok:
-                city_db.edit_city(code,request.form['city_code'],request.form['city_name'],request.form['region'],request.form['population'],request.form['altitude'])
-                return redirect(url_for('edit_city_page', code=code))
+                str_code = str(code)
+                city_db.edit_city(str_code,request.form['city_code'],request.form['city_name'],request.form['region'],request.form['population'],request.form['altitude'])
+                return redirect(url_for('edit_city_page', code=request.form['city_code']))
             else:
                 return views.edit_city_page(str(code), err_msg=err_msg)
     else:

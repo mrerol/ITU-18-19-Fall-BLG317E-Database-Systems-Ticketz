@@ -13,9 +13,9 @@ class CityValidator(BaseValidator):
         try:
             BaseValidator.word_in_range(request,'city_code' ,0,3, "City Code")
             BaseValidator.word_in_range(request,'city_name',3,25, "City Name")
-            BaseValidator.word_in_range(request,'population',10,100000000, "Population")
+            #BaseValidator.word_in_range(request,'population',10,100000000, "Population")
             BaseValidator.word_in_range(request,'region',5,50, "Region")
-            BaseValidator.word_in_range(request,'altitude',10,10000, "Altitude")
+            #BaseValidator.word_in_range(request,'altitude',10,10000, "Altitude")
             return True,""
         except Exception as e:
             return False,str(e)
