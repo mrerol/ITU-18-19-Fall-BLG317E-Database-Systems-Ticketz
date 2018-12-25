@@ -75,7 +75,7 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -150,8 +150,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ITUCSDB18NN', 'ITUCSDB18NN Documentation',
-     author, 'ITUCSDB18NN', 'One line description of project.',
+    (master_doc, 'ITUCSDB1835', 'ITUCSDB1835 Documentation',
+     author, 'ITUCSDB1835', 'Online Flight Ticket System.',
      'Miscellaneous'),
 ]
 

@@ -1,19 +1,25 @@
-.. ITUCSDB18NN documentation master file, created as a template.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Welcome to itucsdb35's documentation!
+=====================================
 
-Welcome to ITUCSDB18NN's documentation!
-=======================================
+:Team: Ticketz
+
+:Members:
+
+   * Ufuk DEMİR            150170710
+   * Muhammed Raşit EROL   150150023
+   * Abdullah AKGÜL        150150133
+
+
+Ticketz allows users to buy flight tickets.
+There are two types of users which are users and firms.
+Firms add expeditions to sell.
+Users buy ticket for expedition.
+Also, Ticketz provide hotel list for users that bought ticket
+
+Contents:
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   user/index
+   developer/index
