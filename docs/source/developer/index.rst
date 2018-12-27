@@ -39,19 +39,20 @@ Table Distribution
 Code
 ----
 
-There are two types of database class definitions that are listed below. ::
+There are two types of database class definitions that are listed below.
 
-   .. code-block:: python
 
-      class hotel_database:
+.. code-block:: python
+
+    class hotel_database:
         def __init__(self):
             self.hotel = self.Hotel()
 
 
 
-::
 
-   .. code-block:: python
+
+.. code-block:: python
 
       class CityDao(BaseDao):
         def __init__(self):
