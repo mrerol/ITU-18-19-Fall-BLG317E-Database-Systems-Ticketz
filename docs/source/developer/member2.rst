@@ -1,3 +1,4 @@
+========================================
 Parts Implemented by Muhammed Raşit EROL
 ========================================
 
@@ -10,7 +11,7 @@ Furthermore, ER diagrams of all tables can be seen in
 Figure 2, Figure 2, Figure 3, Figure 4 and Figure 5.
 
 firms Table
-""""""""""""
+============
 
 firms table is created for adding and editing expeditions.
 Hence, a user is able to see expeditions which are created by firms.
@@ -454,3 +455,100 @@ The code of validation of signup function with JavaScript can be seen in code bl
        }
 
     }
+
+Login
+^^^^^^^^
+
+There is a login system for firms, which is similar to user login system.
+The firm login system is used for entering the system with a firm nor regular user.
+This is performed with the read operation of the firms table.
+After validation controls, a firm can login to the system.
+One the validation control is comparing hashed password with the coming hashed password from database.
+If validation is not correct then related error pages are returned.
+The code of login function can be seen in code block below.
+
+.. code-block:: python
+
+    def firm_login(request):
+        if request.method == "POST":
+            email = request.form['e_mail']
+            db_password = request.form['password']+salt
+            h = hashlib.md5(db_password.encode())
+
+            try:
+                temp = firm_db.get_firm_id_login(email, h.hexdigest())
+
+                if temp is not None:
+                    (firm_id,) = temp
+                    print(firm_id)
+                    session.permanent = True
+                    session['firm_id'] = firm_id
+                    return redirect(url_for('firm_page', id=firm_id))
+                else:
+                    return render_template("firm/login.html", error = "Wrong e mail or password")
+            except:
+                return render_template("firm/login.html", error="Something wents wrong please try again")
+
+
+        elif request.method == "GET":
+            return render_template("firm/login.html", error = None)
+        else:
+            return render_template("404_not_found.html")
+
+
+Moreover, some of the validations which are related to quality of input.
+This validation is performed with the JavaScript code.
+The code of validation of login function with JavaScript can be seen in code block below.
+
+.. code-block:: javascript
+
+    function login()
+    {
+        var $captcha = $( '#recaptcha' ),
+            response = grecaptcha.getResponse();
+
+        if (response.length === 0) {
+            $( '.msg-error').text( "reCAPTCHA is mandatory" );
+            if( !$captcha.hasClass( "error" ) ){
+                $captcha.addClass( "error" );
+                return false;
+            }
+        }
+        else {
+            $( '.msg-error' ).text('');
+            $captcha.removeClass( "error" );
+        }
+
+
+        let fill = true;
+        let value_length = true;
+
+        if($('#e_mail').val().length < 5 || $('#e_mail').val().length > 20 ){
+            document.getElementById("e_mail").style.borderColor = "red";
+            value_length = false;
+        }
+        else
+            document.getElementById("e_mail").style.borderColor = "green";
+
+        if (($('#password').val().length < 5 || $('#password').val().length > 20 )){
+            document.getElementById("password").style.borderColor = "red";
+            value_length = false;
+        }
+        else
+            document.getElementById("password").style.borderColor = "green";
+
+
+        if(fill && value_length){
+            document.getElementById("login_firm").submit()
+        }
+        else{
+                $(".message-box-danger-length").toggle(750, function () {
+                    setTimeout(function () {
+                        $(".message-box-danger-length").toggle(750);
+                    }, 2500);
+                });
+
+       }
+
+    }
+
