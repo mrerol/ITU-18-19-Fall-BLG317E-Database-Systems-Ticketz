@@ -1,5 +1,5 @@
-Developer Guide
-===============
+User Guide
+==========
 
 Database Design
 ---------------
