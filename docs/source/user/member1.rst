@@ -5,6 +5,7 @@ In this section, there are three main page that are user pages, terminal pages a
 
 Signup Pages
 ------------------
+
 User has to give all of the requested information in the signup page. This information will be store in the database. Signup page can be seen below.
 
 .. figure:: images/member1/signup.png
@@ -16,6 +17,7 @@ User has to give all of the requested information in the signup page. This infor
 
 Login Page
 ------------------
+
 To access the Ticketz, user has to be logged in successfully. If user tries to access a page that requires an authorization without being logged in, system redirects you to the unauth page. This implemented for preventing unauthorized access to Ticketz. Login page can be seen below.
 
 .. figure:: images/member1/login.png
@@ -27,6 +29,7 @@ To access the Ticketz, user has to be logged in successfully. If user tries to a
 
 Add User
 ------------------
+
 With this form only admin can add user to the database. The interface of adding user form is given in Figure 3.
 
 .. figure:: images/member1/add_user.png
@@ -36,8 +39,10 @@ With this form only admin can add user to the database. The interface of adding 
      Figure 3 – Add User Form
 
 With this interface user can easily added to database. Admin must fill all blank for adding user to the database.
+
 Users Page
 ------------------
+
 In this page admin can see all registered user. And at the same time admin can delete or edit the user. This page can be seen in Figure 4.
 
 .. figure:: images/member1/users_page.PNG
@@ -49,6 +54,7 @@ In this page admin can see all registered user. And at the same time admin can d
 
 Edit User
 ------------------
+
 With this form only admin can edit the selected user information on the database. The interface of editing user form is given in Figure 5.
 
 .. figure:: images/member1/edit_user.png
@@ -62,6 +68,7 @@ This page is pre-filled with the selected user information. With this interface 
 
 Add Terminal
 ------------------
+
 With this form only admin can add terminal to the database. The interface of adding terminal form is given in Figure 6.
 
 .. figure:: images/member1/add_terminal.PNG
@@ -98,6 +105,7 @@ This page is pre-filled with the selected terminal information. With this interf
 
 Add City
 ------------------
+
 Only admin can add terminal to the database with this form. The interface of adding city form is given in Figure 9.
 
 .. figure:: images/member1/add_city.PNG
@@ -136,6 +144,7 @@ This page is pre-filled with the selected city information. With this interface 
 
 Add Sale
 ------------------
+
 Only admin can add terminal to the database at this page. The interface of adding sae form is given in Figure 12.
 
 .. figure:: images/member1/add_sale.png
@@ -160,6 +169,7 @@ In this page admin can see all sales. And at the same page admin can delete or e
 
 Edit Sale
 ------------------
+
 With this form only admin can edit the selected sale information on the database. The interface of editing sale form is given in Figure 14.
 
 .. figure:: images/member1/edit_sale.PNG

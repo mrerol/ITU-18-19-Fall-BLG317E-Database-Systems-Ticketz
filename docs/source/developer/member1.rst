@@ -45,6 +45,7 @@ UserDao class is derived from BaseDao class.
 
 Insert
 ^^^^^^^^
+
 There is a function which is add_user. This function can be seen below. It is used for adding information of new user. It takes parameters from the sign up in Sign up page and adds user form in admin page. After the adding user to the database, the function returns the user_id of the registered user.
 
 .. code-block:: python
@@ -117,6 +118,7 @@ There is a function which is get_all_user. This function can be seen below. It i
 
 Update
 ^^^^^^^^
+
 There is a function which is edit _user. This function can be seen below. It is used for update the user information from database. It takes parameters from the edit user form. Only admin can edit the user information from admin page. If the one of the parameters which represents the user information are not in the database exception is thrown with a message.
 
 .. code-block:: python
@@ -166,6 +168,7 @@ There are three system in this section, which provide better workflow for the ap
 
 Signup
 ^^^^^^^^
+
 There is a signup system for users, which is different than firms signup system. The signup system is used adding new users to the application. This is performed with the insert operation of the users table. After validation controls, a user is added to the system.. If validation is not correct then related error messages are returned. In the signup system, also password is stored after hashing. The code of signup function can be seen in code block below.
 
 .. code-block:: python
@@ -195,6 +198,7 @@ There is a signup system for users, which is different than firms signup system.
 
 Login
 ^^^^^^^^
+
 There is a login system for users, which is similar to firm login system. The user login system is used for entering the system with a regular user. This is performed with the read operation of the users table. After validation controls, a user can login to the system. One the validation control is comparing hashed password with the coming hashed password from database. If validation is not correct then related error messages are returned. The code of login function can be seen in code block below.
 
 .. code-block:: python
@@ -299,6 +303,7 @@ TerminalDao class is derived from BaseDao class.
 
 Insert
 ^^^^^^^^
+
 There is a function which is add_terminal. This function can be seen below. It is used for adding information of new terminal. It takes parameters from the terminal form in admin page.
 
 .. code-block:: python
@@ -405,6 +410,7 @@ There is a function which is get_all_terminal_v2. This function can be seen belo
 
 Update
 ^^^^^^^^
+
 There is a function which is edit _terminal. This function can be seen below. It is used for update the terminal information from database. It takes parameters from the edit terminal form. Only admin can edit the terminal information from admin page. If the one of the parameters which represents the terminal information are not in the database exception is thrown with a message.
 
 .. code-block:: python
@@ -486,6 +492,7 @@ SaleDao class is derived from BaseDao class.
 
 Insert
 ^^^^^^^^
+
 There is a function which is add_sale. This function can be seen below. It is used for adding information of new sale. It takes parameters from the add sale form in admin page.
 
 .. code-block:: python
@@ -543,6 +550,7 @@ There is a function which is get_sale. This function can be seen below. It is us
 
 Update
 ^^^^^^^^
+
 There is a function which is edit _sale. This function can be seen below. It is used for update the sale information from database. It takes parameters from the edit sale form. Only admin can edit the all sale information in the database from admin page. If one of the parameters which represents the sale information are not in the database exception is thrown with a message.
 
 .. code-block:: python
@@ -623,6 +631,7 @@ CityDao class is derived from BaseDao class
 
 Insert
 ^^^^^^^^
+
 There is a function which is add_city. This function can be seen below. It is used for adding information of new city. It takes parameters which are code and city name which are not null columns from the add city form in admin page.
 
 .. code-block:: python
@@ -713,6 +722,7 @@ There is a function which is get_city_all. This function can be seen below. It i
 
 Update
 ^^^^^^^^
+
 There is a function which is edit _city. This function can be seen below. It is used for update the city information from database. It takes parameters from the edit city form. Only admin can edit the city information from admin page. If the one of the parameters which represents the city information are not in the database exception is thrown with a message.
 
 .. code-block:: python
@@ -794,6 +804,7 @@ UserHasSaleDao class is derived from BaseDao class.
 
 Insert
 ^^^^^^^^
+
 There is a function which is add_sale. This function can be seen below. It is used for adding information of new sale. It takes parameters from the add sale form.
 
 .. code-block:: python
@@ -824,6 +835,7 @@ There is a function which is get_user_sale. This function can be seen below. It 
 
 Update
 ^^^^^^^^
+
 There is a function which is edit _sale. This function can be seen below. It is used for update the sale information from database. Only admin can edit the sale information in the database from admin page. If one of the parameters which represents the sale information are not in the database exception is thrown with a message.
 
 .. code-block:: python
