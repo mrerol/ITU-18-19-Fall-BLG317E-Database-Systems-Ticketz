@@ -17,6 +17,7 @@ Add Expedition
 
 Only firms can add expeditions. The interface of adding expedition is given in Figure 1.
 
+
 .. figure:: images/member3/expeditions/add_expedition.png
      :scale: 75 %
      :alt: Add Expedition
