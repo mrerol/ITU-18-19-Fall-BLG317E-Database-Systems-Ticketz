@@ -109,7 +109,7 @@ add, list, delete and edit drivers for firms.
 Driver Add Page
 ^^^^^^^^^^^^^^^^^
 
-deneme
+A firm can add driver to the system with the driver add page.
 
 .. figure:: images/member2/add_driver.PNG
      :scale: 75 %
@@ -121,36 +121,39 @@ deneme
 Driver List Page
 ^^^^^^^^^^^^^^^^^
 
-deneme
+A firm can list drivers of its with the driver list page.
+In this page, it is possible to delete and edit the drivers.
+Deletion is performed immediately and editing is performed in
+driver edit page.
 
 .. figure:: images/member2/driver_list.PNG
      :scale: 75 %
-     :alt: Firm List Page
+     :alt: Driver List Page
 
-     Figure 7 - Firm List Page
+     Figure 7 - Driver List Page
 
 
 Driver Edit page
 ^^^^^^^^^^^^^^^^^
 
-deneme
+In this page, a firm can edit its driver's information.
 
 .. figure:: images/member2/edit_driver.PNG
      :scale: 75 %
-     :alt: Firm List Page
+     :alt: Driver Edit Page
 
-     Figure 8 - Firm List Page
+     Figure 8 - Driver Edit Page
 
 Vehicle Pages
 ------------------
 
-Driver are members of the firms. Hence, a firm can have driver. It is possible to
-add, list, delete and edit drivers for firms.
+Vehicles are members of the firms. Hence, a firm can have vehicle. It is possible to
+add, list, delete and edit vehicles for firms.
 
 Vehicle Add Page
 ^^^^^^^^^^^^^^^^^
 
-deneme
+A firm can add vehicle to the system with the vehicle add page.
 
 .. figure:: images/member2/add_vehicle.PNG
      :scale: 75 %
@@ -162,7 +165,10 @@ deneme
 Vehicle List Page
 ^^^^^^^^^^^^^^^^^
 
-deneme
+A firm can list vehicles of its with the vehicle list page.
+In this page, it is possible to delete and edit the vehicles.
+Deletion is performed immediately and editing is performed in
+vehicle edit page.
 
 .. figure:: images/member2/vehicle_list.PNG
      :scale: 75 %
@@ -174,7 +180,7 @@ deneme
 Vehicle Edit page
 ^^^^^^^^^^^^^^^^^
 
-deneme
+In this page, a firm can edit its vehicle's information.
 
 .. figure:: images/member2/edit_vehicle.PNG
      :scale: 75 %
