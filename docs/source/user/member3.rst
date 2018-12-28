@@ -382,17 +382,108 @@ In Figure 17, "çorum" is searched and and there is no related hotel.
 
 
 
-Other Components
+Other Pages
 ----------------
 
-bla bla bla
+Other parts handled by Abdullah AKGÜL is given below.
 
-error handling pages
+Admin Home Page
 ^^^^^^^^^^^^^^^^^^^^
 
-bla bla bla
+In admin home page, the parts implemented by Abdullah AKGÜL given in Figure 18.
+
+.. figure:: images/member3/others/admin_home_page.png
+     :scale: 75 %
+     :alt: Admin Home Page
+
+     Figure 17 - Admin Home Page
+
+With this interface, admin can easily see the list of reach the related pages about
+hotels and expeditions.
+
+Error Pages
+^^^^^^^^^^^^^^^^^^^^
+
+There are some error pages, that are implemented by Abdullah AKGÜL, listed below.
+
+404 Not Found Error Page
+....................................
+
+404 not found error page is given in Figure 18.
+
+.. figure:: images/member3/others/404.png
+     :scale: 75 %
+     :alt: 404 Not Found Error Page
+
+     Figure 18 - 404 Not Found Error Page
+
+This page is served when user try to enter an endpoint that is not defined.
+In this page, there is link for home page.
+
+
+403 UnAuthorized Error Page
+.......................................
+
+
+404 not found error page is given in Figure 19.
+
+.. figure:: images/member3/others/403.png
+     :scale: 75 %
+     :alt: 403 UnAuthorized Error Page
+
+     Figure 19 - 403 UnAuthorized Error Page
+
+This page is served when user try to go a page that has not permission.
+In this page, there is link for home page.
+
+
+505 Internal Server Error Page
+....................................
+
+
+505 internal server error page is given in Figure 20.
+
+.. figure:: images/member3/others/505.png
+     :scale: 75 %
+     :alt: 505 Internal Server Error Page
+
+     Figure 20 - 505 Internal Server Error Page
+
+This page is served when unexpected things happens.
+In this page, there is link for home page.
 
 Navbar
 ^^^^^^^^^^^^^
 
-bla bla bla
+
+The dynamic navbar is given in Figure 20, Figure 21 and Figure 22.
+
+.. figure:: images/member3/others/navbar1.png
+     :scale: 75 %
+     :alt: Navbar 1
+
+     Figure 20 - Navbar 1
+
+
+.. figure:: images/member3/others/navbar2.png
+     :scale: 75 %
+     :alt: Navbar 2
+
+     Figure 21 - Navbar 2
+
+
+.. figure:: images/member3/others/navbar3.png
+     :scale: 75 %
+     :alt: Navbar 3
+
+     Figure 22 - Navbar 3
+
+In Figure 20, navbar for not logged user. Not logged user can not search on tickets.
+Also there is links for login and register to not logged user.
+
+In Figure 21, navbar for user that is admin. Admin can search on tickets, expeditions, hotels and firms.
+Also there is links for admin home page and profile page.
+
+
+In Figure 222, navbar for  user. Not logged user can not search on firms.
+Also there is links for profile page and my tickets page.
