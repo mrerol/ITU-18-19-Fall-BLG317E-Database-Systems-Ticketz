@@ -103,12 +103,80 @@ Operations on the hotels table is listed below.
 Insert
 ______
 
-Insertion of hotel on hotels table can be performed with two ways.
+
+Before insertion, inputs are validate in front side with JavaScript. The validation code is given below;
+
+.. code-block:: javascript
+
+    function add()
+    {
+
+        var $captcha = $( '#recaptcha' ),
+            response = grecaptcha.getResponse();
+
+        if (response.length === 0) {
+            $( '.msg-error').text( "reCAPTCHA is mandatory" );
+            if( !$captcha.hasClass( "error" ) ){
+                $captcha.addClass( "error" );
+                return false;
+            }
+        }
+        else {
+            $( '.msg-error' ).text('');
+            $captcha.removeClass( "error" );
+        }
+
+
+        let deneme = true
+        if ($('#hotel_name').val()==""){
+            document.getElementById("hotel_name").style.borderColor = "red";
+            deneme = false
+
+        }
+        if ($('#e_mail').val()==""){
+            document.getElementById("e_mail").style.borderColor = "red";
+            deneme = false
+        }
+        if ($('#description').val()==""){
+            document.getElementById("description").style.borderColor = "red";
+            deneme = false
+        }
+
+        if ($('#address').val()==""){
+            document.getElementById("address").style.borderColor = "red";
+            deneme = false
+        }
+        if ($('#phone').val()==""){
+            document.getElementById("phone").style.borderColor = "red";
+            deneme = false
+        }
+
+
+        if(deneme){
+            $('#s').val(image_count)
+            document.getElementById("add_hotel").submit()
+        }
+        else{
+            $(".message-box-danger").toggle(750, function () {
+                setTimeout(function () {
+                    $(".message-box-danger").toggle(750);
+                }, 2500);
+            });
+
+
+            return false
+        }
+
+    }
+
+
+After passing validation, insertion of hotel on hotels table can be performed with two ways.
 The one of inserting is inserting hotel without logo attribute.
 With this way, logo attribute will be NULL.
 Related function is given below as add_hotel.
 Other way is inserting hotel with logo attribute. This method is given below as add_hotel_with_logo.
 The data for logo is provided with given below code.
+
 
 .. code-block:: python
 
@@ -221,7 +289,74 @@ as picture format, the data of the logo decoded with given code below.
 Update
 ______
 
-Update hotel operation can be handled with given code below;
+
+Before updating, inputs are validate in front side with JavaScript. The validation code is given below;
+
+.. code-block:: javascript
+
+    function edit()
+    {
+
+        var $captcha = $( '#recaptcha' ),
+        response = grecaptcha.getResponse();
+
+        if (response.length === 0) {
+            $( '.msg-error').text( "reCAPTCHA is mandatory" );
+            if( !$captcha.hasClass( "error" ) ){
+                $captcha.addClass( "error" );
+                return false;
+            }
+        }
+        else {
+            $( '.msg-error' ).text('');
+            $captcha.removeClass( "error" );
+        }
+
+        deneme = true
+        if ($('#hotel_name').val()==""){
+            document.getElementById("hotel_name").style.borderColor = "red";
+            deneme = false
+
+        }
+        if ($('#e_mail').val()==""){
+            document.getElementById("e_mail").style.borderColor = "red";
+            deneme = false
+        }
+        if ($('#description').val()==""){
+            document.getElementById("description").style.borderColor = "red";
+            deneme = false
+        }
+
+        if ($('#address').val()==""){
+            document.getElementById("address").style.borderColor = "red";
+            deneme = false
+        }
+        if ($('#phone').val()==""){
+            document.getElementById("phone").style.borderColor = "red";
+            deneme = false
+        }
+
+
+        if(deneme){
+            $('#s').val(image_count)
+            document.getElementById("edit_hotel").submit()
+        }
+        else{
+            $(".message-box-danger").toggle(750, function () {
+                setTimeout(function () {
+                    $(".message-box-danger").toggle(750);
+                }, 2500);
+            });
+
+
+            return false
+        }
+
+    }
+
+
+
+After validation of inputs, update hotel operation can be handled with given code below;
 
 .. code-block:: python
 
@@ -255,11 +390,11 @@ As seen on code, there are two method for updating hotel table.
 
 update_hotel method takes hotel_id and hotel class as parameter.
 This method updates the hotel whose hotel_id is equal to taken hotel_id
-with taken hotel class attributes but without logo attribute.
+of taken hotel class but without logo attribute.
 
 update_hotel_with_logo method takes hotel_id and hotel class as parameter.
 This method updates the hotel whose hotel_id is equal to taken hotel_id
-with taken hotel class attributes.
+of taken hotel class.
 
 After update operations, hotel table will be updated.
 
@@ -340,6 +475,7 @@ is used with LOWER function. This method returns array of tuple that has hotel_i
 that has that string in anywhere on hotel information.
 
 
+
 Expeditions Table
 -----------------
 
@@ -348,7 +484,7 @@ expeditions table is used for store the information about expeditions.
 The attributes of expeditions table are expedition_id, from_city, from_ter,
 to_city, to_ter, dep_time, arr_time, date, price, plane_id, current_cap, total_cap,
 total_cap, driver_id, firm_id and document.
-firm_id is primary key for hotels table.
+expedition_id is primary key for expeditions table.
 There are six more key attributes
 that are from_city, to_city, from_ter, to_ter, plane_id and driver_id.
 from_city and to_city attributes are foreign keys and the reference of the
@@ -372,7 +508,7 @@ vehicles table is not primary key.
 
      Figure 3 - expeditions table
 
-Creation of expeditions table and types of attributes of hotels table are given below;
+Creation of expeditions table and types of attributes of expeditions table are given below;
 
 .. code-block:: sql
 
@@ -457,7 +593,204 @@ Operations on the expeditions table is listed below.
 Insert
 ______
 
-Insertion of expedition on expeditions table can be performed with two ways.
+
+Before insertion, inputs are validate in front side with JavaScript. The validation code is given below;
+
+.. code-block:: javascript
+
+
+    function add()
+    {
+
+        var $captcha = $( '#recaptcha' ),
+            response = grecaptcha.getResponse();
+
+        if (response.length === 0) {
+            $( '.msg-error').text( "reCAPTCHA is mandatory" );
+            if( !$captcha.hasClass( "error" ) ){
+                $captcha.addClass( "error" );
+                return false;
+            }
+        }
+        else {
+            $( '.msg-error' ).text('');
+            $captcha.removeClass( "error" );
+        }
+
+        let deneme = true
+
+        if ($('#from').val()== null){
+            document.getElementById("from").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#from_ter').val()=="" || $('#from_ter').val()== null){
+            document.getElementById("from_ter").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#to').val()==null){
+            document.getElementById("to").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#to_ter').val()=="" || $('#to_ter').val()== null){
+            document.getElementById("to_ter").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#dep_time').val()=="" || $('#dep_time').val()== null) {
+
+            document.getElementById("dep_time").style.borderColor = "red";
+            deneme = false
+        }
+
+
+        if ($('#arr_time').val()=="" || $('#arr_time').val()== null){
+            document.getElementById("arr_time").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        let value = $('#dep_time').val()
+        arr = value.split(':')
+        if(arr.length != 2){
+            document.getElementById("dep_time").style.borderColor = "red";
+            deneme = false
+        }
+        else{
+            if(arr[0].length != 2 || arr[0] < '00' || arr[0] > '23' ){
+                document.getElementById("dep_time").style.borderColor = "red";
+                deneme = false
+            }
+            else{
+                if(arr[1].length != 2 || arr[1] < '00' || arr[1] > '59'){
+                    document.getElementById("dep_time").style.borderColor = "red";
+                    deneme = false
+                }
+            }
+        }
+
+        value = $('#arr_time').val()
+        arr = value.split(':')
+        if(arr.length != 2){
+            document.getElementById("arr_time").style.borderColor = "red";
+            deneme = false
+        }
+        else{
+            if(arr[0].length != 2 || arr[0] < '00' || arr[0] > '23' ){
+                document.getElementById("arr_time").style.borderColor = "red";
+                deneme = false
+            }
+            else{
+                if(arr[1].length != 2 || arr[1] < '00' || arr[1] > '59'){
+                    document.getElementById("arr_time").style.borderColor = "red";
+                    deneme = false
+                }
+            }
+        }
+
+        value = $('#date').val()
+        arr = value.split('/')
+        if(arr.length != 3){
+            document.getElementById("date").style.borderColor = "red";
+            deneme = false
+        }
+        else{
+            if(arr[0].length != 2 || arr[0] < '00' || arr[0] > '12' ){
+                document.getElementById("date").style.borderColor = "red";
+                deneme = false
+            }
+            else{
+                if(arr[1].length != 2 || arr[1] < '00' || arr[1] > '31'){
+                    document.getElementById("date").style.borderColor = "red";
+                    deneme = false
+                }
+                else{
+                    if(arr[2].length != 4 || arr[2] < '2018' || arr[2] > '2200'){
+                        document.getElementById("date").style.borderColor = "red";
+                    deneme = false
+                    }
+                }
+            }
+        }
+
+        tempDay = $('#date').val().split('/')
+        if(tempDay[2]<y){
+            document.getElementById("date").style.borderColor = "red";
+            alert('please pick a valid day')
+            deneme = false
+        }
+        else if(tempDay[2] ==y ){
+            if(tempDay[0]<m){
+                document.getElementById("date").style.borderColor = "red";
+                alert('please pick a valid day')
+                deneme = false
+
+            }
+            else if(tempDay[0] ==m ){
+                if(tempDay[1]<d){
+                    document.getElementById("date").style.borderColor = "red";
+                    alert('please pick a valid day')
+                    deneme = false
+                }
+            }
+        }
+
+        if ($('#price').val()=="" || $('#price').val()== null){
+            document.getElementById("price").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#selected_plane').val()=="" || $('#selected_plane').val()== null){
+            document.getElementById("selected_plane").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#driver').val()=="" || $('#driver').val()== null){
+            document.getElementById("driver").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#to_ter').val()== $('#from_ter').val()){
+            document.getElementById("from_ter").style.borderColor = "red";
+            document.getElementById("to_ter").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#arr_time').val() == $('#dep_time').val()){
+            document.getElementById("arr_time").style.borderColor = "red";
+            document.getElementById("dep_time").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if(deneme){
+            document.getElementById("add_expedition").submit()
+        }
+        else{
+            $(".message-box-danger").toggle(750, function () {
+                setTimeout(function () {
+                    $(".message-box-danger").toggle(750);
+                }, 2500);
+            });
+
+
+            return false
+        }
+
+    }
+
+
+After validation of inputs, insertion of expedition on expeditions table can be performed with two ways.
 The one of inserting is inserting expedition without document attribute.
 With this way, document attribute will be NULL.
 Related function is given below as add_expedition.
@@ -695,7 +1028,204 @@ as PDF format, the data of the document handled with given code below.
 Update
 ______
 
-Update expedition operation can be handled with given code below;
+Before updating, inputs are validate in front side with JavaScript. The validation code is given below;
+
+.. code-block:: javascript
+
+
+    function add()
+    {
+
+        var $captcha = $( '#recaptcha' ),
+            response = grecaptcha.getResponse();
+
+        if (response.length === 0) {
+            $( '.msg-error').text( "reCAPTCHA is mandatory" );
+            if( !$captcha.hasClass( "error" ) ){
+                $captcha.addClass( "error" );
+                return false;
+            }
+        }
+        else {
+            $( '.msg-error' ).text('');
+            $captcha.removeClass( "error" );
+        }
+
+        let deneme = true
+
+        if ($('#from').val()== null){
+            document.getElementById("from").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#from_ter').val()=="" || $('#from_ter').val()== null){
+            document.getElementById("from_ter").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#to').val()==null){
+            document.getElementById("to").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#to_ter').val()=="" || $('#to_ter').val()== null){
+            document.getElementById("to_ter").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#dep_time').val()=="" || $('#dep_time').val()== null) {
+
+            document.getElementById("dep_time").style.borderColor = "red";
+            deneme = false
+        }
+
+
+        if ($('#arr_time').val()=="" || $('#arr_time').val()== null){
+            document.getElementById("arr_time").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        let value = $('#dep_time').val()
+        arr = value.split(':')
+        if(arr.length != 2){
+            document.getElementById("dep_time").style.borderColor = "red";
+            deneme = false
+        }
+        else{
+            if(arr[0].length != 2 || arr[0] < '00' || arr[0] > '23' ){
+                document.getElementById("dep_time").style.borderColor = "red";
+                deneme = false
+            }
+            else{
+                if(arr[1].length != 2 || arr[1] < '00' || arr[1] > '59'){
+                    document.getElementById("dep_time").style.borderColor = "red";
+                    deneme = false
+                }
+            }
+        }
+
+        value = $('#arr_time').val()
+        arr = value.split(':')
+        if(arr.length != 2){
+            document.getElementById("arr_time").style.borderColor = "red";
+            deneme = false
+        }
+        else{
+            if(arr[0].length != 2 || arr[0] < '00' || arr[0] > '23' ){
+                document.getElementById("arr_time").style.borderColor = "red";
+                deneme = false
+            }
+            else{
+                if(arr[1].length != 2 || arr[1] < '00' || arr[1] > '59'){
+                    document.getElementById("arr_time").style.borderColor = "red";
+                    deneme = false
+                }
+            }
+        }
+
+        value = $('#date').val()
+        arr = value.split('/')
+        if(arr.length != 3){
+            document.getElementById("date").style.borderColor = "red";
+            deneme = false
+        }
+        else{
+            if(arr[0].length != 2 || arr[0] < '00' || arr[0] > '12' ){
+                document.getElementById("date").style.borderColor = "red";
+                deneme = false
+            }
+            else{
+                if(arr[1].length != 2 || arr[1] < '00' || arr[1] > '31'){
+                    document.getElementById("date").style.borderColor = "red";
+                    deneme = false
+                }
+                else{
+                    if(arr[2].length != 4 || arr[2] < '2018' || arr[2] > '2200'){
+                        document.getElementById("date").style.borderColor = "red";
+                    deneme = false
+                    }
+                }
+            }
+        }
+
+        tempDay = $('#date').val().split('/')
+        if(tempDay[2]<y){
+            document.getElementById("date").style.borderColor = "red";
+            alert('please pick a valid day')
+            deneme = false
+        }
+        else if(tempDay[2] ==y ){
+            if(tempDay[0]<m){
+                document.getElementById("date").style.borderColor = "red";
+                alert('please pick a valid day')
+                deneme = false
+
+            }
+            else if(tempDay[0] ==m ){
+                if(tempDay[1]<d){
+                    document.getElementById("date").style.borderColor = "red";
+                    alert('please pick a valid day')
+                    deneme = false
+                }
+            }
+        }
+
+        if ($('#price').val()=="" || $('#price').val()== null){
+            document.getElementById("price").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#selected_plane').val()=="" || $('#selected_plane').val()== null){
+            document.getElementById("selected_plane").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#driver').val()=="" || $('#driver').val()== null){
+            document.getElementById("driver").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#to_ter').val()== $('#from_ter').val()){
+            document.getElementById("from_ter").style.borderColor = "red";
+            document.getElementById("to_ter").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if ($('#arr_time').val() == $('#dep_time').val()){
+            document.getElementById("arr_time").style.borderColor = "red";
+            document.getElementById("dep_time").style.borderColor = "red";
+            deneme = false
+
+        }
+
+        if(deneme){
+            document.getElementById("add_expedition").submit()
+        }
+        else{
+            $(".message-box-danger").toggle(750, function () {
+                setTimeout(function () {
+                    $(".message-box-danger").toggle(750);
+                }, 2500);
+            });
+
+
+            return false
+        }
+
+    }
+
+
+
+After validation of inputs, update expedition operation can be handled with given code below;
 
 .. code-block:: python
 
@@ -719,11 +1249,11 @@ As seen on code, there are two method for updating expeditions table.
 
 update_expedition method takes expedition_id and expedition class as parameter.
 This method updates the expedition whose expedition_id is equal to taken expedition_id
-with taken expedition class attributes but without document attribute.
+of taken expedition class but without document attribute.
 
 update_expedition_with_document method takes expedition_id and expedition class as parameter.
 This method updates the expedition whose expedition_id is equal to taken expedition_id
-with taken expedition class attributes.
+of taken expedition class.
 
 After update operations, expeditions table will be updated.
 
@@ -884,4 +1414,431 @@ When a user cancel a ticket, expedition table should be updated. This updating i
 cancelled method takes expedition_id as parameter. When user cancel a ticket for an expedition,
 current_cap attribute of that expedition should be decremented by one. cancelled method updates
 the expedition table with this purpose.
+
+
+
+
+
+
+Tickets Table
+-----------------
+
+tickets table is created for holding the tickets of the users.
+tickets table is used for store the information about tickets.
+The attributes of expeditions table are expedition_id, user_id, seat_number,
+ticket_id, bought_at, edited_at, is_cancelable, extra_baggage, price and price.
+ticket_id is primary key for tickets table.
+There are 4 more key attributes
+that are expedition_id, user_id, seat_number and seat_number.
+expedition_id, user_id and seat_number attributes are foreign keys and the reference of the
+expedition_id, user_id and seat_number is expedition_id, user_id and seat_number attributes of the seat table.
+firm_id is foreign key and the reference of the
+firm_id attribute is firm_id attribute of the firms table.
+Also price attribute comes from
+expedition tables price attribute but it is not foreign key because the price attribute of
+vehicles table is not primary key and tickets price can be changed with sales that are provided to users.
+
+
+
+
+.. figure:: images/member3/figure1.png
+     :scale: 75 %
+     :alt: tickets table
+
+     Figure 4 - tickets table
+
+Creation of tickets table and types of attributes of tickets table are given below;
+
+.. code-block:: sql
+
+    CREATE TABLE IF NOT EXISTS tickets(
+        expedition_id INT NOT NULL,
+        user_id INT NOT NULL,
+        seat_number INT NOT NULL,
+        ticket_id SERIAL NOT NULL,
+        bought_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        is_cancelable BOOLEAN DEFAULT FALSE,
+        extra_baggage BOOLEAN DEFAULT FALSE,
+        price INT NOT NULL,
+        firm_id INT NOT NULL,
+        UNIQUE (expedition_id, user_id, seat_number),
+        PRIMARY KEY (ticket_id),
+        FOREIGN KEY (expedition_id, user_id, seat_number) REFERENCES seats (expedition_id, user_id, seat_number) ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (firm_id) REFERENCES firms (firm_id) ON DELETE RESTRICT ON UPDATE CASCADE
+    )
+
+Only users can manipulate the tickets table.
+
+Operations
+^^^^^^^^^^
+
+Operations on the tickets table is handled with expedition
+class that is given below.
+
+.. code-block:: python
+
+    class Ticket:
+        def __init__(self, expedition_id, user_id, seat_number, firm_id, price, extra_baggage = False, is_cancelable = False, bought_at = None, edited_at = None):
+            self.expedition_id = expedition_id
+            self.user_id = user_id
+            self.seat_number = seat_number
+            self.extra_baggage = extra_baggage
+            self.is_cancelable = is_cancelable
+            self.bought_at = bought_at
+            self.edited_at = edited_at
+            self.firm_id = firm_id
+            self.price = price
+
+
+This class corresponds the tickets table in the database.
+The attributes are same with tickets table.
+This class provides ease on operations on the tickets table.
+
+
+The operations on the tickets table are handled with given below class.
+With this class database connection is provided and operations are handled with
+functions of this class
+
+.. code-block:: python
+
+    class Ticket:
+        def __init__(self):
+            if os.getenv("DATABASE_URL") is None:
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
+            else:
+                self.url = os.getenv("DATABASE_URL")
+
+Operations on the tickets table is listed below.
+
+
+
+Insert
+______
+
+
+Before insertion, inputs are validate in front side with JavaScript. The validation code is given below;
+
+.. code-block:: javascript
+
+
+    function add()
+    {
+
+        let deneme = true
+        console.log(document.querySelectorAll('input[type="checkbox"]:checked').length )
+        if (document.querySelectorAll('input[type="checkbox"]:checked').length == 0){
+            document.getElementById("plane").style.borderColor = "red";
+            deneme = false;
+        }
+
+        if(deneme){
+            document.getElementById("add_ticket").submit()
+        }
+        else{
+            $(".message-box-danger").toggle(750, function () {
+                setTimeout(function () {
+                    $(".message-box-danger").toggle(750);
+                }, 2500);
+            });
+
+
+            return false
+        }
+
+    }
+
+
+
+After validation of inputs, insertion of ticket on tickets table can be performed with
+given below code;
+
+.. code-block:: python
+
+
+    def add_ticket(self, ticket):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                "INSERT INTO tickets ( expedition_id, user_id, seat_number, is_cancelable, extra_baggage, firm_id, price) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                (ticket.expedition_id, ticket.user_id, ticket.seat_number, ticket.is_cancelable, ticket.extra_baggage, ticket.firm_id, ticket.price))
+            cursor.close()
+
+This method takes ticket parameter which is ticket class.
+Foreign key's information are coming from other related tables and session.
+With this insertion method, new ticket will be added as a row to tickets table.
+
+Read
+____
+
+There are two different methods for reading data from
+tickets table. These methods are given below.
+
+
+.. code-block:: python
+
+        def get_tickets_of_users(self, user_id):
+            tickets = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM tickets WHERE user_id = %s;", (user_id, ) )
+                for ticket in cursor:
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[9], ticket[8], ticket[7], ticket[6], ticket[4], ticket[5])
+                    tickets.append((ticket[3], _ticket))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return tickets
+
+        def get_ticket(self, ticket_id):
+            tickets = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM tickets WHERE ticket_id = %s;", (ticket_id, ) )
+                for ticket in cursor:
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[9], ticket[8], ticket[7], ticket[6], ticket[4], ticket[5])
+                    tickets.append(_ticket)
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return tickets
+
+
+
+get_tickets_of_users method takes user_id as parameter.
+This method used for getting the users's tickets by matching user_id.
+This methods returns an array that created with tuple
+which is ticket_id, ticket as ticket class.
+
+get_ticket method takes get_ticket as parameter.
+get_ticket method is used for returning desired ticket
+by matching get_ticket.
+
+
+Update
+______
+
+Users can update their ticket before the date of the expedition.
+This is provided with given codes below;
+
+.. code-block:: python
+
+    if dayCompare(temp_expedition.date):
+        ticket.editable = True
+
+
+.. code-block:: html
+
+    {% if ticket.editable %}
+      <a href="/ticket/edit/{{ ticket.ticket_id }}"><button type="button" class="btn btn-lg btn-block  btn-info ">Edit Ticket </button></a>
+    {% endif %}
+
+Before updating, inputs are validate in front side with JavaScript. The validation code is given below;
+
+.. code-block:: javascript
+
+    function add()
+    {
+
+        let deneme = true
+        console.log(document.querySelectorAll('input[type="checkbox"]:checked').length )
+        if (document.querySelectorAll('input[type="checkbox"]:checked').length == 0){
+            document.getElementById("plane").style.borderColor = "red";
+            deneme = false;
+        }
+
+        if(deneme){
+            document.getElementById("add_ticket").submit()
+        }
+        else{
+            $(".message-box-danger").toggle(750, function () {
+                setTimeout(function () {
+                    $(".message-box-danger").toggle(750);
+                }, 2500);
+            });
+
+
+            return false
+        }
+
+    }
+
+
+After validation of inputs, update ticket operation can be handled with given code below;
+
+.. code-block:: python
+
+        def update_ticket(self, ticket,new_seat_number, new_cancel, new_baggage):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("""UPDATE tickets SET seat_number = %s, is_cancelable = %s, extra_baggage = %s, edited_at = CURRENT_TIMESTAMP WHERE expedition_id = %s AND user_id = %s AND seat_number = %s """, ( new_seat_number, new_cancel, new_baggage ,ticket.expedition_id, ticket.user_id, new_seat_number))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+
+update_ticket method takes ticket as ticket class ,new_seat_number, new_cancel, new_baggage as parameter.
+This method updates the ticket whose ticket_id is equal to taken expedition_id of
+taken ticket class
+
+
+After update operations, tickets table will be updated.
+
+Delete
+______
+
+
+Users can delete only they select cancellable ticket when they buy ticket.
+This is provided with given code below;
+
+.. code-block:: html
+
+    {% if ticket.is_cancelable %}
+      <a href="/ticket/delete/{{ ticket.ticket_id }}" target="_blank" onclick="$('#ticket-{{ ticket.ticket_id }}').hide();"><button type="button"  class="btn btn-lg btn-block  btn-custom ">Cancel The Ticket </button></a>
+    {% endif %}
+
+
+Delete operation is handled with given code below;
+
+.. code-block:: python
+
+
+        def delete_ticket(self, ticket_id):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("DELETE FROM tickets WHERE ticket_id = %s", (ticket_id, ))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+
+The deletion of ticket is handled with delete_ticket method. The selected ticket
+will be deleted in tickets table by matching ticket_id taken as parameter.
+
+Search
+______
+
+The search operation on ticket table is handled with given code below;
+
+.. code-block:: python
+
+        def search(self, text):
+            tickets = []
+            to_search = "%" + text + "%"
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                if isInt(text):
+
+                    cursor.execute("""select * from tickets where ticket_id in (
+                                    select ticket_id
+                                    from tickets, expeditions, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter
+                                    where (firms.firm_id = tickets.firm_id and expeditions.to_city = to_city.code and expeditions.from_city = from_city.code and expeditions.to_ter = to_ter.terminal_id and expeditions.from_ter = from_ter.terminal_id )
+                                    and
+                                    ( (tickets.price = %s) or (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""", (int(text) ,to_search, to_search, to_search, to_search, to_search, to_search,to_search,to_search, ))
+                else:
+                    cursor.execute("""select * from tickets where ticket_id in (
+                                    select ticket_id
+                                    from tickets, city as to_city, firms, city as from_city, terminal as to_ter, terminal as from_ter
+                                    where (firms.firm_id = tickets.firm_id and expeditions.to_city = to_city.code and expeditions.from_city = from_city.code and expeditions.to_ter = to_ter.terminal_id and expeditions.from_ter = from_ter.terminal_id )
+                                    and
+                                    (  (LOWER(to_city.city_name) like LOWER(%s)) or ( LOWER(firms.name) like LOWER(%s) ) or ( LOWER(from_city.city_name) like LOWER(%s) ) or (LOWER(date) like LOWER(%s)) or (LOWER(dep_time) like LOWER(%s)) or (LOWER(arr_time) like LOWER(%s)) or (LOWER(from_ter.terminal_name) like LOWER(%s)) or (LOWER(to_ter.terminal_name) like LOWER(%s))))""",
+                                   ( to_search, to_search, to_search, to_search, to_search, to_search, to_search,
+                                    to_search,))
+
+                for ticket in cursor:
+                    _ticket = Ticket(ticket[0], ticket[1], ticket[2], ticket[9], ticket[8], ticket[7], ticket[6], ticket[4], ticket[5])
+                    tickets.append((ticket[3], _ticket))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return tickets
+
+
+
+The search method takes text as string. This string is searched in whole tickets table join with related tables.
+To search with case-insensitive string and whole data in tickets table
+is used with LOWER function.
+Also the code checks whether given string can be integer or not. If given string can be integer
+code will be search on price too. The checking code is given below.
+This method returns array of tuple that has ticket_id and ticket
+that has that string in anywhere on ticket information.
+
+.. code-block:: python
+
+    def isInt(value):
+      try:
+        int(value)
+        return True
+      except ValueError:
+        return False
+
+
+Related Systems
+^^^^^^^^^^^^^^^
+
+The usage of the tickets table are listed below.
+
+
+Mail Send
+__________
+
+When a user buy a ticket, system sends mail
+to user to inform the user. The mail template
+that will be send and code are given below;
+
+
+.. code-block:: python
+
+
+    import mail
+
+    message = "Ticketz \n" \
+    "Ticket Succesfully Bought \n" \
+    "Thank you " + user[1] + "\n" \
+    "Your Seat Number: " + seat_number + "\n" \
+    "Good Luck in " + city_name
+    mail.send_email( "Ticketz - Ticket Bought", message, user[2])
+
+.. code-block:: python
+
+    import smtplib
+
+    def send_email(subject, msg, to):
+        try:
+            server = smtplib.SMTP('smtp.gmail.com:587')
+            server.ehlo()
+            server.starttls()
+            server.login("ticketz.ticket.info@gmail.com", "Ticketz123.")
+            message = 'Subject: {}\n\n{}'.format(subject, msg)
+            server.sendmail("ticketz.ticket.info@gmail.com", to, message)
+            server.quit()
+        except:
+            print("fail: email send")
+
+
+
+
 
