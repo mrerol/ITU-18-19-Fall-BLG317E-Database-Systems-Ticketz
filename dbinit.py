@@ -6,8 +6,11 @@ import psycopg2 as dbapi2
 DATABASE_URL = 'postgres://kalcitdkfyeevw:39cdcacf84047dc48c74f58064a25a7406bd3645c95c712b9ba888f28cab791b@ec2-54-243-187-30.compute-1.amazonaws.com:5432/d96hqqveldfnft'
 
 INIT_STATEMENTS = [
-    #"""DROP TABLE IF EXISTS images""",
-    #"""DROP TABLE IF EXISTS hotels""",
+    """DROP TABLE IF EXISTS images cascade""",
+    """DROP TABLE IF EXISTS hotels cascade""",
+    """DROP TABLE IF EXISTS expeditions cascade""",
+    """DROP TABLE IF EXISTS tickets cascade""",
+    """DROP TABLE IF EXISTS seats cascade""",
     """DROP TABLE IF EXISTS users cascade """,
     """DROP TABLE IF EXISTS firms cascade""",
     """DROP TABLE IF EXISTS drivers cascade""",
