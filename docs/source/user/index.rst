@@ -1,12 +1,6 @@
 User Guide
 ==========
 
-Deneme
----------------
-
-**include the E/R diagram(s)**
-
-
 
 .. toctree::
 
