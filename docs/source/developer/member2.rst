@@ -8,7 +8,7 @@ Attributes of tables which are mentioned above can be seen in Figure 1.
 
 
 
-.. figure:: images/member3/my_tables.png
+.. figure:: images/member2/all_tables.PNG
      :scale: 75 %
      :alt:  Muhammed Raşit EROL's tables
 
@@ -35,7 +35,7 @@ illogical situation if there is no name for a firm. Also, firm_id is primary key
 for firms table and its serially increased by the system.
 
 
-.. figure:: images/member3/hotel.png
+.. figure:: images/member2/all_tables.PNG
      :scale: 75 %
      :alt: firms table
 
@@ -583,11 +583,11 @@ With this logic, firms have drivers. Furthermore, name, phone and email cannot b
 at least one contact information and reason for illogical situation if there is no name for a driver.
 Also, driver_id is primary key for drivers table and its serially increased by the system.
 
-.. figure:: images/member3/hotel.png
+.. figure:: images/member2/driver_table.PNG
      :scale: 75 %
      :alt: drivers table
 
-     Figure 2 - drivers table
+     Figure 3 - drivers table
 
 
 The creation code of the drivers table can be seen below.
@@ -879,11 +879,11 @@ Except description and document all attributes cannot be NULL because all not NU
 Also, vehicle_id is primary key for vehicles table and its serially increased by the system.
 
 
-.. figure:: images/member3/hotel.png
+.. figure:: images/member2/vehicle_table.PNG
      :scale: 75 %
      :alt: vehicles table
 
-     Figure 2 - vehicles table
+     Figure 4 - vehicles table
 
 
 The creation code of the vehicles table can be seen below.
@@ -1215,11 +1215,11 @@ The most important attribute of the images_for_firms table is firms_id. It is al
 Hence, connection between firms and images_for_firms is created.
 
 
-.. figure:: images/member3/hotel.png
+.. figure:: images/member2/images_table.PNG
      :scale: 75 %
      :alt: images_for_firms table
 
-     Figure 2 - images_for_firms table
+     Figure 5 - images_for_firms table
 
 The creation code of the images_for_firms table can be seen below.
 
