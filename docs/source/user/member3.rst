@@ -485,5 +485,5 @@ In Figure 21, navbar for user that is admin. Admin can search on tickets, expedi
 Also there is links for admin home page and profile page.
 
 
-In Figure 222, navbar for  user. Not logged user can not search on firms.
+In Figure 22, navbar for  user. Not logged user can not search on firms.
 Also there is links for profile page and my tickets page.

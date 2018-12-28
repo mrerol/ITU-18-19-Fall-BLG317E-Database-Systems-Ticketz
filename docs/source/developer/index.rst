@@ -1,10 +1,14 @@
 Developer Guide
 ===============
 
+This web application is developed with Python's Flask library.
+In this web application, PostgreSQL is used for relational database.
+
 Database Design
 ---------------
 
-There are 14 tables in our database. Tables and corresponding members are listed in Table Distribution below.
+There are 14 tables in our database. Every member has 3 main table that has at least 5
+non key attributes and at least 2 foreign key. Tables and corresponding members are listed in Table Distribution below.
 
 Table Distribution
 ^^^^^^^^^^^^^^^^^^^
@@ -33,6 +37,8 @@ Table Distribution
    * images
 
 
+E/R Diagram of Database
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 **include the E/R diagram(s)**
 
@@ -49,7 +55,10 @@ There are two types of database class definitions that are listed below.
             self.hotel = self.Hotel()
 
 
-
+Given database example has Hotel class in itself.
+With this class database connections are handled.
+Furthermore, whole table operations related with hotel table can be handled with
+this hotel_database class.
 
 
 .. code-block:: python
@@ -59,7 +68,7 @@ There are two types of database class definitions that are listed below.
             super(CityDao,self).__init__()
 
 
-
+All dao classes are derived from BaseDao class. Database connection is handled with this class. All database access object (dao) class is derived from BaseDao. This approach is useful because there is no need to write connections codes again for other classes.
 
 
 .. toctree::
