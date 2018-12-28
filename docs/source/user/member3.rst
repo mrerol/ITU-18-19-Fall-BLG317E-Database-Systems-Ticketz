@@ -24,6 +24,7 @@ Only firms can add expeditions. The interface of adding expedition is given in F
 
     Figure 1 - Add Expedition
 
+
 With this interface firms can easily add a new expedition.
 
 Firms must select from city, from terminal, to city and to terminal.
@@ -54,11 +55,13 @@ One is for users that are admin. These users can edit the whole expeditions.
 The other one is for firms. Firms can only edit the their expeditions.
 The interface of adding expedition is given in Figure 2.
 
+
 .. figure:: images/member3/expeditions/edit_expedition.png
      :scale: 75 %
      :alt: Edit Expedition
 
     Figure 2 - Edit Expedition
+
 
 With this interface users that are admin and firms can easily edit an existing expedition.
 
@@ -75,11 +78,13 @@ One is for users that are admin. These users can see the whole expeditions in th
 The other one is for firms. Firms can only see the their expeditions in this list.
 The interface of expedition list is given in Figure 3.
 
+
 .. figure:: images/member3/expeditions/expedition_list.png
      :scale: 75 %
      :alt: Expedition List
 
     Figure 4 - Expedition List
+
 
 With this interface users that are admin and firms can easily see the expeditions.
 Furthermore, admin and firms can easily redirected to edition of expedition or delete the
@@ -95,11 +100,13 @@ Expedition Card
 
 The expedition card is given in Figure 4.
 
+
 .. figure:: images/member3/expeditions/expedition_card.png
      :scale: 75 %
      :alt: Expedition Card
 
     Figure 4 - Expedition Card
+
 
 With this card users can see the related information about expedition. Furthermore,
 user can download the expedition handout as PDF format if expedition has a handout.
@@ -112,11 +119,13 @@ Search and Filter Expedition
 
 The home page is given in Figure 5.
 
+
 .. figure:: images/member3/expeditions/home_page.png
      :scale: 75 %
      :alt: Home Page
 
     Figure 5 - Home Page
+
 
 In home page, expeditions that are up-to-date and have empty seats are listed with
 narrowed expedition card.
@@ -134,7 +143,7 @@ bla bla bla
 Add Hotel
 ^^^^^^^^^
 
-.. figure:: images/member3/hotels/hotel.png
+.. figure:: images/member3/expeditions/add_expedition.png
      :scale: 75 %
      :alt: hotels
 
