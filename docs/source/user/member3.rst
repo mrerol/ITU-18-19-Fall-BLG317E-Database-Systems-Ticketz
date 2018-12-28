@@ -53,7 +53,7 @@ Edit Expedition
 There are two version for edition of expeditions.
 One is for users that are admin. These users can edit the whole expeditions.
 The other one is for firms. Firms can only edit the their expeditions.
-The interface of adding expedition is given in Figure 2.
+The interface of edition of expedition is given in Figure 2.
 
 
 .. figure:: images/member3/expeditions/edit_expedition.png
@@ -67,6 +67,8 @@ With this interface users that are admin and firms can easily edit an existing e
 
 This page is pre-filled with the existing expedition information. Admin and firms
 can easily change the information about expedition.
+
+In this page, firms can see their selections on preview part.
 
 
 
@@ -114,7 +116,7 @@ user can download the expedition handout as PDF format if expedition has a hando
 This card is most detailed page about expedition. There are one more card for listing in home
 page, search expedition and filter expedition. This card will be given Search and Filter Expedition part.
 
-Search and Filter Expedition
+Search And Filter Expedition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The home page is given in Figure 5.
@@ -245,16 +247,139 @@ The search ticket is given in Figure 10 and Figure 11.
      Figure 11 - Search Ticket 2
 
 
-In figure 10, "konya" is searched and there is no related ticket for that user.
+In Figure 10, "konya" is searched and there is no related ticket for that user.
 
-In figure 11, "istanbul" is searched and founded a ticket related with "istanbul".
+In Figure 11, "istanbul" is searched and founded a ticket related with "istanbul".
 
 
 
 Hotel Pages
 -------------
 
-bla bla bla
+Hotels are created by users that are admin. This hotels
+are listed in hotels page to select user proper hotel in landing city.
+
+Add Hotel
+^^^^^^^^^^^^^^^^^
+
+Only users that are admin can add hotel. The interface of adding hotel is given in Figure 12.
+
+
+.. figure:: images/member3/hotels/add_hotel.png
+     :scale: 75 %
+     :alt: Add Hotel
+
+     Figure 12 - Add Hotel
+
+
+With this interface users that are admin can easily add a new hotel.
+
+Users that are admin must fill a name for hotel.
+
+Users that are admin can upload a logo for hotel.
+
+Users that are admin must add e mail for hotel to contact.
+
+Users that are admin must add phone for hotel to contact.
+
+Users that are admin must give short description about hotel.
+
+Users that are admin must select a city for that hotel.
+
+Users that are admin must give address.
+
+Users that are admin can fill the website of that hotel.
+
+Users that are admin can upload multiple photos for that hotel.
+
+In this page, users that are admin can see their selections on preview part.
+
+
+Edit Hotel
+^^^^^^^^^^^^^^^^
+
+The interface of edition of hotel is given in Figure 13.
+
+
+.. figure:: images/member3/hotels/edit_hotel.png
+     :scale: 75 %
+     :alt: Edit Hotel
+
+     Figure 13 - Edit Hotel
+
+
+With this interface users that are admin can easily edit an existing hotel.
+
+This page is pre-filled with the existing hotel information. Admin
+can easily change the information about expedition.
+
+In this page, users that are admin can see their selections on preview part.
+
+
+
+Hotel Card
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The hotel card is given in Figure 14.
+
+
+.. figure:: images/member3/hotels/hotel_card.png
+     :scale: 75 %
+     :alt: Hotel Card
+
+     Figure 14 - Hotel Card
+
+
+With this card users can see the some information about hotel.
+
+This card is used in hotel list for admin users and hotel search page.
+
+
+Hotel List For Admin
+^^^^^^^^^^^^^^^^^^^^
+
+The interface of hotel list for admin is given in Figure 15.
+
+
+.. figure:: images/member3/hotels/hotel_list_for_admin.png
+     :scale: 75 %
+     :alt: Hotel List For Admin
+
+     Figure 15 - Hotel List For Admin
+
+
+With this interface users that are admin can easily see the whole hotels.
+Furthermore, admin can easily redirected to edition of hotel or delete the
+hotel.
+
+
+Search Hotel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The search hotel page is given in Figure 16 and Figure 17.
+
+
+.. figure:: images/member3/hotels/hs1.png
+     :scale: 75 %
+     :alt: Hotel Search Page
+
+     Figure 16 - Hotel Search Page 1
+
+
+.. figure:: images/member3/hotels/hs2.png
+     :scale: 75 %
+     :alt: Hotel Search Page
+
+     Figure 17 - Hotel Search Page 2
+
+
+In Figure 16, "adana" is searched and founded hotels related with "adana"
+
+and there is no related ho for that user.
+
+In Figure 17, "çorum" is searched and and there is no related hotel.
+
+
 
 
 Other Components

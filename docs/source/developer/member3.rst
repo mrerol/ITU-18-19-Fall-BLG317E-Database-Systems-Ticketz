@@ -2059,7 +2059,7 @@ user_id is user_id attribute of the users table.
      :scale: 75 %
      :alt: seats table
 
-     Figure 4 - seats table
+     Figure 6 - seats table
 
 Creation of seats table and types of attributes of seats table are given below;
 
