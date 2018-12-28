@@ -1,8 +1,8 @@
 Parts Implemented by Muhammed Raşit EROL
 ========================================
 
-In this section, there are three main page that are firms
-pages, driver pages and vehicles pages. Furthermore, other
+In this section, there are three main page that are firm
+pages, driver pages and vehicle pages. Furthermore, other
 components are listed in this section.
 
 Firm Pages
@@ -20,15 +20,15 @@ home page, related expedition operations are performed easily.
 
 You can see the firm home page below.
 
-.. figure:: images/member2/homepage.png
+.. figure:: images/member2/homepage.PNG
      :scale: 75 %
      :alt: Home Page for Firm
 
      Figure 1 - Home Page for Firm
 
 
-Signup
-^^^^^^^^
+Signup Page
+^^^^^^^^^^^^
 
 The firms are added to system with the firm signup page.
 Because they are another type of users.
@@ -51,8 +51,8 @@ You can see the signup page of firms below.
      Figure 2 - Signup for Firm
 
 
-Login
-^^^^^^^^^
+Login page
+^^^^^^^^^^^
 
 The firms are logged in to system with the firm login page.
 It is required that firm user have to be logged in successfully.
@@ -61,7 +61,7 @@ system redirects you to the login page with error.
 
 You can see the login page of firms below.
 
-.. figure:: images/member2/login.png
+.. figure:: images/member2/login.PNG
      :scale: 75 %
      :alt: Login for Firm
 
@@ -76,7 +76,7 @@ Hence, firm can see its old information.
 
 You can see the firm edit page of firms below.
 
-.. figure:: images/member2/edit.png
+.. figure:: images/member2/edit.PNG
      :scale: 75 %
      :alt: Edit Firm Page
 
@@ -93,12 +93,94 @@ be seen in this page.
 You can see the firm list page of firms below.
 
 
-.. figure:: images/member2/firm_list.png
+.. figure:: images/member2/firm_list.PNG
      :scale: 75 %
      :alt: Firm List Page
 
      Figure 5 - Firm List Page
 
+
+Driver Pages
+------------------
+
+Driver are members of the firms. Hence, a firm can have driver. It is possible to
+add, list, delete and edit drivers for firms.
+
+Driver Add Page
+^^^^^^^^^^^^^^^^^
+
+deneme
+
+.. figure:: images/member2/add_driver.PNG
+     :scale: 75 %
+     :alt: Add Driver Page
+
+     Figure 6 - Add Driver Page
+
+
+Driver List Page
+^^^^^^^^^^^^^^^^^
+
+deneme
+
+.. figure:: images/member2/driver_list.PNG
+     :scale: 75 %
+     :alt: Firm List Page
+
+     Figure 7 - Firm List Page
+
+
+Driver Edit page
+^^^^^^^^^^^^^^^^^
+
+deneme
+
+.. figure:: images/member2/edit_driver.PNG
+     :scale: 75 %
+     :alt: Firm List Page
+
+     Figure 8 - Firm List Page
+
+Vehicle Pages
+------------------
+
+Driver are members of the firms. Hence, a firm can have driver. It is possible to
+add, list, delete and edit drivers for firms.
+
+Vehicle Add Page
+^^^^^^^^^^^^^^^^^
+
+deneme
+
+.. figure:: images/member2/add_vehicle.PNG
+     :scale: 75 %
+     :alt: Add Vehicle Page
+
+     Figure 9 - Add Vehicle Page
+
+
+Vehicle List Page
+^^^^^^^^^^^^^^^^^
+
+deneme
+
+.. figure:: images/member2/vehicle_list.PNG
+     :scale: 75 %
+     :alt: Vehicle List Page
+
+     Figure 10 - Vehicle List Page
+
+
+Vehicle Edit page
+^^^^^^^^^^^^^^^^^
+
+deneme
+
+.. figure:: images/member2/edit_vehicle.PNG
+     :scale: 75 %
+     :alt: Edit Vehicle Page
+
+     Figure 11 - Edit Vehicle Page
 
 
 
