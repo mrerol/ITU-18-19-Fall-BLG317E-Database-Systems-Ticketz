@@ -54,7 +54,7 @@ hotels - city - images tables E/R diagram given in Figure 2.
      :scale: 75 %
      :alt: hotels - city - images tables E/R diagram
 
-     Figure 1 - hotels - city - images tables E/R diagram
+     Figure 2 - hotels - city - images tables E/R diagram
 
 
 
