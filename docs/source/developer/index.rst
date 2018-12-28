@@ -40,7 +40,13 @@ Table Distribution
 E/R Diagram of Database
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-**include the E/R diagram(s)**
+All tables are given in Figure 1.
+
+.. figure:: images/databasedeneme.png
+     :scale: 75 %
+     :alt: All Tables
+
+     Figure 1 - All Tables
 
 Code
 ----
