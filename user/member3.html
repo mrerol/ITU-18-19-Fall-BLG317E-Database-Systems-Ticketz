@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by Abdullah AKGÜL &mdash; ITUCSDB1835  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developer Guide" href="../developer/index.html" />
+    <link rel="prev" title="Parts Implemented by Muhammed Raşit EROL" href="member2.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1835
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="member1.html">Parts Implemented by Ufuk Demir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="member2.html">Parts Implemented by Muhammed Raşit EROL</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parts Implemented by Abdullah AKGÜL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expeditions-pages">Expeditions Pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#add-expedition">Add Expedition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-expedition">Edit Expedition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list-expedition">List Expedition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expedition-card">Expedition Card</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#search-and-filter-expedition">Search And Filter Expedition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tickets-pages">Tickets Pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#buy-ticket">Buy Ticket</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-ticket">Edit Ticket</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ticket-card">Ticket Card</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#my-tickets-page">My Tickets Page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#search-ticket">Search Ticket</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hotel-pages">Hotel Pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#add-hotel">Add Hotel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-hotel">Edit Hotel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hotel-card">Hotel Card</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hotel-list-for-admin">Hotel List For Admin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#search-hotel">Search Hotel</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-pages">Other Pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#admin-home-page">Admin Home Page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-pages">Error Pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#navbar">Navbar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1835</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">User Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by Abdullah AKGÜL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user/member3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-abdullah-akgul">
+<h1>Parts Implemented by Abdullah AKGÜL<a class="headerlink" href="#parts-implemented-by-abdullah-akgul" title="Permalink to this headline">¶</a></h1>
+<p>In this section, there are three main page that are expedition
+pages, ticket pages and ticket pages. Furthermore, other
+components are listed in this section.</p>
+<div class="section" id="expeditions-pages">
+<h2>Expeditions Pages<a class="headerlink" href="#expeditions-pages" title="Permalink to this headline">¶</a></h2>
+<p>Expeditions are created by firms. This expeditions
+are listed in home page to select user proper expedition.</p>
+<div class="section" id="add-expedition">
+<h3>Add Expedition<a class="headerlink" href="#add-expedition" title="Permalink to this headline">¶</a></h3>
+<p>Only firms can add expeditions. The interface of adding expedition is given in Figure 1.</p>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../_images/add_expedition.png"><img alt="Add Expedition" src="../_images/add_expedition.png" style="width: 635.25px; height: 621.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1 - Add Expedition</span></p>
+</div>
+<p>With this interface firms can easily add a new expedition.</p>
+<p>Firms must select from city, from terminal, to city and to terminal.
+to terminal and from terminal should be different for sensible expeditions.</p>
+<p>Firms must give the information about departure and arrival time.</p>
+<p>Firms must give the information about date but date should not be old day for
+sensible expeditions.</p>
+<p>Firms must fill the price of the expedition. Price of expedition should be
+more expensive in tha case of user has sale for that firm.</p>
+<p>Firms must select driver from driver list for that expedition.</p>
+<p>Firms must select lane from plane list for that expedition.</p>
+<p>Firms can upload a handout as PDF format for that expedition.</p>
+<p>In this page, firms can see their selections on preview part.</p>
+</div>
+<div class="section" id="edit-expedition">
+<h3>Edit Expedition<a class="headerlink" href="#edit-expedition" title="Permalink to this headline">¶</a></h3>
+<p>There are two version for edition of expeditions.
+One is for users that are admin. These users can edit the whole expeditions.
+The other one is for firms. Firms can only edit the their expeditions.
+The interface of edition of expedition is given in Figure 2.</p>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../_images/edit_expedition.png"><img alt="Edit Expedition" src="../_images/edit_expedition.png" style="width: 701.25px; height: 639.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2 - Edit Expedition</span></p>
+</div>
+<p>With this interface users that are admin and firms can easily edit an existing expedition.</p>
+<p>This page is pre-filled with the existing expedition information. Admin and firms
+can easily change the information about expedition.</p>
+<p>In this page, firms can see their selections on preview part.</p>
+</div>
+<div class="section" id="list-expedition">
+<h3>List Expedition<a class="headerlink" href="#list-expedition" title="Permalink to this headline">¶</a></h3>
+<p>There are two version for listing of expeditions.
+One is for users that are admin. These users can see the whole expeditions in this list.
+The other one is for firms. Firms can only see the their expeditions in this list.
+The interface of expedition list is given in Figure 3.</p>
+<div class="figure" id="id3">
+<a class="reference internal image-reference" href="../_images/expediiton_list.png"><img alt="Expedition List" src="../_images/expediiton_list.png" style="width: 664.5px; height: 160.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 3 - Expedition List</span></p>
+</div>
+<p>With this interface users that are admin and firms can easily see the expeditions.
+Furthermore, admin and firms can easily redirected to edition of expedition or delete the
+expedition.</p>
+<p>There is a restriction for deletion of expedition. The restriction is that if any
+user buy a ticket for that expedition, that expedition can not be deleted with anyone
+for the prevent user be victim.</p>
+</div>
+<div class="section" id="expedition-card">
+<h3>Expedition Card<a class="headerlink" href="#expedition-card" title="Permalink to this headline">¶</a></h3>
+<p>The expedition card is given in Figure 4.</p>
+<div class="figure" id="id4">
+<a class="reference internal image-reference" href="../_images/expedition_card.png"><img alt="Expedition Card" src="../_images/expedition_card.png" style="width: 446.25px; height: 580.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 4 - Expedition Card</span></p>
+</div>
+<p>With this card users can see the related information about expedition. Furthermore,
+user can download the expedition handout as PDF format if expedition has a handout.</p>
+<p>This card is most detailed page about expedition. There are one more card for listing in home
+page, search expedition and filter expedition. This card will be given Search and Filter Expedition part.</p>
+</div>
+<div class="section" id="search-and-filter-expedition">
+<h3>Search And Filter Expedition<a class="headerlink" href="#search-and-filter-expedition" title="Permalink to this headline">¶</a></h3>
+<p>The home page is given in Figure 5.</p>
+<div class="figure" id="id5">
+<a class="reference internal image-reference" href="../_images/home_page.png"><img alt="Home Page" src="../_images/home_page.png" style="width: 1397.25px; height: 555.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 5 - Home Page</span></p>
+</div>
+<p>In home page, expeditions that are up-to-date and have empty seats are listed with
+narrowed expedition card.</p>
+<p>Users can filter or search the expeditions with this page.</p>
+</div>
+</div>
+<div class="section" id="tickets-pages">
+<h2>Tickets Pages<a class="headerlink" href="#tickets-pages" title="Permalink to this headline">¶</a></h2>
+<p>Tickets are created by users with buying a ticket for expedition. This tickets
+are listed in my tickets page to users to easily edit or cancel their tickets.</p>
+<div class="section" id="buy-ticket">
+<h3>Buy Ticket<a class="headerlink" href="#buy-ticket" title="Permalink to this headline">¶</a></h3>
+<p>Only users can buy tickets. The interface of buying ticket is given in Figure 6.</p>
+<div class="figure" id="id6">
+<a class="reference internal image-reference" href="../_images/buy_ticket.png"><img alt="Buy Ticket" src="../_images/buy_ticket.png" style="width: 695.25px; height: 620.25px;" /></a>
+<p class="caption"><span class="caption-text">Figure 6 - Buy Ticket</span></p>
+</div>
+<p>With this interface users can easily buy a ticket for expedition.</p>
+<p>Users must select an empty seat.</p>
+<p>Users should select some extra features like extra baggage and cancellable.
+This features is comes default false. If user select cancellable feature, this ticket
+can be cancel before the expedition date.</p>
+<p>When user buy a ticket, Ticketz system will send an e mail to user in order to
+inform the user. Furthermore, user will be redirected to hotels page. This hotel page
+is created with hotels that are on landing city.</p>
+</div>
+<div class="section" id="edit-ticket">
+<h3>Edit Ticket<a class="headerlink" href="#edit-ticket" title="Permalink to this headline">¶</a></h3>
+<p>The interface of editing ticket is given in Figure 7.</p>
+<div class="figure" id="id7">
+<a class="reference internal image-reference" href="../_images/edit_ticket.png"><img alt="Edit Ticket" src="../_images/edit_ticket.png" style="width: 730.5px; height: 621.75px;" /></a>
+<p class="caption"><span class="caption-text">Figure 7 - Edit Ticket</span></p>
+</div>
+<p>With this interface users can easily edit their ticket.</p>
+<p>This page is pre-filled with the existing ticket information.</p>
+</div>
+<div class="section" id="ticket-card">
+<h3>Ticket Card<a class="headerlink" href="#ticket-card" title="Permalink to this headline">¶</a></h3>
+<p>The ticket card is given in Figure 8.</p>
+<div class="figure" id="id8">
+<a class="reference internal image-reference" href="../_images/ticket_card.png"><img alt="Ticket Card" src="../_images/ticket_card.png" style="width: 568.5px; height: 945.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 8 - Ticket Card</span></p>
+</div>
+<p>With this card users can see the related information about ticket.</p>
+<p>This card is used in my tickets page.</p>
+</div>
+<div class="section" id="my-tickets-page">
+<h3>My Tickets Page<a class="headerlink" href="#my-tickets-page" title="Permalink to this headline">¶</a></h3>
+<p>My Tickets page is given in Figure 9.</p>
+<div class="figure" id="id9">
+<a class="reference internal image-reference" href="../_images/my_tickets_page.png"><img alt="My Tickets Page" src="../_images/my_tickets_page.png" style="width: 726.0px; height: 613.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 9 - My Tickets Page</span></p>
+</div>
+<p>With this interface users  can easily see the tickets that they bought.
+Furthermore, users can easily redirected to edition of ticket or cancel the
+ticket page if expedition date is not over.</p>
+</div>
+<div class="section" id="search-ticket">
+<h3>Search Ticket<a class="headerlink" href="#search-ticket" title="Permalink to this headline">¶</a></h3>
+<p>The search ticket is given in Figure 10 and Figure 11.</p>
+<div class="figure" id="id10">
+<a class="reference internal image-reference" href="../_images/search1.png"><img alt="Home Page" src="../_images/search1.png" style="width: 2157.0px; height: 588.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 10 - Search Ticket 1</span></p>
+</div>
+<div class="figure" id="id11">
+<a class="reference internal image-reference" href="../_images/search2.png"><img alt="Home Page" src="../_images/search2.png" style="width: 2157.0px; height: 1033.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 11 - Search Ticket 2</span></p>
+</div>
+<p>In Figure 10, “konya” is searched and there is no related ticket for that user.</p>
+<p>In Figure 11, “istanbul” is searched and founded a ticket related with “istanbul”.</p>
+</div>
+</div>
+<div class="section" id="hotel-pages">
+<h2>Hotel Pages<a class="headerlink" href="#hotel-pages" title="Permalink to this headline">¶</a></h2>
+<p>Hotels are created by users that are admin. This hotels
+are listed in hotels page to select user proper hotel in landing city.</p>
+<div class="section" id="add-hotel">
+<h3>Add Hotel<a class="headerlink" href="#add-hotel" title="Permalink to this headline">¶</a></h3>
+<p>Only users that are admin can add hotel. The interface of adding hotel is given in Figure 12.</p>
+<div class="figure" id="id12">
+<a class="reference internal image-reference" href="../_images/add_hotel.png"><img alt="Add Hotel" src="../_images/add_hotel.png" style="width: 1431.0px; height: 695.25px;" /></a>
+<p class="caption"><span class="caption-text">Figure 12 - Add Hotel</span></p>
+</div>
+<p>With this interface users that are admin can easily add a new hotel.</p>
+<p>Users that are admin must fill a name for hotel.</p>
+<p>Users that are admin can upload a logo for hotel.</p>
+<p>Users that are admin must add e mail for hotel to contact.</p>
+<p>Users that are admin must add phone for hotel to contact.</p>
+<p>Users that are admin must give short description about hotel.</p>
+<p>Users that are admin must select a city for that hotel.</p>
+<p>Users that are admin must give address.</p>
+<p>Users that are admin can fill the website of that hotel.</p>
+<p>Users that are admin can upload multiple photos for that hotel.</p>
+<p>In this page, users that are admin can see their selections on preview part.</p>
+</div>
+<div class="section" id="edit-hotel">
+<h3>Edit Hotel<a class="headerlink" href="#edit-hotel" title="Permalink to this headline">¶</a></h3>
+<p>The interface of edition of hotel is given in Figure 13.</p>
+<div class="figure" id="id13">
+<a class="reference internal image-reference" href="../_images/edit_hotel.png"><img alt="Edit Hotel" src="../_images/edit_hotel.png" style="width: 694.5px; height: 649.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 13 - Edit Hotel</span></p>
+</div>
+<p>With this interface users that are admin can easily edit an existing hotel.</p>
+<p>This page is pre-filled with the existing hotel information. Admin
+can easily change the information about expedition.</p>
+<p>In this page, users that are admin can see their selections on preview part.</p>
+</div>
+<div class="section" id="hotel-card">
+<h3>Hotel Card<a class="headerlink" href="#hotel-card" title="Permalink to this headline">¶</a></h3>
+<p>The hotel card is given in Figure 14.</p>
+<div class="figure" id="id14">
+<a class="reference internal image-reference" href="../_images/hotel_card.png"><img alt="Hotel Card" src="../_images/hotel_card.png" style="width: 273.0px; height: 216.75px;" /></a>
+<p class="caption"><span class="caption-text">Figure 14 - Hotel Card</span></p>
+</div>
+<p>With this card users can see the some information about hotel.</p>
+<p>This card is used in hotel list for admin users and hotel search page.</p>
+</div>
+<div class="section" id="hotel-list-for-admin">
+<h3>Hotel List For Admin<a class="headerlink" href="#hotel-list-for-admin" title="Permalink to this headline">¶</a></h3>
+<p>The interface of hotel list for admin is given in Figure 15.</p>
+<div class="figure" id="id15">
+<a class="reference internal image-reference" href="../_images/hotel_list_for_admin.png"><img alt="Hotel List For Admin" src="../_images/hotel_list_for_admin.png" style="width: 692.25px; height: 139.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 15 - Hotel List For Admin</span></p>
+</div>
+<p>With this interface users that are admin can easily see the whole hotels.
+Furthermore, admin can easily redirected to edition of hotel or delete the
+hotel.</p>
+</div>
+<div class="section" id="search-hotel">
+<h3>Search Hotel<a class="headerlink" href="#search-hotel" title="Permalink to this headline">¶</a></h3>
+<p>The search hotel page is given in Figure 16 and Figure 17.</p>
+<div class="figure" id="id16">
+<a class="reference internal image-reference" href="../_images/hs1.png"><img alt="Hotel Search Page" src="../_images/hs1.png" style="width: 1507.5px; height: 666.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 16 - Hotel Search Page 1</span></p>
+</div>
+<div class="figure" id="id17">
+<a class="reference internal image-reference" href="../_images/hs2.png"><img alt="Hotel Search Page" src="../_images/hs2.png" style="width: 1174.5px; height: 666.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 17 - Hotel Search Page 2</span></p>
+</div>
+<p>In Figure 16, “adana” is searched and founded hotels related with “adana”</p>
+<p>and there is no related ho for that user.</p>
+<p>In Figure 17, “çorum” is searched and and there is no related hotel.</p>
+</div>
+</div>
+<div class="section" id="other-pages">
+<h2>Other Pages<a class="headerlink" href="#other-pages" title="Permalink to this headline">¶</a></h2>
+<p>Other parts handled by Abdullah AKGÜL is given below.</p>
+<div class="section" id="admin-home-page">
+<h3>Admin Home Page<a class="headerlink" href="#admin-home-page" title="Permalink to this headline">¶</a></h3>
+<p>In admin home page, the parts implemented by Abdullah AKGÜL given in Figure 18.</p>
+<div class="figure" id="id18">
+<a class="reference internal image-reference" href="../_images/admin_home_page.png"><img alt="Admin Home Page" src="../_images/admin_home_page.png" style="width: 1057.5px; height: 262.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 17 - Admin Home Page</span></p>
+</div>
+<p>With this interface, admin can easily see the list of reach the related pages about
+hotels and expeditions.</p>
+</div>
+<div class="section" id="error-pages">
+<h3>Error Pages<a class="headerlink" href="#error-pages" title="Permalink to this headline">¶</a></h3>
+<p>There are some error pages, that are implemented by Abdullah AKGÜL, listed below.</p>
+<div class="section" id="not-found-error-page">
+<h4>404 Not Found Error Page<a class="headerlink" href="#not-found-error-page" title="Permalink to this headline">¶</a></h4>
+<p>404 not found error page is given in Figure 18.</p>
+<div class="figure" id="id19">
+<a class="reference internal image-reference" href="../_images/404.png"><img alt="404 Not Found Error Page" src="../_images/404.png" style="width: 2160.0px; height: 1185.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 18 - 404 Not Found Error Page</span></p>
+</div>
+<p>This page is served when user try to enter an endpoint that is not defined.
+In this page, there is link for home page.</p>
+</div>
+<div class="section" id="unauthorized-error-page">
+<h4>403 UnAuthorized Error Page<a class="headerlink" href="#unauthorized-error-page" title="Permalink to this headline">¶</a></h4>
+<p>404 not found error page is given in Figure 19.</p>
+<div class="figure" id="id20">
+<a class="reference internal image-reference" href="../_images/403.png"><img alt="403 UnAuthorized Error Page" src="../_images/403.png" style="width: 2160.0px; height: 1185.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 19 - 403 UnAuthorized Error Page</span></p>
+</div>
+<p>This page is served when user try to go a page that has not permission.
+In this page, there is link for home page.</p>
+</div>
+<div class="section" id="internal-server-error-page">
+<h4>505 Internal Server Error Page<a class="headerlink" href="#internal-server-error-page" title="Permalink to this headline">¶</a></h4>
+<p>505 internal server error page is given in Figure 20.</p>
+<div class="figure" id="id21">
+<a class="reference internal image-reference" href="../_images/505.png"><img alt="505 Internal Server Error Page" src="../_images/505.png" style="width: 2160.0px; height: 1185.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 20 - 505 Internal Server Error Page</span></p>
+</div>
+<p>This page is served when unexpected things happens.
+In this page, there is link for home page.</p>
+</div>
+</div>
+<div class="section" id="navbar">
+<h3>Navbar<a class="headerlink" href="#navbar" title="Permalink to this headline">¶</a></h3>
+<p>The dynamic navbar is given in Figure 20, Figure 21 and Figure 22.</p>
+<div class="figure" id="id22">
+<a class="reference internal image-reference" href="../_images/navbar1.png"><img alt="Navbar 1" src="../_images/navbar1.png" style="width: 2160.0px; height: 99.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 20 - Navbar 1</span></p>
+</div>
+<div class="figure" id="id23">
+<a class="reference internal image-reference" href="../_images/navbar2.png"><img alt="Navbar 2" src="../_images/navbar2.png" style="width: 2160.0px; height: 166.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 21 - Navbar 2</span></p>
+</div>
+<div class="figure" id="id24">
+<a class="reference internal image-reference" href="../_images/navbar3.png"><img alt="Navbar 3" src="../_images/navbar3.png" style="width: 2160.0px; height: 133.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 22 - Navbar 3</span></p>
+</div>
+<p>In Figure 20, navbar for not logged user. Not logged user can not search on tickets.
+Also there is links for login and register to not logged user.</p>
+<p>In Figure 21, navbar for user that is admin. Admin can search on tickets, expeditions, hotels and firms.
+Also there is links for admin home page and profile page.</p>
+<p>In Figure 22, navbar for  user. Not logged user can not search on firms.
+Also there is links for profile page and my tickets page.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../developer/index.html" class="btn btn-neutral float-right" title="Developer Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="member2.html" class="btn btn-neutral" title="Parts Implemented by Muhammed Raşit EROL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, ITUCSDB1835
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

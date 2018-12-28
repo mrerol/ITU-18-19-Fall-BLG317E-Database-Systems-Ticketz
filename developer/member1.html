@@ -1,0 +1,935 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parts Implemented by Ufuk DEMİR &mdash; ITUCSDB1835  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parts Implemented by Muhammed Raşit EROL" href="member2.html" />
+    <link rel="prev" title="Developer Guide" href="index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1835
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#database-design">Database Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#code">Code</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parts Implemented by Ufuk DEMİR</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#users-table">users Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#terminal-table">terminal Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sale-table">Sale Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#city-table">city Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-has-sale-table">user_has_sale Table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member2.html">Parts Implemented by Muhammed Raşit EROL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html">Parts Implemented by Abdullah AKGÜL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1835</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developer Guide</a> &raquo;</li>
+        
+      <li>Parts Implemented by Ufuk DEMİR</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/member1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parts-implemented-by-ufuk-demir">
+<h1>Parts Implemented by Ufuk DEMİR<a class="headerlink" href="#parts-implemented-by-ufuk-demir" title="Permalink to this headline">¶</a></h1>
+<p>In this section, there are three main tables which are users, terminal and sale table, also there two extra tables which are city and user_has_sale table. The responsibility of these tables belongs to Ufuk Demir. Attributes of tables which are mentioned above can be seen in Figure 1.</p>
+<div class="figure" id="id21">
+<a class="reference internal image-reference" href="../_images/tables.PNG"><img alt="Tables that implemented by Ufuk Demir" src="../_images/tables.PNG" style="width: 366.0px; height: 375.75px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1 - Tables that implemented by Ufuk Demir</span></p>
+</div>
+<div class="section" id="users-table">
+<h2>users Table<a class="headerlink" href="#users-table" title="Permalink to this headline">¶</a></h2>
+<p>User table is for storing the customers’ information which is needed and used by the system. users table contains X types of information. One of them is personal information. name, surname and gender belong to this category. Another type is contact information which contains address and phone. Last one is registration information which includes user_id, last_login, register_time, user_name and is_admin. user_id is a primary ke of this table. is_admin is used for determine the user whether is admin or not. users tables creation code can be seen below.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">users</span>
+    <span class="p">(</span>
+       <span class="n">user_id</span> <span class="nb">SERIAL</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+        <span class="n">user_name</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">UNIQUE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">email</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">password</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">name</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">surname</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">phone</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">gender</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">address</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">250</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="n">last_login</span> <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+        <span class="n">register_time</span> <span class="k">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+        <span class="n">is_admin</span> <span class="nb">BOOLEAN</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">FALSE</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>All operations of the users table can be seen below:</p>
+<div class="section" id="operations">
+<h3>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h3>
+<p>Creating, reading, updating and deleting operations can be performed on the users table.
+UserDao class is derived from BaseDao class.</p>
+<div class="section" id="insert">
+<h4>Insert<a class="headerlink" href="#insert" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is add_user. This function can be seen below. It is used for adding information of new user. It takes parameters from the sign up in Sign up page and adds user form in admin page. After the adding user to the database, the function returns the user_id of the registered user.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">user_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;INSERT INTO users (user_name, name, surname, gender, email, password, phone, address) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) RETURNING user_id&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">user_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">userid</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">userid</span>
+</pre></div>
+</div>
+<p>There is a function which is add_user_with_adminfo. This function can be seen below. It is used for adding new user with the parameter of user whether is admin or not. It takes parameters from the add user form in admin/add_user page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_user_with_adminfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">user_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span><span class="n">is_admin</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;INSERT INTO users (user_name, name, surname, gender, email, password, phone, address, is_admin) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) &quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">user_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">is_admin</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="read">
+<h4>Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is get_user_id. This function can be seen below. It is used for getting information of current user with the parameter user_name and password. It takes parameters from the login form. It is used for adding user_id to session.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">user_name</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT user_id FROM users WHERE (users.user_name = </span><span class="si">%s</span><span class="s2"> AND users.password = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span>
+                 <span class="p">(</span><span class="n">user_name</span><span class="p">,</span><span class="n">password</span><span class="p">)</span>
+<span class="p">)</span>
+    <span class="n">userid</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">userid</span>
+</pre></div>
+</div>
+<p>There is a function which is get_user. This function can be seen below. It is used for getting information of current user with the parameter user_id. All attributes of user are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE (users.user_id = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,(</span><span class="n">user_id</span><span class="p">,))</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">user</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_user. This function can be seen below. It is used for getting information of all registered user without parameter. All attributes of users are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users &quot;</span><span class="p">)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">user</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update">
+<h4>Update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is edit _user. This function can be seen below. It is used for update the user information from database. It takes parameters from the edit user form. Only admin can edit the user information from admin page. If the one of the parameters which represents the user information are not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">edit_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span><span class="n">user_name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">is_admin</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;UPDATE users SET user_name = </span><span class="si">%s</span><span class="s2">, email = </span><span class="si">%s</span><span class="s2">, password = </span><span class="si">%s</span><span class="s2">, name = </span><span class="si">%s</span><span class="s2">, surname = </span><span class="si">%s</span><span class="s2">, gender = </span><span class="si">%s</span><span class="s2">, address = </span><span class="si">%s</span><span class="s2">, is_admin = </span><span class="si">%s</span><span class="s2"> WHERE user_id = </span><span class="si">%s</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span><span class="n">is_admin</span><span class="p">,</span><span class="nb">id</span><span class="p">))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete">
+<h4>Delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is delete _user. This function can be seen below. It is used for delete the user from database with the parameter user_id. Only admin can delete the user from admin/users page. If the user_id is not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM users WHERE user_id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="related-systems">
+<h3>Related Systems<a class="headerlink" href="#related-systems" title="Permalink to this headline">¶</a></h3>
+<p>There are three system in this section, which provide better workflow for the application. They are listed below.</p>
+<div class="section" id="signup">
+<h4>Signup<a class="headerlink" href="#signup" title="Permalink to this headline">¶</a></h4>
+<p>There is a signup system for users, which is different than firms signup system. The signup system is used adding new users to the application. This is performed with the insert operation of the users table. After validation controls, a user is added to the system.. If validation is not correct then related error messages are returned. In the signup system, also password is stored after hashing. The code of signup function can be seen in code block below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">signup_page</span><span class="p">():</span>
+
+    <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">db_password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">salt</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">db_password</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="n">userid</span> <span class="o">=</span> <span class="n">userop</span><span class="o">.</span><span class="n">add_user</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;surname&#39;</span><span class="p">],</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">],</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">],</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">])</span>
+        <span class="c1">#print(&quot;userid: &quot;,userid)</span>
+        <span class="c1">#session[&#39;user_id&#39;] = userid</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">IntegrityError</span><span class="p">:</span>
+        <span class="c1">#print(&quot;duplicate entry&quot;)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;duplicate entry&quot;</span>
+        <span class="k">pass</span> <span class="c1"># TODO show error pop up for already existing user</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="c1">#print(&quot;generic errorrrrrrr&quot;,sys.exc_info())</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;error occured&quot;</span>
+        <span class="k">pass</span> <span class="c1"># TODO show generic pop up error</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;signup.html&quot;</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="login">
+<h4>Login<a class="headerlink" href="#login" title="Permalink to this headline">¶</a></h4>
+<p>There is a login system for users, which is similar to firm login system. The user login system is used for entering the system with a regular user. This is performed with the read operation of the users table. After validation controls, a user can login to the system. One the validation control is comparing hashed password with the coming hashed password from database. If validation is not correct then related error messages are returned. The code of login function can be seen in code block below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">login_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+     <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+         <span class="k">try</span><span class="p">:</span>
+             <span class="n">db_password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">salt</span>
+             <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">db_password</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+             <span class="n">user_id</span> <span class="o">=</span> <span class="n">userop</span><span class="o">.</span><span class="n">get_user_id</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+             <span class="k">if</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                 <span class="n">session</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_id</span>
+                 <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home_page&#39;</span><span class="p">))</span>
+             <span class="k">else</span><span class="p">:</span>
+                 <span class="c1"># TODO user not found</span>
+                 <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;invalid credentials&quot;</span>
+                 <span class="c1">#return render_template(&quot;404_not_found.html&quot;)# TODO add 403</span>
+         <span class="k">except</span><span class="p">:</span>
+             <span class="k">print</span><span class="p">(</span><span class="s2">&quot;login generic errorrrrrrr&quot;</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">())</span>
+             <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;error&quot;</span>
+     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login.html&#39;</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="validation">
+<h4>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h4>
+<p>All validation classes are derived from BaseValidator class. Checking words length is handled with this class. This approach is useful because there is no need to write same validaiton codes again for other classes. BaseValidator class’ code can be seen below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseValidator</span><span class="p">():</span>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">pass</span>
+
+    <span class="nd">@staticmethod</span>
+
+    <span class="k">def</span> <span class="nf">word_in_range</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">minl</span><span class="p">,</span><span class="n">maxl</span><span class="p">,</span><span class="n">str_key</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">req</span><span class="o">.</span><span class="n">form</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">str_key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is not found in request&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">minl</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">maxl</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="n">str_key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is not in range&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="terminal-table">
+<h2>terminal Table<a class="headerlink" href="#terminal-table" title="Permalink to this headline">¶</a></h2>
+<p>Terminal table is for storing the terminal information which is needed and used by the system. Terminal table contains two types of information. One of them is identification information about terminals. terminal_id, terminal_name, terminal_code,city_id and description belong to this category. Other type is contact information which contains address, e-mail and phone.</p>
+<div class="figure" id="id22">
+<a class="reference internal image-reference" href="../_images/terminal_table.PNG"><img alt="terminal table" src="../_images/terminal_table.PNG" style="width: 416.25px; height: 216.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1 - terminal table</span></p>
+</div>
+<p>terminal table creation code can be seen below.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">terminal</span>
+
+<span class="p">(</span>
+
+    <span class="n">terminal_id</span> <span class="nb">SERIAL</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+
+    <span class="n">terminal_name</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">UNIQUE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+
+    <span class="n">terminal_code</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="k">UNIQUE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+
+    <span class="n">email</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+
+    <span class="n">phone</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+
+    <span class="n">address</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">250</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+
+    <span class="n">description</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+
+    <span class="n">city_id</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+
+    <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">city_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">city</span> <span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span>
+
+
+
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>All operations of the terminal table can be seen below:</p>
+<div class="section" id="id1">
+<h3>Operations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Creating, reading, updating and deleting operations can be performed on the terminal table.
+TerminalDao class is derived from BaseDao class.</p>
+<div class="section" id="id2">
+<h4>Insert<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is add_terminal. This function can be seen below. It is used for adding information of new terminal. It takes parameters from the terminal form in admin page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">terminal_name</span><span class="p">,</span> <span class="n">terminal_code</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">city</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;INSERT INTO terminal (terminal_name, terminal_code, email, phone, address, description, city_id) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) &quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">terminal_name</span><span class="p">,</span> <span class="n">terminal_code</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">city</span><span class="p">))</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>Read<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is get_terminal_id. This function can be seen below.It is used for getting id of selected terminal with the parameter terminal_name. It take parameters from the add expedition form.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_terminal_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">terminal_name</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT terminal_id FROM terminal WHERE (terminal.terminal_name = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">terminal_name</span><span class="p">,))</span>
+        <span class="n">terminal_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">terminal_id</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_terminal. This function can be seen below. It is used for getting information of all terminals without parameter. All attributes of terminal are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM terminal JOIN city ON (terminal.city_id = city.code)&quot;</span><span class="p">)</span>
+        <span class="n">terminal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">terminal</span>
+</pre></div>
+</div>
+<p>There is a function which is get_terminal_name_wname. This function can be seen below. It is used for getting information of selected terminal with parameter terminal_name. All attributes of the terminal are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_terminal_wname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">terminal_name</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM terminal WHERE (terminal.terminal_name = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,(</span><span class="n">terminal_name</span><span class="p">,))</span>
+        <span class="n">terminal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">terminal</span>
+</pre></div>
+</div>
+<p>There is a function which is get_terminal_name_wid. This function can be seen below. It is used for getting information of selected terminal with parameter terminal_id. All attributes of the terminal are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_terminal_wid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">terminal_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM terminal WHERE (terminal.terminal_id = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,(</span><span class="n">terminal_id</span><span class="p">,))</span>
+        <span class="n">terminal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">terminal</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_terminal_city. This function can be seen below. It is used for getting information of terminal which exists in selected city with parameter city_name. All attributes of the terminal are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_terminal_city</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">city_name</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM terminal WHERE terminal.city = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,(</span><span class="n">city_name</span><span class="p">,))</span>
+        <span class="n">terminal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">terminal</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_terminal_city_wcity_id. This function can be seen below. It is used for getting information of terminal which exists in selected city with parameter city_id. Terinal_id and terminal_name of the terminal are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_terminal_city_wcity_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">city_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT terminal_id, terminal_name FROM terminal where city_id = </span><span class="si">%s</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">city_id</span><span class="p">,))</span>
+        <span class="n">terminal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">terminal</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_terminal_v2. This function can be seen below. It is used for getting information of all terminals without parameter. terminal_id, terminal_name,terminal_code of terminal are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_terminal_v2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT terminal_id, terminal_name,terminal_code FROM terminal JOIN city ON (terminal.city_id = city.code)&quot;</span><span class="p">)</span>
+        <span class="n">terminal</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">terminal</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h4>Update<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is edit _terminal. This function can be seen below. It is used for update the terminal information from database. It takes parameters from the edit terminal form. Only admin can edit the terminal information from admin page. If the one of the parameters which represents the terminal information are not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">edit_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminal_id</span><span class="p">,</span><span class="n">terminal_name</span><span class="p">,</span> <span class="n">terminal_code</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">city_code</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;UPDATE terminal SET terminal_name = </span><span class="si">%s</span><span class="s2">, terminal_code = </span><span class="si">%s</span><span class="s2">, email = </span><span class="si">%s</span><span class="s2">, phone = </span><span class="si">%s</span><span class="s2">, address = </span><span class="si">%s</span><span class="s2">, description = </span><span class="si">%s</span><span class="s2">, city_id = </span><span class="si">%s</span><span class="s2"> WHERE terminal_id = </span><span class="si">%s</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">terminal_name</span><span class="p">,</span> <span class="n">terminal_code</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">city_code</span><span class="p">,</span> <span class="n">terminal_id</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+           <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h4>Delete<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is delete _terminal. This function can be seen below. It is used for delete the selected terminal from database with the parameter terminal_id. Only admin can delete the terminal from admin/terminals page. If the terminal_id is not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminal_id</span><span class="p">):</span>
+     <span class="k">try</span><span class="p">:</span>
+         <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+         <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM terminal WHERE terminal_id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">terminal_id</span><span class="p">,))</span>
+         <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+         <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+     <span class="k">finally</span><span class="p">:</span>
+         <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sale-table">
+<h2>Sale Table<a class="headerlink" href="#sale-table" title="Permalink to this headline">¶</a></h2>
+<p>Sale table is for storing the sale information which is needed and used by the system. Sale table contains sale_id, sale_code, sale_start_at, sale_finish_at, sale_description, is_active, firm_id, sale_price. is_active is used for determine the sale whether is active or not. Sale can be added to tha database by admin or firms. In this, information will be giving about admin side.</p>
+<div class="figure" id="id23">
+<a class="reference internal image-reference" href="../_images/sale_table.PNG"><img alt="sale table" src="../_images/sale_table.PNG" style="width: 163.5px; height: 213.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1 - sale table</span></p>
+</div>
+<p>Sale table creation code can be seen below.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">sale</span><span class="p">(</span>
+
+  <span class="n">sale_id</span> <span class="nb">SERIAL</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="n">sale_code</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="k">UNIQUE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">sale_start_at</span> <span class="nb">DATE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">sale_finish_at</span> <span class="nb">DATE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">sale_description</span> <span class="nb">VARCHAR</span> <span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">is_active</span> <span class="nb">BOOLEAN</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">firm_id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">sale_price</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">firm_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">firms</span> <span class="p">(</span><span class="n">firm_id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>All operations of the sale table can be seen below:</p>
+<div class="section" id="id6">
+<h3>Operations<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>Creating, reading, updating and deleting operations can be performed on the sale table.
+SaleDao class is derived from BaseDao class.</p>
+<div class="section" id="id7">
+<h4>Insert<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is add_sale. This function can be seen below. It is used for adding information of new sale. It takes parameters from the add sale form in admin page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_sale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sale_code</span><span class="p">,</span> <span class="n">sale_start_at</span><span class="p">,</span> <span class="n">sale_finish_at</span><span class="p">,</span> <span class="n">sale_description</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,</span> <span class="n">firm_id</span><span class="p">,</span> <span class="n">sale_price</span><span class="p">):</span>
+      <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+      <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+      <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+      <span class="s2">&quot;INSERT INTO sale (sale_code, sale_start_at, sale_finish_at, sale_description, is_active, firm_id, sale_price) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) &quot;</span><span class="p">,</span>
+      <span class="p">(</span><span class="n">sale_code</span><span class="p">,</span> <span class="n">sale_start_at</span><span class="p">,</span> <span class="n">sale_finish_at</span><span class="p">,</span> <span class="n">sale_description</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,</span> <span class="n">firm_id</span><span class="p">,</span> <span class="n">sale_price</span><span class="p">,))</span>
+      <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h4>Read<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is get_sale_price. This function can be seen below. It is used for getting information of amount of discount of selected user and firms which will be bought tickets with the parameter user_id and firm_id. This function is used when user try to buying a ticket.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sale_price</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">firm_id</span><span class="p">,</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT sale_price FROM sale where (current_date &lt;= sale.sale_finish_at AND current_date &gt;= sale.sale_start_at AND is_active = true AND sale.firm_id = </span><span class="si">%s</span><span class="s2">) AND sale.sale_id IN (SELECT sale_id FROM user_has_sale WHERE ( user_has_sale.sale_id = sale.sale_id AND user_has_sale.user_id = </span><span class="si">%s</span><span class="s2">)) &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">firm_id</span><span class="p">,</span><span class="n">user_id</span><span class="p">,))</span>
+        <span class="n">sale_price</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sale_price</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_sales. This function can be seen below. It is used for getting information of all sale without taking any parameter. sale_id, sale_code,sale_start_at, sale_finish_at, sale_price, sale.firm_id,is_active attributes of sale  are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_sales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT sale_id, sale_code,sale_start_at, sale_finish_at, sale_price, sale.firm_id,is_active FROM sale JOIN firms ON (sale.firm_id = firms.firm_id)&quot;</span><span class="p">)</span>
+        <span class="n">sales</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sales</span>
+</pre></div>
+</div>
+<p>There is a function which is get_sale. This function can be seen below. It is used for getting information of selected sale with parameter sale_id. sale_id, sale_code,sale_start_at, sale_finish_at, sale_price, sale.firm_id,is_active attributes of sale  are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sale_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT sale_id, sale_code,sale_start_at, sale_finish_at, sale_price, sale.firm_id,is_active,sale_description FROM sale JOIN firms ON (sale.firm_id = firms.firm_id) WHERE sale.sale_id =</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,(</span><span class="n">sale_id</span><span class="p">,))</span>
+        <span class="n">sale</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sale</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h4>Update<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is edit _sale. This function can be seen below. It is used for update the sale information from database. It takes parameters from the edit sale form. Only admin can edit the all sale information in the database from admin page. If one of the parameters which represents the sale information are not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">edit_sale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sale_id</span><span class="p">,</span><span class="n">sale_code</span><span class="p">,</span> <span class="n">sale_start_at</span><span class="p">,</span> <span class="n">sale_finish_at</span><span class="p">,</span> <span class="n">sale_description</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,</span> <span class="n">firm_id</span><span class="p">,</span> <span class="n">sale_price</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;UPDATE sale SET sale_code = </span><span class="si">%s</span><span class="s2">, sale_start_at = </span><span class="si">%s</span><span class="s2">, sale_finish_at = </span><span class="si">%s</span><span class="s2">, sale_description = </span><span class="si">%s</span><span class="s2">, is_active = </span><span class="si">%s</span><span class="s2">, firm_id = </span><span class="si">%s</span><span class="s2">, sale_price = </span><span class="si">%s</span><span class="s2"> WHERE sale_id = </span><span class="si">%s</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">sale_code</span><span class="p">,</span> <span class="n">sale_start_at</span><span class="p">,</span> <span class="n">sale_finish_at</span><span class="p">,</span> <span class="n">sale_description</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,</span> <span class="n">firm_id</span><span class="p">,</span> <span class="n">sale_price</span><span class="p">,</span> <span class="n">sale_id</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+          <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h4>Delete<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is delete _sale. This function can be seen below. It is used for delete the selected sale from database with the parameter sale_id. Only admin can delete the sale from admin/sales page. If the sale_id is not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete_sale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sale_id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM sale WHERE sale_id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">sale_id</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+          <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="city-table">
+<h2>city Table<a class="headerlink" href="#city-table" title="Permalink to this headline">¶</a></h2>
+<p>City table is for storing the city information which is needed and used by the system. City table contains city code, city name, population, region and altitude.</p>
+<div class="figure" id="id24">
+<a class="reference internal image-reference" href="../_images/city_table.PNG"><img alt="city table" src="../_images/city_table.PNG" style="width: 180.0px; height: 189.75px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1 - city table</span></p>
+</div>
+<p>City table creation code can be seen below.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">city</span> <span class="p">(</span>
+
+  <span class="n">code</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">UNIQUE</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="n">city_name</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="k">UNIQUE</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">population</span> <span class="nb">INT</span> <span class="k">DEFAULT</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+  <span class="n">region</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">&#39;MARMARA&#39;</span><span class="p">,</span>
+  <span class="n">altitude</span> <span class="nb">INT</span> <span class="k">DEFAULT</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>All operations of the city table can be seen below:</p>
+<div class="section" id="id11">
+<h3>Operations<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>Creating, reading, updating and deleting operations can be performed on the city table.</p>
+<p>CityDao class is derived from BaseDao class</p>
+<div class="section" id="id12">
+<h4>Insert<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is add_city. This function can be seen below. It is used for adding information of new city. It takes parameters which are code and city name which are not null columns from the add city form in admin page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_city</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">code</span><span class="p">,</span><span class="n">city_name</span><span class="p">):</span>
+  <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO city (code, city_name) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">city_name</span><span class="p">))</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>There is a function which is add_city_allCol. This function can be seen below. It is used for adding information of new city. It takes parameters which are code, city name, region, population and altitude from the add city form in admin page.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_city_allCol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">code</span><span class="p">,</span><span class="n">city_name</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">altitude</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;INSERT INTO city (code, city_name,region, population, altitude) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="n">city_name</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,))</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h4>Read<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is get_city_code. This function can be seen below. It is used for getting code of selected city with the parameter city_name. It take parameters from the add city form.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_city_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">city_name</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT code FROM city WHERE (city.city_name = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">city_name</span><span class="p">,))</span>
+        <span class="n">city_code</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">city_code</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_city. This function can be seen below. It is used for getting information which is code and city name of all city without taking any parameter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_city</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT code, city_name FROM city&quot;</span><span class="p">)</span>
+        <span class="n">cities</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">cities</span>
+</pre></div>
+</div>
+<p>There is a function which is get_city. This function can be seen below. It is used for getting information of selected city with parameter city code. City code and city name of the selected city are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_city</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT code, city_name FROM city WHERE (city.code = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,(</span><span class="n">code</span><span class="p">,))</span>
+        <span class="n">city</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">city</span>
+</pre></div>
+</div>
+<p>There is a function which is get_all_cities. This function can be seen below. It is used for getting information of all cities without taking any parameter. All attributes of the city are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_all_cities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM city&quot;</span><span class="p">)</span>
+        <span class="n">cities</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">cities</span>
+</pre></div>
+</div>
+<p>There is a function which is get_city_all. This function can be seen below. It is used for getting information of selected city with parameter city code. All attributes of the city are returned with this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_city_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM city WHERE (city.code = </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,(</span><span class="nb">str</span><span class="p">(</span><span class="n">code</span><span class="p">),))</span>
+        <span class="n">city</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">city</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id14">
+<h4>Update<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is edit _city. This function can be seen below. It is used for update the city information from database. It takes parameters from the edit city form. Only admin can edit the city information from admin page. If the one of the parameters which represents the city information are not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">edit_city</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">city_code</span><span class="p">,</span><span class="n">city_name</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">altitude</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;UPDATE city SET code = </span><span class="si">%s</span><span class="s2">, city_name = </span><span class="si">%s</span><span class="s2">, region = </span><span class="si">%s</span><span class="s2">, population = </span><span class="si">%s</span><span class="s2">, altitude = </span><span class="si">%s</span><span class="s2"> WHERE code = </span><span class="si">%s</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">city_code</span><span class="p">,</span> <span class="n">city_name</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,</span> <span class="n">code</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+          <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h4>Delete<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is delete _city. This function can be seen below. It is used for delete the selected city from database with the parameter city code. Only admin can delete the city from admin/cities page. If the city code is not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete_city</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM city WHERE code = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">code</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+          <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="user-has-sale-table">
+<h2>user_has_sale Table<a class="headerlink" href="#user-has-sale-table" title="Permalink to this headline">¶</a></h2>
+<p>User_has_sale table is for storing the user information which has sale code which is needed and used by the system. This table contains sale_id, user_id and is_used. is_used is used for determine the sale whether is used or not. Sale can be added to the database by user. In this, information will be giving about admin side.</p>
+<div class="figure" id="id25">
+<a class="reference internal image-reference" href="../_images/user_has_sale_table.PNG"><img alt="user_has_sale_table table" src="../_images/user_has_sale_table.PNG" style="width: 297.0px; height: 228.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1 - user_has_sale table</span></p>
+</div>
+<p>User_has_Sale table creation code can be seen below.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">user_has_sale</span><span class="p">(</span>
+    <span class="n">sale_id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">user_id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">is_used</span> <span class="nb">BOOLEAN</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">sale_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">),</span>
+    <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">users</span> <span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span><span class="p">,</span>
+    <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">sale_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">sale</span> <span class="p">(</span><span class="n">sale_id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>All operations of the user_has_sale table can be seen below:</p>
+<div class="section" id="id16">
+<h3>Operations<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<p>Creating, reading, updating and deleting operations can be performed on the user_has_sale table.
+UserHasSaleDao class is derived from BaseDao class.</p>
+<div class="section" id="id17">
+<h4>Insert<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is add_sale. This function can be seen below. It is used for adding information of new sale. It takes parameters from the add sale form.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_sale_to_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sale_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">is_used</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;INSERT INTO sale (sale_id, user_id, is_used) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) &quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">sale_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">is_used</span><span class="p">,))</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h4>Read<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is get_user_sale. This function can be seen below. It is used for getting information of amount of discount of selected user with the parameter user_id and sale_id.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sale_price</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sale_id</span><span class="p">,</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM user_has_sale where (user_id = </span><span class="si">%s</span><span class="s2">, sale_id = </span><span class="si">%s</span><span class="s2">)) &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">sale_id</span><span class="p">,))</span>
+        <span class="n">sale</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sale</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id19">
+<h4>Update<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is edit _sale. This function can be seen below. It is used for update the sale information from database. Only admin can edit the sale information in the database from admin page. If one of the parameters which represents the sale information are not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">edit_sale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">sale_id</span><span class="p">,</span> <span class="n">is_active</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;UPDATE sale SET user_id = </span><span class="si">%s</span><span class="s2">, sale_id = </span><span class="si">%s</span><span class="s2">, is_active = </span><span class="si">%s</span><span class="s2"> &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">sale_id</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+          <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id20">
+<h4>Delete<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<p>There is a function which is delete_sale_from_user. This function can be seen below. It is used for delete the selected sale from database with the parameter user_id. Only admin can delete the sale from admin/user_sales page. If the sale_id or user_id is not in the database exception is thrown with a message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete_sale_from_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM user_has_sale WHERE user_id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">dbapi2</span><span class="o">.</span><span class="n">DatabaseError</span><span class="p">)</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+          <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="member2.html" class="btn btn-neutral float-right" title="Parts Implemented by Muhammed Raşit EROL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Developer Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, ITUCSDB1835
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

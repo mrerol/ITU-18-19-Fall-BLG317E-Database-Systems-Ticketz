@@ -1,0 +1,482 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developer Guide &mdash; ITUCSDB1835  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parts Implemented by Ufuk DEMİR" href="member1.html" />
+    <link rel="prev" title="Parts Implemented by Abdullah AKGÜL" href="../user/member3.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1835
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#database-design">Database Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#table-distribution">Table Distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#e-r-diagram-of-database">E/R Diagram of Database</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#code">Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member1.html">Parts Implemented by Ufuk DEMİR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member2.html">Parts Implemented by Muhammed Raşit EROL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html">Parts Implemented by Abdullah AKGÜL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1835</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Developer Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developer/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developer-guide">
+<h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<p>This web application is developed with Python’s Flask library.
+In this web application, PostgreSQL is used for relational database.</p>
+<div class="section" id="database-design">
+<h2>Database Design<a class="headerlink" href="#database-design" title="Permalink to this headline">¶</a></h2>
+<p>There are 14 tables in our database. Every member has 3 main table that has at least 5
+non key attributes and at least 2 foreign key. Tables and corresponding members are listed in Table Distribution below.</p>
+<div class="section" id="table-distribution">
+<h3>Table Distribution<a class="headerlink" href="#table-distribution" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Ufuk DEMİR:</th><td class="field-body"><ul class="first simple">
+<li>users</li>
+<li>city</li>
+<li>terminal</li>
+<li>sale</li>
+<li>user_has_sale</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Muhammed Raşit EROL:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first simple">
+<li>firms</li>
+<li>drivers</li>
+<li>vehicles</li>
+<li>images_for_firms</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Abdullah AKGÜL:</th><td class="field-body"><ul class="first last simple">
+<li>expeditions</li>
+<li>tickets</li>
+<li>seats</li>
+<li>hotels</li>
+<li>images</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="e-r-diagram-of-database">
+<h3>E/R Diagram of Database<a class="headerlink" href="#e-r-diagram-of-database" title="Permalink to this headline">¶</a></h3>
+<p>All tables are given in Figure 1.</p>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../_images/databasedeneme.png"><img alt="All Tables" src="../_images/databasedeneme.png" style="width: 1421.25px; height: 845.25px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1 - All Tables</span></p>
+</div>
+<p>hotels - city - images tables E/R diagram given in Figure 2.</p>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../_images/er1.png"><img alt="hotels - city - images tables E/R diagram" src="../_images/er1.png" style="width: 1609.5px; height: 822.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2 - hotels - city - images tables E/R diagram</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<p>There are two types of database class definitions that are listed below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">hotel_database</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hotel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hotel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Given database example has Hotel class in itself.
+With this class database connections are handled.
+Furthermore, whole table operations related with hotel table can be handled with
+this hotel_database class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CityDao</span><span class="p">(</span><span class="n">BaseDao</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="nb">super</span><span class="p">(</span><span class="n">CityDao</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>All dao classes are derived from BaseDao class. Database connection is handled with this class. All database access object (dao) class is derived from BaseDao. This approach is useful because there is no need to write connections codes again for other classes.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="member1.html">Parts Implemented by Ufuk DEMİR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="member1.html#users-table">users Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member1.html#operations">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#insert">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#read">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#update">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#delete">Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member1.html#related-systems">Related Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#signup">Signup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#login">Login</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#validation">Validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member1.html#terminal-table">terminal Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member1.html#id1">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id2">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id3">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id4">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id5">Delete</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member1.html#sale-table">Sale Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member1.html#id6">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id7">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id8">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id9">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id10">Delete</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member1.html#city-table">city Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member1.html#id11">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id12">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id13">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id14">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id15">Delete</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member1.html#user-has-sale-table">user_has_sale Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member1.html#id16">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id17">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id18">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id19">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member1.html#id20">Delete</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="member2.html">Parts Implemented by Muhammed Raşit EROL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="member2.html#firms-table">firms Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member2.html#operations">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#insert">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#read">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#update">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#delete">Delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#search">Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member2.html#related-systems">Related Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#signup">Signup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#login">Login</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member2.html#drivers-table">drivers Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member2.html#id1">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id2">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id3">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id4">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id5">Delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id6">Search</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member2.html#vehicles-table">vehicles Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member2.html#id7">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id8">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id9">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id10">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id11">Delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id12">Search</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member2.html#images-for-firms-table">images_for_firms Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member2.html#id13">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id14">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id15">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id16">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member2.html#id17">Delete</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="member3.html">Parts Implemented by Abdullah AKGÜL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="member3.html#hotels-table">hotels Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#operations">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#insert">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#read">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#update">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#delete">Delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#search">Search</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member3.html#expeditions-table">expeditions Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#id1">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id2">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id3">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id4">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id5">Delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id6">Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#related-systems">Related Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#buy-ticket">Buy Ticket</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#cancel-ticket">Cancel Ticket</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member3.html#tickets-table">tickets Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#id7">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id8">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id9">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id10">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id11">Delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id12">Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#id13">Related Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#mail-send">Mail Send</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member3.html#images-table">images Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#id14">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id15">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id16">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id17">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id18">Delete</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="member3.html#seats-table">seats Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#id19">Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id20">Insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id21">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id22">Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#id23">Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="member3.html#id24">Related Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="member3.html#seat-selection-on-buying-and-editing-ticket">Seat Selection On Buying And Editing Ticket</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="member1.html" class="btn btn-neutral float-right" title="Parts Implemented by Ufuk DEMİR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../user/member3.html" class="btn btn-neutral" title="Parts Implemented by Abdullah AKGÜL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, ITUCSDB1835
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
