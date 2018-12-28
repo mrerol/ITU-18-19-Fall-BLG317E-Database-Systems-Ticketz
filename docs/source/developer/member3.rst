@@ -15,7 +15,7 @@ in Figure 1.
 
      Figure 1 - Tables that implemented by Abdullah AKGÜL
 
-Hotels Table
+hotels Table
 ------------
 
 hotels table is created for recommending users proper hotels. hotels table is used for store the information about hotels.
@@ -476,7 +476,7 @@ that has that string in anywhere on hotel information.
 
 
 
-Expeditions Table
+expeditions Table
 -----------------
 
 expeditions table is created for providing expeditions to users by firms.
@@ -1420,7 +1420,7 @@ the expedition table with this purpose.
 
 
 
-Tickets Table
+tickets Table
 -----------------
 
 tickets table is created for holding the tickets of the users.
@@ -1837,6 +1837,467 @@ that will be send and code are given below;
             server.quit()
         except:
             print("fail: email send")
+
+
+
+
+
+
+images Table
+-----------------
+
+images table is created for holding the photos of the hotels. Since
+hotels can have more than one photo this table required.
+images table is used for store the information about images.
+The attributes of images table are hotel_id, image_id and file_data.
+hotel_id and hotel_id are primary key for images table.
+hotel_id attribute is also foreign key and the reference of the
+hotel_id attribute is hotel_id attribute of the hotels table.
+
+
+
+.. figure:: images/member3/figure1.png
+     :scale: 75 %
+     :alt: tickets table
+
+     Figure 5 - images table
+
+Creation of images table and types of attributes of images table are given below;
+
+.. code-block:: sql
+
+    CREATE TABLE IF NOT EXISTS images(
+        hotel_id INT NOT NULL,
+        image_id SERIAL NOT NULL,
+        file_data BYTEA,
+        PRIMARY KEY (hotel_id, image_id),
+        FOREIGN KEY (hotel_id) REFERENCES hotels (hotel_id) ON DELETE CASCADE ON UPDATE CASCADE ,
+        UNIQUE (hotel_id, image_id)
+    )
+
+Only users that are admin can manipulate the images table.
+
+Operations
+^^^^^^^^^^
+
+Operations on the images table is handled with image
+class that is given below.
+
+.. code-block:: python
+
+    class Image:
+        def __init__(self, hotel_id, file_data):
+            self.hotel_id = hotel_id
+            self.file_data = file_data
+
+
+
+This class corresponds the images table in the database.
+The attributes are same with images table.
+This class provides ease on operations on the images table.
+
+
+The operations on the images table are handled with given below class.
+With this class database connection is provided and operations are handled with
+functions of this class
+
+.. code-block:: python
+
+    class Image:
+        def __init__(self):
+            if os.getenv("DATABASE_URL") is None:
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
+            else:
+                self.url = os.getenv("DATABASE_URL")
+
+Operations on the tickets table is listed below.
+
+
+
+Insert
+______
+
+file_data is BLOB and the data for file_data is provided with given below code.
+
+
+.. code-block:: python
+
+    logo = request.files["images"].read()
+
+
+Insertion of image on images table can be performed with
+given below code;
+
+
+.. code-block:: python
+
+
+    def add_image(self, image):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                "INSERT INTO images ( hotel_id, file_data) VALUES (%s, %s)",
+                (image.hotel_id, image.file_data))
+
+
+This method takes image parameter which is v class.
+Foreign key's information are coming from other related tables and session.
+With this insertion method, new image will be added as a row to images table.
+
+Read
+____
+
+There are two different methods for reading data from
+images table. These methods are given below.
+
+
+.. code-block:: python
+
+        def get_image(self, hotel_id, image_id):
+            _image = None
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM images WHERE hotel_id = %s AND image_id = %s", (hotel_id, image_id,))
+                image = cursor.fetchone()
+                if image is not None:
+                    _image = Image(image[1], image[2])
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return _image
+
+        def get_images(self):
+            images = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM images;" )
+                for image in cursor:
+                    _image = Image(image[1], image[2])
+                    images.append((image[0], image[1], _image))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return images
+
+
+get_images used for getting the whole information in images table.
+This methods returns an array that created with tuple
+which is image_id, hotel_id and image as image class.
+
+get_image method takes hotel_id and image_id as parameter.
+get_image method is used for returning desired image
+by matching hotel_id and image_id.
+
+The file_date of the image is stored as BLOB. For showing image
+as picture format, the data of the image decoded with given code below.
+
+.. code-block:: python
+
+    from base64 import b64encode
+
+    image = b64encode(im.file_data).decode("utf-8")
+
+Update
+______
+
+Since images are BLOB type, the updating is handled with delete existing image
+and add a new one.
+
+Delete
+______
+
+
+
+
+Delete operation is handled with given code below;
+
+.. code-block:: python
+
+
+    def delete_image(self, hotel_id, image_id):
+        try:
+            connection = dbapi2.connect(self.url)
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM images WHERE hotel_id = %s AND image_id = %s", (hotel_id, image_id))
+            connection.commit()
+            cursor.close()
+        except (Exception, dbapi2.DatabaseError) as error:
+            print(error)
+        finally:
+            if connection is not None:
+                connection.close()
+
+The deletion of image is handled with delete_image method. The selected image
+will be deleted in images table by matching hotel_id and image_id taken as parameter.
+
+
+seats Table
+-----------------
+
+seats table is created for holding the taken seats of the expeditions.
+seats table is used for store the information about seats.
+The attributes of seats table are expedition_id, user_id and seat_number,
+expedition_id, user_id and seat_number are primary key for seats table.
+expedition_id is foreign key and the reference of the
+expedition_id is expedition_id attribute of the expeditions table.
+user_id is foreign key and the reference of the
+user_id is user_id attribute of the users table.
+
+
+
+.. figure:: images/member3/figure1.png
+     :scale: 75 %
+     :alt: seats table
+
+     Figure 4 - seats table
+
+Creation of seats table and types of attributes of seats table are given below;
+
+.. code-block:: sql
+
+    CREATE TABLE IF NOT EXISTS seats(
+        expedition_id INT NOT NULL,
+        user_id INT NOT NULL,
+        seat_number INT NOT NULL,
+        PRIMARY KEY (expedition_id, user_id, seat_number),
+        FOREIGN KEY (expedition_id) REFERENCES expeditions (expedition_id) ON DELETE RESTRICT ON UPDATE CASCADE ,
+        FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE ,
+        UNIQUE (expedition_id, user_id, seat_number)
+    )
+
+Only users can manipulate the seats table.
+
+Operations
+^^^^^^^^^^
+
+Operations on the tickets table is handled with expedition
+class that is given below.
+
+.. code-block:: python
+
+
+    class Seat:
+        def __init__(self, expedition_id, user_id, seat_number):
+            self.expedition_id = expedition_id
+            self.user_id = user_id
+            self.seat_number = seat_number
+
+
+
+This class corresponds the seats table in the database.
+The attributes are same with seats table.
+This class provides ease on operations on the seats table.
+
+
+The operations on the seats table are handled with given below class.
+With this class database connection is provided and operations are handled with
+functions of this class
+
+.. code-block:: python
+
+    class Seat:
+        def __init__(self):
+            if os.getenv("DATABASE_URL") is None:
+                self.url = "postgres://itucs:itucspw@localhost:32768/itucsdb"
+            else:
+                self.url = os.getenv("DATABASE_URL")
+
+
+Operations on the seats table is listed below.
+
+
+
+Insert
+______
+
+
+Insertion of seat on seats table can be performed with
+given below code;
+
+.. code-block:: python
+
+
+    def add_seat(self, seat):
+        with dbapi2.connect(self.url) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                "INSERT INTO seats ( expedition_id, user_id, seat_number) VALUES (%s, %s, %s)",
+                (seat.expedition_id, seat.user_id, seat.seat_number))
+            cursor.close()
+
+
+This method takes seat parameter which is seat class.
+Foreign key's information are coming from other related tables and session.
+With this insertion method, new seat will be added as a row to seats table.
+
+Read
+____
+
+There are two different methods for reading data from
+seats table. These methods are given below.
+
+
+.. code-block:: python
+
+        def get_seats_of_expedition(self, expedition_id):
+            seats = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM seats WHERE expedition_id = %s;", (expedition_id, ) )
+                for seat in cursor:
+                    _seat = Seat(seat[0], seat[1], seat[2])
+                    seats.append(_seat)
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return seats
+
+        def get_seat_of_user(self, expedition_id, user_id):
+            seats = []
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("SELECT * FROM seats WHERE expedition_id = %s AND user_id = %s;", (expedition_id, user_id ) )
+                for seat in cursor:
+                    _seat = Seat(seat[0], seat[1], seat[2])
+                    seats.append(_seat)
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+            return seats
+
+
+
+
+get_seats_of_expedition method takes expedition_id as parameter.
+This method used for getting the expeditions's seats by matching expedition_id.
+This methods returns an array.
+
+get_seat_of_user method takes expedition_id and user_id as parameter.
+get_seat_of_user method is used for returning desired seats
+by matching expedition_id and user_id.
+This methods returns an array of tuples that created with expedition_id, user_id and seat as seat class .
+
+
+Update
+______
+
+
+Update seat operation can be handled with given code below;
+
+.. code-block:: python
+
+        def update_seat_number(self, seat, new_seat_number):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("""UPDATE seats SET seat_number = %s WHERE expedition_id = %s AND user_id = %s AND seat_number = %s """, ( new_seat_number, seat.expedition_id, seat.user_id, seat.seat_number))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+
+
+update_seat_number method takes seat as seat class ,new_seat_number as parameter.
+This method updates the user's seat_number with new_seat_number that are taken as parameter.
+
+
+After update operations, seats table will be updated.
+
+Delete
+______
+
+
+Delete operation is handled with given code below;
+
+.. code-block:: python
+
+        def delete_seat(self, seat):
+            try:
+                connection = dbapi2.connect(self.url)
+                cursor = connection.cursor()
+                cursor.execute("DELETE FROM seats WHERE expedition_id = %s AND user_id = %s AND seat_number = %s", (seat.expedition_id, seat.user_id, seat.seat_number))
+                connection.commit()
+                cursor.close()
+            except (Exception, dbapi2.DatabaseError) as error:
+                print(error)
+            finally:
+                if connection is not None:
+                    connection.close()
+
+
+The deletion of seat is handled with delete_seat method. The selected seat
+will be deleted in tickets table by matching seat taken as parameter.
+
+
+Related Systems
+^^^^^^^^^^^^^^^
+
+The usage of the seats table are listed below.
+
+Seat Selection On Buying And Editing Ticket
+___________________________________________
+
+When user tries to buy ticket or edit their ticket, seat table is used.
+The usage is that, user should select a seat that are not taken by another
+user. This is provided with given code below;
+
+.. code-block:: html
+
+    {% for i in range (expedition.total_cap) %}
+        {% if i%6 == 0 %}
+            <li  class="row row--{{ i/6  }}">
+        {% endif %}
+            <ol class="seats" type="A">
+                <li class="seat">
+                {% for seat in seats if seat.seat_number == i %}
+                    <input disabled name="seat" type="checkbox" value="{{ i }}" id="{{ i }}">
+                    {% else %}
+                        <input  name="seat" type="checkbox" value="{{ i }}" id="{{ i }}">
+                {% endfor %}
+
+
+                  <label for="{{ i }}">
+                        {% if i <10 %}
+                            00{{ i }}
+                        {% elif i <100 %}
+                            0{{ i }}
+                        {% else %}
+                            {{ i }}
+                        {% endif %}
+                  </label>
+                </li>
+            </ol>
+        {% if i%6 == 5 %}
+            </li>
+        {% endif %}
+
+    {% endfor %}
+
+
+
 
 
 
