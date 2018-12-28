@@ -9,7 +9,7 @@ Attributes of tables which are mentioned above can be seen
 in Figure 1.
 
 
-.. figure:: images/member3/figure1.png
+.. figure:: images/member3/my_tables.png
      :scale: 75 %
      :alt: Abdullah AKGÜL's tables
 
@@ -29,7 +29,7 @@ city attribute is code attribute of the city table.
 
 
 
-.. figure:: images/member3/figure1.png
+.. figure:: images/member3/hotel.png
      :scale: 75 %
      :alt: hotels table
 
@@ -502,7 +502,7 @@ vehicles table is not primary key.
 
 
 
-.. figure:: images/member3/figure1.png
+.. figure:: images/member3/expedition.png
      :scale: 75 %
      :alt: expeditions table
 
@@ -1441,7 +1441,7 @@ vehicles table is not primary key and tickets price can be changed with sales th
 
 
 
-.. figure:: images/member3/figure1.png
+.. figure:: images/member3/tickets.png
      :scale: 75 %
      :alt: tickets table
 
@@ -1856,9 +1856,9 @@ hotel_id attribute is hotel_id attribute of the hotels table.
 
 
 
-.. figure:: images/member3/figure1.png
+.. figure:: images/member3/images.png
      :scale: 75 %
-     :alt: tickets table
+     :alt: images table
 
      Figure 5 - images table
 
@@ -2055,7 +2055,7 @@ user_id is user_id attribute of the users table.
 
 
 
-.. figure:: images/member3/figure1.png
+.. figure:: images/member3/seats.png
      :scale: 75 %
      :alt: seats table
 
