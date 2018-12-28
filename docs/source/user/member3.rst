@@ -81,7 +81,7 @@ The other one is for firms. Firms can only see the their expeditions in this lis
 The interface of expedition list is given in Figure 3.
 
 
-.. figure:: images/member3/expeditions/expedition_list.png
+.. figure:: images/member3/expediitions/expedition_list.png
      :scale: 75 %
      :alt: Expedition List
 
