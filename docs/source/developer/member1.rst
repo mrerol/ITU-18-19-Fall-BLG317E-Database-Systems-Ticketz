@@ -4,7 +4,7 @@ Parts Implemented by Ufuk DEMİR
 
 In this section, there are three main tables which are users, terminal and sale table, also there two extra tables which are city and user_has_sale table. The responsibility of these tables belongs to Ufuk Demir. Attributes of tables which are mentioned above can be seen in Figure 1.
 
-.. figure:: images/member1/tables.png
+.. figure:: images/member1/tables.PNG
      :scale: 75 %
      :alt: Tables that implemented by Ufuk Demir
 
@@ -219,7 +219,8 @@ There is a login system for users, which is similar to firm login system. The us
         return render_template('login.html',error = error)
 
 Validation
-^^^^^^^^^
+^^^^^^^^^^
+
 All validation classes are derived from BaseValidator class. Checking words length is handled with this class. This approach is useful because there is no need to write same validaiton codes again for other classes. BaseValidator class’ code can be seen below.
 
 .. code-block:: python
@@ -250,7 +251,7 @@ terminal Table
 
 Terminal table is for storing the terminal information which is needed and used by the system. Terminal table contains two types of information. One of them is identification information about terminals. terminal_id, terminal_name, terminal_code,city_id and description belong to this category. Other type is contact information which contains address, e-mail and phone.
 
-.. figure:: images/member1/terminal_table.png
+.. figure:: images/member1/terminal_table.PNG
      :scale: 75 %
      :alt: terminal table
 
@@ -450,7 +451,7 @@ Sale Table
 
 Sale table is for storing the sale information which is needed and used by the system. Sale table contains sale_id, sale_code, sale_start_at, sale_finish_at, sale_description, is_active, firm_id, sale_price. is_active is used for determine the sale whether is active or not. Sale can be added to tha database by admin or firms. In this, information will be giving about admin side.
 
-.. figure:: images/member1/sale_table.png
+.. figure:: images/member1/sale_table.PNG
      :scale: 75 %
      :alt: sale table
 
@@ -588,7 +589,7 @@ city Table
 
 City table is for storing the city information which is needed and used by the system. City table contains city code, city name, population, region and altitude.
 
-.. figure:: images/member1/city_table.png
+.. figure:: images/member1/city_table.PNG
      :scale: 75 %
      :alt: city table
 
@@ -759,7 +760,7 @@ user_has_sale Table
 User_has_sale table is for storing the user information which has sale code which is needed and used by the system. This table contains sale_id, user_id and is_used. is_used is used for determine the sale whether is used or not. Sale can be added to the database by user. In this, information will be giving about admin side.
 
 
-.. figure:: images/member1/user_has_sale_table.png
+.. figure:: images/member1/user_has_sale_table.PNG
      :scale: 75 %
      :alt: user_has_sale_table table
 

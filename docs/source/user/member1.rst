@@ -40,7 +40,7 @@ Users Page
 ------------------
 In this page admin can see all registered user. And at the same time admin can delete or edit the user. This page can be seen in Figure 4.
 
-.. figure:: images/member1/users_page.png
+.. figure:: images/member1/users_page.PNG
      :scale: 75 %
      :alt: users
 
@@ -64,7 +64,7 @@ Add Terminal
 ------------------
 With this form only admin can add terminal to the database. The interface of adding terminal form is given in Figure 6.
 
-.. figure:: images/member1/add_terminal.png
+.. figure:: images/member1/add_terminal.PNG
      :scale: 75 %
      :alt: addterminal
 
@@ -87,7 +87,7 @@ Edit Terminal
 
 With this form only admin can edit the selected terminal information on the database. The interface of editing terminal form is given in Figure 8.
 
-.. figure:: images/member1/edit_terminal.png
+.. figure:: images/member1/edit_terminal.PNG
      :scale: 75 %
      :alt: editterminal
 
@@ -100,7 +100,7 @@ Add City
 ------------------
 Only admin can add terminal to the database with this form. The interface of adding city form is given in Figure 9.
 
-.. figure:: images/member1/add_city.png
+.. figure:: images/member1/add_city.PNG
      :scale: 75 %
      :alt: addcity
 
@@ -113,7 +113,7 @@ Cities Page
 
 In this page admin can see all cities. And at the same page admin can delete or edit the city. This page can be seen in Figure 10.
 
-.. figure:: images/member1/cities_page.png
+.. figure:: images/member1/cities_page.PNG
      :scale: 75 %
      :alt: cities
 
@@ -125,7 +125,7 @@ Edit City
 
 With this form only admin can edit the selected city information on the database. The interface of editing city form is given in Figure 11.
 
-.. figure:: images/member1/edit_city.png
+.. figure:: images/member1/edit_city.PNG
      :scale: 75 %
      :alt: editcity
 
@@ -162,7 +162,7 @@ Edit Sale
 ------------------
 With this form only admin can edit the selected sale information on the database. The interface of editing sale form is given in Figure 14.
 
-.. figure:: images/member1/edit_sale.png
+.. figure:: images/member1/edit_sale.PNG
      :scale: 75 %
      :alt: editcity
 
