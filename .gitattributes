@@ -1,2 +1,2 @@
-special-vendored-static/* linguist-vendored
-jquery.js linguist-vendored=false
+*.js linguist-vendored
+*.html linguist-vendored
