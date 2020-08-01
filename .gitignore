@@ -1,6 +1,6 @@
 *.pyc
 
-__pycache__
+__pycache__/
 
 .project
 .pydevproject
@@ -11,5 +11,5 @@ venv/
 docs/build/
 .vscode/*
 
-static
-templates
+static/
+templates/
