@@ -11,5 +11,4 @@ venv/
 docs/build/
 .vscode/*
 
-static/
-templates/
+
